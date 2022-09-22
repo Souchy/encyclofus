@@ -1,0 +1,3 @@
+[submodule "src/DofusDB"]
+	path = src/DofusDB
+	url = https://github.com/Souchy/DofusDB.git

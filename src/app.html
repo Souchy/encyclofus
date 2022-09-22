@@ -1,0 +1,40 @@
+
+<import from="./pages/breed"></import>
+<import from="./pages/asdf/hello"></import>
+<import from="./pages/asdf/missing-page"></import>
+<import from="./components/sidebar"></import>
+
+<!-- 
+<div class="main">
+	<sidebar></sidebar>
+	<au-viewport default="hello" fallback="missing-page"></au-viewport>
+</div> -->
+
+
+
+<div class="main">
+	<sidebar></sidebar>
+  
+	<div class="b-example-divider">
+	</div>
+
+	<div class="page-host">
+		<div>
+			<div class="message">${message}</div>
+		
+			<span t="hello"></span>
+			<div>
+				Data?: ${jsonmsg}
+			</div>
+			<!-- <breed breed="feca"></breed> -->
+			<!-- <img src="res/12549.png" style="width: 55px; height: 55px;"/> -->
+			<img src="src/res/12549.png" style="width: 55px; height: 55px;"/>
+			<!-- <img src="/encyclofus/src/res/12549.png" style="width: 55px; height: 55px;"/> -->
+			<img src="src/DofusDB/scraped/spellIcons/12977.png" style="width: 55px; height: 55px;"/>
+		</div>
+	
+		
+	  <!-- <router-view></router-view> -->
+	  <au-viewport default="hello" fallback="missing-page"></au-viewport>
+	</div>
+</div>
