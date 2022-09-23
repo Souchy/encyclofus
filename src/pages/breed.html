@@ -1,27 +1,29 @@
 <import from="./spell"></import>
 
-
 <h4>${getI18nName()}</h4>
 
 <!-- TODO: combobox choose game version -->
 
 <!-- Spell List -->
-<div class="spellList d-flex flex-wrap">
+<div class="spellList d-flex flex-wrap" if.bind="spells">
+
 	<!-- <div class="spellGroup" repeat.for="i of spells.length / 2"> -->
-	<div class="spellGroup" repeat.for="spell of spells">
+	<div class="spellGroup" repeat.for="spell of spells" if.bind="$even">
+		<!-- <div if.bind="$even"> -->
+			<div class="spell ${selectedSpellNumber == $index ? 'spellactive' : ''}" click.delegate="selectSpell($index)">
+				<img src="${getSpellImg(spells[$index].id)}" title="${spells[$index].name}"
+					style="width: 55px; height: 55px;" />
+			</div>
 
-		<div if.bind="$even" class="spell ${selectedSpellNumber == $index ? 'spellactive' : ''}" click.delegate="selectSpell($index)">
-			<img src="${getSpellIcon(spells[$index].id)}" title="${spells[$index].name}"
-				style="width: 55px; height: 55px;" />
-		</div>
-
-		<div if.bind="$odd" class="spell ${selectedSpellNumber == $index ? 'spellactive' : ''}" click.delegate="selectSpell($index)">
-			<img src="${getSpellIcon(spells[$index].id)}" title="${spells[$index].name}"
-				style="width: 55px; height: 55px;" />
-		</div>
-
+			<div class="spell ${selectedSpellNumber == $index + 1 ? 'spellactive' : ''}" click.delegate="selectSpell($index + 1)">
+				<img src="${getSpellImg(spells[$index + 1].id)}" title="${spells[$index + 1].name}"
+					style="width: 55px; height: 55px;" />
+			</div>
+		<!-- </div> -->
 	</div>
+	<!-- </div> -->
+
 </div>
 
 <!-- Spell Description -->
-<spell breedid.bind="breedid" spellid.bind="spellid"></spell>
+<spell breedid.bind="breed" spellid.bind="selectedSpellNumber"></spell>

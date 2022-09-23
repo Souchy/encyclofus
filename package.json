@@ -8,6 +8,7 @@
   },
   "license": "UNLICENSED",
   "dependencies": {
+    "@aurelia/fetch-client": "^2.0.0-alpha.41",
     "@aurelia/i18n": "^2.0.0-alpha.40",
     "aurelia": "latest",
     "bootstrap": "^5.2.1",
