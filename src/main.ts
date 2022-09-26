@@ -1,3 +1,4 @@
+import { Breed } from './pages/breed';
 import Aurelia from 'aurelia';
 import { I18nConfiguration } from '@aurelia/i18n';
 import { RouterConfiguration } from '@aurelia/router';
@@ -17,7 +18,12 @@ Aurelia
 			};
 		})
 	)
+	// .register(Breed)
 	// .register(RouterConfiguration)
-	// .register(RouterConfiguration.customize({ useUrlFragmentHash: false }))
+	.register(RouterConfiguration.customize({ 
+		useUrlFragmentHash: true, 
+		// useDirectRouting: false,
+		useHref: false,
+	}))
 	.app(App)
 	.start();

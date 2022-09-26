@@ -1,24 +1,39 @@
-import { bindable } from "aurelia";
+import { bindable, inject } from "aurelia";
+import { db } from '../DofusDB/db';
 
+@inject(db)
 export class Spell {
+	private db: db;
+
 	@bindable 
 	public breedid: string;
 	@bindable
-	public spellid: string;
+	public spell: any;
 
-/*
+	public constructor(db: db) {
+		this.db = db;
+	}
+	
+	public get dbLoaded() {
+		return this.db.promiseLoadingSpells;
+	}
+
 	public getIcon(val: string) {
+		// console.log("spell get icon for: " + val)
 		if(val) {
 			return this.db.getModIconStyle(val);
 		}
 		return "";
 	}
 
-	public getDetailsObj(spellListIndex) {
-		return this.db.jsonSpellsDetails[this.getSpell(spellListIndex).id];
+	public get detailsObj(): any {
+		if(!this.spell) return null;
+		// console.log("detailsObj: " + JSON.stringify(this.db.jsonSpellsDetails))
+		return this.db.jsonSpellsDetails[this.spell.id];
 	}
-	public getDetails(spellListIndex) {
-		let detail = this.db.jsonSpellsDetails[this.getSpell(spellListIndex).id];
+
+	public get details() {
+		let detail = this.db.jsonSpellsDetails[this.spell.id];
 		if(!detail) {
 			return "";
 		}
@@ -51,6 +66,6 @@ export class Spell {
 		}
 		return "";
 	}
-*/
+
 
 }
