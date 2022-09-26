@@ -23,6 +23,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    
+    - name: checkout all the submodules
+      uses: actions/checkout@v2
       with:
         submodules: recursive
             
@@ -42,6 +45,9 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
+    - run: pwd
+    - run: ls
+    
     - run: npm install
     - name: Build Aurelia
       run: |
@@ -49,7 +55,6 @@ jobs:
   #      npm install aurelia-cli -g
   #     au build
       
-    - run: pwd
     - run: cd "/home/runner/work/encyclofus/encyclofus"
     - run: ls
     - run: rm '.gitignore'
