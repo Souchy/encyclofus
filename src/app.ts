@@ -11,7 +11,26 @@ import jsonClasses from './DofusDB/static/classes.json'
 export class App {
 	
 	// Important routing
-	static routes: IRoute[] = [];
+	static routes: IRoute[] = [
+		{
+			path: "",
+			redirectTo: "tournaments"
+		},
+		{
+			path: "resources",
+			component: import('./pages/resources')
+		},
+		{
+			path: "tournaments",
+			component: import('./pages/tournaments')
+		}
+		// {
+		// 	path: "feca",
+		// 	component: import('./pages/breed'),
+		// 	title: jsonClasses.french[jsonClasses.ids["feca"] - 1],
+		// 	reloadBehavior: ReloadBehavior.refresh,
+		// }
+	];
 
 	constructor(db: db) {
 		// load data the first time
