@@ -1,9 +1,22 @@
-.message {
-	background-color: lightblue;
+:root {
+	// --bs-table-striped-bg: red !important;
+	// --bs-body-color: rgb(218, 218, 218) !important;
+}
+
+td {
+	// color: rgb(218, 218, 218) !important;
+}
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+	// --bs-table-accent-bg: rgba(100, 100, 100, 0.05) !important;
+}
+
+html {
+	height: 100%;
 }
 
 body {
 	margin: 0;
+	height: 100%;
 }
 
 .main {
@@ -11,6 +24,14 @@ body {
 	display: flex;
 	width: 100%;
 	align-items: stretch;
+	height: 100%;
+	
+	// color: rgb(218, 218, 218);
+	// background-color: rgb(31, 31, 31);
+	background-color: rgb(240, 240, 240);
+}
+.form-select {
+	background-color: rgb(250, 250, 250) !important;
 }
 
 sidebar {

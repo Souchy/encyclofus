@@ -15,7 +15,7 @@ export class Breed implements IRouteableComponent {
 
 	@bindable
 	public breed: string = "iop";
-	public selectedSpell: any;
+	public selectedSlot: number;
 
 	constructor(@IRouter readonly rtr: IRouter, db: db) { //}, router: IRouter) { 
 		this.db = db;
@@ -67,7 +67,8 @@ export class Breed implements IRouteableComponent {
 		if(result) {
 			let spell = this.spells[0];
 			console.log("breed async load: spell = " + spell.name)
-			this.selectSpell(spell);
+			// this.selectSpell(spell);
+			this.selectSlot(0);
 		}
 	}
 
@@ -81,8 +82,11 @@ export class Breed implements IRouteableComponent {
 	}
 	
 
-	public selectSpell(spell: any): void {
-		this.selectedSpell = spell;
+	// public selectSpell(spell: any): void {
+	// 	this.selectedSpell = spell;
+	// }
+	public selectSlot(slot: number): void {
+		this.selectedSlot = slot;
 	}
 
 	public get breedId(): number {
