@@ -28,13 +28,11 @@ jobs:
     - name: Checkout submodules
       run: git submodule update --init --recursive
       
-    - name: commands test 1
-      run: |
-        pwd
-        cd src
-        ls
-        cd ..
-        ls
+    - run: pwd
+    - run: cd src
+    - run: ls
+    - run: cd ..
+    - run: ls
             
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
@@ -51,12 +49,10 @@ jobs:
       run: |
         npm run build
     
-    - name: commands test 2
-      run: |
-        cd "/home/runner/work/encyclofus/encyclofus"
-        ls
-        rm '.gitignore'
-        ls
+    - run: cd "/home/runner/work/encyclofus/encyclofus"
+    - run: ls
+    - run: rm '.gitignore'
+    - run: ls
 
     - name: Deploy to branch
       uses: peaceiris/actions-gh-pages@v3
