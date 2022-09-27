@@ -1,5 +1,5 @@
 import { loadavg } from "os";
-import version from './scraped/version.json'
+import versions from './scraped/versions.json'
 
 import { DI, Registration } from 'aurelia';
 import { HttpClient } from '@aurelia/fetch-client';
@@ -11,7 +11,7 @@ export class db {
 	// lang should be stored on the client (local storage / session storage / cache / cookie)
 	public lang_default = "fr";
 	public lang: string = this.lang_default;
-	public version: string = version.latest;
+	private _version: string = versions[0]; // first version is the latest
 
 	// actual json fetched 
 	public jsonSpells: any;
@@ -20,9 +20,13 @@ export class db {
 	public jsonSpellsDetailsName = "spellsDetails.json";
 
 	public constructor() {
-
+		// load cached version and language
+		let ver = localStorage.getItem("version");
+		if (ver) this.setVersion(ver);
+		let lan = localStorage.getItem("language");
+		if (lan) this.setLanguage(lan);
 	}
-	
+
 	public promiseLoadingSpells: Promise<boolean>;
 	public promiseLoadingSpellsDetails: Promise<boolean>;
 	public get isLoaded() {
@@ -30,22 +34,27 @@ export class db {
 	}
 
 	public setLanguage(lang: string) {
-		if (lang == this.lang) {
+		if (this.lang == lang) {
 			// do nothing
 		} else {
 			this.lang = lang;
+			localStorage.setItem("language", lang);
 			this.loadJson();
 		}
 	}
 
-	public setVersionLatest() {
-		this.setVersion(version.latest);
+	public get version() {
+		return this._version;
 	}
 	public setVersion(version: string) {
-		if (version == this.version) {
+		if (this.version == version) {
 			// do nothing
+		} else 
+		if(!versions.includes(version)) {
+			alert("Invalid version")
 		} else {
-			this.version = version;
+			this._version = version;
+			localStorage.setItem("version", version);
 			this.loadJson();
 		}
 	}

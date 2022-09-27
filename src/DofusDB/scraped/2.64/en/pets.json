@@ -1,0 +1,1969 @@
+[
+	{
+		"name": "Dragouf",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/12541-dragouf",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/121000.w40h40.png",
+		"effects": [
+			{
+				"effect": "70 Puissance",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-damagespercent\" data-hasqtip=\"18\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Puissance\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			},
+			{
+				"effect": "2 Invocation{~ps}{~zs}"
+			}
+		],
+		"type": "Montilier",
+		"level": "Niv. 100"
+	},
+	{
+		"name": "Kanigloups",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/11950-kanigloups",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18073.w40h40.png",
+		"effects": [],
+		"type": "Familier",
+		"level": "Niv. 80"
+	},
+	{
+		"name": "Bulbisou",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/11955-bulbisou",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18074.w40h40.png",
+		"effects": [
+			{
+				"effect": "120 Force"
+			},
+			{
+				"effect": "20 Dommage{~ps}{~zs} Terre"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 80"
+	},
+	{
+		"name": "Bisouglours",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/11971-bisouglours",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18076.w40h40.png",
+		"effects": [
+			{
+				"effect": "120 Intelligence"
+			},
+			{
+				"effect": "20 Dommage{~ps}{~zs} Feu"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 80"
+	},
+	{
+		"name": "Blérodoudou",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/11966-blerodoudou",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18075.w40h40.png",
+		"effects": [
+			{
+				"effect": "120 Agilité"
+			},
+			{
+				"effect": "20 Dommage{~ps}{~zs} Air"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 80"
+	},
+	{
+		"name": "Bouloute du Parrain",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/9594-bouloute-parrain",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18046.w40h40.png",
+		"effects": [
+			{
+				"effect": "Etre abonné"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 60"
+	},
+	{
+		"name": "Vampyrette",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/10106-vampyrette",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18053.w40h40.png",
+		"effects": [
+			{
+				"effect": "400 Vitalité",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-vitality\" data-hasqtip=\"18\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Vitalit\\u00e9\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			},
+			{
+				"effect": "30 Fuite"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 60"
+	},
+	{
+		"name": "Gelutin",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/10544-gelutin",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18055.w40h40.png",
+		"effects": [
+			{
+				"effect": "400 Vitalité",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-vitality\" data-hasqtip=\"19\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Vitalit\\u00e9\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			},
+			{
+				"effect": "60 Dommage{~ps}{~zs} Poussée",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-push\" data-hasqtip=\"20\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Dommages Pouss\\u00e9e\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 60"
+	},
+	{
+		"name": "Gupin",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/11015-gupin",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18067.w40h40.png",
+		"effects": [
+			{
+				"effect": "400 Vitalité",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-vitality\" data-hasqtip=\"18\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Vitalit\\u00e9\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			},
+			{
+				"effect": "10% Résistance Neutre"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 60"
+	},
+	{
+		"name": "Platypus",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/12009-platypus",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18077.w40h40.png",
+		"effects": [
+			{
+				"effect": "400 Vitalité",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-vitality\" data-hasqtip=\"18\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Vitalit\\u00e9\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			},
+			{
+				"effect": "30 Tacle"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 60"
+	},
+	{
+		"name": "Balafreux",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/13603-balafreux",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/121004.w40h40.png",
+		"effects": [
+			{
+				"effect": "100 Dommage{~ps}{~zs} Poussée",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-push\" data-hasqtip=\"18\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Dommages Pouss\\u00e9e\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			},
+			{
+				"effect": "1 PM"
+			}
+		],
+		"type": "Montilier",
+		"level": "Niv. 60"
+	},
+	{
+		"name": "Brûlih",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/14854-brulih",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/121008.w40h40.png",
+		"effects": [
+			{
+				"effect": "Etre abonné"
+			}
+		],
+		"type": "Montilier",
+		"level": "Niv. 60"
+	},
+	{
+		"name": "Phorror",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/15243-phorror",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/121010.w40h40.png",
+		"effects": [
+			{
+				"effect": "Etre abonné"
+			}
+		],
+		"type": "Montilier",
+		"level": "Niv. 60"
+	},
+	{
+		"name": "Blokus",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/15978-blokus",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18104.w40h40.png",
+		"effects": [
+			{
+				"effect": "40 Retrait PM"
+			},
+			{
+				"effect": "50 Tacle"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 60"
+	},
+	{
+		"name": "Eliôme",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/16116-eliome",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18105.w40h40.png",
+		"effects": [
+			{
+				"effect": "400 Vitalité",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-vitality\" data-hasqtip=\"18\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Vitalit\\u00e9\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			},
+			{
+				"effect": "10% Résistance Feu"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 60"
+	},
+	{
+		"name": "Kougnard",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/18088-kougnard",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/121014.w40h40.png",
+		"effects": [
+			{
+				"effect": "2000 Initiative"
+			},
+			{
+				"effect": "1 PA"
+			}
+		],
+		"type": "Montilier",
+		"level": "Niv. 60"
+	},
+	{
+		"name": "Kougnard Albâtre",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/19044-kougnard-albatre",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/121019.w40h40.png",
+		"effects": [
+			{
+				"effect": "70 Puissance",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-damagespercent\" data-hasqtip=\"18\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Puissance\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			},
+			{
+				"effect": "40 Dommage{~ps}{~zs} Critiques"
+			}
+		],
+		"type": "Montilier",
+		"level": "Niv. 60"
+	},
+	{
+		"name": "Tiwabbit Kiafin",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/9619-tiwabbit-kiafin",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18051.w40h40.png",
+		"effects": [
+			{
+				"effect": "80 Résistance{~ps}{~zs} Air"
+			},
+			{
+				"effect": "50 Puissance",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-damagespercent\" data-hasqtip=\"18\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Puissance\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 60"
+	},
+	{
+		"name": "Sakochère",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/13465-sakochere",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/121003.w40h40.png",
+		"effects": [
+			{
+				"effect": "50 Dommage{~ps}{~zs} Critiques"
+			},
+			{
+				"effect": "1 PA"
+			}
+		],
+		"type": "Montilier",
+		"level": "Niv. 60"
+	},
+	{
+		"name": "Toukancre",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/13679-toukancre",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18092.w40h40.png",
+		"effects": [
+			{
+				"effect": "80 Résistance{~ps}{~zs} Terre"
+			},
+			{
+				"effect": "50 Puissance",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-damagespercent\" data-hasqtip=\"18\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Puissance\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 60"
+	},
+	{
+		"name": "Siroko",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/14833-siroko",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/121005.w40h40.png",
+		"effects": [
+			{
+				"effect": "Etre abonné"
+			}
+		],
+		"type": "Montilier",
+		"level": "Niv. 60"
+	},
+	{
+		"name": "Dehluge",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/14838-dehluge",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/121006.w40h40.png",
+		"effects": [
+			{
+				"effect": "Etre abonné"
+			}
+		],
+		"type": "Montilier",
+		"level": "Niv. 60"
+	},
+	{
+		"name": "Bontique",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/17023-bontique",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18109.w40h40.png",
+		"effects": [
+			{
+				"effect": "400 Vitalité",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-vitality\" data-hasqtip=\"18\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Vitalit\\u00e9\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			},
+			{
+				"effect": "50 Résistance{~ps}{~zs} Critiques"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 60"
+	},
+	{
+		"name": "Brâkarien",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/17028-brakarien",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18110.w40h40.png",
+		"effects": [
+			{
+				"effect": "400 Vitalité",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-vitality\" data-hasqtip=\"18\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Vitalit\\u00e9\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			},
+			{
+				"effect": "50 Résistance{~ps}{~zs} Poussée"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 60"
+	},
+	{
+		"name": "Dauge",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/18626-dauge",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18120.w40h40.png",
+		"effects": [
+			{
+				"effect": "400 Vitalité",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-vitality\" data-hasqtip=\"18\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Vitalit\\u00e9\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			},
+			{
+				"effect": "10% Résistance Eau"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 60"
+	},
+	{
+		"name": "Bouftor",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/19286-bouftor",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/121021.w40h40.png",
+		"effects": [
+			{
+				"effect": "100 Résistance{~ps}{~zs} Critiques"
+			},
+			{
+				"effect": "100 Résistance{~ps}{~zs} Poussée"
+			}
+		],
+		"type": "Montilier",
+		"level": "Niv. 60"
+	},
+	{
+		"name": "Molosk",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/19531-molosk",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18147.w40h40.png",
+		"effects": [
+			{
+				"effect": "400 Vitalité",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-vitality\" data-hasqtip=\"18\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Vitalit\\u00e9\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			},
+			{
+				"effect": "30 Dommage{~ps}{~zs} Critiques"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 60"
+	},
+	{
+		"name": "Tortikoli",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/25293-tortikoli",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/121069.w40h40.png",
+		"effects": [
+			{
+				"effect": "80 Résistance{~ps}{~zs} Poussée"
+			},
+			{
+				"effect": "40 Tacle"
+			}
+		],
+		"type": "Montilier",
+		"level": "Niv. 60"
+	},
+	{
+		"name": "Bouloute",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/8151-bouloute",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18035.w40h40.png",
+		"effects": [
+			{
+				"effect": "400 Vitalité",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-vitality\" data-hasqtip=\"18\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Vitalit\\u00e9\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			},
+			{
+				"effect": "30 Esquive PA"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 60"
+	},
+	{
+		"name": "Miniminotot",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/9620-miniminotot",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18049.w40h40.png",
+		"effects": [
+			{
+				"effect": "80 Résistance{~ps}{~zs} Eau"
+			},
+			{
+				"effect": "50 Puissance",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-damagespercent\" data-hasqtip=\"18\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Puissance\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 60"
+	},
+	{
+		"name": "Crocodaille",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/9623-crocodaille",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18047.w40h40.png",
+		"effects": [
+			{
+				"effect": "80 Résistance{~ps}{~zs} Feu"
+			},
+			{
+				"effect": "50 Puissance",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-damagespercent\" data-hasqtip=\"18\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Puissance\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 60"
+	},
+	{
+		"name": "Chachyène",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/15110-chachyene",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18094.w40h40.png",
+		"effects": [
+			{
+				"effect": "2 Invocation{~ps}{~zs}"
+			},
+			{
+				"effect": "1 PM"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 60"
+	},
+	{
+		"name": "La Chose",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/19139-chose",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18139.w40h40.png",
+		"effects": [
+			{
+				"effect": "400 Vitalité",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-vitality\" data-hasqtip=\"18\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Vitalit\\u00e9\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			},
+			{
+				"effect": "10% Résistance Air"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 60"
+	},
+	{
+		"name": "Bouflux",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/19291-bouflux",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/121022.w40h40.png",
+		"effects": [
+			{
+				"effect": "50 Dommage{~ps}{~zs} Critiques"
+			},
+			{
+				"effect": "80 Dommage{~ps}{~zs} Poussée",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-push\" data-hasqtip=\"18\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Dommages Pouss\\u00e9e\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			}
+		],
+		"type": "Montilier",
+		"level": "Niv. 60"
+	},
+	{
+		"name": "Péki",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/6978-peki",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18012.w40h40.png",
+		"effects": [
+			{
+				"effect": "400 Vitalité",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-vitality\" data-hasqtip=\"19\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Vitalit\\u00e9\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			},
+			{
+				"effect": "60 Dommage{~ps}{~zs} Poussée",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-push\" data-hasqtip=\"20\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Dommages Pouss\\u00e9e\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 60"
+	},
+	{
+		"name": "Fotome",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/7518-fotome",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18013.w40h40.png",
+		"effects": [
+			{
+				"effect": "400 Vitalité",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-vitality\" data-hasqtip=\"18\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Vitalit\\u00e9\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			},
+			{
+				"effect": "30 Fuite"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 60"
+	},
+	{
+		"name": "Kramkram",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/13182-kramkram",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/121002.w40h40.png",
+		"effects": [
+			{
+				"effect": "Etre abonné"
+			}
+		],
+		"type": "Montilier",
+		"level": "Niv. 60"
+	},
+	{
+		"name": "Kwaltess",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/14827-kwaltess",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/121009.w40h40.png",
+		"effects": [
+			{
+				"effect": "Etre abonné"
+			}
+		],
+		"type": "Montilier",
+		"level": "Niv. 60"
+	},
+	{
+		"name": "Phortiche",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/15254-phortiche",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18097.w40h40.png",
+		"effects": [
+			{
+				"effect": "1 PM"
+			},
+			{
+				"effect": "2 Portée"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 60"
+	},
+	{
+		"name": "Homlett",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/15469-homlett",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18099.w40h40.png",
+		"effects": [
+			{
+				"effect": "400 Vitalité",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-vitality\" data-hasqtip=\"18\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Vitalit\\u00e9\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			},
+			{
+				"effect": "30 Esquive PM"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 60"
+	},
+	{
+		"name": "Teh'Niak",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/25292-teh-niak",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/121070.w40h40.png",
+		"effects": [
+			{
+				"effect": "2 Invocation{~ps}{~zs}"
+			},
+			{
+				"effect": "15 Dommage{~ps}{~zs} Feu"
+			},
+			{
+				"effect": "15 Dommage{~ps}{~zs} Air"
+			},
+			{
+				"effect": "15 Dommage{~ps}{~zs} Terre"
+			},
+			{
+				"effect": "15 Dommage{~ps}{~zs} Eau"
+			}
+		],
+		"type": "Montilier",
+		"level": "Niv. 60"
+	},
+	{
+		"name": "Serpète",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/12133-serpete",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18079.w40h40.png",
+		"effects": [
+			{
+				"effect": "80 Résistance{~ps}{~zs} Neutre"
+			},
+			{
+				"effect": "50 Puissance",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-damagespercent\" data-hasqtip=\"18\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Puissance\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 60"
+	},
+	{
+		"name": "Tofüm",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/12177-tofuem",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18078.w40h40.png",
+		"effects": [
+			{
+				"effect": "400 Vitalité",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-vitality\" data-hasqtip=\"18\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Vitalit\\u00e9\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			},
+			{
+				"effect": "30 Dommage{~ps}{~zs} Critiques"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 60"
+	},
+	{
+		"name": "Hurledent",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/12963-hurledent",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/121001.w40h40.png",
+		"effects": [
+			{
+				"effect": "120 Prospection"
+			}
+		],
+		"type": "Montilier",
+		"level": "Niv. 60"
+	},
+	{
+		"name": "Kompost",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/14848-kompost",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/121007.w40h40.png",
+		"effects": [],
+		"type": "Montilier",
+		"level": "Niv. 60"
+	},
+	{
+		"name": "Moumoute",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/16295-moumoute",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18108.w40h40.png",
+		"effects": [
+			{
+				"effect": "400 Vitalité",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-vitality\" data-hasqtip=\"18\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Vitalit\\u00e9\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			},
+			{
+				"effect": "30 Esquive PA"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 60"
+	},
+	{
+		"name": "Titard",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/17379-titard",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18113.w40h40.png",
+		"effects": [
+			{
+				"effect": "400 Vitalité",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-vitality\" data-hasqtip=\"18\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Vitalit\\u00e9\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			},
+			{
+				"effect": "10% Résistance Terre"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 60"
+	},
+	{
+		"name": "Titcham",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/17833-titcham",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18117.w40h40.png",
+		"effects": [
+			{
+				"effect": "400 Vitalité",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-vitality\" data-hasqtip=\"18\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Vitalit\\u00e9\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			},
+			{
+				"effect": "30 Esquive PM"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 60"
+	},
+	{
+		"name": "Malo Chaméléon",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/25036-malo-chameleon",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/121067.w40h40.png",
+		"effects": [
+			{
+				"effect": "<a href=/fr/mmorpg/encyclopedie/familiers/25036-malo-chameleon\">\n                    Malo Chaméléon                      </a>"
+			}
+		],
+		"type": "Montilier",
+		"level": "Niv. 40"
+	},
+	{
+		"name": "Berlo Chaméléon",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/25047-berlo-chameleon",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/121065.w40h40.png",
+		"effects": [
+			{
+				"effect": "<a href=/fr/mmorpg/encyclopedie/familiers/25047-berlo-chameleon\">\n                    Berlo Chaméléon                      </a>"
+			}
+		],
+		"type": "Montilier",
+		"level": "Niv. 40"
+	},
+	{
+		"name": "Sherajah Possédée",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/25787-sherajah-possedee",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/121073.w40h40.png",
+		"effects": [
+			{
+				"effect": "<a href=/fr/mmorpg/encyclopedie/familiers/25787-sherajah-possedee\">\n                    Sherajah Possédée                      </a>"
+			}
+		],
+		"type": "Montilier",
+		"level": "Niv. 40"
+	},
+	{
+		"name": "Malo",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/25034-malo",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/121067.w40h40.png",
+		"effects": [],
+		"type": "Montilier",
+		"level": "Niv. 40"
+	},
+	{
+		"name": "Desse",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/25038-desse",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/121066.w40h40.png",
+		"effects": [],
+		"type": "Montilier",
+		"level": "Niv. 40"
+	},
+	{
+		"name": "Sherajah Démoniaque",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/25788-sherajah-demoniaque",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/121073.w40h40.png",
+		"effects": [],
+		"type": "Montilier",
+		"level": "Niv. 40"
+	},
+	{
+		"name": "Sherajah Embrasée",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/25786-sherajah-embrasee",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/121072.w40h40.png",
+		"effects": [],
+		"type": "Montilier",
+		"level": "Niv. 40"
+	},
+	{
+		"name": "Sherajah Spectrale",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/25789-sherajah-spectrale",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/121074.w40h40.png",
+		"effects": [],
+		"type": "Montilier",
+		"level": "Niv. 40"
+	},
+	{
+		"name": "Sherajah Libérée",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/25785-sherajah-liberee",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/121072.w40h40.png",
+		"effects": [],
+		"type": "Montilier",
+		"level": "Niv. 40"
+	},
+	{
+		"name": "Desse Chaméléone",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/25043-desse-chameleone",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/121066.w40h40.png",
+		"effects": [],
+		"type": "Montilier",
+		"level": "Niv. 40"
+	},
+	{
+		"name": "Berlo",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/25045-berlo",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/121065.w40h40.png",
+		"effects": [],
+		"type": "Montilier",
+		"level": "Niv. 40"
+	},
+	{
+		"name": "Wabbit",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/1748-wabbit",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18007.w40h40.png",
+		"effects": [],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Chachatte Rousse",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/7523-chachatte-rousse",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18040.w40h40.png",
+		"effects": [],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Bébé Pandawa",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/8561-bebe-pandawa",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18042.w40h40.png",
+		"effects": [],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Ross",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/8677-ross",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18044.w40h40.png",
+		"effects": [],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Tofoudre",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/10865-tofoudre",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18060.w40h40.png",
+		"effects": [],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Cromeugnon",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/11765-cromeugnon",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18068.w40h40.png",
+		"effects": [],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Gwo Tofu Ventripotent",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/11858-gwo-tofu-ventripotent",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18072.w40h40.png",
+		"effects": [],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Ploup",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/13099-ploup",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18086.w40h40.png",
+		"effects": [],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Bulbouture",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/13667-bulbouture",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18089.w40h40.png",
+		"effects": [],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Snouffle",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/15249-snouffle",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18098.w40h40.png",
+		"effects": [],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Sherajah Dévouée",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/25780-sherajah-devouee",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18232.w40h40.png",
+		"effects": [],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Sherajah Fidèle",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/25781-sherajah-fidele",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18232.w40h40.png",
+		"effects": [],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Bwak de Feu",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/2074-bwak-feu",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18003.w40h40.png",
+		"effects": [],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Bwak de Terre",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/2077-bwak-terre",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18005.w40h40.png",
+		"effects": [],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Petit Chacha Blanc",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/7414-petit-chacha-blanc",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18009.w40h40.png",
+		"effects": [],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Chacha Tigré",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/7524-chacha-tigre",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18041.w40h40.png",
+		"effects": [],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Vilain Petit Corbac",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/7703-vilain-petit-corbac",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18018.w40h40.png",
+		"effects": [],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Pioute rose",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/7710-pioute-rose",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18024.w40h40.png",
+		"effects": [],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Pioute rouge",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/7711-pioute-rouge",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18025.w40h40.png",
+		"effects": [],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Koalak Sanguin",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/7911-koalak-sanguin",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18030.w40h40.png",
+		"effects": [],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Fëanor",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/8693-feanor",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18045.w40h40.png",
+		"effects": [
+			{
+				"effect": "50 Puissance",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-damagespercent\" data-hasqtip=\"18\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Puissance\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			},
+			{
+				"effect": "1 PA"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Chauffe-souris",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/10107-chauffe-souris",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18054.w40h40.png",
+		"effects": [
+			{
+				"effect": "2000 Pod{~ps}{~zs}"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Dragoune Dorée",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/10802-dragoune-doree",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18057.w40h40.png",
+		"effects": [
+			{
+				"effect": "0 Esquive PA"
+			},
+			{
+				"effect": "0 Portée"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Meuch",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/10864-meuch",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18059.w40h40.png",
+		"effects": [],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Tifoux Tigré",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/11011-tifoux-tigre",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18063.w40h40.png",
+		"effects": [
+			{
+				"effect": "120 Prospection"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Chienchien Tigré",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/11012-chienchien-tigre",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18064.w40h40.png",
+		"effects": [
+			{
+				"effect": "50 Esquive PA"
+			},
+			{
+				"effect": "1 PA"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Kouin-Kouin Noir",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/11013-kouin-kouin-noir",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18065.w40h40.png",
+		"effects": [
+			{
+				"effect": "40 Retrait PA"
+			},
+			{
+				"effect": "50 Fuite"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Médugivre",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/11771-medugivre",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18069.w40h40.png",
+		"effects": [],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Sourisette",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/12982-sourisette",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18082.w40h40.png",
+		"effects": [
+			{
+				"effect": "2000 Initiative"
+			},
+			{
+				"effect": "2 Portée"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Fosfo",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/14545-fosfo",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/164020.w40h40.png",
+		"effects": [
+			{
+				"effect": "2000 Pod{~ps}{~zs}"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Bloalak",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/16276-bloalak",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18107.w40h40.png",
+		"effects": [
+			{
+				"effect": "120 Prospection"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Minikrone",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/17511-minikrone",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18114.w40h40.png",
+		"effects": [
+			{
+				"effect": "40 Esquive PM"
+			},
+			{
+				"effect": "2 Invocation{~ps}{~zs}"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Mira Chaméléone",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/25020-mira-chameleone",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18221.w40h40.png",
+		"effects": [
+			{
+				"effect": "<a href=/fr/mmorpg/encyclopedie/familiers/25020-mira-chameleone\">\n                    Mira Chaméléone                      </a>"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Louz",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/25024-louz",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18222.w40h40.png",
+		"effects": [],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Sherajah Indomptable",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/25783-sherajah-indomptable",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18233.w40h40.png",
+		"effects": [
+			{
+				"effect": "<a href=/fr/mmorpg/encyclopedie/familiers/25783-sherajah-indomptable\">\n                    Sherajah Indomptable                      </a>"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Bwak d'Eau",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/2075-bwak-eau",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18002.w40h40.png",
+		"effects": [
+			{
+				"effect": "25% Résistance Eau"
+			},
+			{
+				"effect": "50 Puissance",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-damagespercent\" data-hasqtip=\"18\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Puissance\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Chienchien Noir",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/6717-chienchien-noir",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18010.w40h40.png",
+		"effects": [
+			{
+				"effect": "Etre abonné"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Dragoune Rose",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/7519-dragoune-rose",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18014.w40h40.png",
+		"effects": [
+			{
+				"effect": "40 Retrait PA"
+			},
+			{
+				"effect": "50 Fuite"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Minimino",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/7522-minimino",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18021.w40h40.png",
+		"effects": [
+			{
+				"effect": "70 Puissance",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-damagespercent\" data-hasqtip=\"18\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Puissance\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			},
+			{
+				"effect": "40 Retrait PA"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Léopardo",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/7705-leopardo",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18027.w40h40.png",
+		"effects": [
+			{
+				"effect": "Etre abonné"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Bilby",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/7706-bilby",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18043.w40h40.png",
+		"effects": [
+			{
+				"effect": "50 Soin{~ps}{~zs}"
+			},
+			{
+				"effect": "50 Tacle"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Willy le Relou",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/7892-willy-relou",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18029.w40h40.png",
+		"effects": [
+			{
+				"effect": "120 Intelligence"
+			},
+			{
+				"effect": "120 Agilité"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Walk",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/8211-walk",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18038.w40h40.png",
+		"effects": [
+			{
+				"effect": "Etre abonné"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Dragoune Noire",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/9624-dragoune-noire",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18048.w40h40.png",
+		"effects": [],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Shushu de Rushu",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/9785-shushu-rushu",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18052.w40h40.png",
+		"effects": [
+			{
+				"effect": "2000 Initiative"
+			},
+			{
+				"effect": "2 Invocation{~ps}{~zs}"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Kouin-Kouin amélioré",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/11104-kouin-kouin-ameliore",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18008.w40h40.png",
+		"effects": [
+			{
+				"effect": "Etre abonné"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Écumouth",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/11777-ecumouth",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18070.w40h40.png",
+		"effects": [],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Tofu Givré",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/12975-tofu-givre",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18081.w40h40.png",
+		"effects": [],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Scarakiri",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/12988-scarakiri",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18083.w40h40.png",
+		"effects": [
+			{
+				"effect": "120 Intelligence"
+			},
+			{
+				"effect": "80 Dommage{~ps}{~zs} Poussée",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-push\" data-hasqtip=\"18\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Dommages Pouss\\u00e9e\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Rauleur",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/12994-rauleur",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18084.w40h40.png",
+		"effects": [],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Mékrabe",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/13071-mekrabe",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18087.w40h40.png",
+		"effects": [
+			{
+				"effect": "120 Force"
+			},
+			{
+				"effect": "120 Agilité"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Kokulte",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/13673-kokulte",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18091.w40h40.png",
+		"effects": [
+			{
+				"effect": "15% Critique",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-criticalhit\" data-hasqtip=\"18\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Coup critique\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			},
+			{
+				"effect": "40 Dommage{~ps}{~zs} Critiques"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Boskito",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/14433-boskito",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18093.w40h40.png",
+		"effects": [
+			{
+				"effect": "70 Puissance",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-damagespercent\" data-hasqtip=\"18\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Puissance\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			},
+			{
+				"effect": "40 Retrait PA"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Mira",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/25018-mira",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18221.w40h40.png",
+		"effects": [
+			{
+				"effect": "<a href=/fr/mmorpg/encyclopedie/familiers/25018-mira\">\n                    Mira                      </a>"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Sherajah Rebelle",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/25782-sherajah-rebelle",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18233.w40h40.png",
+		"effects": [],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Chacha",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/1728-chacha",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18001.w40h40.png",
+		"effects": [
+			{
+				"effect": "70 Puissance",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-damagespercent\" data-hasqtip=\"18\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Puissance\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			},
+			{
+				"effect": "40 Fuite"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Bwak d'Air",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/2076-bwak-air",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18004.w40h40.png",
+		"effects": [
+			{
+				"effect": "25% Résistance Air"
+			},
+			{
+				"effect": "50 Puissance",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-damagespercent\" data-hasqtip=\"18\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Puissance\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Chacha Blanc",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/6718-chacha-blanc",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18009.w40h40.png",
+		"effects": [
+			{
+				"effect": "Etre abonné"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Pioute vert",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/7712-pioute-vert",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18026.w40h40.png",
+		"effects": [
+			{
+				"effect": "Etre abonné"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Mini Wa",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/7891-mini-wa",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18028.w40h40.png",
+		"effects": [
+			{
+				"effect": "Etre abonné"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Tifoux",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/8155-tifoux",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18037.w40h40.png",
+		"effects": [
+			{
+				"effect": "120 Prospection"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Chacha Angora",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/9617-chacha-angora",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18050.w40h40.png",
+		"effects": [
+			{
+				"effect": "Etre abonné"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Raknaille",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/10863-raknaille",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18058.w40h40.png",
+		"effects": [
+			{
+				"effect": "Etre abonné"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Givrefoux",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/11783-givrefoux",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18071.w40h40.png",
+		"effects": [
+			{
+				"effect": "2000 Initiative"
+			},
+			{
+				"effect": "50 Tacle"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Meulourd",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/13000-meulourd",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18085.w40h40.png",
+		"effects": [
+			{
+				"effect": "40 Esquive PM"
+			},
+			{
+				"effect": "100 Résistance{~ps}{~zs} Critiques"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Black Tiwabbit",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/15133-black-tiwabbit",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18096.w40h40.png",
+		"effects": [
+			{
+				"effect": "120 Force"
+			},
+			{
+				"effect": "80 Dommage{~ps}{~zs} Poussée",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-push\" data-hasqtip=\"18\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Dommages Pouss\\u00e9e\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Tatouf",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/15607-tatouf",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18100.w40h40.png",
+		"effects": [
+			{
+				"effect": "100 Dommage{~ps}{~zs} Poussée",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-push\" data-hasqtip=\"18\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Dommages Pouss\\u00e9e\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			},
+			{
+				"effect": "100 Résistance{~ps}{~zs} Critiques"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Drakopin",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/16122-drakopin",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18106.w40h40.png",
+		"effects": [
+			{
+				"effect": "40 Retrait PA"
+			},
+			{
+				"effect": "50 Tacle"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Tanuk",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/16269-tanuk",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18111.w40h40.png",
+		"effects": [
+			{
+				"effect": "50 Esquive PM"
+			},
+			{
+				"effect": "1 PA"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Glub",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/17813-glub",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18118.w40h40.png",
+		"effects": [
+			{
+				"effect": "120 Prospection"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Louz Chaméléon",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/25032-louz-chameleon",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18222.w40h40.png",
+		"effects": [
+			{
+				"effect": "<a href=/fr/mmorpg/encyclopedie/familiers/25032-louz-chameleon\">\n                    Louz Chaméléon                      </a>"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Chienchien",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/1711-chienchien",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18006.w40h40.png",
+		"effects": [
+			{
+				"effect": "<a href=/fr/mmorpg/encyclopedie/familiers/1711-chienchien\">\n                    Chienchien                      </a>"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Kouin-Kouin",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/6604-kouin-kouin",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18008.w40h40.png",
+		"effects": [
+			{
+				"effect": "Etre abonné"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Nomoon",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/6716-nomoon",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18011.w40h40.png",
+		"effects": [
+			{
+				"effect": "120 Prospection"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Petit Chienchien Noir",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/7415-petit-chienchien-noir",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18010.w40h40.png",
+		"effects": [
+			{
+				"effect": "70 Puissance",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-damagespercent\" data-hasqtip=\"19\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Puissance\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			},
+			{
+				"effect": "80 Dommage{~ps}{~zs} Poussée",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-push\" data-hasqtip=\"20\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Dommages Pouss\\u00e9e\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Croum",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/7520-croum",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18015.w40h40.png",
+		"effects": [
+			{
+				"effect": "25% Résistance Neutre"
+			},
+			{
+				"effect": "50 Puissance",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-damagespercent\" data-hasqtip=\"18\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Puissance\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Écureuil Chenapan",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/7704-ecureuil-chenapan",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18016.w40h40.png",
+		"effects": [
+			{
+				"effect": "70 Puissance",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-damagespercent\" data-hasqtip=\"18\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Puissance\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			},
+			{
+				"effect": "40 Fuite"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Marcassin",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/7707-marcassin",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18020.w40h40.png",
+		"effects": [
+			{
+				"effect": "70 Puissance",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-damagespercent\" data-hasqtip=\"18\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Puissance\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			},
+			{
+				"effect": "40 Tacle"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Pioute bleu",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/7708-pioute-bleu",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18019.w40h40.png",
+		"effects": [
+			{
+				"effect": "Etre abonné"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Pioute jaune",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/7709-pioute-jaune",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18023.w40h40.png",
+		"effects": [
+			{
+				"effect": "Etre abonné"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Pioute violet",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/7713-pioute-violet",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18022.w40h40.png",
+		"effects": [
+			{
+				"effect": "Etre abonné"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Atouin",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/7714-atouin",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18017.w40h40.png",
+		"effects": [
+			{
+				"effect": "50 Soin{~ps}{~zs}"
+			},
+			{
+				"effect": "50 Esquive PA"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Bworky",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/8000-bworky",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18031.w40h40.png",
+		"effects": [
+			{
+				"effect": "2000 Pod{~ps}{~zs}"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Abra Kadabra",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/8153-abra-kadabra",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18034.w40h40.png",
+		"effects": [
+			{
+				"effect": "70 Puissance",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-damagespercent\" data-hasqtip=\"18\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Puissance\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			},
+			{
+				"effect": "50 Esquive PM"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "El Scarador",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/8154-scarador",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18036.w40h40.png",
+		"effects": [
+			{
+				"effect": "5% Résistance Feu"
+			},
+			{
+				"effect": "5% Résistance Eau"
+			},
+			{
+				"effect": "5% Résistance Terre"
+			},
+			{
+				"effect": "5% Résistance Air"
+			},
+			{
+				"effect": "5% Résistance Neutre"
+			},
+			{
+				"effect": "50 Puissance",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-damagespercent\" data-hasqtip=\"18\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Puissance\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Chercheur d'Ogrines",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/10657-chercheur-ogrines",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18056.w40h40.png",
+		"effects": [
+			{
+				"effect": "70 Puissance",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-damagespercent\" data-hasqtip=\"19\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Puissance\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			},
+			{
+				"effect": "80 Dommage{~ps}{~zs} Poussée",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-push\" data-hasqtip=\"20\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Dommages Pouss\\u00e9e\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Pykur",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/10866-pykur",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18061.w40h40.png",
+		"effects": [
+			{
+				"effect": "Etre abonné"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Chacha des Glaces",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/10985-chacha-glaces",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18062.w40h40.png",
+		"effects": [
+			{
+				"effect": "15% Critique",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-criticalhit\" data-hasqtip=\"18\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Coup critique\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			},
+			{
+				"effect": "100 Résistance{~ps}{~zs} Poussée"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Chauffe-souris Délavée",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/11014-chauffe-souris-delavee",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18066.w40h40.png",
+		"effects": [
+			{
+				"effect": "50 Dommage{~ps}{~zs} Critiques"
+			},
+			{
+				"effect": "100 Résistance{~ps}{~zs} Poussée"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Kroliméa",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/13230-krolimea",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18088.w40h40.png",
+		"effects": [
+			{
+				"effect": "70 Puissance",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-damagespercent\" data-hasqtip=\"18\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Puissance\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			},
+			{
+				"effect": "2 Portée"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Kafarce",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/13661-kafarce",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18090.w40h40.png",
+		"effects": [
+			{
+				"effect": "15% Critique",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-criticalhit\" data-hasqtip=\"19\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Coup critique\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			},
+			{
+				"effect": "80 Dommage{~ps}{~zs} Poussée",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-push\" data-hasqtip=\"20\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Dommages Pouss\\u00e9e\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Chaperlipopette",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/17700-chaperlipopette",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18115.w40h40.png",
+		"effects": [
+			{
+				"effect": "2000 Initiative"
+			},
+			{
+				"effect": "15% Critique",
+				"val": "<span class=\"ak-tooltip ak-icon-small ak-tx-criticalhit\" data-hasqtip=\"18\"></span><script type=\"application/json\">{\"manual\":true,\"tooltip\":{\"content\":{\"title\":\"\",\"text\":\"Coup critique\"},\"style\":{\"classes\":\"ak-tooltip-content\"}},\"forceOnTouch\":true}</script>"
+			}
+		],
+		"type": "Familier",
+		"level": "Niv. 1"
+	},
+	{
+		"name": "Tirubim",
+		"url": "https://www.dofus.com/fr/mmorpg/encyclopedie/familiers/17795-tirubim",
+		"img": "https://static.ankama.com/dofus/ng/img/../../../dofus/www/game/items/52/18116.w40h40.png",
+		"effects": [],
+		"type": "Familier",
+		"level": "Niv. 1"
+	}
+]
