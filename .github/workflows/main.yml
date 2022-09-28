@@ -53,9 +53,12 @@ jobs:
     - run: ls
     - run: rm '.gitignore'
     - run: ls
+    - run: cd "/home/runner/work/encyclofus/encyclofus/src/DofusDB/"
+    - run: rm 'scraped'
+    - run: ls
 
     - name: Deploy to branch
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: "/home/runner/work/encyclofus/encyclofus/dist"
+        publish_dir: "/home/runner/work/encyclofus/encyclofus"
