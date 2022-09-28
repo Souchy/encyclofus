@@ -83,7 +83,7 @@ module.exports = function(env, { analyze }) {
           use: '@aurelia/webpack-loader',
           exclude: /node_modules/
         },
-		{ test: /\.md$/i, use: ['@aurelia/webpack-loader', 'markdown-loader'], exclude: /node_modules/ }
+		    { test: /\.md$/i, use: ['@aurelia/webpack-loader', 'markdown-loader'], exclude: /node_modules/ }
       ]
     },
     plugins: [
