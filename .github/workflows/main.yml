@@ -69,4 +69,4 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: "/home/runner/work/encyclofus/encyclofus"
+        publish_dir: "/home/runner/work/encyclofus/encyclofus/dist"
