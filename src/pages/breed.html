@@ -1,0 +1,26 @@
+<import from="./spell"></import>
+
+
+<h4>${breedName}</h4>
+
+<!-- TODO: combobox choose game version -->
+
+<!-- Spell List -->
+<div class="spellList d-flex flex-wrap" if.bind="spells">
+	<!-- spell group-->
+	<div class="spellGroup" repeat.for="i of spells.length" if.bind="$even">
+		<!-- iterate 2 by 2 -->
+		<div repeat.for="j of 2">
+			<let s.bind="spells[$parent.$index + j]"></let>
+			<!-- spell div -->
+			<div class="spell ${selectedSlot == i+j ? 'spellactive' : ''}" click.delegate="selectSlot(i + j)">
+				<!-- spell img -->
+				<img src="${getSpellImg(spells[i+j].id)}" title="${spells[i+j].name}" style="width: 55px; height: 55px;" />
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Spell Description -->
+<spell if.bind="isDbLoaded" breedid.bind="breedId" spell.bind="spells[selectedSlot]"></spell>
+
