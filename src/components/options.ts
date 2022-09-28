@@ -17,18 +17,18 @@ export class Options {
 		this.versions = jsonVersions;
 
 		this.selectedVersion = this.db.version;
-		this.selectedLang = this.db.lang;
+		this.selectedLang = this.db.lang.toUpperCase();
 	}
 
-	selectedVersionChanged(newValue, oldValue) {
+	selectedVersionChanged(newValue: string, oldValue: string) {
 		// console.log("selected version changed: " + oldValue + " -> " + newValue)
 		this.db.setVersion(newValue);
 	}
 
 	
-	selectedLangChanged(newValue, oldValue) {
+	selectedLangChanged(newValue: string, oldValue: string) {
 		// console.log("selected language changed: " + oldValue + " -> " + newValue)
-		this.db.setLanguage(newValue);
+		this.db.setLanguage(newValue.toLowerCase());
 	}
 
 }
