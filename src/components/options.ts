@@ -1,7 +1,7 @@
 
 import { inject, observable } from 'aurelia';
 import { db } from '../DofusDB/db';
-import jsonVersions from '../DofusDB/scraped/versions.json'
+import jsonVersions from '../DofusDB/versions.json'
 
 @inject(db)
 export class Options {
