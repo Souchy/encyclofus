@@ -6,7 +6,8 @@
 td {
 	// color: rgb(218, 218, 218) !important;
 }
-.table-striped > tbody > tr:nth-of-type(odd) > * {
+
+.table-striped>tbody>tr:nth-of-type(odd)>* {
 	// --bs-table-accent-bg: rgba(100, 100, 100, 0.05) !important;
 }
 
@@ -25,29 +26,14 @@ body {
 	width: 100%;
 	align-items: stretch;
 	height: 100%;
-	
+
 	// color: rgb(218, 218, 218);
 	// background-color: rgb(31, 31, 31);
 	background-color: rgb(240, 240, 240);
 }
+
 .form-select {
 	background-color: rgb(250, 250, 250) !important;
-}
-
-sidebar {
-	width: 225px;
-	// height: 100%;
-	overflow: auto;
-	// overflow-y: scroll;
-
-	// position: fixed;
-	// top: 0;
-	// bottom: 0;
-
-	// width: 230px;
-	// border-right-width: 1px;
-	// border-right-color: gray;
-	// border-right-style: solid;
 }
 
 .page-host {
@@ -62,8 +48,87 @@ sidebar {
 	//   border: 5px solid #FFFF00;
 
 	// height: 100%;
-	width: 80%;
-	margin-left: 10%;
-	margin-right: 10%;
-	padding: 16px;
+	// padding: 16px;
+
+	// width: 80%;
+	// margin-left: auto;
+	// margin-right: auto;
+	// width: 80%;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	width: 100%;
+	// margin-left: 10%;
+	// margin-right: 10%;
+	padding-left: 10%;
+	padding-right: 10%;
 }
+
+// Large desktop
+@media (min-width: 1200px) {
+
+	#collapseBtn {
+		display: none;
+	}
+	#collapseSidebar {
+		display: none;
+	}
+}
+// landscape tablet
+@media /* (min-width: 981) and */ (max-width: 1199px) {
+	.page-host {
+		width: 100%;
+		padding-left: 7%;
+		padding-right: 5%;
+	}
+	#normalSidebar {
+		display: none;
+	}
+	#collapseBtn {
+		z-index: 3;
+		display: block;
+		position: fixed;
+		top: 17px;
+		left: 15px;
+		color: black;
+	}
+	#collapseSidebar {
+		z-index: 2;
+		// width: 250px;
+		position: fixed;
+		height: 100%;
+		background-color: inherit;
+		// opacity: 99%;
+		padding-top: 50px !important;
+		border-right: 1px grey solid;
+	}
+}
+
+// Portrait tablet to landscape and desktop
+@media (max-width: 980px) {
+	.page-host {
+		width: 100%;
+		padding-left: 7%;
+		padding-right: 1%;
+	}
+}
+
+// Landscape phone to portrait tablet
+@media (max-width: 768px) {
+	#collapseSidebar {
+		width: 100%;
+	}
+}
+// Landscape phones and down
+@media (max-width: 480px) {
+	.page-host {
+		padding-left: 35px;
+		// padding-right: 1%;
+	}
+}
+
+// remove bootstrap's collapsing animation
+// .collapsing {
+//     -webkit-transition: none;
+//     transition: none;
+//     display: none;
+// }

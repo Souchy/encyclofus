@@ -1,13 +1,16 @@
 import 'bootstrap'; // Import the Javascript
 import 'bootstrap/dist/css/bootstrap.css'; // Import the CSS
+import '@fortawesome/fontawesome-free';
+import '@fortawesome/fontawesome-free/css/all.css';
 
-import { inject } from 'aurelia';
+import { inject, IEventAggregator } from 'aurelia';
 import { Route, IRoute, IRouter, IRouteableComponent, RouterConfiguration, ReloadBehavior } from '@aurelia/router';
 
 import { db } from './DofusDB/db';
 import jsonClasses from './DofusDB/static/classes.json'
+import { sidebar } from './components/sidebar';
 
-@inject(db)
+@inject(IEventAggregator, db)
 export class App {
 
 	// Important routing
@@ -26,7 +29,10 @@ export class App {
 		}
 	];
 
-	constructor(db: db) {
+	// collapsing sidebar reference
+	private collapseSidebar: HTMLElement;
+
+    constructor(@IEventAggregator readonly ea: IEventAggregator, db: db) {
 		// load data the first time
 		db.loadJson();
 
@@ -39,6 +45,12 @@ export class App {
 				reloadBehavior: ReloadBehavior.refresh,
 			});
 		}
+		
+		// collapse the sidebar when navigating to a new page
+        this.ea.subscribe('au:router:navigation-start', (asfd) => {
+            // Do stuff inside of this callback
+			this.collapseSidebar.classList.remove("show")
+        });
 	}
 
 }

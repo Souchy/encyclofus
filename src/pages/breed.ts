@@ -66,7 +66,7 @@ export class Breed implements IRouteableComponent {
 		let result = await this.db.promiseLoadingSpells;
 		if(result) {
 			let spell = this.spells[0];
-			console.log("breed async load: spell = " + spell.name)
+			// console.log("breed async load: spell = " + spell.name)
 			// this.selectSpell(spell);
 			this.selectSlot(0);
 		}

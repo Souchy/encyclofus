@@ -1,14 +1,18 @@
-<template class="d-flex flex-column flex-shrink-0 p-3">
-	<!-- <h5><a href="#" style="color: inherit; text-decoration: inherit;">Accueil</a></h5> -->
+<import from="./options"></import>
 
-	<!-- <h5>Classes</h5> -->
+<template class="flex-shrink-0 p-3">
+<!-- flex-column -->
+<!-- <template class="d-flex flex-column flex-shrink-0 p-3"> -->
+
+	<!-- options -->
+	<!-- <options style="margin-left: auto; margin-right: auto;"></options> -->
+
+
 	<div class="d-flex p-2 flex-wrap">
 		<a repeat.for="i of breeds.length" load="${breeds[i]}" css="${getBreedIconStyle(i)}"></a>
 	</div>
 
 	<div>
-		<!-- Information -->
-		<!-- --- -->
 		<strong>Information</strong>
 		<br />
 		<a load="tournaments" style="color: inherit; text-decoration: inherit;">
@@ -21,24 +25,20 @@
 	</div>
 
 	<div>
-		<!-- Infos dofus -->
-		<!-- --- -->
 		<strong>Dofus</strong>
 		<br />
 		<a href="https://www.dofus.com/fr/mmorpg/actualites/maj" target="_blank"
 			style="color: inherit; text-decoration: inherit;">
-			Changelogs <i class="fas fa-link"></i>
+			<i class="fas fa-link"></i> Changelogs 
 		</a>
 		<br />
 		<a href="https://www.dofus.com/fr/mmorpg/actualites/devblog" target="_blank"
 			style="color: inherit; text-decoration: inherit;">
-			Devblogs <i class="fas fa-link"></i>
+			<i class="fas fa-link"></i> Devblogs 
 		</a>
 	</div>
 
 	<div>
-		<!-- Autre -->
-		<!-- --- -->
 		<strong>Autre</strong>
 		<!-- <br />
 		<a href="https://souchy.github.io/quickfus/" target="_blank" style="color: inherit; text-decoration: inherit;">
@@ -47,10 +47,9 @@
 		<br />
 		<a href="https://github.com/Souchy/encyclofus" target="_blank"
 			style="color: inherit; text-decoration: inherit;">
-			Github <i class="fab fa-github"></i>
+			<i class="fab fa-github"></i> Github 
 		</a>
 	</div>
-
 
 	<!-- <h5>Mises à jour</h5>
 	<div></div> -->

@@ -1,17 +1,25 @@
-
 <import from="./pages/breed"></import>
 <import from="./components/missing-page"></import>
 <import from="./components/sidebar"></import>
 <import from="./components/options"></import>
 
 <div class="main">
+	<!-- options -->
 	<options></options>
-	<sidebar></sidebar>
-  
-	<div class="b-example-divider">
-	</div>
 
+	<!-- collapsing sidebar -->
+	<a id="collapseBtn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSidebar" 
+			aria-expanded="false" aria-controls="collapseExample">
+		<i class="fa-solid fa-bars"></i>
+	</a>
+	<sidebar id="collapseSidebar" ref="collapseSidebar" class="collapse"></sidebar>
+
+	<!-- normal sidebar -->
+	<sidebar id="normalSidebar"></sidebar>
+	<div class="b-example-divider"></div>
+
+	<!-- content -->
 	<div class="page-host">
-	  <au-viewport default="hello" fallback="missing-page"></au-viewport> <!--  -->
+		<au-viewport default="hello" fallback="missing-page"></au-viewport> <!--  -->
 	</div>
 </div>
