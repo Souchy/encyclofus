@@ -54,9 +54,9 @@ jobs:
     - run: rm '.gitignore'
     - run: ls
     - run: cd "src/DofusDB"
-    - run: ls
-    - run: rm 'scraped'
-    - run: ls
+    - run: ls "/home/runner/work/encyclofus/encyclofus/src/DofusDB/"
+    - run: rm "/home/runner/work/encyclofus/encyclofus/src/DofusDB/scraped"
+    - run: ls "/home/runner/work/encyclofus/encyclofus/src/DofusDB/"
 
     - name: Deploy to branch
       uses: peaceiris/actions-gh-pages@v3
