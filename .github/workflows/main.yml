@@ -53,7 +53,8 @@ jobs:
     - run: ls
     - run: rm '.gitignore'
     - run: ls
-    - run: cd "/home/runner/work/encyclofus/encyclofus/src/DofusDB/"
+    - run: cd "src/DofusDB"
+    - run: ls
     - run: rm 'scraped'
     - run: ls
 
