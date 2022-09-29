@@ -43,21 +43,20 @@ jobs:
         npm run build
     
     # remove scraped (images are heavy to deploy)
-    - run: rm -rf "/home/runner/work/encyclofus/encyclofus/src/DofusDB/scraped/"
-    # remove test folder
-    - run: rm -rf "/home/runner/work/encyclofus/encyclofus/test/"
-    # remove src folder
-    - run: rm -rf "/home/runner/work/encyclofus/encyclofus/src/"
-    # remove all files in the root directory (not folders)
-    - run: ls
-    - run: find "/home/runner/work/encyclofus/encyclofus/" -maxdepth 1 -type f -delete
-    - run: ls
-    # move files from dist to root
-    - run: mv dist/* .
-
+    # - run: rm -rf "/home/runner/work/encyclofus/encyclofus/src/DofusDB/scraped/"
+    # # remove test folder
+    # - run: rm -rf "/home/runner/work/encyclofus/encyclofus/test/"
+    # # remove src folder
+    # - run: rm -rf "/home/runner/work/encyclofus/encyclofus/src/"
+    # # remove all files in the root directory (not folders)
+    # - run: ls
+    # - run: find "/home/runner/work/encyclofus/encyclofus/" -maxdepth 1 -type f -delete
+    # - run: ls
+    # # move files from dist to root
+    # - run: mv dist/* .
 
     - name: Deploy to branch
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: "/home/runner/work/encyclofus/encyclofus"
+        publish_dir: "/home/runner/work/encyclofus/encyclofus/dist"
