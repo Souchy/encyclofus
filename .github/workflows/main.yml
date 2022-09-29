@@ -22,18 +22,11 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    #- name: Checkout repository
     - uses: actions/checkout@v3
     
     - name: Checkout submodules
       run: git submodule update --init --recursive
-      
-    - run: pwd
-    - run: cd src
-    - run: ls
-    - run: cd ..
-    - run: ls
-            
+          
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
@@ -49,14 +42,16 @@ jobs:
       run: |
         npm run build
     
-    - run: cd "/home/runner/work/encyclofus/encyclofus"
-    - run: ls
-    - run: rm '.gitignore'
-    - run: ls
-    - run: cd "src/DofusDB"
-    - run: ls "/home/runner/work/encyclofus/encyclofus/src/DofusDB/"
+    # remove scraped (images are heavy to deploy)
     - run: rm -rf "/home/runner/work/encyclofus/encyclofus/src/DofusDB/scraped/"
-    - run: ls "/home/runner/work/encyclofus/encyclofus/src/DofusDB/"
+    # remove test folder
+    - run: rm -rf "/home/runner/work/encyclofus/encyclofus/test/"
+    # - run: ls "/home/runner/work/encyclofus/encyclofus/src/DofusDB/"
+    # remove all files in the root directory (not folders)
+    - run: find "/home/runner/work/encyclofus/encyclofus/" -maxdepth 1 -type f -delete
+    # move files from dist to root
+    - run: mv "/home/runner/work/encyclofus/encyclofus/dist/*" "/home/runner/work/encyclofus/encyclofus/"
+
 
     - name: Deploy to branch
       uses: peaceiris/actions-gh-pages@v3
