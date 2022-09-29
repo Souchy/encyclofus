@@ -46,13 +46,13 @@ jobs:
     - run: rm -rf "/home/runner/work/encyclofus/encyclofus/src/DofusDB/scraped/"
     # remove test folder
     - run: rm -rf "/home/runner/work/encyclofus/encyclofus/test/"
-    # - run: ls "/home/runner/work/encyclofus/encyclofus/src/DofusDB/"
+    # remove src folder
+    - run: rm -rf "/home/runner/work/encyclofus/encyclofus/src/"
     # remove all files in the root directory (not folders)
     - run: ls
     - run: find "/home/runner/work/encyclofus/encyclofus/" -maxdepth 1 -type f -delete
     - run: ls
     # move files from dist to root
-    # - run: mv "/home/runner/work/encyclofus/encyclofus/dist/* "/home/runner/work/encyclofus/encyclofus/"
     - run: mv dist/* .
 
 
