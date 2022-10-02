@@ -1,7 +1,7 @@
 <import from="./spell"></import>
 
 <!-- Spell List -->
-<div class="spellList d-flex flex-wrap" if.bind="spells">
+<div class="spellList d-flex flex-wrap" if.bind="db.isLoaded">
 	<!-- spell group-->
 	<div class="spellGroup" repeat.for="i of spells.length" if.bind="$even">
 		<!-- iterate 2 by 2 -->
@@ -10,13 +10,23 @@
 			<!-- spell div -->
 			<div class="spell ${selectedSlot == i+j ? 'spellactive' : ''}" click.delegate="selectSlot(i + j)">
 				<!-- spell img -->
-				<img src="${getSpellImg(spells[i+j].id)}" title="${spells[i+j].name}" style="width: 55px; height: 55px;" />
+				<img src="${getSpellImg(spells[i+j])}" title="${getSpellName(spells[i+j])}" id="${spells[i+j]}" style="width: 55px; height: 55px;" />
+				<!-- <spell-icon spell.bind="spells[i+j]" style="width:45%; margin-right: auto;"></table-details> -->
 			</div>
 		</div>
 	</div>
 </div>
 
+<button click.trigger="testSpells()">Hey</button>
+
 <!-- Spell Description -->
-<spell if.bind="isDbLoaded" spell.bind="spells[selectedSlot]"></spell>
+<!-- <spell if.bind="isDbLoaded" spell.bind="spells[selectedSlot]"></spell> -->
 <!-- breedid.bind="breedId" -->
 
+
+<!-- custom template pour les Autres Caractéristiques -->
+
+<!-- <template as-custom-element="spell-icon">
+	<bindable property="spell"></bindable>
+	<img src="${getSpellImg(spell)}" style="width: 55px; height: 55px;" />
+</template> -->

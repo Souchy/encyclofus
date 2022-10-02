@@ -17,18 +17,7 @@ export class Breed implements IRouteableComponent {
 		{
 			path: '',
 			component: import('./breeds/spelllist'),
-			// data: {
-			// 	breed: "sacrieur"
-			// }
 		},
-		// {
-		// 	path: "resources",
-		// 	component: import('./pages/resources')
-		// },
-		// {
-		// 	path: "tournaments",
-		// 	component: import('./pages/tournaments')
-		// }
 		{
 			path: "situations",
 			component: import('./breeds/xelor/xelor.situations.fr.md'),
@@ -37,24 +26,25 @@ export class Breed implements IRouteableComponent {
 		}
 	];
 
-	// public db: db;
-	// public router: IRouter;
 
 	@bindable
-	public breed: string = "feca";
+	// public breed: string = "feca";
+	public breedId: number = 0;
 
-	constructor(){ //@IRouter readonly rtr: IRouter) { 
-		// this.router = rtr;
+	constructor(){ 
 	}
 
 	load(parameters: Parameters, instruction: RoutingInstruction, navigation: Navigation): void | Promise<void> {
-		this.breed = instruction.route.match.id;
 		// console.log("hey breeds load: " + JSON.stringify(instruction.route))
+		// this.breed = instruction.route.match.id;
+		let basicname = instruction.route.match.id;
+		this.breedId = jsonBreeds.ids[basicname];
+		// console.log("breed: " + this.breedId);
 	}
 	
-	public get breedId(): number {
-		return jsonBreeds.ids[this.breed];
-	}
+	// public get breedId(): number {
+	// 	return jsonBreeds.ids[this.breed];
+	// }
 	public get breedName(): string {
 		return jsonBreeds.french[this.breedId-1];
 	}
