@@ -1,26 +1,16 @@
-<import from="./spell"></import>
-
+<import from="./breeds/spell"></import>
+<import from="./breeds/spelllist"></import>
+<!-- <import from="./breeds/xelor/xelor-situations-fr"></import> -->
 
 <h4>${breedName}</h4>
 
-<!-- TODO: combobox choose game version -->
 
-<!-- Spell List -->
-<div class="spellList d-flex flex-wrap" if.bind="spells">
-	<!-- spell group-->
-	<div class="spellGroup" repeat.for="i of spells.length" if.bind="$even">
-		<!-- iterate 2 by 2 -->
-		<div repeat.for="j of 2">
-			<let s.bind="spells[$parent.$index + j]"></let>
-			<!-- spell div -->
-			<div class="spell ${selectedSlot == i+j ? 'spellactive' : ''}" click.delegate="selectSlot(i + j)">
-				<!-- spell img -->
-				<img src="${getSpellImg(spells[i+j].id)}" title="${spells[i+j].name}" style="width: 55px; height: 55px;" />
-			</div>
-		</div>
-	</div>
-</div>
+<!-- <div w3-include-html="./breeds/xelor/xelor-situations-fr.md"></div> -->
+<zero-md src="src/pages/breeds/xelor/xelor.situations.fr.md"></zero-md>
+<!-- <spelllist></spelllist> -->
 
-<!-- Spell Description -->
-<spell if.bind="isDbLoaded" breedid.bind="breedId" spell.bind="spells[selectedSlot]"></spell>
+<au-viewport name="breeds-routes" default="spelllist" fallback="missing-page" breed="breed"></au-viewport> 
+ <!-- default="spelllist" -->
+<!-- <au-viewport default="${name}(id=${id})"></au-viewport> -->
+<!-- <xelor-situations-fr></xelor-situations-fr> -->
 

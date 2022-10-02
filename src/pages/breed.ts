@@ -1,104 +1,62 @@
-import { db } from './../DofusDB/db';
+import { ReloadBehavior } from '@aurelia/router';
+// import { db } from './../DofusDB/db';
 import jsonBreeds from '../DofusDB/static/classes.json';
 
 // Aurelia 2
 import { inject, lazy, all, optional, newInstanceOf, factory, Constructable } from "@aurelia/kernel";
 import { bindable, route } from 'aurelia';
-import { IRouter, IRouteableComponent, Navigation, Parameters, RoutingInstruction } from '@aurelia/router';
+import { IRoute, IRouter, IRouteableComponent, Navigation, Parameters, RoutingInstruction } from '@aurelia/router';
 import { IDryCustomElementController, IHydrationContext, CustomElementDefinition, PartialCustomElementDefinition, IContextualCustomElementController, ICompiledCustomElementController, ICustomElementController, IHydratedController, LifecycleFlags } from '@aurelia/runtime-html';
+import { SpellList } from "./breeds/spelllist";
 
-@inject(db)
+// @inject(db)
 // @route('')
 export class Breed implements IRouteableComponent {
-	public db: db;
-	public router: IRouter;
+	
+	static routes: IRoute[] = [
+		{
+			path: '',
+			component: import('./breeds/spelllist'),
+			// data: {
+			// 	breed: "sacrieur"
+			// }
+		},
+		// {
+		// 	path: "resources",
+		// 	component: import('./pages/resources')
+		// },
+		// {
+		// 	path: "tournaments",
+		// 	component: import('./pages/tournaments')
+		// }
+		{
+			path: "situations",
+			component: import('./breeds/xelor/xelor.situations.fr.md'),
+			title: "Situations",
+			reloadBehavior: ReloadBehavior.refresh,
+		}
+	];
+
+	// public db: db;
+	// public router: IRouter;
 
 	@bindable
-	public breed: string = "iop";
-	public selectedSlot: number;
+	public breed: string = "feca";
 
-	constructor(@IRouter readonly rtr: IRouter, db: db) { //}, router: IRouter) { 
-		this.db = db;
-		this.router = rtr;
+	constructor(){ //@IRouter readonly rtr: IRouter) { 
+		// this.router = rtr;
 	}
-
-    // created(controller) {
-	// 	console.log("breed created")
-	// }
-	// define(controller: IDryCustomElementController<this>, hydrationContext: IHydrationContext<unknown>, definition: CustomElementDefinition<Constructable<{}>>): void | PartialCustomElementDefinition {
-	// 	console.log("[define] url path: " + this.router.activeNavigation);
-	// }
-	// hydrating(controller: IContextualCustomElementController<this>): void {
-	// 	console.log("[hydrating] url path: " + this.router.activeNavigation);
-	// }
-	// hydrated(controller: ICompiledCustomElementController<this>): void {
-	// 	console.log("[hydrated] url path: " + this.router.activeNavigation);
-	// }
-	// created(controller: ICustomElementController<this>): void {
-	// 	console.log("[created] url path: " + this.router.activeNavigation);
-	// }
-	// binding(initiator: IHydratedController, parent: IHydratedController, flags: LifecycleFlags): void | Promise<void> {
-		
-	// }
-	// bound(initiator: IHydratedController, parent: IHydratedController, flags: LifecycleFlags): void | Promise<void> {
-	// 	console.log("[bound] url path: " + this.router.activeNavigation);
-	// }
-	// attached(initiator: IHydratedController, flags: LifecycleFlags): void | Promise<void> {
-	// 	console.log("[attached] url path: " + this.rtr.activeNavigation);
-	// }
 
 	load(parameters: Parameters, instruction: RoutingInstruction, navigation: Navigation): void | Promise<void> {
-		// console.log(JSON.stringify(instruction.route))
-		// this.breed = asdf[asdf.length - 1];
-		// this.breed = instruction.route.data.breed;
-		// this.breed = instruction.route.matching;
 		this.breed = instruction.route.match.id;
-		// let spell = this.spells[0];
-		// console.log("breed load: spell = " + spell)
-		// this.selectSpell(spell);
-		this.selectSpellOnLoad();
-
-		// let asdf = window.location.href.split("/");
-		// console.log("breed load: " + this.breed + " =? " + asdf[asdf.length - 1] + " ,,, " + window.location.href) // + " ,,, " + document.URL)
-	}
-
-	public async selectSpellOnLoad() {
-		let result = await this.db.promiseLoadingSpells;
-		if(result) {
-			let spell = this.spells[0];
-			// console.log("breed async load: spell = " + spell.name)
-			// this.selectSpell(spell);
-			this.selectSlot(0);
-		}
-	}
-
-	public get isDbLoaded() {
-		return this.db.isLoaded;
+		// console.log("hey breeds load: " + JSON.stringify(instruction.route))
 	}
 	
-	public get spells(): any[] {
-		if(!this.db.jsonSpells) return null;
-		return this.db.jsonSpells[this.breed];
-	}
-	
-
-	// public selectSpell(spell: any): void {
-	// 	this.selectedSpell = spell;
-	// }
-	public selectSlot(slot: number): void {
-		this.selectedSlot = slot;
-	}
-
 	public get breedId(): number {
 		return jsonBreeds.ids[this.breed];
 	}
 	public get breedName(): string {
 		return jsonBreeds.french[this.breedId-1];
-	}
-
-
-	public getSpellImg(spellId: string): string {
-		return this.db.getSpellIconPath(spellId);
 	}
 
 }

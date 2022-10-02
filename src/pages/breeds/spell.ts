@@ -1,12 +1,10 @@
 import { bindable, inject } from "aurelia";
-import { db } from '../DofusDB/db';
+import { db } from '../../DofusDB/db';
 
 @inject(db)
 export class Spell {
 	private db: db;
 
-	@bindable 
-	public breedid: string;
 	@bindable
 	public spell: any;
 
@@ -61,7 +59,6 @@ export class Spell {
 	public getFighterIcon(val: string) {
 		if(val) {
 			let style = this.db.getFighterIconStyle(val);
-			// console.log("get fighter style: " + style);
 			return style;
 		}
 		return "";
