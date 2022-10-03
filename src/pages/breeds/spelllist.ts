@@ -19,7 +19,7 @@ export class SpellList {
 	}
 
 	load(parameters: Parameters, instruction: RoutingInstruction, navigation: Navigation): void | Promise<void> {
-		// console.log("spellliste route: " + JSON.stringify(navigation.instruction))
+		console.log("spelllist load route: " + JSON.stringify(navigation.instruction))
 		let basicname = navigation.instruction as string; //instruction.route.match.id;
 		this.breedId = jsonBreeds.ids[basicname];
 		// console.log("spellliste breed: " + this.breedId);

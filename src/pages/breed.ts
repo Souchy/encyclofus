@@ -34,7 +34,7 @@ export class Breed implements IRouteableComponent {
 	}
 
 	load(parameters: Parameters, instruction: RoutingInstruction, navigation: Navigation): void | Promise<void> {
-		// console.log("hey breeds load: " + JSON.stringify(instruction.route))
+		console.log("breeds load route: " + JSON.stringify(instruction.route))
 		// this.breed = instruction.route.match.id;
 		let basicname = instruction.route.match.id;
 		this.breedId = jsonBreeds.ids[basicname];

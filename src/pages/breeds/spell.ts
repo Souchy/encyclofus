@@ -89,7 +89,7 @@ export class Spell {
 	// }
 
 	public getIcon(val: string) {
-		console.log("spell get icon for: " + val)
+		// console.log("spell get icon for: " + val)
 		if (val) {
 			return this.db.getModIconStyle(this.renderEffectI18n(val));
 		}
