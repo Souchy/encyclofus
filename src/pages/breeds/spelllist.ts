@@ -3,7 +3,7 @@ import { IRouter, IRouteableComponent, Navigation, Parameters, RoutingInstructio
 
 import { db } from "../../DofusDB/db";
 import jsonBreeds from '../../DofusDB/static/classes.json';
-import { Breed } from "../breed";
+// import { Breed } from "../breed";
 
 @inject(db)
 export class SpellList {
@@ -20,7 +20,7 @@ export class SpellList {
 	}
 
 	public get breedId(): number {
-		return Breed.breedId;
+		return this.db.breedId;
 	}
 	public get breed(): any {
 		if (!this.db.jsonBreeds) return null;
