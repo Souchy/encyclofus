@@ -67,9 +67,11 @@ export class SpellList {
 	}
 
 	public get selectedSpellId() {
+		if(!this.spells) return null;
 		return this.spells[this.selectedSlot];
 	}
 	public get selectedSpell() {
+		if(!this.selectedSpellId) return null;
 		return this.db.jsonSpells[this.selectedSpellId];
 	}
 	public hasSummon(e: any) {

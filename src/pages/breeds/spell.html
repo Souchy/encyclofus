@@ -2,7 +2,7 @@
 <import from="./othercharac"></import>
 
 <!-- Spell Description -->
-<div class="spellDescription">
+<div class="spellDescription" if.bind="spell">
 	<!-- name -->
 	<h5 if.bind="!issummon">${name}</h5>
 	<h6 if.bind="issummon">
