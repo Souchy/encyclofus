@@ -18,7 +18,8 @@ export class SpellList {
 	}
 
 	load(parameters: Parameters, instruction: RoutingInstruction, navigation: Navigation): void | Promise<void> {
-		// console.log("spelllist load route: " + JSON.stringify(navigation.instruction))
+		// console.log("spelllist load inst: " + JSON.stringify(instruction)) // spelllist
+		// console.log("spelllist load nav: " + JSON.stringify(navigation.instruction)) // cra
 		let basicname = navigation.instruction as string; //instruction.route.match.id;
 		basicname = basicname.substring(basicname.indexOf("/") + 1)
 		if (basicname.length > 0)

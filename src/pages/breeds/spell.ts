@@ -31,12 +31,48 @@ export class Spell {
 
 	public renderEffectI18n(e) {
 		let text = this.db.getI18n(e.effect.descriptionId);
+		let has1 = text.includes("#1");
+		let has2 = text.includes("#2");
+		let has3 = text.includes("#3");
 		// invocation
-		if(this.hasSummon(e)) {
+		if (this.hasSummon(e)) {
 			let summon = this.getSummon(e);
 			// console.log("monster: " + JSON.stringify(summon));
 			let name = this.db.getI18n(summon.nameId);
 			text = text.replace("#1", name);
+		}
+		// effet de charge
+		if(has1 && has3 && !has2) { // if(e.effectId == 293) { //} && e.diceNum != e.spellId) {
+			let subspellid = e.diceNum;
+			let subspell = this.db.jsonSpells[subspellid];
+			// doSpell(subspellid);
+
+			text = text.replace("#1", this.db.getI18n(subspell.nameId));
+			text = text.replace("#3", e.value);
+		}
+		// state condition, fouet osa dragocharge
+		if(e.effectId == 1160 || e.effectId == 2160 || e.effectId == 2794) {
+			let subspellid = e.diceNum;
+			let subspell = this.db.jsonSpells[subspellid];
+			text = text.replace("#1", this.db.getI18n(subspell.nameId));
+		}
+		// état
+		if (e.effectId == 950) {
+			// if (e.value) {
+			let state = this.db.jsonStates[e.value]
+			let stateName = this.db.getI18n(state.nameId);
+			// "968135": "{spell,24036,1::<u>Saoul</u>}",
+			if (!stateName) {
+				console.log("state: " + JSON.stringify(state))
+			} else
+			if (stateName.includes("{")) {
+				stateName = stateName.replace("{", "").replace("}", "");
+				let data = stateName.split(",");
+				let subSpellId = data[1];
+				let stateSpell = this.db.jsonSpells[subSpellId];
+				stateName = stateName.split("::")[1] + "<spell spellid.bind='" + subSpellId + "' issummon.bind='"+this.issummon+"'></spell>";
+			}
+			if (state) text = text.replace("#3", stateName);
 		}
 		// min/max
 		let min = e.diceNum;
@@ -51,18 +87,13 @@ export class Spell {
 			text = text.replace("#2", "");
 		}
 		// conjugaison
-		if(min > 1 || max > 1) {
+		if (min > 1 || max > 1) {
 			text = text.replace("{~ps}{~zs}", "s");
 		} else {
 			text = text.replace("{~ps}{~zs}", "");
 		}
-		// état
-		if (e.value) {
-			let state = this.db.jsonStates[e.value]
-			if (state) text = text.replace("#3", this.db.getI18n(state.nameId));
-		}
 		// durée
-		if (e.duration) {
+		if (e.duration > 0) {
 			text += " (" + e.duration + " " + this.i18n.tr("turns") + ")";
 		}
 		return text;
@@ -72,7 +103,7 @@ export class Spell {
 		return e.effectId == 181;
 	}
 	public getSummon(e: any): any {
-		if(!this.hasSummon(e)) return null;
+		if (!this.hasSummon(e)) return null;
 		return this.db.jsonSummons[e.diceNum];
 	}
 

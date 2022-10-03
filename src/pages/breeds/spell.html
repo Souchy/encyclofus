@@ -30,10 +30,11 @@
 			<table class="table table-striped table-sm table-borderless ">
 				<tbody>
 					<tr repeat.for="e of spell.effects" if.bind="e.visibleInTooltip">
-						<td style="vertical-align: middle;">${renderEffectI18n(e)}</td>
+						<td style="vertical-align: middle;" innerHtml.bind="renderEffectI18n(e)"></td>
 						<td style.bind="getIcon(e)"></td>
 						<td style.bind="db.getAoeIconStyle(e)"></td>
 					</tr>
+					<!-- <effect repeat.for="e of spell.effects" e.bind="e"></effect> -->
 
 					<!-- <tr if.bind="hasSummon(e)">
 						<td>${getSummon(e)}</td>
@@ -59,7 +60,7 @@
 			<table class="table table-striped table-sm table-borderless ">
 				<tbody>
 					<tr repeat.for="e of spell.criticalEffect" if.bind="e.visibleInTooltip">
-						<td style="vertical-align: middle;">${renderEffectI18n(e)}</td>
+						<td style="vertical-align: middle;" innerHtml.bind="renderEffectI18n(e)"></td>
 						<td style.bind="getIcon(e)"></td>
 						<td style.bind="db.getAoeIconStyle(e)"></td>
 					</tr>
