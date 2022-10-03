@@ -67,4 +67,18 @@ export class SpellList {
 		return this.db.getI18n(nameid);
 	}
 
+	public get selectedSpellId() {
+		return this.spells[this.selectedSlot];
+	}
+	public get selectedSpell() {
+		return this.db.jsonSpells[this.selectedSpellId];
+	}
+	public hasSummon(e: any) {
+		return e.effectId == 181;
+	}
+	public getSummon(e: any): any {
+		if(!this.hasSummon(e)) return null;
+		return this.db.jsonSummons[e.diceNum];
+	}
+
 }

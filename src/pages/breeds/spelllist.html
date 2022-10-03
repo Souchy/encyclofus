@@ -1,4 +1,5 @@
 <import from="./spell"></import>
+<import from="./summon"></import>
 
 <!-- Spell List -->
 <div class="spellList d-flex flex-wrap" if.bind="db.isLoaded">
@@ -17,4 +18,9 @@
 </div>
 
 <!-- Spell Description -->
-<spell if.bind="db.isLoaded" spellid.bind="spells[selectedSlot]"></spell>
+<spell if.bind="db.isLoaded" spellid.bind="selectedSpellId"></spell>
+
+<!-- Summons Description -->
+<div if.bind="db.isLoaded" repeat.for="e1 of selectedSpell.effects" >
+	<summon if.bind="hasSummon(e1)" summon.bind="getSummon(e1)"></summon>
+</div>
