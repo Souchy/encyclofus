@@ -5,7 +5,7 @@
 	</select>
 	
 	<select class="form-select" style="width: auto;" value.bind="selectedVersion">
-		<option repeat.for="version of versions" model.bind="version">
+		<option repeat.for="version of versions" model.bind="version" if.bind="version > '2.64'">
 			${version}
 		</option>
 	</select>
