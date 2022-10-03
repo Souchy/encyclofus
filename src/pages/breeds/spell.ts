@@ -139,6 +139,13 @@ export class Spell {
 		return text;
 	}
 
+	public hasSubSpell(e: any) {
+		return e.effectId == 2794;
+	}
+	public getSubSpell(e: any) {
+		return this.db.jsonSpells[e.diceNum];
+	}
+
 	public hasSummon(e: any) {
 		return e.effectId == 181;
 	}
