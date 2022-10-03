@@ -47,23 +47,6 @@
 						</td>
 					</tr>
 
-					<!-- <tr repeat.for="e of spell.effects" if.bind="e.visibleInTooltip">
-						<td style="vertical-align: middle;" innerHtml.bind="renderEffectI18n(e)"></td>
-						<td style.bind="getIcon(e)"></td>
-						<td style.bind="db.getAoeIconStyle(e)"></td>
-					</tr>
-					<tr repeat.for="e of spell.effects" if.bind="hasTrapGlyph(e)" style="--bs-table-striped-bg: none;">
-						<td style="vertical-align: middle; padding: 0px;" innerHtml.bind="renderTrapGlyph(e)" colspan="3"></td>
-					</tr> -->
-
-					<!-- <effect repeat.for="e of spell.effects" e.bind="e"></effect> -->
-
-					
-					<!-- <an-effect repeat.for="e of spell.effects" if.bind="e.visibleInTooltip" e.bind="e"
-						text.bind="renderEffectI18n(e)" summon.bind="getSummon(e)"></an-effect> -->
-					<!-- <tr repeat.for="e of spell.effects" if.bind="hasSummon(e)">
-						<td>${getSummon(e)}</td>
-					</tr> -->
 					<!-- <tr repeat.for="i of detailsObj.effects.length" height="32px;" if.bind="detailsObj">
 						<td class="">
 							${removeFighterIconTag(detailsObj.effects[i])}
@@ -102,17 +85,13 @@
 
 	<!-- other -->
 	<div>
-		<othercharac spell.bind="spell"></othercharac>
-		<!-- <div class="d-flex"> -->
-			<!-- <table-details polarity.bind="'$even'" spell.bind="spell" style="width:45%; margin-right: auto;"></table-details>
-			<table-details polarity.bind="'$odd'" spell.bind="spell" style="width:45%; margin-right: auto; height: auto; margin-bottom: auto;"></table-details> -->
-		<!-- </div> -->
+		<othercharac spellid.bind="spellid" spell.bind="spell"></othercharac>
 	</div> 
 
 	<!-- détails additionels -->
-	<div if.bind="detailsObj.text">
+	<!-- <div if.bind="detailsObj.text">
 		<h6>Détails additionnels</h6>
 		<p if.bind="detailsObj.text">${detailsObj.text}</p>
-	</div>
+	</div> -->
 
 </div> <!-- fin info sort -->

@@ -33,7 +33,7 @@ export class Spell {
 		let text = this.db.getI18n(e.effect.descriptionId);
 		let subspellid = e.diceNum;
 		let tg = this.getTrapGlyph(e);
-		console.log("trap glyph: " + JSON.stringify(tg))
+		// console.log("trap glyph: " + JSON.stringify(tg))
 		// doSpell(subspellid);
 		//  if.bind="hasTrapGlyph(e)"
 		// text += this.db.getI18n(tg.nameId);

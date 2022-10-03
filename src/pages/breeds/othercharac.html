@@ -1,5 +1,5 @@
-
 <h6 t="otherCharac"></h6>
+
 <div class="d-flex" style="margin-bottom: 16px;">
 	<table class="table table-striped table-sm table-borderless"
 		style="width:45%; margin-right: auto; margin-bottom: auto">
@@ -26,7 +26,7 @@
 			</tr>
 			<tr if.bind="spell.globalCooldown">
 				<td t="globalCooldown"></td>
-				<td style="white-space: nowrap; text-align: right;" t="${spell.globalCooldown}"></td>
+				<td style="white-space: nowrap; text-align: right;">${translate(spell.globalCooldown != 0)}</td>
 			</tr>
 		</tbody>
 	</table>
@@ -35,32 +35,33 @@
 		<tbody>
 			<tr>
 				<td t="castTestLos"></td>
-				<td style="white-space: nowrap; text-align: right;" t="${spell.castTestLos}"></td>
+				<td style="white-space: nowrap; text-align: right;">${translate(spell.castTestLos)}</td>
 			</tr>
 			<tr if.bind="spell.needFreeCell">
 				<td t="needFreeCell"></td>
-				<td style="white-space: nowrap; text-align: right;" t="${spell.needFreeCell}"></td>
+				<td style="white-space: nowrap; text-align: right;">${translate(spell.needFreeCell)}</td>
 			</tr>
 			<tr if.bind="spell.needTakenCell">
 				<td t="needTakenCell"></td>
-				<td style="white-space: nowrap; text-align: right;" t="${spell.needTakenCell}"></td>
+				<td style="white-space: nowrap; text-align: right;">${translate(spell.needTakenCell)}</td>
 			</tr>
 			<tr if.bind="spell.castInLine">
 				<td t="castInLine"></td>
-				<td style="white-space: nowrap; text-align: right;" t="${spell.castInLine}"></td>
+				<td style="white-space: nowrap; text-align: right;">${translate(spell.castInLine)}</td>
 			</tr>
 			<tr if.bind="spell.castInDiagonal">
 				<td t="castInDiagonal"></td>
-				<td style="white-space: nowrap; text-align: right;" t="${spell.castInDiagonal}"></td>
+				<td style="white-space: nowrap; text-align: right;">${translate(spell.castInDiagonal)}</td>
 			</tr>
 			<tr if.bind="spell.maxStack > 0">
 				<td t="maxStack"></td>
 				<td style="white-space: nowrap; text-align: right;">${spell.maxStack}</td>
 			</tr>
-			<!-- <tr if.bind="spell.needFreeTrapCell">
-				<td>Cellule libre de pièges</td>
-				<td style="white-space: nowrap; text-align: right;">${spell.needFreeTrapCell ? "Oui" : "Non"}</td>
-			</tr> -->
 		</tbody>
 	</table>
 </div>
+
+<!-- <tr if.bind="spell.needFreeTrapCell">
+	<td>Cellule libre de pièges</td>
+	<td style="white-space: nowrap; text-align: right;">${spell.needFreeTrapCell ? "Oui" : "Non"}</td>
+</tr> -->
