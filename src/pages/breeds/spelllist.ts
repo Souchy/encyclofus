@@ -21,7 +21,8 @@ export class SpellList {
 	load(parameters: Parameters, instruction: RoutingInstruction, navigation: Navigation): void | Promise<void> {
 		console.log("spelllist load route: " + JSON.stringify(navigation.instruction))
 		let basicname = navigation.instruction as string; //instruction.route.match.id;
-		this.breedId = jsonBreeds.ids[basicname];
+		if(basicname.length > 0)
+			this.breedId = jsonBreeds.ids[basicname];
 		// console.log("spellliste breed: " + this.breedId);
 		// this.selectSpellOnLoad();
 	}
@@ -39,6 +40,7 @@ export class SpellList {
 
 	public get breed(): any {
 		if (!this.db.jsonBreeds) return null;
+		if(!this.breedId) return null;
 		return this.db.jsonBreeds[this.breedId + ""];
 	}
 	public get spells(): any[] {
@@ -47,22 +49,10 @@ export class SpellList {
 		return this.breed.spells;
 	}
 
-	public testSpells() {
-		console.log("spell list breed[" + this.breedId + "]: " + JSON.stringify(this.breed.spells));
-	}
-
-	// public get spells(): any[] {
-	// 	if(!this.db.jsonSpells) return null;
-	// 	return this.db.jsonSpells[this.breed];
-	// }
 
 	public selectSlot(slot: number): void {
 		this.selectedSlot = slot;
 	}
-
-	// public get selectedSpellId() {
-	// 	this.db.jsonBreeds
-	// }
 
 	public getSpellImg(spellId: number): string {
 		// console.log("getSpellImg " + spellId)
