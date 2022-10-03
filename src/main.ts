@@ -21,7 +21,14 @@ Aurelia
 	// .register(Breed)
 	// .register(RouterConfiguration)
 	.register(RouterConfiguration.customize({
-		title: '${componentTitles}${appTitleSeparator}Encyclofus',
+		title: 'Encyclofus',
+		// title: {
+		// 	transformTitle: (title: string, instruction: RoutingInstruction, navigation: Navigation) => {
+		// 		console.log("transform title: " + JSON.stringify(instruction))
+		// 		// console.log("transform title: " + JSON.stringify(navigation.instruction))
+		// 		return "as";
+		// 	}
+		// },
 		useUrlFragmentHash: true,
 		// useDirectRouting: false,
 		useHref: false,

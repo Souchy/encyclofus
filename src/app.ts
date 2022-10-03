@@ -47,9 +47,23 @@ export class App {
 		}
 		
 		// collapse the sidebar when navigating to a new page
-        this.ea.subscribe('au:router:navigation-start', (asfd) => {
+        this.ea.subscribe('au:router:navigation-start', (asdf: any) => {
             // Do stuff inside of this callback
 			this.collapseSidebar.classList.remove("show")
+			
+			// let ele = document.getElementsByTagName("title").item(0);
+			// ele.innerHTML = "Encyclofus"
+        });
+		
+        this.ea.subscribe('au:router:navigation-end', (asdf: any) => {
+			let basicName = asdf.navigation.instruction;
+			if(db.jsonBreeds) {
+				let breed = db.jsonBreeds[jsonClasses.ids[basicName]]
+				let name = db.getI18n(breed.nameId);
+				// console.log("app nav: " + JSON.stringify(asdf.navigation.instruction))
+				let ele = document.getElementsByTagName("title").item(0);
+				ele.innerHTML = name + " | Encyclofus"
+			}
         });
 	}
 
