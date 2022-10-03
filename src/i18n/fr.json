@@ -1,3 +1,6 @@
 {
-	"hello": "Salut i18n"
+	"hello": "Salut i18n",
+	"turns": "tours",
+	"po": "PO",
+	"pa": "PA"
 }

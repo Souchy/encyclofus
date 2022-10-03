@@ -1,4 +1,5 @@
 
+import { I18N } from '@aurelia/i18n';
 import { inject, observable } from 'aurelia';
 import { db } from '../DofusDB/db';
 import jsonVersions from '../DofusDB/versions.json'
@@ -12,7 +13,7 @@ export class Options {
 	@observable
 	public selectedLang: string;
 
-	constructor(db: db) {
+	constructor(db: db, @I18N private readonly i18n: I18N) {
 		this.db = db;
 		this.versions = jsonVersions;
 
@@ -27,8 +28,10 @@ export class Options {
 
 	
 	selectedLangChanged(newValue: string, oldValue: string) {
+		let lang = newValue.toLowerCase();
 		// console.log("selected language changed: " + oldValue + " -> " + newValue)
-		this.db.setLanguage(newValue.toLowerCase());
+		this.i18n.setLocale(lang);
+		this.db.setLanguage(lang);
 	}
 
 }

@@ -1,0 +1,45 @@
+<import from="./spell"></import>
+
+<hr>
+
+<h5>
+	<img src="${db.getMonsterIconPath(summon.id)}" style="width: 28px; height: 28px;" />
+	${db.getI18n(summon.nameId)}
+</h5>
+
+<table class="table table-striped table-sm table-borderless">
+	<tbody>
+		<!-- <div style="margin-top: 10px;"></div> -->
+		<!-- <h6 style="margin-top: 10px;">
+			Charactéristiques
+		</h6> -->
+		<tr>
+			<td>PV : ${summon.grades[0].lifePoints * 3}</td>
+			<td></td>
+			<td>Neutre (%) : ${summon.grades[0].neutralResistance}</td>
+		</tr>
+		<tr>
+			<td>PA : ${summon.grades[0].actionPoints}</td>
+			<td></td>
+			<td>Terre (%) : ${summon.grades[0].earthResistance}</td>
+		</tr>
+		<tr>
+			<td>PM : ${summon.grades[0].movementPoints}</td>
+			<td></td>
+			<td>Feu (%) : ${summon.grades[0].fireResistance}</td>
+		</tr>
+		<tr>
+			<td>Esquive (PA) : ${summon.grades[0].wisdom * 3 / 10}</td>
+			<td></td>
+			<td>Eau (%) : ${summon.grades[0].waterResistance}</td>
+		</tr>
+		<tr>
+			<td>Esquive (PM) : ${summon.grades[0].wisdom * 3 / 10}</td>
+			<td></td>
+			<td>Air (%) : ${summon.grades[0].airResistance}</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<spell repeat.for="summonSpellId of summon.spells" issummon.bind="true" spellid.bind="summonSpellId"></spell>

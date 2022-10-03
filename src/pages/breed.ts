@@ -27,8 +27,7 @@ export class Breed implements IRouteableComponent {
 	];
 
 
-	@bindable
-	// public breed: string = "feca";
+	// @bindable
 	public breedId: number = 0;
 
 	constructor(){ 

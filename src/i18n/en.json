@@ -1,3 +1,6 @@
 {
-	"hello": "Hello i18n"
+	"hello": "Hello i18n",
+	"turns": "turns",
+	"po": "Range",
+	"pa": "AP"
 }
