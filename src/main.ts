@@ -1,7 +1,7 @@
 import { Breed } from './pages/breed';
 import Aurelia from 'aurelia';
 import { I18nConfiguration } from '@aurelia/i18n';
-import { RouterConfiguration } from '@aurelia/router';
+import { RouterConfiguration, RoutingInstruction, Navigation } from '@aurelia/router';
 import { App } from './app';
 
 import * as fr from './i18n/fr.json';
@@ -20,8 +20,9 @@ Aurelia
 	)
 	// .register(Breed)
 	// .register(RouterConfiguration)
-	.register(RouterConfiguration.customize({ 
-		useUrlFragmentHash: true, 
+	.register(RouterConfiguration.customize({
+		title: '${componentTitles}${appTitleSeparator}Encyclofus',
+		useUrlFragmentHash: true,
 		// useDirectRouting: false,
 		useHref: false,
 	}))
