@@ -75,6 +75,12 @@ export class Spell {
 		// if (e.effectId == 400 || e.effectId == 401) {
 		// 	// return;
 		// }
+
+		// ajoute relance 
+		if(e.effectId == 1035) {
+			text = text.replace("#1", this.db.getI18n(this.spell.nameId)); // this.name
+			text = text.replace("#3", e.value);
+		} else
 		// effet de charge
 		if (has1 && has3 && !has2) { // if(e.effectId == 293) { //} && e.diceNum != e.spellId) {
 			let subspellid = e.diceNum;
