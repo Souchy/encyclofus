@@ -7,34 +7,34 @@ import { inject, lazy, all, optional, newInstanceOf, factory, Constructable } fr
 import { bindable, route } from 'aurelia';
 import { IRoute, IRouter, IRouteableComponent, Navigation, Parameters, RoutingInstruction } from '@aurelia/router';
 import { IDryCustomElementController, IHydrationContext, CustomElementDefinition, PartialCustomElementDefinition, IContextualCustomElementController, ICompiledCustomElementController, ICustomElementController, IHydratedController, LifecycleFlags } from '@aurelia/runtime-html';
-import { SpellList } from "./breeds/spelllist";
+// import { SpellList } from "./breeds/spelllist";
 
 // @inject(db)
 // @route('')
-export class Breed { //implements IRouteableComponent {
+export class Breed implements IRouteableComponent {
 	
-	// static routes: IRoute[] = [
-	// 	{
-	// 		path: '',
-	// 		component: import('./breeds/spelllist'),
-	// 	},
-	// 	{
-	// 		path: "situations",
-	// 		component: import('./breeds/xelor/xelor.situations.fr.md'),
-	// 		title: "Situations",
-	// 		reloadBehavior: ReloadBehavior.refresh,
-	// 	}
-	// ];
+	static routes: IRoute[] = [
+		{
+			path: '',
+			component: import('./breeds/spelllist'),
+		},
+		{
+			path: "situations",
+			component: import('./breeds/xelor/xelor.situations.fr.md'),
+			title: "Situations",
+			reloadBehavior: ReloadBehavior.refresh,
+		}
+	];
 
 
-	// @bindable
+	@bindable
 	public breedId: number = 0;
 
 	constructor(){ 
 	}
 
 	load(parameters: Parameters, instruction: RoutingInstruction, navigation: Navigation): void | Promise<void> {
-		console.log("breeds load route: " + JSON.stringify(navigation.instruction))
+		// console.log("breeds load route: " + JSON.stringify(navigation.instruction))
 		// this.breed = instruction.route.match.id;
 		let basicname = instruction.route.match.id;
 		this.breedId = jsonBreeds.ids[basicname];

@@ -9,7 +9,6 @@ export class SpellList {
 
 	public db: db;
 
-	// public breed: string = "feca";
 	@bindable
 	public breedId: number;
 	public selectedSlot: number = 0;
