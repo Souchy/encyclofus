@@ -1,6 +1,20 @@
 {
-	"hello": "Salut i18n",
+	"true": "Oui",
+	"false": "Non",
 	"turns": "tours",
 	"po": "PO",
-	"pa": "PA"
+	"pa": "PA",
+	"otherCharac": "Autres caractéristiques",
+	"maxStack": "Cumul max. des effets",
+	"castInDiagonal": "Lancer en diagonale",
+	"castInLine": "Lancer en ligne",
+	"needTakenCell": "Cellule pleine",
+	"needFreeCell": "Cellule libre",
+	"castTestLos": "Ligne de vue",
+	"globalCooldown": "Intervalle de relance global",
+	"initialCooldown": "Intervalle de relance initial",
+	"minCastInterval": "Intervalle de relance",
+	"maxCastPerTarget": "Nb. de lancers par tour par joueur",
+	"maxCastPerTurn": "Utilisations par tour",
+	"criticalHitProbability": "Probabilité de coup critique"
 }

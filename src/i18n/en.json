@@ -1,6 +1,20 @@
 {
-	"hello": "Hello i18n",
+	"true": "Yes",
+	"false": "No",
 	"turns": "turns",
 	"po": "Range",
-	"pa": "AP"
+	"pa": "AP",
+	"otherCharac": "Other characteristics",
+	"maxStack": "Max effect stacks",
+	"castInDiagonal": "Cast in diagonal",
+	"castInLine": "Cast in line",
+	"needTakenCell": "Taken cell",
+	"needFreeCell": "Empty cell",
+	"castTestLos": "Line of sight",
+	"globalCooldown": "Global cooldown",
+	"initialCooldown": "Initial cooldown",
+	"minCastInterval": "Cooldown",
+	"maxCastPerTarget": "Max. uses per turn per player",
+	"maxCastPerTurn": "Max. uses per turn",
+	"criticalHitProbability": "Critical chance"
 }

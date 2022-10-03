@@ -1,30 +1,32 @@
+
+<h6 t="otherCharac"></h6>
 <div class="d-flex" style="margin-bottom: 16px;">
 	<table class="table table-striped table-sm table-borderless"
 		style="width:45%; margin-right: auto; margin-bottom: auto">
 		<tbody>
 			<tr if.bind="spell.criticalHitProbability">
-				<td>Probabilité de coup critique</td>
+				<td t="criticalHitProbability"></td>
 				<td style="white-space: nowrap; text-align: right;">${spell.criticalHitProbability}%</td>
 			</tr>
 			<tr if.bind="spell.maxCastPerTurn">
-				<td>Utilisations par tour</td>
+				<td t="maxCastPerTurn"></td>
 				<td style="white-space: nowrap; text-align: right;">${spell.maxCastPerTurn}</td>
 			</tr>
 			<tr if.bind="spell.maxCastPerTarget">
-				<td>Nb. de lancers par tour par joueur</td>
+				<td t="maxCastPerTarget"></td>
 				<td style="white-space: nowrap; text-align: right;">${spell.maxCastPerTarget}</td>
 			</tr>
 			<tr if.bind="spell.minCastInterval">
-				<td>Intervalle de relance</td>
+				<td t="minCastInterval"></td>
 				<td style="white-space: nowrap; text-align: right;">${spell.minCastInterval}</td>
 			</tr>
 			<tr if.bind="spell.initialCooldown">
-				<td>Intervalle de relance initial</td>
+				<td t="initialCooldown"></td>
 				<td style="white-space: nowrap; text-align: right;">${spell.initialCooldown}</td>
 			</tr>
 			<tr if.bind="spell.globalCooldown">
-				<td>Intervalle de relance global</td>
-				<td style="white-space: nowrap; text-align: right;">${spell.globalCooldown ? "Oui" : "Non"}</td>
+				<td t="globalCooldown"></td>
+				<td style="white-space: nowrap; text-align: right;" t="${spell.globalCooldown}"></td>
 			</tr>
 		</tbody>
 	</table>
@@ -32,33 +34,33 @@
 		style="width:45%; margin-right: auto; height: auto; margin-bottom: auto;">
 		<tbody>
 			<tr>
-				<td>Ligne de vue</td>
-				<td style="white-space: nowrap; text-align: right;">${spell.castTestLos ? "Oui" : "Non"}</td>
+				<td t="castTestLos"></td>
+				<td style="white-space: nowrap; text-align: right;" t="${spell.castTestLos}"></td>
 			</tr>
 			<tr if.bind="spell.needFreeCell">
-				<td>Cellule libre</td>
-				<td style="white-space: nowrap; text-align: right;">${spell.needFreeCell ? "Oui" : "Non"}</td>
+				<td t="needFreeCell"></td>
+				<td style="white-space: nowrap; text-align: right;" t="${spell.needFreeCell}"></td>
 			</tr>
 			<tr if.bind="spell.needTakenCell">
-				<td>Cellule pleine</td>
-				<td style="white-space: nowrap; text-align: right;">${spell.needTakenCell ? "Oui" : "Non"}</td>
+				<td t="needTakenCell"></td>
+				<td style="white-space: nowrap; text-align: right;" t="${spell.needTakenCell}"></td>
 			</tr>
 			<tr if.bind="spell.castInLine">
-				<td>Lancer en ligne</td>
-				<td style="white-space: nowrap; text-align: right;">${spell.castInLine ? "Oui" : "Non"}</td>
+				<td t="castInLine"></td>
+				<td style="white-space: nowrap; text-align: right;" t="${spell.castInLine}"></td>
 			</tr>
 			<tr if.bind="spell.castInDiagonal">
-				<td>Lancer en diagonale</td>
-				<td style="white-space: nowrap; text-align: right;">${spell.castInDiagonal ? "Oui" : "Non"}</td>
+				<td t="castInDiagonal"></td>
+				<td style="white-space: nowrap; text-align: right;" t="${spell.castInDiagonal}"></td>
 			</tr>
 			<tr if.bind="spell.maxStack > 0">
-				<td>Cumul max. des effets</td>
+				<td t="maxStack"></td>
 				<td style="white-space: nowrap; text-align: right;">${spell.maxStack}</td>
 			</tr>
 			<!-- <tr if.bind="spell.needFreeTrapCell">
-			<td>Cellule libre de pièges</td>
-			<td style="white-space: nowrap; text-align: right;">${spell.needFreeTrapCell ? "Oui" : "Non"}</td>
-		</tr> -->
+				<td>Cellule libre de pièges</td>
+				<td style="white-space: nowrap; text-align: right;">${spell.needFreeTrapCell ? "Oui" : "Non"}</td>
+			</tr> -->
 		</tbody>
 	</table>
 </div>
