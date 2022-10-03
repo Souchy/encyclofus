@@ -1,37 +1,54 @@
-# encyclofus
+# Encyclofus
+Encyclopédie des sorts Dofus à penchant pvp
 
-This project is bootstrapped by [aurelia/new](https://github.com/aurelia/new).
-
-## Start dev web server
-
-    npm start
-
-## Build the app in production mode
-
-    npm run build
-
-It builds all files to dist folder. To deploy to production server, copy all the `dist/*` files to production root folder.
-
-For example
-```
-dist/index.html
-dist/foo.12345.js
-```
-Copy to production root folder
-```
-root_folder/index.html
-root_folder/foo.12345.js
-```
-
-## Unit Tests
-
-    npm run test
-
-Run unit tests in watch mode.
-
-    npm run test:watch
-
-
-## Analyze webpack bundle
-
-    npm run analyze
+## TODO:
+i18n anglais
+Sort communs
+Zones (aoe)
+parsing des descriptions pour des subspells/états 
+spell sheet des sous-sorts en hover
+sorts :
+- osa 
+    - RELAI fait bug tous les autres sorts
+    - invocs
+    - déplu
+- eca
+    - trèfle
+    - roulette/coup du sort
+- feca
+    - glyphe répu/barrière
+- roublard
+    - bombes
+    - poudre
+    - mousquet
+    - ds
+    - piège mag
+    - kaboom/impos
+    - mégabomb/roublabot
+    - bombe ambu
+    - entourloupe
+    - oblitération
+    - aimant/croise
+    - déto
+- cra
+    - acuité
+- elio
+    - portail/contrat/stupeur
+- ougi
+    - sorts de rage
+    - poursuite? 
+- eni
+    - mot marquant
+    - solida
+    - marque de regen
+    - revita
+- hupper
+    - sous-sorts dans les descriptions
+- steamer
+    - evolution/transi/surten
+    - tourelles (evo)
+    - sorts qui proc les tourelles (longue vue, sonar..)
+- sadi
+    - tréant/groute
+    - invocs transmutées
+    - vent empoi
