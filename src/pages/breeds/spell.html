@@ -80,9 +80,20 @@
 			<table class="table table-striped table-sm table-borderless ">
 				<tbody>
 					<tr repeat.for="e of spell.criticalEffect" if.bind="e.visibleInTooltip">
-						<td style="vertical-align: middle;" innerHtml.bind="renderEffectI18n(e)"></td>
-						<td style.bind="getIcon(e)"></td>
-						<td style.bind="db.getAoeIconStyle(e)"></td>
+						<td style="padding: 0px;">
+							<table class="table table-striped table-sm table-borderless" style="--bs-table-striped-bg: none; margin-bottom: 0px;">
+								<tbody>
+									<td style="vertical-align: middle;" innerHtml.bind="renderEffectI18n(e)"></td>
+									<td style.bind="getIcon(e)"></td>
+									<td style.bind="db.getAoeIconStyle(e)"></td>
+								</tbody>
+							</table>
+							<table class="table table-striped table-sm table-borderless" if.bind="hasTrapGlyph(e)" style="--bs-table-striped-bg: none; margin-bottom: 0px;">
+								<tbody>
+									<td style="vertical-align: middle; padding: 0px;" innerHtml.bind="renderTrapGlyph(e)" colspan="3"></td>
+								</tbody>
+							</table>
+						</td>
 					</tr>
 				</tbody>
 			</table>
