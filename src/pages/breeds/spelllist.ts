@@ -3,41 +3,25 @@ import { IRouter, IRouteableComponent, Navigation, Parameters, RoutingInstructio
 
 import { db } from "../../DofusDB/db";
 import jsonBreeds from '../../DofusDB/static/classes.json';
+import { Breed } from "../breed";
 
 @inject(db)
 export class SpellList {
 
 	public db: db;
-
-	@bindable
-	public breedId: number;
 	public selectedSlot: number = 0;
 
 	constructor(db: db) {
 		this.db = db;
 	}
 
-	load(parameters: Parameters, instruction: RoutingInstruction, navigation: Navigation): void | Promise<void> {
-		// console.log("spelllist load inst: " + JSON.stringify(instruction)) // spelllist
-		// console.log("spelllist load nav: " + JSON.stringify(navigation.instruction)) // cra
-		let basicname = navigation.instruction as string; //instruction.route.match.id;
-		basicname = basicname.substring(basicname.indexOf("/") + 1)
-		if (basicname.length > 0)
-			this.breedId = jsonBreeds.ids[basicname];
-		// console.log("spellliste breed: " + this.breedId);
-	}
-
-	// public async selectSpellOnLoad() {
-	// 	let result = await this.db.promiseLoadingSpells;
-	// 	if (result) {
-	// 		this.selectSlot(0);
-	// 	}
-	// }
-
 	public get isDbLoaded() {
 		return this.db.isLoaded;
 	}
 
+	public get breedId(): number {
+		return Breed.breedId;
+	}
 	public get breed(): any {
 		if (!this.db.jsonBreeds) return null;
 		if (!this.breedId) return null;

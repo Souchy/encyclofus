@@ -4,7 +4,7 @@ import '@fortawesome/fontawesome-free';
 import '@fortawesome/fontawesome-free/css/all.css';
 
 import { inject, IEventAggregator } from 'aurelia';
-import { Route, IRoute, IRouter, IRouteableComponent, RouterConfiguration, ReloadBehavior } from '@aurelia/router';
+import { Route, IRoute, IRouter, IRouteableComponent, RouterConfiguration, ReloadBehavior, Navigation } from '@aurelia/router';
 
 import { db } from './DofusDB/db';
 import jsonClasses from './DofusDB/static/classes.json'
@@ -50,7 +50,7 @@ export class App {
         this.ea.subscribe('au:router:navigation-start', (asdf: any) => {
             // Do stuff inside of this callback
 			this.collapseSidebar.classList.remove("show")
-			
+			// console.log("app start: " + JSON.stringify(asdf.navigation.instruction))
 			// let ele = document.getElementsByTagName("title").item(0);
 			// ele.innerHTML = "Encyclofus"
         });
