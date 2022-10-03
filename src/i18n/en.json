@@ -1,9 +1,21 @@
 {
 	"true": "Yes",
 	"false": "No",
+	
 	"turns": "turns",
+	
 	"po": "Range",
 	"pa": "AP",
+	"pm": "PM",
+	"pv": "PV",
+	"esqpa": "Esquive (PA)",
+	"esqpm": "Esquive (PM)",
+	"neutral": "Neutre",
+	"earth": "Terre",
+	"fire": "Feu",
+	"water": "Eau",
+	"air": "Air",
+
 	"otherCharac": "Other characteristics",
 	"maxStack": "Max effect stacks",
 	"castInDiagonal": "Cast in diagonal",
