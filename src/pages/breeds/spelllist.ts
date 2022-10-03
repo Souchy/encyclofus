@@ -18,12 +18,12 @@ export class SpellList {
 	}
 
 	load(parameters: Parameters, instruction: RoutingInstruction, navigation: Navigation): void | Promise<void> {
-		console.log("spelllist load route: " + JSON.stringify(navigation.instruction))
+		// console.log("spelllist load route: " + JSON.stringify(navigation.instruction))
 		let basicname = navigation.instruction as string; //instruction.route.match.id;
-		if(basicname.length > 0)
+		basicname = basicname.substring(basicname.indexOf("/") + 1)
+		if (basicname.length > 0)
 			this.breedId = jsonBreeds.ids[basicname];
 		// console.log("spellliste breed: " + this.breedId);
-		// this.selectSpellOnLoad();
 	}
 
 	// public async selectSpellOnLoad() {
@@ -39,7 +39,7 @@ export class SpellList {
 
 	public get breed(): any {
 		if (!this.db.jsonBreeds) return null;
-		if(!this.breedId) return null;
+		if (!this.breedId) return null;
 		return this.db.jsonBreeds[this.breedId + ""];
 	}
 	public get spells(): any[] {
@@ -67,18 +67,18 @@ export class SpellList {
 	}
 
 	public get selectedSpellId() {
-		if(!this.spells) return null;
+		if (!this.spells) return null;
 		return this.spells[this.selectedSlot];
 	}
 	public get selectedSpell() {
-		if(!this.selectedSpellId) return null;
+		if (!this.selectedSpellId) return null;
 		return this.db.jsonSpells[this.selectedSpellId];
 	}
 	public hasSummon(e: any) {
 		return e.effectId == 181;
 	}
 	public getSummon(e: any): any {
-		if(!this.hasSummon(e)) return null;
+		if (!this.hasSummon(e)) return null;
 		return this.db.jsonSummons[e.diceNum];
 	}
 
