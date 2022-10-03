@@ -29,6 +29,36 @@ export class Spell {
 		return this.db.getI18n(this.spell.descriptionId);
 	}
 
+	public renderTrapGlyph(e) {
+		let text = this.db.getI18n(e.effect.descriptionId);
+		let subspellid = e.diceNum;
+		let tg = this.getTrapGlyph(e);
+		console.log("trap glyph: " + JSON.stringify(tg))
+		// doSpell(subspellid);
+		//  if.bind="hasTrapGlyph(e)"
+		// text += this.db.getI18n(tg.nameId);
+		// text +=
+		text =
+			`
+			<table class="table table-striped table-sm table-borderless" style="width: 100%; margin-bottom: 0px;">
+				<tbody>
+					`
+					+
+					tg.effects.map(e1 => {
+						if(!e1.visibleInTooltip) return "";
+						return `<tr>
+									<td style="vertical-align: middle;"> &nbsp;&nbsp;&nbsp;`+ this.renderEffectI18n(e1) + `</td>
+									<td style.bind="getIcon(e1)"></td>
+									<td style.bind="db.getAoeIconStyle(e1)"></td>
+								</tr>`
+					}).join("")
+					+
+					`
+				</tbody>
+			</table>`;
+		return text;
+	}
+
 	public renderEffectI18n(e) {
 		let text = this.db.getI18n(e.effect.descriptionId);
 		let has1 = text.includes("#1");
@@ -41,8 +71,12 @@ export class Spell {
 			let name = this.db.getI18n(summon.nameId);
 			text = text.replace("#1", name);
 		}
+		// piège/glyphes
+		// if (e.effectId == 400 || e.effectId == 401) {
+		// 	// return;
+		// }
 		// effet de charge
-		if(has1 && has3 && !has2) { // if(e.effectId == 293) { //} && e.diceNum != e.spellId) {
+		if (has1 && has3 && !has2) { // if(e.effectId == 293) { //} && e.diceNum != e.spellId) {
 			let subspellid = e.diceNum;
 			let subspell = this.db.jsonSpells[subspellid];
 			// doSpell(subspellid);
@@ -51,7 +85,7 @@ export class Spell {
 			text = text.replace("#3", e.value);
 		}
 		// state condition, fouet osa dragocharge
-		if(e.effectId == 1160 || e.effectId == 2160 || e.effectId == 2794) {
+		if (e.effectId == 1160 || e.effectId == 2160 || e.effectId == 2794) {
 			let subspellid = e.diceNum;
 			let subspell = this.db.jsonSpells[subspellid];
 			text = text.replace("#1", this.db.getI18n(subspell.nameId));
@@ -65,13 +99,13 @@ export class Spell {
 			if (!stateName) {
 				console.log("state: " + JSON.stringify(state))
 			} else
-			if (stateName.includes("{")) {
-				stateName = stateName.replace("{", "").replace("}", "");
-				let data = stateName.split(",");
-				let subSpellId = data[1];
-				let stateSpell = this.db.jsonSpells[subSpellId];
-				stateName = stateName.split("::")[1] + "<spell spellid.bind='" + subSpellId + "' issummon.bind='"+this.issummon+"'></spell>";
-			}
+				if (stateName.includes("{")) {
+					stateName = stateName.replace("{", "").replace("}", "");
+					let data = stateName.split(",");
+					let subSpellId = data[1];
+					let stateSpell = this.db.jsonSpells[subSpellId];
+					stateName = stateName.split("::")[1] + "<spell spellid.bind='" + subSpellId + "' issummon.bind='" + this.issummon + "'></spell>";
+				}
 			if (state) text = text.replace("#3", stateName);
 		}
 		// min/max
@@ -105,6 +139,14 @@ export class Spell {
 	public getSummon(e: any): any {
 		if (!this.hasSummon(e)) return null;
 		return this.db.jsonSummons[e.diceNum];
+	}
+
+	public hasTrapGlyph(e: any) {
+		return e.effectId == 400 || e.effectId == 401 || e.effectId == 1091;
+	}
+	public getTrapGlyph(e: any): any {
+		if (!this.hasTrapGlyph(e)) return null;
+		return this.db.jsonSpells[e.diceNum];
 	}
 
 
