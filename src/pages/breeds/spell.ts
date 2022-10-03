@@ -31,7 +31,6 @@ export class Spell {
 
 	public renderEffectI18n(e) {
 		let text = this.db.getI18n(e.effect.descriptionId);
-
 		// invocation
 		if(this.hasSummon(e)) {
 			let summon = this.getSummon(e);
@@ -39,7 +38,7 @@ export class Spell {
 			let name = this.db.getI18n(summon.nameId);
 			text = text.replace("#1", name);
 		}
-
+		// min/max
 		let min = e.diceNum;
 		let max = e.diceSide;
 		text = text.replace("#1", min);
@@ -51,14 +50,21 @@ export class Spell {
 			text = text.substring(0, text.indexOf("{")) + text.substring(text.indexOf("}") + 1)
 			text = text.replace("#2", "");
 		}
+		// conjugaison
+		if(min > 1 || max > 1) {
+			text = text.replace("{~ps}{~zs}", "s");
+		} else {
+			text = text.replace("{~ps}{~zs}", "");
+		}
+		// état
 		if (e.value) {
 			let state = this.db.jsonStates[e.value]
 			if (state) text = text.replace("#3", this.db.getI18n(state.nameId));
 		}
+		// durée
 		if (e.duration) {
 			text += " (" + e.duration + " " + this.i18n.tr("turns") + ")";
 		}
-
 		return text;
 	}
 

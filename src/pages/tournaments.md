@@ -24,7 +24,7 @@ Vous pouvez y mettre un lien vers votre draft ou rejoindre celle de quelqu'un d'
 
 # Pivipi
 https://discord.gg/7Cb76KrVrq  
-Le Pivipi est organisé par Sledax, Viper et Joken sur le serveur tournoi.
-C'est un mini-tournoi en arbre qui a lieu presque chaque jour.
-C'est ouvert à tous pour se pratiquer.
+Le Pivipi est organisé par Sledax, Viper et Joken sur le serveur tournoi.  
+C'est un mini-tournoi en arbre qui a lieu presque chaque jour.  
+C'est ouvert à tous pour se pratiquer.  
 Les règles du KTA s'appliquent.
