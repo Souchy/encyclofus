@@ -26,7 +26,13 @@ export class Spell {
 		return this.db.getI18n(this.spell.nameId);
 	}
 	public get description() {
-		return this.db.getI18n(this.spell.descriptionId);
+		let text = this.db.getI18n(this.spell.descriptionId);
+		while(text.includes("{")) {
+			let sub = text.substring(text.indexOf("{"), text.indexOf("}") + 1)
+			let rep = sub.replace("}", "").split("::")[1];
+			text = text.replace(sub, rep);
+		}
+		return text;
 	}
 
 	public renderTrapGlyph(e) {
