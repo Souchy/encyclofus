@@ -147,7 +147,7 @@ export class Spell {
 	}
 
 	public hasSummon(e: any) {
-		return e.effectId == 181;
+		return this.db.isSummonEffect(e);
 	}
 	public getSummon(e: any): any {
 		if (!this.hasSummon(e)) return null;

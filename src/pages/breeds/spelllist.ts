@@ -62,7 +62,7 @@ export class SpellList {
 		return this.db.jsonSpells[this.selectedSpellId];
 	}
 	public hasSummon(e: any) {
-		return e.effectId == 181 || e.effectId == 1011;
+		return this.db.isSummonEffect(e); // e.effectId == 181 || e.effectId == 1011 || e.effectId == 1008;
 	}
 	public getSummon(e: any): any {
 		if (!this.hasSummon(e)) return null;
