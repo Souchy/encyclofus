@@ -3,6 +3,8 @@
 	"false": "No",
 	
 	"turns": "turns",
+	"effects": "Effects",
+	"effectsCrit": "Critical effects",
 	
 	"po": "Range",
 	"pa": "AP",

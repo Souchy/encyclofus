@@ -27,7 +27,7 @@
 	<div class="d-flex effects">
 		<!-- normal -->
 		<div class="effectsNormal">
-			<h6>Effets</h6>
+			<h6 t="effects"></h6>
 			<table class="table table-striped table-sm table-borderless" style="">
 				<tbody>
 					<tr repeat.for="e of spell.effects"  if.bind="e.visibleInTooltip"> <!-- || e.effect.showInTooltip -->
@@ -73,7 +73,7 @@
 		</div>
 		<!-- critiques -->
 		<div class="effectsCrit">
-			<h6>Effets critiques</h6>
+			<h6 t="effectsCrit"></h6>
 			<table class="table table-striped table-sm table-borderless ">
 				<tbody>
 					<tr repeat.for="e of spell.criticalEffect" if.bind="e.visibleInTooltip">
