@@ -91,7 +91,7 @@ export class Spell {
 			text = text.replace("#3", e.value);
 		} 
 		// état
-		if (e.effectId == 950) {
+		if (e.effectId == 950 || e.effectId == 951) {
 			// if (e.value) {
 			let state = this.db.jsonStates[e.value]
 			let stateName = this.db.getI18n(state.nameId);
