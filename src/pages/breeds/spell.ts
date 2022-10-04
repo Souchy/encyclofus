@@ -67,7 +67,6 @@ export class Spell {
 						( icon ? "" : "<td></td>")
 						+
 						this.getTargets(e1).map(t => {
-							console.log("t: " + t)
 							return `
 									<td style="width: 22px;">
 										<div style="${this.getTargetIcon(t)}"></div>
@@ -130,6 +129,8 @@ export class Spell {
 					tex = `<tr>
 								<td style="vertical-align: middle;" >` + tab + this.renderEffectI18n(e1) + `</td>
 								`
+						+
+						( icon ? "" : "<td></td>")
 						+
 						this.getTargets(e1).map(t => {
 							return `
