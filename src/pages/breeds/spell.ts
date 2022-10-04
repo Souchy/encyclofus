@@ -43,9 +43,9 @@ export class Spell {
 		let tg = this.getTrapGlyph(e);
 		// console.log("trap glyph: " + e.effectId)
 		// console.log("trap glyph: " + JSON.stringify(tg))
-		if(e.spellId == 13019 || e.spellId == 13030 || e.spellId == 13044) {
-			console.log("barriere " + e.spellId)
-		}
+		// if(e.spellId == 13019 || e.spellId == 13030 || e.spellId == 13044) {
+		// 	console.log("barriere " + e.spellId)
+		// }
 		let tab = "";
 		for (let i = 0; i <= depth; i++) {
 			tab += "&nbsp;&nbsp;&nbsp;";
@@ -86,9 +86,9 @@ export class Spell {
 		let subspellid = e.diceNum;
 		let subspell = this.db.jsonSpells[subspellid];
 		if(!subspell) return ""
-		if(e.spellId == 13019 || e.spellId == 13030 || e.spellId == 13044) {
-			console.log("renderSubSpell " + e.spellId)
-		}
+		// if(e.spellId == 13019 || e.spellId == 13030 || e.spellId == 13044) {
+		// 	console.log("renderSubSpell " + e.spellId)
+		// }
 		let tab = "";
 		for (let i = 0; i <= depth; i++) {
 			tab += "&nbsp;&nbsp;&nbsp;";
