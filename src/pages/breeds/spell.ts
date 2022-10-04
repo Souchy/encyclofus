@@ -103,7 +103,7 @@ export class Spell {
 			text = text.replace("#3", e.value);
 		} 
 		// effet de charge
-		if(e.effectId == 293 || e.effectId == 281) { // if (has1 && has3 && !has2) { //
+		if(e.effectId == 293 || e.effectId == 281 || e.effectId == 290 || e.effectId == 291) { // if (has1 && has3 && !has2) { //
 			let subspellid = e.diceNum;
 			let subspell = this.db.jsonSpells[subspellid];
 			text = text.replace("#1", this.db.getI18n(subspell.nameId));
