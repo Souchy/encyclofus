@@ -48,7 +48,7 @@ export class Spell {
 					`
 					+
 					tg.effects.map(e1 => {
-						if(e1.visibleInTooltip || e1.effect.showInTooltip)
+						if(e1.visibleInTooltip) //  || e1.effect.showInTooltip
 							return `<tr>
 										<td style="vertical-align: middle;"> &nbsp;&nbsp;&nbsp;`+ this.renderEffectI18n(e1) + `</td>
 										<td style="${this.getIcon(e1)}"></td>
