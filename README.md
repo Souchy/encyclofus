@@ -9,8 +9,8 @@ parsing des descriptions pour des subspells/états
 spell sheet des sous-sorts en hover
 sorts :
 - osa 
-    - RELAI fait bug tous les autres sorts
-    - invocs
+    - ~~RELAI fait bug tous les autres sorts~~
+    - ~~invocs~~
     - déplu
 - eca
     - trèfle
@@ -24,7 +24,7 @@ sorts :
     - ds
     - piège mag
     - kaboom/impos
-    - mégabomb/roublabot
+    - ~~mégabomb/roublabot~~
     - bombe ambu
     - entourloupe
     - oblitération
@@ -49,6 +49,6 @@ sorts :
     - tourelles (evo)
     - sorts qui proc les tourelles (longue vue, sonar..)
 - sadi
-    - tréant/groute
-    - invocs transmutées
-    - vent empoi
+    - ~~tréant/groute~~
+    - ~~invocs transmutées~~
+    - ~~vent empoi~~
