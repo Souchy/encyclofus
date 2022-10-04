@@ -11,5 +11,3 @@ sorts :
     - vita invocs
 - roublard
     - vita bombes
-- feca
-    - barrière
