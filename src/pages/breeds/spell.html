@@ -1,4 +1,4 @@
-<!-- <import from="./summon"></import> -->
+<import from="./summon"></import>
 <!-- <import from="./effect"></import> -->
 <import from="./othercharac"></import>
 
@@ -42,6 +42,15 @@
 									</tr>
 								</tbody>
 							</table>
+							<!-- <table if.bind="hasSubSpell(e)" sclass="table table-striped table-sm table-borderless" tyle="--bs-table-striped-bg: none; margin-bottom: 0px;">
+								<tbody>
+									<tr repeat.for="e1 of getSubSpell(e).effects">
+										<td style="vertical-align: middle;" innerHtml.bind="renderEffectI18n(e1)"></td>
+										<td style.bind="getIcon(e1)"></td>
+										<td style.bind="db.getAoeIconStyle(e1)"></td>
+									</tr>
+								</tbody>
+							</table> -->
 							<table if.bind="hasTrapGlyph(e)" class="table table-striped table-sm table-borderless" style="--bs-table-striped-bg: none; margin-bottom: 0px;">
 								<tbody>
 									<tr>
@@ -100,3 +109,14 @@
 	</div> -->
 
 </div> <!-- fin info sort -->
+
+
+<!-- Invoc -->
+<div if.bind="db.isLoaded" repeat.for="e1 of spell.effects">
+	<summon if.bind="hasSummon(e1)" summon.bind="getSummon(e1)" side.bind="e1.diceSide"></summon>
+</div>
+
+
+<!-- <div if.bind="db.isLoaded" repeat.for="e1 of spell.effects">
+	<summon if.bind="hasSummon(e1)" summon.bind="getSummon(e1)" side.bind="e1.diceSide"></summon>
+</div> -->

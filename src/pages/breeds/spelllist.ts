@@ -36,6 +36,7 @@ export class SpellList {
 
 	public selectSlot(slot: number): void {
 		this.selectedSlot = slot;
+		this.selectedSummon = null;
 	}
 
 	public getSpellImg(spellId: number): string {
@@ -53,6 +54,7 @@ export class SpellList {
 
 	public get selectedSpellId() {
 		if (!this.spells) return null;
+		if (this.selectedSlot == undefined) return undefined;
 		return this.spells[this.selectedSlot];
 	}
 	public get selectedSpell() {
@@ -60,11 +62,17 @@ export class SpellList {
 		return this.db.jsonSpells[this.selectedSpellId];
 	}
 	public hasSummon(e: any) {
-		return e.effectId == 181;
+		return e.effectId == 181 || e.effectId == 1011;
 	}
 	public getSummon(e: any): any {
 		if (!this.hasSummon(e)) return null;
 		return this.db.jsonSummons[e.diceNum];
+	}
+
+	public selectedSummon: any;
+	public selectSummon(e: any) {
+		this.selectedSummon = e;
+		this.selectedSlot = undefined;
 	}
 
 }

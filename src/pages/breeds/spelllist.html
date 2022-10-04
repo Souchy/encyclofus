@@ -9,7 +9,7 @@
 		<div repeat.for="j of 2">
 			<let s.bind="spells[$parent.$index + j]"></let>
 			<!-- spell div -->
-			<div class="spell ${selectedSlot == i+j ? 'spellactive' : ''}" click.delegate="selectSlot(i + j)">
+			<div class="spell ${selectedSlot === i+j ? 'spellactive' : ''}" click.delegate="selectSlot(i + j)">
 				<!-- spell img -->
 				<img src="${getSpellImg(spells[i+j])}" title="${getSpellName(spells[i+j])}" id="${spells[i+j]}" style="width: 55px; height: 55px;" />
 			</div>
@@ -17,10 +17,23 @@
 	</div>
 </div>
 
-<!-- Spell Description -->
+<!-- osa summons -->
+<div class="spellList d-flex flex-wrap" if.bind="breedId == 2">
+	<!-- <let ss="${db.jsonSpells[13997].effects}"></let>
+	${ss} -->
+	<div repeat.for="e of db.jsonSpells[13997].effects" click.delegate="selectSummon(e)" class="spell ${selectedSummon == e ? 'spellactive' : ''}">
+		<img src="${db.getMonsterIconPath(e.diceNum)}" style="width: 45px; height: 45px;" />
+	</div>
+</div>
+<!-- selected osa summon -->
+<summon if.bind="selectedSummon" summon.bind="getSummon(selectedSummon)" side.bind="selectedSummon.diceSide"></summon>
+
+
+<!-- selected spell Description -->
 <spell if.bind="db.isLoaded" spellid.bind="selectedSpellId"></spell>
 
+
 <!-- Summons Description -->
-<div if.bind="db.isLoaded" repeat.for="e1 of selectedSpell.effects">
+<!-- <div if.bind="db.isLoaded" repeat.for="e1 of selectedSpell.effects">
 	<summon if.bind="hasSummon(e1)" summon.bind="getSummon(e1)" side.bind="e1.diceSide"></summon>
-</div>
+</div> -->
