@@ -120,6 +120,9 @@ export class Spell {
 				}
 			if (state) text = text.replace("#3", stateName);
 		}
+		if(e.effectId == 1181) {
+			text = text.replace("#3", e.value);
+		}
 
 		// min/max
 		let min = e.diceNum;
