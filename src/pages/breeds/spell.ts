@@ -36,12 +36,20 @@ export class Spell {
 		return text;
 	}
 
-	public renderTrapGlyph(e) {
+	public renderTrapGlyph(e, depth?: number) {
+		if(!depth) depth = 0;
 		let text = this.db.getI18n(e.effect.descriptionId);
 		let subspellid = e.diceNum;
 		let tg = this.getTrapGlyph(e);
 		// console.log("trap glyph: " + e.effectId)
 		// console.log("trap glyph: " + JSON.stringify(tg))
+		if(e.spellId == 13019 || e.spellId == 13030 || e.spellId == 13044) {
+			console.log("barriere " + e.spellId)
+		}
+		let tab = "";
+		for (let i = 0; i <= depth; i++) {
+			tab += "&nbsp;&nbsp;&nbsp;";
+		}
 		text =
 			`
 			<table class="table table-striped table-sm table-borderless" style="width: 100%; margin-bottom: 0px;">
@@ -49,13 +57,89 @@ export class Spell {
 					`
 					+
 					tg.effects.map(e1 => {
-						if(e1.visibleInTooltip) //  || e1.effect.showInTooltip
-							return `<tr>
-										<td style="vertical-align: middle;"> &nbsp;&nbsp;&nbsp;`+ this.renderEffectI18n(e1) + `</td>
-										<td style="${this.getIcon(e1)}"></td>
+						let tex = "";
+						if(e1.visibleInTooltip) { // || e1.effect.showInTooltip){
+							tex = `<tr>
+										<td style="vertical-align: middle;">` + tab + this.renderEffectI18n(e1) + `</td>
+										<td style="width: 22px;">
+											<div style="${this.getIcon(e1)}"></div>
+										</td>
 										<td style="${this.db.getAoeIconStyle(e1)}"></td>
-									</tr>`
-						else return "";
+									</tr>`;
+						}
+						if(e1.visibleInTooltip || e1.visibleOnTerrain)
+							if(this.hasTrapGlyph(e1) && e1.diceNum != e.spellId) {
+								// tex += this.renderTrapGlyph(e1);
+								tex += this.renderSubSpell(e1, depth + 1);
+							}
+						return tex;
+					}).join("")
+					+
+					`
+				</tbody>
+			</table>`;
+		return text;
+	}
+
+	public renderSubSpell(e, depth?: number) {
+		if(!depth) depth = 0;
+		let subspellid = e.diceNum;
+		let subspell = this.db.jsonSpells[subspellid];
+		if(!subspell) return ""
+		if(e.spellId == 13019 || e.spellId == 13030 || e.spellId == 13044) {
+			console.log("renderSubSpell " + e.spellId)
+		}
+		let tab = "";
+		for (let i = 0; i <= depth; i++) {
+			tab += "&nbsp;&nbsp;&nbsp;";
+		}
+		let text =
+			`
+			<table class="table table-striped table-sm table-borderless" style="width: 100%; margin-bottom: 0px;">
+				<tbody>
+					`
+					+
+					subspell.effects.map(e1 => {
+						if(e1.diceNum == 13044) {
+							console.log("13044 reference: " + JSON.stringify(e1))
+						}
+						let tex = "";
+						if(e1.visibleInTooltip) { //  || e1.effect.showInTooltip
+							tex = `<tr>
+										<td style="vertical-align: middle;">` + tab + this.renderEffectI18n(e1) + `</td>
+										<td style="width: 22px;">
+											<div style="${this.getIcon(e1)}"></div>
+										</td>
+										<td style="${this.db.getAoeIconStyle(e1)}"></td>
+									</tr>`;
+						}
+						if(e1.visibleInTooltip || e1.visibleOnTerrain)
+							if(e1.diceNum != e.spellId && (this.hasTrapGlyph(e1) || e1.effectId == 1160)) {
+								if(this.hasTrapGlyph(e1)) {
+									tex += "<tr><td colspan=3>"+this.renderTrapGlyph(e1, depth + 1)+"</td></tr>";
+								}
+								if(e1.effectId == 1160) {
+									tex += "<tr><td colspan=3>"+this.renderSubSpell(e1, depth + 1)+"</td></tr>";
+								}
+							}
+						return tex;
+
+						// if(e1.visibleInTooltip || e1.visibleOnTerrain) {//  || e1.effect.showInTooltip
+						// 	let tex = `<tr>
+						// 					<td style="vertical-align: middle;"> &nbsp;&nbsp;&nbsp;`+ this.renderEffectI18n(e1) + `</td>
+						// 					<td style="${this.getIcon(e1)}"></td>
+						// 					<td style="${this.db.getAoeIconStyle(e1)}"></td>
+						// 				</tr>`;
+						// 	if(e1.diceNum != e.spellId && (this.hasTrapGlyph(e1)|| e1.effectId == 1160)) {
+						// 		if(this.hasTrapGlyph(e1)) {
+						// 			tex += this.renderTrapGlyph(e1);
+						// 		}
+						// 		if(e1.effectId == 1160) {
+						// 			tex += this.renderSubSpell(e1);
+						// 		}
+						// 	}
+						// 	return tex;
+						// } else return "";
 					}).join("")
 					+
 					`
@@ -103,7 +187,7 @@ export class Spell {
 			text = text.replace("#3", e.value);
 		} 
 		// effet de charge
-		if(e.effectId == 293 || e.effectId == 281 || e.effectId == 290 || e.effectId == 291) { // if (has1 && has3 && !has2) { //
+		if(e.effectId == 293 || e.effectId == 281 || e.effectId == 290 || e.effectId == 291 || e.effectId == 280) { // if (has1 && has3 && !has2) { //
 			let subspellid = e.diceNum;
 			let subspell = this.db.jsonSpells[subspellid];
 			text = text.replace("#1", this.db.getI18n(subspell.nameId));
@@ -164,7 +248,7 @@ export class Spell {
 	}
 
 	public hasSummon(e: any) {
-		return this.db.isSummonEffect(e);
+		return this.db.isSummonEffect(e) && e.visibleInTooltip;
 	}
 	public getSummon(e: any): any {
 		if (!this.hasSummon(e)) return null;
