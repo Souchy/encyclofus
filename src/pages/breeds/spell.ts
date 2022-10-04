@@ -171,7 +171,7 @@ export class Spell {
 	}
 
 	public hasTrapGlyph(e: any) {
-		return e.effectId == 400 || e.effectId == 401 || e.effectId == 1091 || e.effectId == 402 || e.effectId == 1165 || e.effectId == 400;
+		return this.db.isCellEffect(e);
 	}
 	public getTrapGlyph(e: any): any {
 		if (!this.hasTrapGlyph(e)) return null;
