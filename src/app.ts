@@ -19,6 +19,12 @@ export class App {
 			path: "",
 			redirectTo: "feca"
 		},
+		// {
+		// 	path: "commun",
+		// 	component: import('./pages/breed'),
+		// 	title: "Sorts communs",
+		// 	reloadBehavior: ReloadBehavior.refresh,
+		// },
 		{
 			path: "resources",
 			component: import('./pages/resources')

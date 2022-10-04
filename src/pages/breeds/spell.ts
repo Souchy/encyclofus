@@ -27,11 +27,12 @@ export class Spell {
 	}
 	public get description() {
 		let text = this.db.getI18n(this.spell.descriptionId);
-		while(text.includes("{")) {
-			let sub = text.substring(text.indexOf("{"), text.indexOf("}") + 1)
-			let rep = sub.replace("}", "").split("::")[1];
-			text = text.replace(sub, rep);
-		}
+		if(text) // les invoc chafer n'ont pas de description sur leurs sorts par exemple
+			while(text.includes("{")) {
+				let sub = text.substring(text.indexOf("{"), text.indexOf("}") + 1)
+				let rep = sub.replace("}", "").split("::")[1];
+				text = text.replace(sub, rep);
+			}
 		return text;
 	}
 

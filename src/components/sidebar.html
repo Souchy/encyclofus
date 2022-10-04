@@ -9,9 +9,9 @@
 
 
 	<div class="d-flex p-2 flex-wrap">
-		<a repeat.for="i of breeds.length" load="${breeds[i]}" css="${getBreedIconStyle(i)}"></a>
+		<a load="${breeds[i]}" css="${getBreedIconStyle(i)}" repeat.for="i of breeds.length" ></a>
 	</div>
-
+	
 	<div>
 		<strong>Information</strong>
 		<br />
