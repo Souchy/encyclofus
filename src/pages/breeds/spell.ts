@@ -159,7 +159,7 @@ export class Spell {
 	}
 
 	public hasTrapGlyph(e: any) {
-		return e.effectId == 400 || e.effectId == 401 || e.effectId == 1091;
+		return e.effectId == 400 || e.effectId == 401 || e.effectId == 1091 || e.effectId == 402;
 	}
 	public getTrapGlyph(e: any): any {
 		if (!this.hasTrapGlyph(e)) return null;
