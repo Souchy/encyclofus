@@ -2,9 +2,9 @@
 Encyclopédie des sorts Dofus à penchant pvp
 
 ## TODO:
-Zones (aoe)  
-Target filters (allies, enemies, summons)
-spell sheet des sous-sorts en hover  
+Aoes 
+Pop-up d'états (saoul, sobre, combinaison élémentaire)
+filtres de cible (allié, ennemi, invoc)
 
 sorts :
 - osa
