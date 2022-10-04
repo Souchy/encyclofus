@@ -33,11 +33,8 @@ export class Spell {
 		let text = this.db.getI18n(e.effect.descriptionId);
 		let subspellid = e.diceNum;
 		let tg = this.getTrapGlyph(e);
+		// console.log("trap glyph: " + e.effectId)
 		// console.log("trap glyph: " + JSON.stringify(tg))
-		// doSpell(subspellid);
-		//  if.bind="hasTrapGlyph(e)"
-		// text += this.db.getI18n(tg.nameId);
-		// text +=
 		text =
 			`
 			<table class="table table-striped table-sm table-borderless" style="width: 100%; margin-bottom: 0px;">
@@ -45,12 +42,13 @@ export class Spell {
 					`
 					+
 					tg.effects.map(e1 => {
-						if(!e1.visibleInTooltip) return "";
-						return `<tr>
-									<td style="vertical-align: middle;"> &nbsp;&nbsp;&nbsp;`+ this.renderEffectI18n(e1) + `</td>
-									<td style.bind="getIcon(e1)"></td>
-									<td style.bind="db.getAoeIconStyle(e1)"></td>
-								</tr>`
+						if(e1.visibleInTooltip || e1.effect.showInTooltip)
+							return `<tr>
+										<td style="vertical-align: middle;"> &nbsp;&nbsp;&nbsp;`+ this.renderEffectI18n(e1) + `</td>
+										<td style="${this.getIcon(e1)}"></td>
+										<td style="${this.db.getAoeIconStyle(e1)}"></td>
+									</tr>`
+						else return "";
 					}).join("")
 					+
 					`
@@ -71,11 +69,6 @@ export class Spell {
 			let name = this.db.getI18n(summon.nameId);
 			text = text.replace("#1", name);
 		}
-		// piège/glyphes
-		// if (e.effectId == 400 || e.effectId == 401) {
-		// 	// return;
-		// }
-
 		// state condition, fouet osa dragocharge, +1 combo,
 		if (e.effectId == 1160 || e.effectId == 2160 || e.effectId == 2794 || e.effectId == 792) {
 			let subspellid = e.diceNum;
@@ -83,13 +76,32 @@ export class Spell {
 			if(!subspell) {
 				console.log("error at uid " + e.effectUid)
 			}
-			text = text.replace("#1", this.db.getI18n(subspell.nameId));
+			let name = this.db.getI18n(subspell.nameId);
+			
+			if (name.includes("{")) {
+				let obj = name.substring(name.indexOf("{"), name.indexOf("}"))
+				name = name.substring(0, name.indexOf("{"));
+				// name = name.replace("{", "").replace("}", "");
+				let data = obj.split(",");
+				let subSpellId = data[1];
+				let stateSpell = this.db.jsonSpells[subSpellId];
+				obj = obj.split("::")[1] + "<spell spellid.bind='" + subSpellId + "' issummon.bind='" + this.issummon + "'></spell>";
+				name += obj;
+			}
+			text = text.replace("#1", name);
 		}
-		// ajoute relance 
-		if(e.effectId == 1035) {
+		// augmente ou réduit le cooldown du sort 
+		if(e.effectId == 1035 || e.effectId == 1036) {
 			text = text.replace("#1", this.db.getI18n(this.spell.nameId)); // this.name
 			text = text.replace("#3", e.value);
 		} 
+		// effet de charge
+		if(e.effectId == 293 || e.effectId == 281) { // if (has1 && has3 && !has2) { //
+			let subspellid = e.diceNum;
+			let subspell = this.db.jsonSpells[subspellid];
+			text = text.replace("#1", this.db.getI18n(subspell.nameId));
+			text = text.replace("#3", e.value);
+		}
 		// état
 		if (e.effectId == 950 || e.effectId == 951) {
 			// if (e.value) {
@@ -109,15 +121,6 @@ export class Spell {
 			if (state) text = text.replace("#3", stateName);
 		}
 
-		// effet de charge
-		// if (has1 && has3 && !has2) { //
-		if(e.effectId == 293 || e.effectId == 281) { 
-			let subspellid = e.diceNum;
-			let subspell = this.db.jsonSpells[subspellid];
-			text = text.replace("#1", this.db.getI18n(subspell.nameId));
-			text = text.replace("#3", e.value);
-		}
-		
 		// min/max
 		let min = e.diceNum;
 		let max = e.diceSide;
@@ -159,7 +162,7 @@ export class Spell {
 	}
 
 	public hasTrapGlyph(e: any) {
-		return e.effectId == 400 || e.effectId == 401 || e.effectId == 1091 || e.effectId == 402;
+		return e.effectId == 400 || e.effectId == 401 || e.effectId == 1091 || e.effectId == 402 || e.effectId == 1165 || e.effectId == 400;
 	}
 	public getTrapGlyph(e: any): any {
 		if (!this.hasTrapGlyph(e)) return null;
@@ -168,21 +171,6 @@ export class Spell {
 
 
 
-	// public renderEffectAoe(e) {
-	// 	let zone: string = e.rawZone;
-	// 	let length = e.rawZone.charAt(1);
-	// 	let str = "";
-	// 	if(zone.startsWith("C")) {
-	// 		str = "Cercle";
-	// 	}
-	// 	if(zone.startsWith("P")) {
-	// 		str = "Point";
-	// 	}
-	// 	if(length > 1) {
-	// 		str += " de " + length;
-	// 	}
-	// 	return str;
-	// }
 
 	public getIcon(val: string) {
 		// console.log("spell get icon for: " + val)
