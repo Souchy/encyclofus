@@ -76,26 +76,20 @@ export class Spell {
 		// 	// return;
 		// }
 
+		// state condition, fouet osa dragocharge, +1 combo,
+		if (e.effectId == 1160 || e.effectId == 2160 || e.effectId == 2794 || e.effectId == 792) {
+			let subspellid = e.diceNum;
+			let subspell = this.db.jsonSpells[subspellid];
+			if(!subspell) {
+				console.log("error at uid " + e.effectUid)
+			}
+			text = text.replace("#1", this.db.getI18n(subspell.nameId));
+		}
 		// ajoute relance 
 		if(e.effectId == 1035) {
 			text = text.replace("#1", this.db.getI18n(this.spell.nameId)); // this.name
 			text = text.replace("#3", e.value);
-		} else
-		// effet de charge
-		if (has1 && has3 && !has2) { // if(e.effectId == 293) { //} && e.diceNum != e.spellId) {
-			let subspellid = e.diceNum;
-			let subspell = this.db.jsonSpells[subspellid];
-			// doSpell(subspellid);
-
-			text = text.replace("#1", this.db.getI18n(subspell.nameId));
-			text = text.replace("#3", e.value);
-		}
-		// state condition, fouet osa dragocharge
-		if (e.effectId == 1160 || e.effectId == 2160 || e.effectId == 2794) {
-			let subspellid = e.diceNum;
-			let subspell = this.db.jsonSpells[subspellid];
-			text = text.replace("#1", this.db.getI18n(subspell.nameId));
-		}
+		} 
 		// état
 		if (e.effectId == 950) {
 			// if (e.value) {
@@ -114,6 +108,16 @@ export class Spell {
 				}
 			if (state) text = text.replace("#3", stateName);
 		}
+
+		// effet de charge
+		// if (has1 && has3 && !has2) { //
+		if(e.effectId == 293 || e.effectId == 281) { 
+			let subspellid = e.diceNum;
+			let subspell = this.db.jsonSpells[subspellid];
+			text = text.replace("#1", this.db.getI18n(subspell.nameId));
+			text = text.replace("#3", e.value);
+		}
+		
 		// min/max
 		let min = e.diceNum;
 		let max = e.diceSide;
