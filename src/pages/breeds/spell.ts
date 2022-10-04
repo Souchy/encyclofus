@@ -88,7 +88,7 @@ export class Spell {
 							</tr>`;
 				}
 				if (e1.visibleInTooltip || e1.visibleOnTerrain)
-					if (this.hasTrapGlyph(e1) && e1.diceNum != e.spellId) {
+					if (this.hasTrapGlyph(e1) && e1.diceNum != e.spellId && e1.diceNum != e1.spellId) {
 						// tex += this.renderTrapGlyph(e1);
 						tex += this.renderSubSpell(e1, depth + 1);
 					}
@@ -152,7 +152,8 @@ export class Spell {
 							</tr>`;
 				}
 				if (e1.visibleInTooltip || e1.visibleOnTerrain)
-					if (e1.diceNum != e.spellId && (this.hasTrapGlyph(e1) || e1.effectId == 1160)) {
+				// 1160 pour barrière je pense
+					if (e1.diceNum != e.spellId && e1.diceNum != e1.spellId && (this.hasTrapGlyph(e1))) { //  || e1.effectId == 1160
 						if (this.hasTrapGlyph(e1)) {
 							tex += "<tr><td colspan=3>" + this.renderTrapGlyph(e1, depth + 1) + "</td></tr>";
 						}
@@ -233,21 +234,27 @@ export class Spell {
 		}
 		// état
 		if (e.effectId == 950 || e.effectId == 951) {
+
 			// if (e.value) {
 			let state = this.db.jsonStates[e.value]
-			let stateName = this.db.getI18n(state.nameId);
+			if(!state) {}
 			// "968135": "{spell,24036,1::<u>Saoul</u>}",
-			if (!stateName) {
-				console.log("state: " + JSON.stringify(state))
-			} else
-				if (stateName.includes("{")) {
-					stateName = stateName.replace("{", "").replace("}", "");
-					let data = stateName.split(",");
-					let subSpellId = data[1];
-					let stateSpell = this.db.jsonSpells[subSpellId];
-					stateName = stateName.split("::")[1] + "<spell spellid.bind='" + subSpellId + "' issummon.bind='" + this.issummon + "'></spell>";
+			if(state){
+				let stateName = this.db.getI18n(state.nameId);
+				if(stateName) {
+					if (stateName.includes("{")) {
+						stateName = stateName.replace("{", "").replace("}", "");
+						let data = stateName.split(",");
+						let subSpellId = data[1];
+						let stateSpell = this.db.jsonSpells[subSpellId];
+						stateName = stateName.split("::")[1] + "<spell spellid.bind='" + subSpellId + "' issummon.bind='" + this.issummon + "'></spell>";
+					}
 				}
-			if (state) text = text.replace("#3", stateName);
+				text = text.replace("#3", stateName);
+			} else {
+				console.log("null state: " + JSON.stringify(state))
+			}
+				
 		}
 		if (e.effectId == 1181) {
 			text = text.replace("#3", e.value);
@@ -354,11 +361,11 @@ export class Spell {
 		if (e.targetMask.includes("U")) return ["U"];
 		if (e.targetMask.includes("A") && (e.targetMask.includes("g") || e.targetMask.includes("a"))) return ["all"]
 		let m = e.targetMask.split(",");
-		if (e.spellId == 14622) {
-			console.log("masks : " + m)
-		}
+		// if (e.spellId == 14622) {
+		// 	console.log("masks : " + m)
+		// }
 		m = m.filter(m => m == "a" || m == "A" || m == "g" || m == "c" || m == "C" || m == "U")
-		console.log("m:" + m)
+		// console.log("m:" + m)
 		// if(m.includes("*293"))
 		// 	console.log("prob " + m)
 		return m;
