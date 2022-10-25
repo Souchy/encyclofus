@@ -7,7 +7,7 @@
 	${db.getI18n(summon.nameId)}
 </h5>
 
-<table class="table table-striped table-sm table-borderless">
+<table class="table table-striped table-sm table-borderless" if.bind="showDescriptions">
 	<tbody>
 		<tr>
 			<td><span t="pv"></span> : ${grade.lifePoints * 3}</td>
@@ -37,5 +37,5 @@
 	</tbody>
 </table>
 
-
+showDescriptions
 <spell repeat.for="summonSpellId of summon.spells" issummon.bind="true" spellid.bind="summonSpellId"></spell>

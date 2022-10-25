@@ -11,9 +11,33 @@
 	<div class="d-flex p-2 flex-wrap">
 		<a load="${breeds[i]}" css="${getBreedIconStyle(i)}" repeat.for="i of breeds.length" ></a>
 	</div>
+
+	<div if.bind="isRouteClass && db.isLoaded">
+		<strong>${breedNameI18n}</strong>
+		<br />
+		<a load="${breedName}/mechanics" style="color: inherit; text-decoration: inherit;">
+			Mécaniques
+		</a>
+		<br />
+		<a load="${breedName}/situations" style="color: inherit; text-decoration: inherit;">
+			Situations
+		</a>
+	</div>
 	
+	<hr>
 	<div>
 		<strong>Information</strong>
+		<br />
+		<a load="general" style="color: inherit; text-decoration: inherit;">
+			Général
+		</a>
+		<br />
+		<a load="formules" style="color: inherit; text-decoration: inherit;">
+			Formules
+		</a>
+	</div>
+	<div>
+		<strong>Communauté pvp</strong>
 		<br />
 		<a load="tournaments" style="color: inherit; text-decoration: inherit;">
 			Tournois

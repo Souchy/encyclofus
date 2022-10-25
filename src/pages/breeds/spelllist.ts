@@ -1,4 +1,4 @@
-import { bindable, inject } from "aurelia";
+import { bindable, IEventAggregator, inject } from "aurelia";
 import { IRouter, IRouteableComponent, Navigation, Parameters, RoutingInstruction } from '@aurelia/router';
 
 import { db } from "../../DofusDB/db";
@@ -10,15 +10,17 @@ export class SpellList {
 
 	public db: db;
 	public selectedSlot: number = 0;
+	// @bindable
+	// public showDescriptions: boolean = true;
 
-	constructor(db: db) {
-		this.db = db;
-	}
+    constructor(db: db, @IEventAggregator readonly ea: IEventAggregator) {
+        this.db = db;
+    }
+
 
 	public get isDbLoaded() {
 		return this.db.isLoaded;
 	}
-
 	public get breedId(): number {
 		return this.db.breedId;
 	}
@@ -32,11 +34,20 @@ export class SpellList {
 		// console.log("spell list breed[" + this.breedId + "]: " + JSON.stringify(this.breed.spells));
 		return this.breed.spells;
 	}
-
+	public get selectedSpellId() {
+		if (!this.spells) return null;
+		if (this.selectedSlot == undefined) return undefined;
+		return this.spells[this.selectedSlot];
+	}
+	public get selectedSpell() {
+		if (!this.selectedSpellId) return null;
+		return this.db.jsonSpells[this.selectedSpellId];
+	}
 
 	public selectSlot(slot: number): void {
 		this.selectedSlot = slot;
 		this.selectedSummon = null;
+		this.ea.publish("spelllist:select:" + this.selectedSpellId);
 	}
 
 	public getSpellImg(spellId: number): string {
@@ -52,15 +63,6 @@ export class SpellList {
 		return this.db.getI18n(nameid);
 	}
 
-	public get selectedSpellId() {
-		if (!this.spells) return null;
-		if (this.selectedSlot == undefined) return undefined;
-		return this.spells[this.selectedSlot];
-	}
-	public get selectedSpell() {
-		if (!this.selectedSpellId) return null;
-		return this.db.jsonSpells[this.selectedSpellId];
-	}
 	public hasSummon(e: any) {
 		return this.db.isSummonEffect(e) && e.visibleInTooltip; // e.effectId == 181 || e.effectId == 1011 || e.effectId == 1008;
 	}

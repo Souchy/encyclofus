@@ -1,0 +1,29 @@
+
+<import from="./spelllist"></import>
+
+<spelllist></spelllist>
+
+<button>Nouveau combo</button>
+<select class="form-select" style="width: auto;" value.bind="critMode">
+    <option>0% crit</option>
+    <option>50% crit</option>
+    <option>100% crit</option>
+</select>
+<select class="form-select" style="width: auto;" value.bind="rollMode">
+    <option>Jet minimum</option>
+    <option>Jet moyen</option>
+    <option>Jet maximum</option>
+</select>
+
+<div repeat.for="combo of combos">
+    <div>Cost: ${sumAp(combo)}</div>
+    <div>Damage: ${sumDamage(combo)}</div>
+    <div>Heal: ${sumHeal(combo)}</div>
+    <div>Ret: ${sumRet(combo)}</div>
+    <div repeat.for="spellid of combo.spells">
+        <img src="${getSpellImg(spellid)}" title="${getSpellName(spellid)}" id="${spellid}" style="width: 55px; height: 55px;" />
+        <div>
+            ${damageOf(spellid)}
+        </div>
+    </div>
+</div>
