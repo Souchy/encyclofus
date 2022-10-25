@@ -42,6 +42,14 @@ export class App {
 			path: "formules",
 			component: import("./info/formules"),
 		},
+		{
+			path: "map",
+			component: import("./pages/maps/map"),
+		},
+		{
+			path: "maps",
+			component: import("./pages/maps/maplist"),
+		},
 	];
 
 	// collapsing sidebar reference
