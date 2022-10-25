@@ -1,0 +1,44 @@
+
+map {
+    width: 100%;
+}
+
+svg {
+    width: 100%;
+    height: 100%;
+}
+
+.mapcontainer {
+    width: sin(60deg) * 40 * 2 * 14.5px;
+    height: sin(30deg) * 40 * 2 * 20.5px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.floor {}
+
+.floor .base {
+    &.k0 {
+        fill: rgb(157, 149, 136);
+        stroke: rgb(166, 158, 147);
+    }
+
+    &.k1 {
+        fill: rgb(152, 143, 130);
+        stroke: rgb(166, 158, 147);
+    }
+}
+
+.floor .base:hover {
+    fill: rgb(184, 127, 73);
+}
+
+.block .base {
+    fill: rgb(39, 65, 73);
+    stroke: rgb(166, 158, 147);
+}
+
+.object .base {
+    fill: rgb(73, 39, 39);
+    stroke: rgb(166, 158, 147);
+}

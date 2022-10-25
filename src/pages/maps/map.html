@@ -1,18 +1,14 @@
 
-Hi map
-<hr>
-<svg innerHtml.bind="generateMap"></svg>
-<hr>
-<svg width="100%" height="100%">
-    <g class="floor">
-        <g repeat.for="j of 20">
-            <g repeat.for="i of 14">
-                <polygon class="base" points="0,0 250,190 160,210"></polygon>
-                <!-- <polygon class="base" points.bind="${i},0 250,190 160,210"></polygon> -->
-            </g>
-        </g>
-    </g>
-    <g class="block">
+<div class="mapcontainer">
+    <svg ref="svg">
+        <g ref="groupFloor" class="floor"></g>
+        <g ref="groupHoles" class="hole"></g>
+        <g ref="groupBlocks" class="block"></g>
+        <g ref="groupObjects" class="object"></g>
+    </svg>
+</div>
 
-    </g>
-</svg>
+${generateFloor()}
+${generateHoles()}
+${generateObjects()}
+${generateBlocks()}
