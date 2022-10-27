@@ -15,30 +15,48 @@ svg {
     margin-right: auto;
 }
 
-.floor {}
-
-.floor .base {
+// .los {
+//     fill: rgba(104, 243, 23, 0.473);
+// }
+.floor {
+    stroke: rgb(166, 158, 147);
     &.k0 {
         fill: rgb(157, 149, 136);
-        stroke: rgb(166, 158, 147);
     }
-
     &.k1 {
         fill: rgb(152, 143, 130);
-        stroke: rgb(166, 158, 147);
     }
 }
-
-.floor .base:hover {
+.floor:hover {
     fill: rgb(184, 127, 73);
 }
-
-.block .base {
-    fill: rgb(39, 65, 73);
+.hole {
+    fill: rgba(0, 0, 0, 0.85);
+    stroke: rgba(166, 158, 147, 0.30);
+}
+.block {
+    fill: rgba(59, 66, 68, 0.7);
+    stroke: rgb(166, 158, 147);
+}
+.object {
+    fill: rgba(73, 39, 39, 0.70);
     stroke: rgb(166, 158, 147);
 }
 
-.object .base {
-    fill: rgb(73, 39, 39);
-    stroke: rgb(166, 158, 147);
+
+.blue {
+    fill: rgb(0, 38, 255);
+}
+.red {
+    fill: rgb(255, 0, 0);
+}
+
+.s1 {
+    fill: rgb(234, 0, 255);
+}
+.s2 {
+    fill: rgb(0, 255, 179);
+}
+.s3 {
+    fill: rgb(229, 255, 0);
 }

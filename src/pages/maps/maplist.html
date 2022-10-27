@@ -1,7 +1,9 @@
 <import from="./map"></import>
 
-<div repeat.for="m of mapsData">
+<div if.bind="db.isLoaded">
+    <button repeat.for="i of mapIds" click.trigger="select(i)">${getMapName(i)}</button>
 </div>
 
 <hr>
-<map id.bind="0"></map>
+
+<map mapId.bind="77336069"></map>
