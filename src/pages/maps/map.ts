@@ -120,6 +120,10 @@ export class Map {
 
             let classes = "k" + k + " "
 
+            if(this.board.target != -1) {
+                let inlos = this.board.checkViewById(this.board.target, id);
+                if(inlos) classes += "highlight ";
+            }
             if(this.board.target == id) {
                 classes += "target "
             }
