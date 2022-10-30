@@ -37,7 +37,7 @@ export class Spell {
 	}
 
 	public renderTrapGlyph(e, depth?: number) {
-		if (!depth) depth = 0;
+		if (!depth) depth = 1;
 		let text = this.db.getI18n(e.effect.descriptionId);
 		let subspellid = e.diceNum;
 		let tg = this.getTrapGlyph(e);
@@ -50,42 +50,33 @@ export class Spell {
 		for (let i = 0; i <= depth; i++) {
 			tab += "&nbsp;&nbsp;&nbsp;";
 		}
-		text =
-			`
-			<table class="table table-striped table-sm table-borderless" style="width: 100%; margin-bottom: 0px;">
-				<tbody>
-					`
-			+
-			tg.effects.map(e1 => {
+		let paddingLeft = depth * 15 + 4;
+
+		let stuff = [
+			`<table class="table table-striped table-sm table-borderless" style="width: 100%; margin-bottom: 0px;">`,
+			`<tbody>`
+		];
+		let effs = tg.effects.map(e1 => {
 				let tex = "";
 				let icon = this.getIcon(e1);
 				if (e1.visibleInTooltip) { // || e1.effect.showInTooltip){
-					tex = `<tr>
-								<td style="vertical-align: middle;">` + tab + this.renderEffectI18n(e1) + `</td>
-								`
-						+
-						( icon ? "" : "<td></td>")
-						+
-						this.getTargets(e1).map(t => {
-							return `
-									<td style="width: 22px;">
-										<div style="${this.getTargetIcon(t)}"></div>
-									</td>
-									`
-						}).join("")
-						+
+					let arr = [
+						`<tr>`,
 						(
-							icon ? 
-							`<td style="width: 22px;">
+							icon? 
+							`<td style="width: 20px; padding: 0px; padding-left: `+paddingLeft+`px;">
 								<div style="${icon}"></div>
 							</td>` 
-							: 
-							""//`<td></td>`
-						)
-						+
-						`
-							<td style="${this.db.getAoeIconStyle(e1)}"></td>
-							</tr>`;
+							: `<td style="padding: 0px; padding-left: `+paddingLeft+`px;"></td>`
+						),
+						`<td style="vertical-align: middle;">` + this.renderEffectI18n(e1) + `</td>`,
+						this.getTargets(e1).map(t => {
+							return `<td style="${this.getTargetIcon(t)}"></td>`
+						}).join(""),
+						`<td style="${this.db.getAoeIconStyle(e1)}"></td>`,
+						`</tr>`
+					];
+					tex = arr.join("");
 				}
 				if (e1.visibleInTooltip || e1.visibleOnTerrain)
 					if (this.hasTrapGlyph(e1) && e1.diceNum != e.spellId && e1.diceNum != e1.spellId) {
@@ -93,11 +84,11 @@ export class Spell {
 						tex += this.renderSubSpell(e1, depth + 1);
 					}
 				return tex;
-			}).join("")
-			+
-			`
-				</tbody>
-			</table>`;
+			})
+		stuff.push(...effs);
+		stuff.push(`</tbody>`);
+		stuff.push(`</table>`);
+		text = stuff.join("");
 		return text;
 	}
 
@@ -113,46 +104,41 @@ export class Spell {
 		for (let i = 0; i <= depth; i++) {
 			tab += "&nbsp;&nbsp;&nbsp;";
 		}
-		let text =
-			`
-			<table class="table table-striped table-sm table-borderless" style="width: 100%; margin-bottom: 0px;">
-				<tbody>
-					`
-			+
-			subspell.effects.map(e1 => {
+		let paddingLeft = depth * 15 + 4;
+		
+		let text = "";
+		let stuff = [
+			`<table class="table table-striped table-sm table-borderless" style="width: 100%; margin-bottom: 0px;">`,
+			`<tbody>`
+		];
+
+		let effs = subspell.effects.map(e1 => {
 				// if (e1.diceNum == 13044) {
 				// 	console.log("13044 reference: " + JSON.stringify(e1))
 				// }
 				let tex = "";
 				let icon = this.getIcon(e1);
 				if (e1.visibleInTooltip) { //  || e1.effect.showInTooltip
-					tex = `<tr>
-								<td style="vertical-align: middle;" >` + tab + this.renderEffectI18n(e1) + `</td>
-								`
-						+
-						( icon ? "" : "<td></td>")
-						+
-						this.getTargets(e1).map(t => {
-							return `
-									<td style="width: 22px;">
-										<div style="${this.getTargetIcon(t)}"></div>
-									</td>
-									`
-						}).join("")
-						+
+					let arr = [
+					   `<tr>`,
 						(
-							icon ? `<td style="width: 22px;">
-									<div style="${icon}"></div>
-								</td>` : ""
-						)
-
-						+
-						`
-								<td style="${this.db.getAoeIconStyle(e1)}"></td>
-							</tr>`;
+							icon? 
+							`<td style="width: 20px; padding: 0px; padding-left: `+paddingLeft+`px;">
+								<div style="${icon}"></div>
+							</td>` 
+							: `<td style="padding: 0px; padding-left: `+paddingLeft+`px;"></td>`
+						),
+						`<td style="vertical-align: middle;" >` + tab + this.renderEffectI18n(e1) + `</td>`,
+						this.getTargets(e1).map(t => {
+							return `<td style="${this.getTargetIcon(t)}"></td>`
+						}).join(""),
+						`<td style="${this.db.getAoeIconStyle(e1)}"></td>`,
+						`</tr>`
+					]
+					tex = arr.join("");
 				}
 				if (e1.visibleInTooltip || e1.visibleOnTerrain)
-				// 1160 pour barrière je pense
+					// 1160 pour barrière je pense
 					if (e1.diceNum != e.spellId && e1.diceNum != e1.spellId && (this.hasTrapGlyph(e1))) { //  || e1.effectId == 1160
 						if (this.hasTrapGlyph(e1)) {
 							tex += "<tr><td colspan=3>" + this.renderTrapGlyph(e1, depth + 1) + "</td></tr>";
@@ -162,29 +148,15 @@ export class Spell {
 						}
 					}
 				return tex;
-
-				// if(e1.visibleInTooltip || e1.visibleOnTerrain) {//  || e1.effect.showInTooltip
-				// 	let tex = `<tr>
-				// 					<td style="vertical-align: middle;"> &nbsp;&nbsp;&nbsp;`+ this.renderEffectI18n(e1) + `</td>
-				// 					<td style="${this.getIcon(e1)}"></td>
-				// 					<td style="${this.db.getAoeIconStyle(e1)}"></td>
-				// 				</tr>`;
-				// 	if(e1.diceNum != e.spellId && (this.hasTrapGlyph(e1)|| e1.effectId == 1160)) {
-				// 		if(this.hasTrapGlyph(e1)) {
-				// 			tex += this.renderTrapGlyph(e1);
-				// 		}
-				// 		if(e1.effectId == 1160) {
-				// 			tex += this.renderSubSpell(e1);
-				// 		}
-				// 	}
-				// 	return tex;
-				// } else return "";
-			}).join("")
-			+
-			`
-				</tbody>
-			</table>`;
+			}).join("");
+		stuff.push(...effs);
+		stuff.push(`</tbody>`);
+		stuff.push(`</table>`);
 		return text;
+	}
+
+	public isDispellable(e) {
+		return e.dispellable;
 	}
 
 	public renderEffectI18n(e) {
@@ -234,14 +206,13 @@ export class Spell {
 		}
 		// état
 		if (e.effectId == 950 || e.effectId == 951) {
-
 			// if (e.value) {
 			let state = this.db.jsonStates[e.value]
-			if(!state) {}
+			if (!state) { }
 			// "968135": "{spell,24036,1::<u>Saoul</u>}",
-			if(state){
+			if (state) {
 				let stateName = this.db.getI18n(state.nameId);
-				if(stateName) {
+				if (stateName) {
 					if (stateName.includes("{")) {
 						stateName = stateName.replace("{", "").replace("}", "");
 						let data = stateName.split(",");
@@ -254,7 +225,6 @@ export class Spell {
 			} else {
 				console.log("null state: " + JSON.stringify(state))
 			}
-				
 		}
 		if (e.effectId == 1181) {
 			text = text.replace("#3", e.value);
