@@ -33,6 +33,7 @@
 	"criticalHitProbability": "Probabilité de coup critique",
 
 
+	"help": "Aide",
 	"sidebar" : {
 		"information": {
 			"information": "Information",
@@ -53,6 +54,8 @@
 	"maps": {
 		"goultar": "Goultarminator",
 		"tournament": "Tournoi",
-		"duel": "Duel"
+		"duel": "Duel",
+		"clickl": "Click gauche pour placer la cible",
+		"clickr": "Click droit pour placer un obstacle"
 	}
 }

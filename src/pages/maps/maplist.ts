@@ -16,6 +16,7 @@ export class MapList {
     public showGoultar = true;
     public showTournoi = false;
     public showDuel = false;
+    public showHelp = false;
 
     public constructor(db: db, @IEventAggregator readonly ea: IEventAggregator) {
         this.db = db;
@@ -36,18 +37,24 @@ export class MapList {
         this.showGoultar = true;
         this.showTournoi = false;
         this.showDuel = false;
+        this.showHelp = false;
     }
     public clickTournoi() {
         // console.log("click tournoi")
         this.showGoultar = false;
         this.showTournoi = true;
         this.showDuel = false;
+        this.showHelp = false;
     }
     public clickDuel() {
         // console.log("click duel")
         this.showGoultar = false;
         this.showTournoi = false;
         this.showDuel = true;
+        this.showHelp = false;
+    }
+    public clickHelp() {
+        this.showHelp = !this.showHelp;
     }
 
 

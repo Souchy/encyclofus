@@ -32,6 +32,7 @@
 	"maxCastPerTurn": "Max. uses per turn",
 	"criticalHitProbability": "Critical chance",
 
+	"help": "Help",
 	"sidebar" : {
 		"information": {
 			"information": "Information",
@@ -52,6 +53,8 @@
 	"maps": {
 		"goultar": "Goultarminator",
 		"tournament": "Tournament",
-		"duel": "Duel"
+		"duel": "Duel",
+		"clickl": "Left click to place the target",
+		"clickr": "Right click to place an obstacle"
 	}
 }

@@ -66,12 +66,12 @@ export class Map {
 
     public initDone: boolean;
     public init() {
-        if(this.initDone) return;
-        if(!this.groupFloor) return;
+        if(this.initDone) return "";
+        if(!this.groupFloor) return "";
         // console.log("maps: " + JSON.stringify(this.db.jsonMaps))
         if(!this.db.jsonMaps || !this.db.jsonMaps[this.mapId]) {
             this.db.loadMap(this.mapId);
-            return;
+            return "";
         }
         // console.log("map init " + this.mapId)
         // this.initDone = false;
@@ -104,7 +104,7 @@ export class Map {
         this.board.objects[id] = !this.board.objects[id];
         let coord = JSON.stringify(this.board.getCellCoordById(id)) 
         let pos = JSON.stringify(this.board.getPos(id))
-        console.log("object at id " + id + ": " + this.board.objects[id] + ", pos: " + pos + ", coord: " + coord)
+        // console.log("object at id " + id + ": " + this.board.objects[id] + ", pos: " + pos + ", coord: " + coord)
 
         this.generateMap();
     }
@@ -173,7 +173,7 @@ export class Map {
                 else
                 // target
                 if(this.board.target == id) {
-                    console.log("set class target " + id)
+                    // console.log("set class target " + id)
                     classes += "target "
                 } else
                 if(inlos) classes += "highlight "
