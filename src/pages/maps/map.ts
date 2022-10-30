@@ -1,7 +1,8 @@
 import { bindable, IEventAggregator, inject, observable } from 'aurelia';
 import { watch } from '@aurelia/runtime-html';
-import { Board } from '../../DofusDB/formulas';
+import { Board, posVIP1, posVIP2, posVIP3, Vector2 } from '../../DofusDB/formulas';
 import { db } from '../../DofusDB/db';
+// import { MapTools } from '../../DofusDB/formulas2';
 // import jsonMap from '../../DofusDB/scraped/common/map_kolo/113508877.json'
 // import jsonMap from '../../DofusDB/scraped/common/134484992.json'
 // import fs from 'fs'
@@ -36,35 +37,45 @@ export class Map {
     // public target = { i: 0, j: 0, k: 0 }
     public board: Board;
 
-    @bindable
-    public mapId: string;
+    public mapId: string = "134479872";
+    public mapLoaded = false;
 
     public constructor(db: db, @IEventAggregator readonly ea: IEventAggregator) {
         this.db = db;
         ea.subscribe("db:loadmap", e => {
-            console.log("map db:loadmap")
+            // console.log("map db:loadmap")
             this.init();
         });
         ea.subscribe("db:loaded", e => {
-            console.log("map db:loaded")
+            // console.log("map db:loaded")
             this.init();
         });
         ea.subscribe("map:setid", e => {
-            console.log("map setid " + e);
+            // console.log("map setid " + e);
             this.mapId = e as string;
-            this.init();
+            // this.init();
+            let map = this.db.jsonMaps[this.mapId]
+            this.board.cells = map.cells;
+            this.generateMap();
         })
+    }
+
+    public get mapName() {
+        return this.db.getI18n("map_" + this.mapId);
     }
 
     public initDone: boolean;
     public init() {
-        console.log("map init")
+        if(this.initDone) return;
+        if(!this.groupFloor) return;
         // console.log("maps: " + JSON.stringify(this.db.jsonMaps))
         if(!this.db.jsonMaps || !this.db.jsonMaps[this.mapId]) {
             this.db.loadMap(this.mapId);
             return;
         }
-        this.initDone = false;
+        // console.log("map init " + this.mapId)
+        // this.initDone = false;
+        if(this.groupFloor) this.groupFloor.innerHTML = "";
         // this.generateFloor()
         // this.generateHoles()
         // this.generateObjects()
@@ -73,6 +84,7 @@ export class Map {
 
         let map = this.db.jsonMaps[this.mapId]
         this.board.cells = map.cells;
+        // console.log("init map: " + JSON.stringify(map))
 
         this.generateMap();
         this.initDone = true;
@@ -85,17 +97,33 @@ export class Map {
     public load() {
         // fs.readFileSync("")
         // let map = this.db.jsonMaps[this.id];
-        console.log("load: " + this.mapId)
+        // console.log("load: " + this.mapId)
     }
 
     public placeObject(id) {
         this.board.objects[id] = !this.board.objects[id];
-        console.log("object at id " + id + ": " + this.board.objects[id])
+        let coord = JSON.stringify(this.board.getCellCoordById(id)) 
+        let pos = JSON.stringify(this.board.getPos(id))
+        console.log("object at id " + id + ": " + this.board.objects[id] + ", pos: " + pos + ", coord: " + coord)
+
         this.generateMap();
     }
+    
+    public placeTarget(id0) {
+        console.log("placeTarget " + id0)
+        // let id1 = posVIP3;
+        // let coord0 = this.board.getCaseCoordonnee(id0)
+        // let coord1 = this.board.getCaseCoordonnee(id1)
+        // let id0a = this.board.getCaseNum(coord0.x, coord0.y)
+        // let id1a = this.board.getCaseNum(coord1.x, coord1.y)
+        // console.log("pos vec: p0: " + JSON.stringify(this.board.getPos(id0)) + ", p1:" + JSON.stringify(this.board.getPos(id1)) + ", " + id0 + ", " + id1)
+        // console.log("pos coord: p0: " + JSON.stringify(coord0) + ", p1: " + JSON.stringify(coord1) + ", " + id0a + ", " + id1a)
 
-    public placeTarget(id) {
-        this.board.target = id;
+        if(this.board.target == id0) {
+            this.board.target = -1;
+        } else {
+            this.board.target = id0;
+        }
         this.generateMap();
     }
 
@@ -105,7 +133,9 @@ export class Map {
     }
 
     public generateMap() {
-        this.groupFloor.innerHTML = "";
+        // console.log("generateMap")
+        // console.log("children 2: " + this.groupFloor.children.length)
+
         for (let id = 0; id < this.board.cells.length; id++) {
             let cell = this.board.cells[id];
             let x = this.board.getX(id);
@@ -120,29 +150,48 @@ export class Map {
 
             let classes = "k" + k + " "
 
-            if(this.board.target != -1) {
-                let inlos = this.board.checkViewById(this.board.target, id);
-                if(inlos) classes += "highlight ";
-            }
-            if(this.board.target == id) {
-                classes += "target "
-            }
+            // placed object blocks
             if(this.board.objects[id]) {
                 classes += "object "
                 this.getPolygonBlock(id, o1, classes);
             } else
+            // natural blocks
             if(!cell.los) {
                 classes += "block "
                 this.getPolygonBlock(id, o1, classes);
-            } else {
-                if(cell.blue) classes += "blue "
-                else if(cell.red) classes += "red "
-                else if(!cell.mov && cell.los) classes += "hole "
+            } 
+            // floor
+            else {
+                let inlos = false;
+                // highlight los from target
+                if(this.board.target != -1) {
+                    inlos = this.board.checkView(this.board.target, id);
+                } 
+                // hole
+                if(!cell.mov && cell.los) 
+                    classes += "hole "
+                else
+                // target
+                if(this.board.target == id) {
+                    console.log("set class target " + id)
+                    classes += "target "
+                } else
+                if(inlos) classes += "highlight "
+                else
+                // blue start
+                if (cell.blue) classes += "blue "
+                else
+                // red start
+                if (cell.red) classes += "red "
+                // normal cell
                 else classes += "floor "
+
+                // make polygon
                 this.getPolygon(id, o1, classes)
             }
-
         }
+        this.mapLoaded = true;
+        // console.log("children 1: " + this.groupFloor.children.length)
     }
 
     public getPolygon(id, o, classes: string) {
@@ -158,7 +207,8 @@ export class Map {
             if (c) p.classList.add(c)
         }
         p.onclick = (e) => {
-            this.placeTarget(id);
+            if(!classes.includes("hole"))
+                this.placeTarget(id);
         };
         p.oncontextmenu = (e) => {
             e.preventDefault();
@@ -174,7 +224,8 @@ export class Map {
         
         // this.groupFloor.appendChild(p)
         if(this.initDone) { 
-            let old =  this.groupFloor.childNodes.item(id)
+            let old =  this.groupFloor.children.item(id)
+            // console.log("replace " + id + ", " + old)
             // this.groupFloor.replaceChild(p, old);
             old.replaceWith(p);
         } else {

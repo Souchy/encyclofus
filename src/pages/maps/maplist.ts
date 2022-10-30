@@ -1,4 +1,4 @@
-import map_ids from '../../DofusDB/scraped/common/maps_kolo_ids.json'
+import map_ids from '../../DofusDB/scraped/common/mapIds.json'
 // import mapsJson from './maps.json'
 // import fs from 'fs'
 import { bindable, IEventAggregator, inject } from 'aurelia';
@@ -8,26 +8,46 @@ import { db } from '../../DofusDB/db';
 export class MapList {
 
     public mapIds = map_ids;
-
-    public selectedId: string = "77336069";
-
-    // public mapsData = mapsJson;
-
+    public goultars = map_ids.goultar.sort();
+    public tournois = map_ids.tournoi.sort();
+    public duels = map_ids.duel.sort();
     public db: db;
+
+    public showGoultar = true;
+    public showTournoi = false;
+    public showDuel = false;
 
     public constructor(db: db, @IEventAggregator readonly ea: IEventAggregator) {
         this.db = db;
     }
 
-
     public select(mapid: string): void {
-        this.selectedId = mapid;
-        console.log("id: " + this.selectedId)
-        this.ea.publish("map:setid", this.selectedId)
+        // console.log("id: " + mapid)
+        this.ea.publish("map:setid", mapid)
     }
 
     public getMapName(mapid) {
-        return this.db.getI18n("map_" + mapid);
+        let spaces = this.db.getI18n("map_" + mapid).split(" ");
+        return spaces[spaces.length - 1];
+    }
+
+    public clickGoultar() {
+        // console.log("click goulta")
+        this.showGoultar = true;
+        this.showTournoi = false;
+        this.showDuel = false;
+    }
+    public clickTournoi() {
+        // console.log("click tournoi")
+        this.showGoultar = false;
+        this.showTournoi = true;
+        this.showDuel = false;
+    }
+    public clickDuel() {
+        // console.log("click duel")
+        this.showGoultar = false;
+        this.showTournoi = false;
+        this.showDuel = true;
     }
 
 

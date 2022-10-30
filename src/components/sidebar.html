@@ -12,44 +12,30 @@
 		<a load="${breeds[i]}" css="${getBreedIconStyle(i)}" repeat.for="i of breeds.length" ></a>
 	</div>
 
-	<div if.bind="isRouteClass && db.isLoaded">
+	<!-- <div if.bind="isRouteClass && db.isLoaded">
 		<strong>${breedNameI18n}</strong>
 		<br />
-		<a load="${breedName}/mechanics" style="color: inherit; text-decoration: inherit;">
-			Mécaniques
-		</a>
+		<a load="${breedName}/mechanics" style="color: inherit; text-decoration: inherit;" t="sidebar.classes.mecanics"></a>
 		<br />
-		<a load="${breedName}/situations" style="color: inherit; text-decoration: inherit;">
-			Situations
-		</a>
-	</div>
+		<a load="${breedName}/situations" style="color: inherit; text-decoration: inherit;" t="sidebar.classes.situations"></a>
+	</div> -->
 	
-	<hr>
+	<!-- <hr> -->
 	<div>
-		<strong>Information</strong>
+		<strong t="sidebar.information.information"></strong>
+		<!-- <br />
+		<a load="general" style="color: inherit; text-decoration: inherit;" t="sidebar.information.general"></a>
 		<br />
-		<a load="general" style="color: inherit; text-decoration: inherit;">
-			Général
-		</a>
+		<a load="formules" style="color: inherit; text-decoration: inherit;" t="sidebar.information.formulas"></a> -->
 		<br />
-		<a load="formules" style="color: inherit; text-decoration: inherit;">
-			Formules
-		</a>
-		<br />
-		<a load="maps" style="color: inherit; text-decoration: inherit;">
-			Maps
-		</a>
+		<a load="maps" style="color: inherit; text-decoration: inherit;" t="sidebar.information.maps"></a>
 	</div>
 	<div>
-		<strong>Communauté pvp</strong>
+		<strong t="sidebar.pvp.pvp"></strong>
 		<br />
-		<a load="tournaments" style="color: inherit; text-decoration: inherit;">
-			Tournois
-		</a>
+		<a load="tournaments" style="color: inherit; text-decoration: inherit;" t="sidebar.pvp.tournaments"></a>
 		<br />
-		<a load="resources" style="color: inherit; text-decoration: inherit;">
-			Ressources
-		</a>
+		<a load="resources" style="color: inherit; text-decoration: inherit;" t="sidebar.pvp.resources"></a>
 	</div>
 
 	<div>

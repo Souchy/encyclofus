@@ -30,5 +30,28 @@
 	"minCastInterval": "Cooldown",
 	"maxCastPerTarget": "Max. uses per turn per player",
 	"maxCastPerTurn": "Max. uses per turn",
-	"criticalHitProbability": "Critical chance"
+	"criticalHitProbability": "Critical chance",
+
+	"sidebar" : {
+		"information": {
+			"information": "Information",
+			"general": "General",
+			"formulas": "Formulas",
+			"maps": "Maps"
+		},
+		"pvp": {
+			"pvp": "Pvp Community",
+			"tournaments": "Tournaments",
+			"resources": "Resources"
+		},
+		"classes": {
+			"mecanics": "Mechanics",
+			"situations": "Situations"
+		}
+	},
+	"maps": {
+		"goultar": "Goultarminator",
+		"tournament": "Tournament",
+		"duel": "Duel"
+	}
 }

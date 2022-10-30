@@ -30,5 +30,29 @@
 	"minCastInterval": "Intervalle de relance",
 	"maxCastPerTarget": "Nb. de lancers par tour par joueur",
 	"maxCastPerTurn": "Utilisations par tour",
-	"criticalHitProbability": "Probabilité de coup critique"
+	"criticalHitProbability": "Probabilité de coup critique",
+
+
+	"sidebar" : {
+		"information": {
+			"information": "Information",
+			"general": "Général",
+			"formulas": "Formules",
+			"maps": "Maps"
+		},
+		"pvp": {
+			"pvp": "Communauté pvp",
+			"tournaments": "Tournois",
+			"resources": "Ressources"
+		},
+		"classes": {
+			"mecanics": "Mécaniques",
+			"situations": "Situations"
+		}
+	},
+	"maps": {
+		"goultar": "Goultarminator",
+		"tournament": "Tournoi",
+		"duel": "Duel"
+	}
 }

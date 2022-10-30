@@ -1,9 +1,33 @@
 <import from="./map"></import>
 
 <div if.bind="db.isLoaded">
-    <button repeat.for="i of mapIds" click.trigger="select(i)">${getMapName(i)}</button>
+    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+        <input type="radio" class="btn-check" name="btnradioa" id="btnGoultar" autocomplete="off" checked click.delegate="clickGoultar()">
+        <label class="btn btn-outline-dark radioDark" for="btnGoultar" t="maps.goultar"></label>
+
+        <input type="radio" class="btn-check" name="btnradioa" id="btnTournoi" autocomplete="off" click.delegate="clickTournoi()">
+        <label class="btn btn-outline-dark radioDark" for="btnTournoi" t="maps.tournament"></label>
+
+        <input type="radio" class="btn-check" name="btnradioa" id="btnDuel" autocomplete="off" click.delegate="clickDuel()">
+        <label class="btn btn-outline-dark radioDark" for="btnDuel" t="maps.duel"></label>
+    </div>
+
+    <hr>
+    <div show.bind="showGoultar">
+        <!-- <input repeat.for="id of goultars" type="radio" class="btn-check" name="btnradio${id}" id="btn${id}" autocomplete="off" click.delegate="select(id)">
+        <label repeat.for="id of goultars" class="btn btn-outline-dark radioDark" for="btn${id}">${getMapName(id)}</label> -->
+        <button class="btn btn-outline-dark" repeat.for="id of goultars" click.trigger="select(id)">${getMapName(id)}</button>
+    </div>
+
+    <div show.bind="showTournoi">
+        <button class="btn btn-outline-dark" repeat.for="id of tournois" click.trigger="select(id)">${getMapName(id)}</button>
+    </div>
+
+    <div show.bind="showDuel">
+        <button class="btn btn-outline-dark" repeat.for="id of mapIds.duel" click.trigger="select(id)">${getMapName(id)}</button>
+    </div>
+
+    <hr>
+
+    <map></map>
 </div>
-
-<hr>
-
-<map mapId.bind="77336069"></map>

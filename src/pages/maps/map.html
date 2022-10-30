@@ -1,17 +1,20 @@
+<!-- name + reset -->
+<div class="d-flex">
+    <b style="vertical-align: middle;">${mapName}</b>
+    <button class="btn btn-outline-dark ms-auto" click.trigger="resetObjects()">Reset</button>
+</div>
 
+<!-- spinner -->
+<div show.bind="!mapLoaded" class="loaderContainer">
+    <div class="loader"></div>
+</div>
 
-<button click.trigger="resetObjects()">Reset</button>
-
-<!-- ${mapId} -->
-
-<div class="mapcontainer">
+<!-- map -->
+<div show.bind="mapLoaded" class="mapcontainer">
     <svg ref="svg">
         <g ref="groupFloor" class=""></g>
-        <!-- <g ref="groupHoles" class="hole"></g>
-        <g ref="groupBlocks" class="block"></g>
-        <g ref="groupObjects" class="object"></g> -->
     </svg>
 </div>
 
-<!-- ${init()}
-${load()} -->
+<!-- init -->
+${init()}
