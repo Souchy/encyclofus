@@ -46,13 +46,14 @@
 									</tr>
 								</tbody>
 							</table>
-							<table if.bind="hasTrapGlyph(e)" class="table table-striped table-sm table-borderless" style="--bs-table-striped-bg: none; margin-bottom: 0px;">
+							<div if.bind="hasTrapGlyph(e)" innerHtml.bind="renderTrapGlyph(e)"></div>
+							<!-- <table if.bind="hasTrapGlyph(e)" class="table table-striped table-sm table-borderless" style="--bs-table-striped-bg: none; margin-bottom: 0px;">
 								<tbody>
 									<tr>
 										<td style="vertical-align: middle; padding: 0px;" innerHtml.bind="renderTrapGlyph(e)" colspan="4"></td>
 									</tr>
 								</tbody>
-							</table>
+							</table> -->
 						</td>
 					</tr>
 
@@ -79,13 +80,14 @@
 									</tr>
 								</tbody>
 							</table>
-							<table if.bind="hasTrapGlyph(e)" class="table table-striped table-sm table-borderless" style="--bs-table-striped-bg: none; margin-bottom: 0px;">
+							<div if.bind="hasTrapGlyph(e)" innerHtml.bind="renderTrapGlyph(e)"></div>
+							<!-- <table if.bind="hasTrapGlyph(e)" class="table table-striped table-sm table-borderless" style="--bs-table-striped-bg: none; margin-bottom: 0px;">
 								<tbody>
 									<tr>
 										<td style="vertical-align: middle; padding: 0px;" innerHtml.bind="renderTrapGlyph(e)" colspan="4"></td>
 									</tr>
 								</tbody>
-							</table>
+							</table> -->
 						</td>
 					</tr>
 				</tbody>

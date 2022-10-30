@@ -57,35 +57,44 @@ export class Spell {
 			`<tbody>`
 		];
 		let effs = tg.effects.map(e1 => {
-				let tex = "";
-				let icon = this.getIcon(e1);
-				if (e1.visibleInTooltip) { // || e1.effect.showInTooltip){
-					let arr = [
-						`<tr>`,
-						(
-							icon? 
-							`<td style="width: 20px; padding: 0px; padding-left: `+paddingLeft+`px;">
-								<div style="${icon}"></div>
-							</td>` 
-							: `<td style="padding: 0px; padding-left: `+paddingLeft+`px;"></td>`
-						),
-						`<td style="vertical-align: middle;">` + this.renderEffectI18n(e1) + `</td>`,
-						`<td style.bind="${this.getDispellIcon(e1)}" if.bind="${this.isDuration(e1)}"></td>`,
-						this.getTargets(e1).map(t => {
-							if(this.getTargetIcon(t)) return `<td style="${this.getTargetIcon(t)}"></td>`
-						}).join(""),
-						(this.db.getAoeIconStyle(e1) ? `<td style="${this.db.getAoeIconStyle(e1)}"></td>` : ""),
-						`</tr>`
-					];
-					tex = arr.join("");
+			let tex = "";
+			let icon = this.getIcon(e1);
+			if (e1.visibleInTooltip) { // || e1.effect.showInTooltip){
+				let arr = [
+					`<tr>`,
+						`<td style="padding: 0px;">`,
+							`<table class="table table-striped table-sm table-borderless" style="--bs-table-striped-bg: none; width: 100%; margin-bottom: 0px;">`,
+								`<tbody>`,
+									`<tr>`,
+										(
+											icon ?
+												`<td style="width: 20px; padding: 0px; padding-left: ` + paddingLeft + `px;">
+													<div style="${icon}"></div>
+												</td>`
+												: `<td style="padding: 0px; padding-left: ` + paddingLeft + `px;"></td>`
+										),
+										`<td style="vertical-align: middle;">` + this.renderEffectI18n(e1) + `</td>`,
+										(this.isDuration(e1) ? `<td style.bind="${this.getDispellIcon(e1)}"></td>` : ""),
+										this.getTargets(e1).map(t => {
+											if (this.getTargetIcon(t)) return `<td style="${this.getTargetIcon(t)}"></td>`
+										}).join(""),
+										(this.db.getAoeIconStyle(e1) ? `<td style="${this.db.getAoeIconStyle(e1)}"></td>` : ""),
+									`</tr>`,
+								`</tbody>`,
+							`</table>`,
+						`</td>`,
+					`</tr>`
+				];
+				tex = arr.join("");
+			}
+			if (e1.visibleInTooltip || e1.visibleOnTerrain) {
+				if (this.hasTrapGlyph(e1) && e1.diceNum != e.spellId && e1.diceNum != e1.spellId) {
+					// tex += this.renderTrapGlyph(e1);
+					tex += this.renderSubSpell(e1, depth + 1);
 				}
-				if (e1.visibleInTooltip || e1.visibleOnTerrain)
-					if (this.hasTrapGlyph(e1) && e1.diceNum != e.spellId && e1.diceNum != e1.spellId) {
-						// tex += this.renderTrapGlyph(e1);
-						tex += this.renderSubSpell(e1, depth + 1);
-					}
-				return tex;
-			})
+			}
+			return tex;
+		})
 		stuff.push(...effs);
 		stuff.push(`</tbody>`);
 		stuff.push(`</table>`);
@@ -105,52 +114,60 @@ export class Spell {
 		for (let i = 0; i <= depth; i++) {
 			tab += "&nbsp;&nbsp;&nbsp;";
 		}
-		let paddingLeft = depth * 15 + 4;
-		
 		let text = "";
+		let paddingLeft = depth * 15 + 4;
 		let stuff = [
 			`<table class="table table-striped table-sm table-borderless" style="width: 100%; margin-bottom: 0px;">`,
 			`<tbody>`
 		];
 
 		let effs = subspell.effects.map(e1 => {
-				// if (e1.diceNum == 13044) {
-				// 	console.log("13044 reference: " + JSON.stringify(e1))
-				// }
-				let tex = "";
-				let icon = this.getIcon(e1);
-				if (e1.visibleInTooltip) { //  || e1.effect.showInTooltip
-					let arr = [
-						`<tr>`,
-						(
-							icon? 
-							`<td style="width: 20px; padding: 0px; padding-left: `+paddingLeft+`px;">
-								<div style="${icon}"></div>
-							</td>` 
-							: `<td style="padding: 0px; padding-left: `+paddingLeft+`px;"></td>`
-						),
-						`<td style="vertical-align: middle;">` + this.renderEffectI18n(e1) + `</td>`,
-						`<td style.bind="${this.getDispellIcon(e1)}" if.bind="${this.isDuration(e1)}"></td>`,
-						this.getTargets(e1).map(t => {
-							if(this.getTargetIcon(t)) return `<td style="${this.getTargetIcon(t)}"></td>`
-						}).join(""),
-						(this.db.getAoeIconStyle(e1) ? `<td style="${this.db.getAoeIconStyle(e1)}"></td>` : ""),
-						`</tr>`
-					];
-					tex = arr.join("");
-				}
-				if (e1.visibleInTooltip || e1.visibleOnTerrain)
-					// 1160 pour barrière je pense
-					if (e1.diceNum != e.spellId && e1.diceNum != e1.spellId && (this.hasTrapGlyph(e1))) { //  || e1.effectId == 1160
-						if (this.hasTrapGlyph(e1)) {
-							tex += "<tr><td colspan=3>" + this.renderTrapGlyph(e1, depth + 1) + "</td></tr>";
-						}
-						if (e1.effectId == 1160) {
-							tex += "<tr><td colspan=3>" + this.renderSubSpell(e1, depth + 1) + "</td></tr>";
-						}
+			let tex = "";
+			// if (e1.diceNum == 13044) {
+			// 	console.log("13044 reference: " + JSON.stringify(e1))
+			// }
+			let icon = this.getIcon(e1);
+			if (e1.visibleInTooltip) { //  || e1.effect.showInTooltip
+				let arr = [
+					`<tr>`,
+						`<td style="padding: 0px;">`,
+							`<table class="table table-striped table-sm table-borderless" style="--bs-table-striped-bg: none; width: 100%; margin-bottom: 0px;">`,
+								`<tbody>`,
+									`<tr>`,
+										(
+											icon ?
+												`<td style="width: 20px; padding: 0px; padding-left: ` + paddingLeft + `px;">
+													<div style="${icon}"></div>
+												</td>`
+												: `<td style="padding: 0px; padding-left: ` + paddingLeft + `px;"></td>`
+										),
+										`<td style="vertical-align: middle;">` + this.renderEffectI18n(e1) + `</td>`,
+										(this.isDuration(e1) ? `<td style.bind="${this.getDispellIcon(e1)}"></td>` : ""),
+										this.getTargets(e1).map(t => {
+											if (this.getTargetIcon(t)) return `<td style="${this.getTargetIcon(t)}"></td>`
+										}).join(""),
+										(this.db.getAoeIconStyle(e1) ? `<td style="${this.db.getAoeIconStyle(e1)}"></td>` : ""),
+									`</tr>`,
+								`</tbody>`,
+							`</table>`,
+						`</td>`,
+					`</tr>`
+				];
+				tex = arr.join("");
+			}
+			if (e1.visibleInTooltip || e1.visibleOnTerrain) {
+				// 1160 pour barrière je pense
+				if (e1.diceNum != e.spellId && e1.diceNum != e1.spellId && (this.hasTrapGlyph(e1))) { //  || e1.effectId == 1160
+					if (this.hasTrapGlyph(e1)) {
+						tex += "<tr><td colspan=3>" + this.renderTrapGlyph(e1, depth + 1) + "</td></tr>"
 					}
-				return tex;
-			}).join("");
+					if (e1.effectId == 1160) {
+						tex += "<tr><td colspan=3>" + this.renderSubSpell(e1, depth + 1) + "</td></tr>"
+					}
+				}
+			}
+			return tex;
+		});
 		stuff.push(...effs);
 		stuff.push(`</tbody>`);
 		stuff.push(`</table>`);
@@ -158,7 +175,7 @@ export class Spell {
 	}
 
 	public isDuration(e) {
-		return e.duration != 0;
+		return this.db.hasDispellIcon(e);
 	}
 	// public isDispellable(e) {
 	// 	return e.dispellable == 1;
@@ -180,7 +197,7 @@ export class Spell {
 			text = text.replace("#1", name);
 		}
 		// state condition, fouet osa dragocharge, +1 combo,
-		if (e.effectId == 1160 || e.effectId == 2160 || e.effectId == 2794 || e.effectId == 792) {
+		if (this.db.isEffectThing(e)) {
 			let subspellid = e.diceNum;
 			let subspell = this.db.jsonSpells[subspellid];
 			if (!subspell) {
@@ -201,19 +218,19 @@ export class Spell {
 			text = text.replace("#1", name);
 		}
 		// augmente ou réduit le cooldown du sort 
-		if (e.effectId == 1035 || e.effectId == 1036) {
+		if (this.db.isEffectChargeCooldown(e)) {
 			text = text.replace("#1", this.db.getI18n(this.spell.nameId)); // this.name
 			text = text.replace("#3", e.value);
 		}
 		// effet de charge
-		if (e.effectId == 293 || e.effectId == 281 || e.effectId == 290 || e.effectId == 291 || e.effectId == 280) { // if (has1 && has3 && !has2) { //
+		if (this.db.isEffectCharge(e)) { // if (has1 && has3 && !has2) { //
 			let subspellid = e.diceNum;
 			let subspell = this.db.jsonSpells[subspellid];
 			text = text.replace("#1", this.db.getI18n(subspell.nameId));
 			text = text.replace("#3", e.value);
 		}
 		// état
-		if (e.effectId == 950 || e.effectId == 951) {
+		if (this.db.isEffectState(e)) {
 			// if (e.value) {
 			let state = this.db.jsonStates[e.value]
 			if (!state) { }
