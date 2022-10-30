@@ -70,10 +70,11 @@ export class Spell {
 							: `<td style="padding: 0px; padding-left: `+paddingLeft+`px;"></td>`
 						),
 						`<td style="vertical-align: middle;">` + this.renderEffectI18n(e1) + `</td>`,
+						`<td style.bind="${this.getDispellIcon(e1)}" if.bind="${this.isDuration(e1)}"></td>`,
 						this.getTargets(e1).map(t => {
-							return `<td style="${this.getTargetIcon(t)}"></td>`
+							if(this.getTargetIcon(t)) return `<td style="${this.getTargetIcon(t)}"></td>`
 						}).join(""),
-						`<td style="${this.db.getAoeIconStyle(e1)}"></td>`,
+						(this.db.getAoeIconStyle(e1) ? `<td style="${this.db.getAoeIconStyle(e1)}"></td>` : ""),
 						`</tr>`
 					];
 					tex = arr.join("");
@@ -120,7 +121,7 @@ export class Spell {
 				let icon = this.getIcon(e1);
 				if (e1.visibleInTooltip) { //  || e1.effect.showInTooltip
 					let arr = [
-					   `<tr>`,
+						`<tr>`,
 						(
 							icon? 
 							`<td style="width: 20px; padding: 0px; padding-left: `+paddingLeft+`px;">
@@ -128,13 +129,14 @@ export class Spell {
 							</td>` 
 							: `<td style="padding: 0px; padding-left: `+paddingLeft+`px;"></td>`
 						),
-						`<td style="vertical-align: middle;" >` + tab + this.renderEffectI18n(e1) + `</td>`,
+						`<td style="vertical-align: middle;">` + this.renderEffectI18n(e1) + `</td>`,
+						`<td style.bind="${this.getDispellIcon(e1)}" if.bind="${this.isDuration(e1)}"></td>`,
 						this.getTargets(e1).map(t => {
-							return `<td style="${this.getTargetIcon(t)}"></td>`
+							if(this.getTargetIcon(t)) return `<td style="${this.getTargetIcon(t)}"></td>`
 						}).join(""),
-						`<td style="${this.db.getAoeIconStyle(e1)}"></td>`,
+						(this.db.getAoeIconStyle(e1) ? `<td style="${this.db.getAoeIconStyle(e1)}"></td>` : ""),
 						`</tr>`
-					]
+					];
 					tex = arr.join("");
 				}
 				if (e1.visibleInTooltip || e1.visibleOnTerrain)
@@ -155,8 +157,14 @@ export class Spell {
 		return text;
 	}
 
-	public isDispellable(e) {
-		return e.dispellable;
+	public isDuration(e) {
+		return e.duration != 0;
+	}
+	// public isDispellable(e) {
+	// 	return e.dispellable == 1;
+	// }
+	public getDispellIcon(e) {
+		return this.db.getDispellIcon(e);
 	}
 
 	public renderEffectI18n(e) {

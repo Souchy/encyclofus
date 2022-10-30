@@ -40,10 +40,8 @@
 											<div style.bind="getIcon(e)"></div>
 										</td>
 										<td style="vertical-align: middle;" innerHtml.bind="renderEffectI18n(e)"></td>
-										<!-- <td style="width: 22px;">
-											${isDispellable(e)}
-										</td> -->
-										<td style.bind="getTargetIcon(t)" repeat.for="t of getTargets(e)"></td>
+										<td if.bind="isDuration(e)" style.bind="getDispellIcon(e)" ></td>
+										<td if.bind="getTargetIcon(t)" repeat.for="t of getTargets(e)" style.bind="getTargetIcon(t)"></td>
 										<td if.bind="db.getAoeIconStyle(e)" style.bind="db.getAoeIconStyle(e)"></td>
 									</tr>
 								</tbody>
@@ -75,7 +73,8 @@
 											<div style.bind="getIcon(e)"></div>
 										</td>
 										<td style="vertical-align: middle;" innerHtml.bind="renderEffectI18n(e)"></td>
-										<td style.bind="getTargetIcon(t)" repeat.for="t of getTargets(e)"></td>
+										<td if.bind="isDuration(e)" style.bind="getDispellIcon(e)"></td>
+										<td if.bind="getTargetIcon(t)" repeat.for="t of getTargets(e)" style.bind="getTargetIcon(t)"></td>
 										<td if.bind="db.getAoeIconStyle(e)" style.bind="db.getAoeIconStyle(e)"></td>
 									</tr>
 								</tbody>
