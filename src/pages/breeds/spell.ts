@@ -71,7 +71,7 @@ export class Spell {
 												`<td style="width: 20px; padding: 0px; padding-left: ` + paddingLeft + `px;">
 													<div style="${icon}"></div>
 												</td>`
-												: `<td style="padding: 0px; padding-left: ` + paddingLeft + `px;"></td>`
+												: `<td style="width: 20px; padding: 0px; padding-left: ` + paddingLeft + `px;"></td>`
 										),
 										`<td style="vertical-align: middle;">` + this.renderEffectI18n(e1) + `</td>`,
 										(this.isDuration(e1) ? `<td style.bind="${this.getDispellIcon(e1)}"></td>` : ""),
@@ -139,7 +139,7 @@ export class Spell {
 												`<td style="width: 20px; padding: 0px; padding-left: ` + paddingLeft + `px;">
 													<div style="${icon}"></div>
 												</td>`
-												: `<td style="padding: 0px; padding-left: ` + paddingLeft + `px;"></td>`
+												: `<td style="width: 20px; padding: 0px; padding-left: ` + paddingLeft + `px;"></td>`
 										),
 										`<td style="vertical-align: middle;">` + this.renderEffectI18n(e1) + `</td>`,
 										(this.isDuration(e1) ? `<td style.bind="${this.getDispellIcon(e1)}"></td>` : ""),
