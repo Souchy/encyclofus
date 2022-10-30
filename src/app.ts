@@ -105,7 +105,7 @@ export class App {
 		
         this.ea.subscribe('au:router:navigation-end', (asdf: any) => {
 			let basicName = asdf.navigation.instruction;
-			if(!basicName) {
+			if(!basicName || basicName == "/") {
 				basicName = "feca";
 			}
 			// console.log("nav end: " + this.db.jsonBreeds + ", " + Object.keys(jsonBreeds.ids).includes(basicName) + ", " + asdf.navigation.instruction + " in? " + Object.keys(jsonBreeds.ids) + "")
