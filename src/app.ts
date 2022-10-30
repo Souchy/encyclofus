@@ -98,7 +98,7 @@ export class App {
         this.ea.subscribe('au:router:navigation-start', (asdf: any) => {
             // Do stuff inside of this callback
 			this.collapseSidebar.classList.remove("show")
-			// console.log("app start: " + JSON.stringify(asdf.navigation.instruction))
+			// console.log("nav start: " + JSON.stringify(asdf.navigation.instruction))
 			// let ele = document.getElementsByTagName("title").item(0);
 			// ele.innerHTML = "Encyclofus"
         });
@@ -108,7 +108,7 @@ export class App {
 			if(!basicName) {
 				basicName = "feca";
 			}
-			// console.log("event: " + this.db.jsonBreeds + ", " + Object.keys(jsonBreeds.ids).includes(basicName) + ", " + asdf.navigation.instruction + " in? " + Object.keys(jsonBreeds.ids) + "")
+			// console.log("nav end: " + this.db.jsonBreeds + ", " + Object.keys(jsonBreeds.ids).includes(basicName) + ", " + asdf.navigation.instruction + " in? " + Object.keys(jsonBreeds.ids) + "")
 			if(Object.keys(jsonBreeds.ids).includes(basicName)) {
 				this.db.breedId = jsonBreeds.ids[basicName];
 				if(this.db.jsonBreeds) {

@@ -17,7 +17,6 @@ export class SpellList {
         this.db = db;
     }
 
-
 	public get isDbLoaded() {
 		return this.db.isLoaded;
 	}
@@ -25,11 +24,13 @@ export class SpellList {
 		return this.db.breedId;
 	}
 	public get breed(): any {
+		// console.log("spelllist.breed: " + (this.breedId)); // + this.db?.jsonBreeds + ", " + this.breedId)
 		if (!this.db.jsonBreeds) return null;
 		if (!this.breedId) return null;
 		return this.db.jsonBreeds[this.breedId + ""];
 	}
 	public get spells(): any[] {
+		// console.log("spelllist.spells: " + this.breed)
 		if (!this.breed) return null;
 		// console.log("spell list breed[" + this.breedId + "]: " + JSON.stringify(this.breed.spells));
 		return this.breed.spells;
