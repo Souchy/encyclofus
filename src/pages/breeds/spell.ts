@@ -251,6 +251,7 @@ export class Spell {
 				console.log("null state: " + JSON.stringify(state))
 			}
 		}
+		// pose un portail avec value = % do
 		if (e.effectId == 1181) {
 			text = text.replace("#3", e.value);
 		}
