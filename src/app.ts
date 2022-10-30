@@ -104,7 +104,8 @@ export class App {
         });
 		
         this.ea.subscribe('au:router:navigation-end', (asdf: any) => {
-			let basicName = asdf.navigation.instruction;
+			let basicName = asdf.navigation.instruction as string;
+			basicName = basicName.replace("/", "")
 			if(!basicName || basicName == "/") {
 				basicName = "feca";
 			}
