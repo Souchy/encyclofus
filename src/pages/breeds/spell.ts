@@ -197,7 +197,7 @@ export class Spell {
 			text = text.replace("#1", name);
 		}
 		// state condition, fouet osa dragocharge, +1 combo,
-		if (this.db.isEffectThing(e)) {
+		if (this.db.isSubSpell(e)) {
 			let subspellid = e.diceNum;
 			let subspell = this.db.jsonSpells[subspellid];
 			if (!subspell) {
