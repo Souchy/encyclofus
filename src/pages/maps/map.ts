@@ -44,7 +44,13 @@ export class Map {
         this.db = db;
         ea.subscribe("db:loadmap", e => {
             // console.log("map db:loadmap")
-            this.init();
+            if (!this.initDone) {
+                this.init();
+            } else {
+                let map = this.db.jsonMaps[this.mapId]
+                this.board.cells = map.cells;
+                this.generateMap();
+            }
         });
         ea.subscribe("db:loaded", e => {
             // console.log("map db:loaded")
@@ -53,11 +59,16 @@ export class Map {
         ea.subscribe("map:setid", e => {
             // console.log("map setid " + e);
             this.mapId = e as string;
-            // this.init();
-            let map = this.db.jsonMaps[this.mapId]
-            this.board.cells = map.cells;
-            this.generateMap();
+            if (!this.db.jsonMaps[this.mapId]) {
+                this.db.loadMap(this.mapId);
+            } else {
+                // this.init();
+                let map = this.db.jsonMaps[this.mapId]
+                this.board.cells = map.cells;
+                this.generateMap();
+            }
         })
+        // console.log("map ctor")
     }
 
     public get mapName() {
@@ -66,21 +77,21 @@ export class Map {
 
     public initDone: boolean;
     public init() {
-        if(this.initDone) return "";
-        if(!this.groupFloor) return "";
+        if (this.initDone) return "";
+        if (!this.groupFloor) return "";
         // console.log("maps: " + JSON.stringify(this.db.jsonMaps))
-        if(!this.db.jsonMaps || !this.db.jsonMaps[this.mapId]) {
+        if (!this.db.jsonMaps || !this.db.jsonMaps[this.mapId]) {
             this.db.loadMap(this.mapId);
             return "";
         }
         // console.log("map init " + this.mapId)
         // this.initDone = false;
-        if(this.groupFloor) this.groupFloor.innerHTML = "";
+        if (this.groupFloor) this.groupFloor.innerHTML = "";
+        this.board = new Board();
         // this.generateFloor()
         // this.generateHoles()
         // this.generateObjects()
         // this.generateBlocks()
-        this.board = new Board();
 
         let map = this.db.jsonMaps[this.mapId]
         this.board.cells = map.cells;
@@ -102,13 +113,13 @@ export class Map {
 
     public placeObject(id) {
         this.board.objects[id] = !this.board.objects[id];
-        let coord = JSON.stringify(this.board.getCellCoordById(id)) 
+        let coord = JSON.stringify(this.board.getCellCoordById(id))
         let pos = JSON.stringify(this.board.getPos(id))
         // console.log("object at id " + id + ": " + this.board.objects[id] + ", pos: " + pos + ", coord: " + coord)
 
         this.generateMap();
     }
-    
+
     public placeTarget(id0) {
         console.log("placeTarget " + id0)
         // let id1 = posVIP3;
@@ -119,7 +130,7 @@ export class Map {
         // console.log("pos vec: p0: " + JSON.stringify(this.board.getPos(id0)) + ", p1:" + JSON.stringify(this.board.getPos(id1)) + ", " + id0 + ", " + id1)
         // console.log("pos coord: p0: " + JSON.stringify(coord0) + ", p1: " + JSON.stringify(coord1) + ", " + id0a + ", " + id1a)
 
-        if(this.board.target == id0) {
+        if (this.board.target == id0) {
             this.board.target = -1;
         } else {
             this.board.target = id0;
@@ -142,53 +153,53 @@ export class Map {
             let y = this.board.getY(id);
             let j = Math.floor(y / 2)
             let k = y % 2;
-            let o1 = { 
-                i: x, 
-                j: j, 
-                k: k 
+            let o1 = {
+                i: x,
+                j: j,
+                k: k
             };
 
             let classes = "k" + k + " "
 
             // placed object blocks
-            if(this.board.objects[id]) {
+            if (this.board.objects[id]) {
                 classes += "object "
                 this.getPolygonBlock(id, o1, classes);
             } else
-            // natural blocks
-            if(!cell.los) {
-                classes += "block "
-                this.getPolygonBlock(id, o1, classes);
-            } 
-            // floor
-            else {
-                let inlos = false;
-                // highlight los from target
-                if(this.board.target != -1) {
-                    inlos = this.board.checkView(this.board.target, id);
-                } 
-                // hole
-                if(!cell.mov && cell.los) 
-                    classes += "hole "
-                else
-                // target
-                if(this.board.target == id) {
-                    // console.log("set class target " + id)
-                    classes += "target "
-                } else
-                if(inlos) classes += "highlight "
-                else
-                // blue start
-                if (cell.blue) classes += "blue "
-                else
-                // red start
-                if (cell.red) classes += "red "
-                // normal cell
-                else classes += "floor "
+                // natural blocks
+                if (!cell.los) {
+                    classes += "block "
+                    this.getPolygonBlock(id, o1, classes);
+                }
+                // floor
+                else {
+                    let inlos = false;
+                    // highlight los from target
+                    if (this.board.target != -1) {
+                        inlos = this.board.checkView(this.board.target, id);
+                    }
+                    // hole
+                    if (!cell.mov && cell.los)
+                        classes += "hole "
+                    else
+                        // target
+                        if (this.board.target == id) {
+                            // console.log("set class target " + id)
+                            classes += "target "
+                        } else
+                            if (inlos) classes += "highlight "
+                            else
+                                // blue start
+                                if (cell.blue) classes += "blue "
+                                else
+                                    // red start
+                                    if (cell.red) classes += "red "
+                                    // normal cell
+                                    else classes += "floor "
 
-                // make polygon
-                this.getPolygon(id, o1, classes)
-            }
+                    // make polygon
+                    this.getPolygon(id, o1, classes)
+                }
         }
         this.mapLoaded = true;
         // console.log("children 1: " + this.groupFloor.children.length)
@@ -202,17 +213,17 @@ export class Map {
         let p3 = { x: x0 + u + o.k * u / 2, y: y0 + v / 2 + o.k * v / 2 }
         let p4 = { x: x0 + u / 2 + o.k * u / 2, y: y0 + v + o.k * v / 2 }
         let p: SVGPolygonElement = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
-        
+
         for (let c of classes.split(" ")) {
             if (c) p.classList.add(c)
         }
         p.onclick = (e) => {
-            if(!classes.includes("hole"))
+            if (!classes.includes("hole"))
                 this.placeTarget(id);
         };
         p.oncontextmenu = (e) => {
             e.preventDefault();
-            if(!classes.includes("hole"))
+            if (!classes.includes("hole"))
                 this.placeObject(id);
         };
         let points = "";
@@ -221,10 +232,10 @@ export class Map {
         points += p3.x + "," + p3.y + " "
         points += p4.x + "," + p4.y
         p.setAttribute("points", points)
-        
+
         // this.groupFloor.appendChild(p)
-        if(this.initDone) { 
-            let old =  this.groupFloor.children.item(id)
+        if (this.initDone) {
+            let old = this.groupFloor.children.item(id)
             // console.log("replace " + id + ", " + old)
             // this.groupFloor.replaceChild(p, old);
             old.replaceWith(p);
@@ -247,7 +258,7 @@ export class Map {
         let top: SVGPolygonElement = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
         let left: SVGPolygonElement = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
         let right: SVGPolygonElement = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
-        
+
         for (let c of classes.split(" ")) {
             if (c) top.classList.add(c)
             if (c) left.classList.add(c)
@@ -256,7 +267,7 @@ export class Map {
 
         let func = (e) => {
             e.preventDefault();
-            if(classes.includes("object"))
+            if (classes.includes("object"))
                 this.placeObject(id);
         };
 
@@ -292,8 +303,8 @@ export class Map {
         g.appendChild(left)
         g.appendChild(right)
 
-        if(this.initDone) { 
-            let old =  this.groupFloor.childNodes.item(id)
+        if (this.initDone) {
+            let old = this.groupFloor.childNodes.item(id)
             // this.groupFloor.replaceChild(g, old);
             old.replaceWith(g);
         } else {
