@@ -41,7 +41,7 @@
 										</td>
 										<td style="vertical-align: middle;" innerHtml.bind="renderEffectI18n(e)"></td>
 										<td if.bind="isDuration(e)" style.bind="getDispellIcon(e)" ></td>
-										<td if.bind="getTargetIcon(t)" repeat.for="t of getTargets(e)" style.bind="getTargetIcon(t)"></td>
+										<td repeat.for="t of getTargets(e)" if.bind="getTargetIcon(t)" style.bind="getTargetIcon(t)"></td>
 										<td if.bind="db.getAoeIconStyle(e)" style.bind="db.getAoeIconStyle(e)"></td>
 									</tr>
 								</tbody>
@@ -74,7 +74,7 @@
 										</td>
 										<td style="vertical-align: middle;" innerHtml.bind="renderEffectI18n(e)"></td>
 										<td if.bind="isDuration(e)" style.bind="getDispellIcon(e)"></td>
-										<td if.bind="getTargetIcon(t)" repeat.for="t of getTargets(e)" style.bind="getTargetIcon(t)"></td>
+										<td repeat.for="t of getTargets(e)" if.bind="getTargetIcon(t)" style.bind="getTargetIcon(t)"></td>
 										<td if.bind="db.getAoeIconStyle(e)" style.bind="db.getAoeIconStyle(e)"></td>
 									</tr>
 								</tbody>
