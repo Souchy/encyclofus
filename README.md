@@ -2,9 +2,14 @@
 Encyclopédie des sorts Dofus à penchant pvp
 
 ## TODO:  
-Aoes  
-Pop-up d'états (saoul, sobre, combinaison élémentaire)  
-filtres de cible (allié, ennemi, invoc)  
+- Icônes aoes + tooltip grandeur  
+- Icônes cibles (allié, ennemi, invoc)  
+- Pop-up d'états (saoul, sobre, combinaison élémentaire)  
+- Combos
+- Équipements, Armes, Dofus/Prysma, items légendaires
+- Formules
+- Ordre d'effets début/fin de tour
+- Autres infos générales + infos de classes/sort
 
 sorts :
 - osa
