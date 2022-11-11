@@ -42,7 +42,7 @@
 
 - Indéplaçable (portail, porter, déplacer, téléporter, échanger)
     - Pilori, Détermination, Ginga
-- Inébranlable (déplacer, téléporter, échanger)
+- Inébranlable (déplacer, ~~téléporter, échanger~~) // on peut transpo sacri sur un ougi aboiement
     -  Glyphe Gravitationnel, Aboiement
 - Enraciné (portail, déplacer)
     - Stabilisation, Harmonie, Cawotte...

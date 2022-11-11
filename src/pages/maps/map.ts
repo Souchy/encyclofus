@@ -233,14 +233,30 @@ export class Map {
         points += p4.x + "," + p4.y
         p.setAttribute("points", points)
 
+        var g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        g.appendChild(p);
+        
+        if(this.board.target != -1 && classes.includes("highlight")) {
+            let pos0 = this.board.getCellCoordById(id) 
+            let pos1 = this.board.getCellCoordById(this.board.target)
+            let dist = Math.abs(pos0.x - pos1.x) + Math.abs(pos0.y - pos1.y);
+            let text: SVGTextElement = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            text.textContent = dist + "";
+            let dx = dist >= 10 ? 7 : 3;
+            text.setAttribute("x", (p2.x - dx) + "");
+            text.setAttribute("y", (p2.y + segmentLength / 2 + 3) + "");
+            // p.appendChild(text);
+            g.appendChild(text);
+        }
+
         // this.groupFloor.appendChild(p)
         if (this.initDone) {
             let old = this.groupFloor.children.item(id)
-            // console.log("replace " + id + ", " + old)
-            // this.groupFloor.replaceChild(p, old);
-            old.replaceWith(p);
+            // old.replaceWith(p);
+            old.replaceWith(g)
         } else {
-            this.groupFloor.appendChild(p);
+            // this.groupFloor.appendChild(p);
+            this.groupFloor.appendChild(g);
         }
     }
 
