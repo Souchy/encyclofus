@@ -37,6 +37,9 @@
 	"maxCastPerTarget": "Nb. de lancers par tour par joueur",
 	"maxCastPerTurn": "Utilisations par tour",
 	"criticalHitProbability": "Probabilité de coup critique",
+	"dodge": "Fuite",
+	"lock": "Tacle",
+
 
 	"help": "Aide",
 	"sidebar" : {

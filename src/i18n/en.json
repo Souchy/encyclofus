@@ -37,6 +37,8 @@
 	"maxCastPerTarget": "Max. uses per turn per player",
 	"maxCastPerTurn": "Max. uses per turn",
 	"criticalHitProbability": "Critical chance",
+	"dodge": "Dodge",
+	"lock": "Lock",
 
 	"help": "Help",
 	"sidebar" : {

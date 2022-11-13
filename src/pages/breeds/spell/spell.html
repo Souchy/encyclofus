@@ -27,8 +27,9 @@
 	<!-- description -->
 	<p style="position: relative;" >
 		<p style="white-space: pre-line;" innerhtml.bind="description"></p>
-		<p style="position: absolute; margin-top: -30px; margin-left: -50px; width: 80%; height: 35px;" if.bind="hasSubspell()">
-			<spell if.bind="depth == 0" spellid.bind="subSpellId" depth.bind="depth+1"></spell>
+		<!-- hasspell : ${spell.spellId} : ${hasSubSpell} : ${subSpellId} -->
+		<p if.bind="hasSubSpell" style="position: absolute; margin-top: -30px; margin-left: -50px; width: 80%; height: 35px;">
+			<spell if.bind="depth == 0 && subSpellId != 0" spellid.bind="subSpellId" depth.bind="depth+1"></spell>
 		</p>
 	</p>
 

@@ -31,17 +31,17 @@ export class Spell {
 	public get description() {
 		let text = this.db.getI18n(this.spell.descriptionId);
 		if (text) // les invoc chafer n'ont pas de description sur leurs sorts par exemple
-		while (text.includes("{")) {
+			while (text.includes("{")) {
 				// console.log("desc: " + text);
 				let sub = text.substring(text.indexOf("{"), text.indexOf("}") + 1)
 				let data = sub.replace("}", "").split("::");
 				let spellData = data[0].split(",");
 				let html = data[1];
 				text = text.replace(sub, html);
-				let subspell = `<span style="position: relative;">`+
-					`<span>`+data[1]+`</span>`+
-					`<spell if.bind="${this.depth == 0}" spellid.bind="${+spellData[1]}" depth.bind="${this.depth+1}"></spell>`
-				+`</span>`
+				// let subspell = `<span style="position: relative;">` +
+				// 	`<span>` + data[1] + `</span>` +
+				// 	`<spell if.bind="${this.depth == 0}" spellid.bind="${+spellData[1]}" depth.bind="${this.depth + 1}"></spell>`
+				// 	+ `</span>`
 				// text += subspell;
 			}
 		return text;
@@ -84,24 +84,25 @@ export class Spell {
 		return this.db.jsonSummons[e.diceNum];
 	}
 
-	public hasSubspell() {
+	public get hasSubSpell() {
 		let text = this.db.getI18n(this.spell.descriptionId);
-		if(!text) return false;
-		if(text.includes("{")) return true;
-		return false;
+		if (!text) return false;
+		let has = text.includes("{");
+		// console.log("desc has spell: " + has)
+		return has;
 	}
 	public get subSpellId() {
 		let text = this.db.getI18n(this.spell.descriptionId);
-		if(!text) return false;
-		if(text.includes("{")) {
+		if (!text) return false;
+		if (text.includes("{")) {
 			let sub = text.substring(text.indexOf("{"), text.indexOf("}") + 1)
 			sub = sub.replace("{", "").replace("}", "")
 			let data = sub.split("::")[0].split(",");
 			let spellid = data[1]
 			let grade = data[2];
-			if(this.db.jsonSpells[spellid])
+			if (this.db.jsonSpells[spellid])
 				return spellid;
-			else 
+			else
 				return spellid + "-" + grade;
 		}
 		return 0;
@@ -159,5 +160,5 @@ export class Spell {
 		if (grade) key += "-" + grade;
 		return this.db.jsonSpells[key];
 	}
-	
+
 }
