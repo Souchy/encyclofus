@@ -10,7 +10,7 @@
 <div class="spellDescription" if.bind="spell">
 	<!-- name -->
 	<h5 if.bind="!issummon">${name}</h5>
-	<h6 if.bind="issummon">
+	<h6 if.bind="issummon" id="${spellid}">
 		<img src="${db.getSpellIconPath(spellid)}" style="width: 28px; height: 28px;" />
 		${name}
 	</h6>
