@@ -32,7 +32,7 @@ export class Spell {
 		let text = this.db.getI18n(this.spell.descriptionId);
 		if (text) // les invoc chafer n'ont pas de description sur leurs sorts par exemple
 		while (text.includes("{")) {
-				console.log("desc: " + text);
+				// console.log("desc: " + text);
 				let sub = text.substring(text.indexOf("{"), text.indexOf("}") + 1)
 				let data = sub.replace("}", "").split("::");
 				let spellData = data[0].split(",");
