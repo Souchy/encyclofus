@@ -83,7 +83,7 @@ td:hover > spell, span:hover > spell, p:hover > spell {
   opacity: 95%;
   top: -0px;
   left: 105%;
-  z-index: 1;
+  z-index: 901;
 }
 .tooltiptext::after {
   content: " ";
@@ -96,5 +96,8 @@ td:hover > spell, span:hover > spell, p:hover > spell {
   border-color: transparent black transparent transparent;
 }
 td:hover > .tooltiptext {
+  visibility: visible;
+}
+.spell:hover .tooltiptext {
   visibility: visible;
 }

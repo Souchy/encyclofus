@@ -9,8 +9,9 @@
 		<div repeat.for="j of 2">
 			<let s.bind="i+j"></let>
 			<!-- spell div -->
-			<div class="spell" spellactive.class="selectedSlot === s" click.delegate="selectSlot(s)">
+			<div class="spell tooltipx" spellactive.class="selectedSlot === s" click.delegate="selectSlot(s)">
 				<img src="${getSpellImg(spells[s])}" title="${getSpellName(spells[s])}" id="${spells[s]}" style="width: 55px; height: 55px;" />
+				<span class="tooltiptext">${getSpellName(spells[s])}</span>
 			</div>
 		</div>
 	</div>
