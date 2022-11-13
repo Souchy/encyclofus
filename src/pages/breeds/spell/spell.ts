@@ -97,7 +97,12 @@ export class Spell {
 			let sub = text.substring(text.indexOf("{"), text.indexOf("}") + 1)
 			sub = sub.replace("{", "").replace("}", "")
 			let data = sub.split("::")[0].split(",");
-			return +data[1];
+			let spellid = data[1]
+			let grade = data[2];
+			if(this.db.jsonSpells[spellid])
+				return spellid;
+			else 
+				return spellid + "-" + grade;
 		}
 		return 0;
 	}
