@@ -1,0 +1,66 @@
+<import from="../summon"></import>
+<!-- <import from="./effect"></import> -->
+<import from="../othercharac"></import>
+<import from="./effect"></import>
+<import from="./effectlist"></import>
+
+<!-- ${spellid} -->
+
+<!-- Spell Description -->
+<div class="spellDescription" if.bind="spell">
+	<!-- name -->
+	<h5 if.bind="!issummon">${name}</h5>
+	<h6 if.bind="issummon">
+		<img src="${db.getSpellIconPath(spellid)}" style="width: 28px; height: 28px;" />
+		${name} 
+	</h6>
+	
+	<span>
+		${spell.apCost} <span t="pa"></span> <span style.bind="db.getModIconStyle(' pa ') + 'display: inline-block;'"></span> /
+	</span>
+	<span>
+		${spell.minRange} - ${spell.range} <span t="po"></span> 
+		<img if.bind="spell.rangeCanBeBoosted" src="${db.getIconPath('icons/editable_range.webp')}"/>
+		<img if.bind="!spell.rangeCanBeBoosted" src="${db.getIconPath('icons/fixed_range.webp')}"/>
+	</span>
+
+	<!-- description -->
+	<p style="white-space: pre-line;" innerhtml.bind="description"></p>
+
+	<!-- effects -->
+	<div class="d-flex effects">
+		<!-- normal -->
+		<div class="effectsNormal">
+			<h6 t="effects"></h6>
+			<effectlist effects.bind="spell.effects" iscrit.bind="false" depth.bind="depth"></effectlist>
+		</div>
+		<!-- critiques -->
+		<div class="effectsCrit">
+			<h6 t="effectsCrit"></h6>
+			<effectlist effects.bind="spell.criticalEffect" iscrit.bind="true" depth.bind="depth"></effectlist>
+		</div>
+	</div>
+
+	<!-- other -->
+	<div>
+		<othercharac spellid.bind="spellid" spell.bind="spell"></othercharac>
+	</div> 
+
+	<!-- détails additionels -->
+	<!-- <div if.bind="detailsObj.text">
+		<h6>Détails additionnels</h6>
+		<p if.bind="detailsObj.text">${detailsObj.text}</p>
+	</div> -->
+
+</div> <!-- fin info sort -->
+
+
+<!-- Invoc -->
+<div if.bind="db.isLoaded" repeat.for="e1 of spell.effects">
+	<summon if.bind="hasSummon(e1)" summon.bind="getSummon(e1)" side.bind="e1.diceSide"></summon>
+</div>
+
+
+<!-- <div if.bind="db.isLoaded" repeat.for="e1 of spell.effects">
+	<summon if.bind="hasSummon(e1)" summon.bind="getSummon(e1)" side.bind="e1.diceSide"></summon>
+</div> -->

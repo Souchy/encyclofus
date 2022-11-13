@@ -1,0 +1,13 @@
+<import from="./effect"></import>
+
+
+<table if.bind="db.isLoaded" class="table table-striped table-sm table-borderless" style.bind="tableStyle">
+    <tbody>
+        <tr repeat.for="e of effects" if.bind="isEffectVisible(e)">
+            <td style.bind="tdStyle">
+                <effect effect.bind="e" depth.bind="depth" iscrit.bind="iscrit"></effect>
+            </td>
+        </tr>
+    </tbody>
+</table>
+

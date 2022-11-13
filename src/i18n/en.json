@@ -2,9 +2,15 @@
 	"true": "Yes",
 	"false": "No",
 	
+	"delay": "(in {{delay}} turns)",
+	"duration": "({{duration}} turns)",
+	"in": "in",
 	"turns": "turns",
 	"effects": "Effects",
 	"effectsCrit": "Critical effects",
+	"dispell": "Unbewitchable",
+	"!dispell": "Not unbewitchable",
+	"?dispell": "Unbewitchable on death",
 	
 	"po": "Range",
 	"pa": "AP",
@@ -56,5 +62,45 @@
 		"duel": "Duel",
 		"clickl": "Left click to place the target",
 		"clickr": "Right click to place an obstacle"
+	},
+	
+	"zone": {
+		"zone": "{{shape}} of {{size}} cells",
+		"minZone": " with a hole of {{minSize}}",
+		"cell": "cell",
+		"circle": "Circle",
+		"alfcircle": "Half-circle",
+		"square": "Square",
+		"cone": "Cone",
+		"ring": "Ring",
+		"everyone": "Everyone",
+		"diagonal": "Diagonal",
+		"line": "Line",
+		"checkerboard": "Diagonal cross",
+		"plus": "Diagonal cross",
+		"star": "Star",
+		"point": "Point",
+		"line2": "Perpendicular Line ",
+		"cross": "Cross",
+		"cross2": "Cross with a hole",
+		"tarea": "tarea",
+		"line3": "Line until the target"
+	},
+
+	"target": {
+		"fighter": "Entity",
+		"caster": "Caster",
+		"enemy": "Enemy",
+		"ally": "Ally",
+		"allyExceptCaster": "Ally except caster",
+		"summon": "Summon",
+		"summoner": "No-Summon",
+		"static": "Static",
+		"telefrag": "Telefrag",
+		"visible": "Visible",
+		"invisible": "Invisible",
+		"portal": "Portal",
+		"summonCaster": "Caster's summon",
+		"carried": "carried"
 	}
 }

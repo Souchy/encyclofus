@@ -2,9 +2,7 @@
 Encyclopédie des sorts Dofus à penchant pvp
 
 ## TODO:  
-- Icônes aoes + tooltip grandeur  
-- Icônes cibles (allié, ennemi, invoc)  
-- Pop-up d'états (saoul, sobre, combinaison élémentaire)  
+- Pop-up d'états/subspells (combinaison élémentaire) 
 - Combos
 - Équipements, Armes, Dofus/Prysma, items légendaires
 - Formules
@@ -14,5 +12,7 @@ Encyclopédie des sorts Dofus à penchant pvp
 sorts :
 - osa
     - vita invocs
+    - relai manque le sort pour le cooldown
+    - cravache manque des états
 - roublard
     - vita bombes

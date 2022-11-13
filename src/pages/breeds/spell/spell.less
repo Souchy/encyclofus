@@ -1,0 +1,100 @@
+spelllist > spell {
+  margin-top: 10px;
+  display: block;
+}
+
+tr {
+
+}
+
+td {
+  position: relative;
+}
+
+
+td spell {
+    position: absolute;
+    width: 1000px;
+    height: auto;
+    // background-color: #ffffff;
+    background-color: #f0f0f0;
+    border:rgb(0, 0, 0) 1px solid;
+    padding: 5px;
+
+    z-index: 94561239 !important;
+    // pointer-events: none;
+    cursor: default;
+    display: block;
+    visibility: collapse;
+    top: -0%;
+    left: 20%;
+}
+@media (max-width: 800px) and (max-width: 1199px) {
+  td spell {
+    width: 800px;
+	}
+}
+@media (max-width: 765px) {
+  td spell {
+    width: 500px;
+	}
+}
+@media (max-width: 500px) {
+  td spell {
+    width: 300px;
+	}
+}
+td:hover > spell {
+  visibility: visible;
+  opacity: 100%;
+}
+
+
+
+/* Tooltip container */
+.tooltipx {
+  position: relative;
+  // display: block;
+  // display: inline-block;
+  // float: inline-end;
+  // left: 50%;
+  // border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltiptext {
+  // display: none;
+  visibility: collapse;
+  min-width: 150px;
+  min-height: 34px;
+  // max-height: 64px;
+  background-color: rgb(0, 0, 0);
+  color: #fff;
+  text-align: center;
+  padding: 5px 5px;
+  border-radius: 6px;
+  /* Position the tooltip text - see examples below! */
+  pointer-events: none;
+  display: inline-block;
+  // display: block;
+  // float: right;
+
+  position: absolute;
+  opacity: 95%;
+  top: -0px;
+  left: 105%;
+  z-index: 1;
+}
+.tooltiptext::after {
+  content: " ";
+  position: absolute;
+  top: 17px;
+  right: 100%; /* To the left of the tooltip */
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent black transparent transparent;
+}
+td:hover > .tooltiptext {
+  visibility: visible;
+}

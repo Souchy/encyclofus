@@ -2,9 +2,15 @@
 	"true": "Oui",
 	"false": "Non",
 
+	"delay": "(dans {{delay}} tours)",
+	"duration": "({{duration}} tours)",
+	"in": "dans",
 	"turns": "tours",
 	"effects": "Effets",
 	"effectsCrit": "Effets critiques",
+	"dispell": "Désenvoutable",
+	"!dispell": "Non-désenvoutable",
+	"?dispell": "Désenvoutable à la mort",
 
 	"po": "PO",
 	"pa": "PA",
@@ -56,5 +62,45 @@
 		"duel": "Duel",
 		"clickl": "Click gauche pour placer la cible",
 		"clickr": "Click droit pour placer un obstacle"
+	},
+
+	"zone": {
+		"zone": "{{shape}} de {{size}} cases",
+		"minZone": " avec un trou de {{minSize}}",
+		"cell": "case",
+		"circle": "Cercle",
+		"alfcircle": "Demi-cercle",
+		"square": "Carré",
+		"cone": "Cône",
+		"ring": "Anneau",
+		"everyone": "Tous",
+		"diagonal": "Diagonale",
+		"line": "Ligne",
+		"checkerboard": "Croix diagonale",
+		"plus": "Croix diagonale",
+		"star": "Étoile",
+		"point": "Point",
+		"line2": "Ligne perpendiculaire",
+		"cross": "Croix",
+		"cross2": "Croix avec un trou",
+		"tarea": "tarea",
+		"line3": "Ligne jusqu'à la cible"
+	},
+
+	"target": {
+		"fighter": "Entité",
+		"caster": "Lanceur",
+		"enemy": "Ennemi",
+		"ally": "Allié",
+		"allyExceptCaster": "Allié sauf lanceur",
+		"summon": "Invocation",
+		"summoner": "Non-Invocation",
+		"static": "Statique",
+		"telefrag": "Téléfrag",
+		"visible": "Visible",
+		"invisible": "Invisible",
+		"portal": "Portail",
+		"summonCaster": "Invocation du lanceur",
+		"carried": "Porté"
 	}
 }
