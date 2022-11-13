@@ -31,10 +31,18 @@ export class Spell {
 	public get description() {
 		let text = this.db.getI18n(this.spell.descriptionId);
 		if (text) // les invoc chafer n'ont pas de description sur leurs sorts par exemple
-			while (text.includes("{")) {
+		while (text.includes("{")) {
+				console.log("desc: " + text);
 				let sub = text.substring(text.indexOf("{"), text.indexOf("}") + 1)
-				let rep = sub.replace("}", "").split("::")[1];
-				text = text.replace(sub, rep);
+				let data = sub.replace("}", "").split("::");
+				let spellData = data[0].split(",");
+				let html = data[1];
+				text = text.replace(sub, html);
+				let subspell = `<span style="position: relative;">`+
+					`<span>`+data[1]+`</span>`+
+					`<spell if.bind="${this.depth == 0}" spellid.bind="${+spellData[1]}" depth.bind="${this.depth+1}"></spell>`
+				+`</span>`
+				// text += subspell;
 			}
 		return text;
 	}
@@ -76,5 +84,75 @@ export class Spell {
 		return this.db.jsonSummons[e.diceNum];
 	}
 
+	public hasSubspell() {
+		let text = this.db.getI18n(this.spell.descriptionId);
+		if(!text) return false;
+		if(text.includes("{")) return true;
+		return false;
+	}
+	public get subSpellId() {
+		let text = this.db.getI18n(this.spell.descriptionId);
+		if(!text) return false;
+		if(text.includes("{")) {
+			let sub = text.substring(text.indexOf("{"), text.indexOf("}") + 1)
+			sub = sub.replace("{", "").replace("}", "")
+			let data = sub.split("::")[0].split(",");
+			return +data[1];
+		}
+		return 0;
+	}
+
+	public isStateSubspell(e) {
+		if (this.db.isEffectState(e)) {
+			let state = this.db.jsonStates[e.value]
+			if (!state) return false;
+			let name = this.db.getI18n(state.nameId);
+			if (name.includes("{")) {
+				return true;
+			}
+		}
+		// state condition, fouet osa dragocharge, +1 combo,
+		if (this.db.isSubSpell(e)) {
+			let subspell = this.getSubSpell(e);
+			if (!subspell) return false;
+			let name = this.db.getI18n(subspell.nameId);
+			if (name.includes("{")) {
+				return true;
+			}
+		}
+		return false;
+	}
+	public getStateSubspellId(e) {
+		// let state = this.db.jsonStates[e.value]
+		// let stateName = this.db.getI18n(state.nameId);
+		// stateName = stateName.replace("{", "").replace("}", "");
+		// let data = stateName.split(",");
+		// let subSpellId = data[1];
+		// return subSpellId;
+		let spellString;
+		// état
+		if (this.db.isEffectState(e)) {
+			let state = this.db.jsonStates[e.value]
+			spellString = this.db.getI18n(state.nameId);
+		}
+		if (this.db.isSubSpell(e)) {
+			let subspell = this.getSubSpell(e);
+			spellString = this.db.getI18n(subspell.nameId);
+		}
+
+		spellString = spellString.replace("{", "").replace("}", "");
+		let data = spellString.split("::")[0].split(",");
+		// let subSpellId = data[1];
+		// return subSpellId;
+		let subspellid = data[1]
+		let subgrade = data[2];
+		return subspellid + "-" + subgrade;
+	}
+	public getSubSpell(e: any) {
+		let grade = e.diceSide;
+		let key = e.diceNum + "";
+		if (grade) key += "-" + grade;
+		return this.db.jsonSpells[key];
+	}
 	
 }

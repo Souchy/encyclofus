@@ -101,6 +101,9 @@
 		"invisible": "Invisible",
 		"portal": "Portal",
 		"summonCaster": "Caster's summon",
-		"carried": "carried"
+		"carried": "Carried",
+		"target": "Target",
+		"attacker": "Attacker",
+		"attackerCaster": "Attacker-Caster"
 	}
 }

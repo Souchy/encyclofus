@@ -12,7 +12,7 @@ td {
 }
 
 
-td spell {
+td spell, span spell {
     position: absolute;
     width: 1000px;
     height: auto;
@@ -30,21 +30,21 @@ td spell {
     left: 20%;
 }
 @media (max-width: 800px) and (max-width: 1199px) {
-  td spell {
+  td spell, span spell {
     width: 800px;
 	}
 }
 @media (max-width: 765px) {
-  td spell {
+  td spell, span spell {
     width: 500px;
 	}
 }
 @media (max-width: 500px) {
-  td spell {
+  td spell, span spell {
     width: 300px;
 	}
 }
-td:hover > spell {
+td:hover > spell, span:hover > spell {
   visibility: visible;
   opacity: 100%;
 }

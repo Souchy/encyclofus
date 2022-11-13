@@ -26,6 +26,12 @@
 
 	<!-- description -->
 	<p style="white-space: pre-line;" innerhtml.bind="description"></p>
+	<!-- <p style="position: relative;">
+		<span style="vertical-align: middle; position: relative;" if.bind="hasSubspell()">
+			${subSpellId}
+			<spell if.bind="depth == 0" spellid.bind="subSpellId" depth.bind="depth+1"></spell>
+		</span>
+	</p> -->
 
 	<!-- effects -->
 	<div class="d-flex effects">

@@ -101,6 +101,9 @@
 		"invisible": "Invisible",
 		"portal": "Portail",
 		"summonCaster": "Invocation du lanceur",
-		"carried": "Porté"
+		"carried": "Porté",
+		"target": "Cible",
+		"attacker": "Attaquant",
+		"attackerCaster": "Attaquant-Lanceur"
 	}
 }
