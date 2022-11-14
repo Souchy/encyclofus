@@ -39,4 +39,4 @@
 </table>
 
 <!-- showDescriptions -->
-<spell repeat.for="summonSpellId of summon.spells" issummon.bind="true" spellid.bind="summonSpellId"></spell>
+<spell if.bind="db.isLoaded" repeat.for="summonSpellId of summon.spells" issummon.bind="true" spellid.bind="summonSpellId" depth.bind="0"></spell>

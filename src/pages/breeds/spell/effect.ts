@@ -218,7 +218,7 @@ export class Effect {
 					let data = obj.split(",");
 					let subSpellId = data[1];
 					let stateSpell = this.db.jsonSpells[subSpellId];
-					obj = obj.split("::")[1] + "<spell spellid.bind='" + subSpellId + "'></spell>"; // issummon.bind='" + this.issummon + "'></spell>";
+					obj = obj.split("::")[1]; 
 					name += obj;
 				}
 				text = text.replace("#1", name);
@@ -249,24 +249,16 @@ export class Effect {
 			// "968135": "{spell,24036,1::<u>Saoul</u>}",
 			if (state) {
 				let stateName = this.db.getI18n(state.nameId);
-				let stateSubSpellHtml;
 				if (stateName) {
 					if (stateName.includes("{")) {
 						stateName = stateName.replace("{", "").replace("}", "");
 						let data = stateName.split(",");
 						let subSpellId = data[1];
 						let stateSpell = this.db.jsonSpells[subSpellId];
-						// stateName = "<span>"+stateName.split("::")[1]+"</span>" + "<spell spellid='" + subSpellId + "'></spell>";
 						stateName = stateName.split("::")[1];
-						stateSubSpellHtml = "<spell if.bind=\"db.isLoaded\" spellid.bind=" + +subSpellId + "></spell>"
-
-						// let spellComponent = new Spell(this.db, this.i18n);
-						// spellComponent.spellid = subSpellId;
 					}
 				}
 				text = text.replace("#3", stateName);
-				// if(stateSubSpellHtml) 
-				// 	text = "<span>"+text+"</span>" + stateSubSpellHtml;
 			} else {
 				console.log("null state: " + JSON.stringify(state))
 			}

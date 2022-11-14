@@ -38,11 +38,6 @@ export class Spell {
 				let spellData = data[0].split(",");
 				let html = data[1];
 				text = text.replace(sub, html);
-				// let subspell = `<span style="position: relative;">` +
-				// 	`<span>` + data[1] + `</span>` +
-				// 	`<spell if.bind="${this.depth == 0}" spellid.bind="${+spellData[1]}" depth.bind="${this.depth + 1}"></spell>`
-				// 	+ `</span>`
-				// text += subspell;
 			}
 		return text;
 	}
