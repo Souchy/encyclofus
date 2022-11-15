@@ -38,6 +38,6 @@
 
 <!-- SUB SPELLS -->
 <!-- normal effects -->
-<effectlist if.bind="hasSubSpell(effect) && !iscrit" effects.bind="getSubSpell(effect).effects" depth.bind="depth+1"></effectlist>
+<effectlist if.bind="hasSubSpell(effect) && !iscrit && !isStateSubspell(effect)" effects.bind="getSubSpell(effect).effects" depth.bind="depth+1"></effectlist>
 <!-- crit effects -->
-<effectlist if.bind="hasSubSpell(effect) && iscrit" effects.bind="getSubSpell(effect).criticalEffect" depth.bind="depth+1"></effectlist>
+<effectlist if.bind="hasSubSpell(effect) && iscrit && !isStateSubspell(effect)" effects.bind="getSubSpell(effect).criticalEffect" depth.bind="depth+1"></effectlist>
