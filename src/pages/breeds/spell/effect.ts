@@ -191,7 +191,8 @@ export class Effect {
 
 
 	public renderEffectI18n(e) {
-		let text = this.db.getI18n(e.effect.descriptionId);
+		let text = this.db.getI18n(e.effect?.descriptionId);
+		if(!text) text = "#1";
 		let has1 = text.includes("#1");
 		let has2 = text.includes("#2");
 		let has3 = text.includes("#3");

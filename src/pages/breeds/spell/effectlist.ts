@@ -48,7 +48,7 @@ export class Effectlist {
 
     public isEffectVisible(e) {
         // 666 = ACTION_NOOP = "Pas d'effet supplémentaire"
-        return (this.isGreenList(e.effectUid) || e.visibleInTooltip || e.effect.showInTooltip || this.advanced) // || e.visibleInBuffUi || e.visibleInFightLog) 
+        return (this.isGreenList(e.effectUid) || e.visibleInTooltip || e.effect?.showInTooltip || this.advanced) // || e.visibleInBuffUi || e.visibleInFightLog) 
             && !this.isRedList(e.effectUid) && e.effectId != 666
     }
 
