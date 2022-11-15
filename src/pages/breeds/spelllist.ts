@@ -9,9 +9,6 @@ import jsonBreeds from '../../DofusDB/static/classes.json';
 export class SpellList {
 
 	public db: db;
-	public selectedSlot: number = 0;
-	// @bindable
-	// public showDescriptions: boolean = true;
 
     constructor(db: db, @IEventAggregator readonly ea: IEventAggregator) {
         this.db = db;
@@ -24,21 +21,18 @@ export class SpellList {
 		return this.db.breedId;
 	}
 	public get breed(): any {
-		// console.log("spelllist.breed: " + (this.breedId)); // + this.db?.jsonBreeds + ", " + this.breedId)
 		if (!this.db.jsonBreeds) return null;
 		if (!this.breedId) return null;
 		return this.db.jsonBreeds[this.breedId + ""];
 	}
 	public get spells(): any[] {
-		// console.log("spelllist.spells: " + this.breed)
 		if (!this.breed) return null;
-		// console.log("spell list breed[" + this.breedId + "]: " + JSON.stringify(this.breed.spells));
 		return this.breed.spells;
 	}
 	public get selectedSpellId() {
 		if (!this.spells) return null;
-		if (this.selectedSlot == undefined) return undefined;
-		return this.spells[this.selectedSlot];
+		if (this.db.selectedSpellSlot < 0) return undefined;
+		return this.spells[this.db.selectedSpellSlot];
 	}
 	public get selectedSpell() {
 		if (!this.selectedSpellId) return null;
@@ -46,8 +40,8 @@ export class SpellList {
 	}
 
 	public selectSlot(slot: number): void {
-		this.selectedSlot = slot;
-		this.selectedSummon = null;
+		this.db.selectedSpellSlot = slot;
+		this.db.selectedOsaSlot = -1;
 		this.ea.publish("spelllist:select:" + this.selectedSpellId);
 	}
 
@@ -64,18 +58,33 @@ export class SpellList {
 		return this.db.getI18n(nameid);
 	}
 
-	public hasSummon(e: any) {
+	public selectSummon(s: number) {
+		this.db.selectedOsaSlot = s;
+		this.db.selectedSpellSlot = -1;
+	}
+
+	public hasSummon() {
+		let e = this.summonEffect;
+		// console.log("hasSummon effect: " + e)
 		return this.db.isSummonEffect(e) && e.visibleInTooltip; // e.effectId == 181 || e.effectId == 1011 || e.effectId == 1008;
 	}
-	public getSummon(e: any): any {
-		if (!this.hasSummon(e)) return null;
+	public get getSummon(): any {
+		let e = this.summonEffect;
+		if (!this.hasSummon()) return null;
+		// console.log("getSummon json why: " + e)
 		return this.db.jsonSummons[e.diceNum];
 	}
 
-	public selectedSummon: any;
-	public selectSummon(e: any) {
-		this.selectedSummon = e;
-		this.selectedSlot = undefined;
+	public get summonEffect() {
+		// console.log("get effect")
+		let s = this.db.jsonSpells[13997];
+		let e = s.effects[this.db.selectedOsaSlot];
+		// console.log("summon effect: " + s + ", " + e)
+		return e;
 	}
+	public summonSide() {
+		return this.summonEffect.diceSide;
+	}
+
 
 }
