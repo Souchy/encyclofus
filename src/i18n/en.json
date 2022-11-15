@@ -42,6 +42,7 @@
 
 	"help": "Help",
 	"sidebar" : {
+		"contact": "Contact",
 		"information": {
 			"information": "Information",
 			"general": "General",

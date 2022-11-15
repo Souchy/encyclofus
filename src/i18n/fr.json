@@ -43,6 +43,7 @@
 
 	"help": "Aide",
 	"sidebar" : {
+		"contact": "Contacte",
 		"information": {
 			"information": "Information",
 			"general": "Général",
