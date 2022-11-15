@@ -199,9 +199,12 @@ export class Effect {
 		// invocation
 		if (this.hasSummon(e)) {
 			let summon = this.getSummon(e);
-			// console.log("monster: " + JSON.stringify(summon));
-			let name = this.db.getI18n(summon.nameId);
-			text = text.replace("#1", name);
+			if(summon) {
+				// console.log("monster: " + JSON.stringify(summon));
+				let name = this.db.getI18n(summon.nameId);
+				text = text.replace("#1", name);
+			}
+
 		}
 		// state condition, fouet osa dragocharge, +1 combo,
 		if (this.db.isSubSpell(e)) {
@@ -320,12 +323,6 @@ export class Effect {
 	}
 
 	public getStateSubspellId(e) {
-		// let state = this.db.jsonStates[e.value]
-		// let stateName = this.db.getI18n(state.nameId);
-		// stateName = stateName.replace("{", "").replace("}", "");
-		// let data = stateName.split(",");
-		// let subSpellId = data[1];
-		// return subSpellId;
 		let spellString;
 		// état
 		if (this.db.isEffectState(e)) {
@@ -343,7 +340,8 @@ export class Effect {
 		// return subSpellId;
 		let subspellid = data[1]
 		let subgrade = data[2];
-		return subspellid + "-" + subgrade;
+		let output = subspellid + "-" + subgrade;
+		return output;
 	}
 
 

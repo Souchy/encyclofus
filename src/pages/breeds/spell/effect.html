@@ -13,7 +13,6 @@
             <td style="vertical-align: middle; position: absolute; left: 0px; width: 100%; height: 100%;" if.bind="isStateSubspell(effect)">
                 <spell class="spellHover" if.bind="depth == 0" spellid.bind="getStateSubspellId(effect)" depth.bind="depth+1"></spell>
             </td>
-            <!-- <td if.bind="isDuration(effect)" style.bind="getDispellIcon(effect)"></td> -->
             <td if.bind="isDuration(effect)" style="vertical-align: middle; width: 25px; height: 32px; ">
                 <img style="vertical-align: middle; margin-left: -10px; margin-right: -10px;" src.bind="getDispellIcon(effect)"></img>
                 <span class="tooltiptext">${getDispellString(effect)}</span>

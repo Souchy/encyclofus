@@ -72,7 +72,7 @@ export class Spell {
 	}
 
 	public hasSummon(e: any) {
-		return this.db.isSummonEffect(e) && e.visibleInTooltip; // e.effectId == 181 || e.effectId == 1011 || e.effectId == 1008;
+		return this.db.isSummonEffect(e) && e.visibleInTooltip && this.db.jsonSummons[e.diceNum]; // e.effectId == 181 || e.effectId == 1011 || e.effectId == 1008;
 	}
 	public getSummon(e: any): any {
 		if (!this.hasSummon(e)) return null;
