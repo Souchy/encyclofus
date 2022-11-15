@@ -90,7 +90,8 @@
 		"tarea": "tarea",
 		"line3": "Ligne jusqu'à la cible",
 		"fork": "Fourchette",
-		"rectangle": "Rectangle"
+		"rectangle": "Rectangle",
+		"squareChecker": "Damier"
 	},
 
 	"target": {

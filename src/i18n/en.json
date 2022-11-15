@@ -89,7 +89,8 @@
 		"tarea": "tarea",
 		"line3": "Line until the target",
 		"fork": "Fork",
-		"rectangle": "Rectangle"
+		"rectangle": "Rectangle",
+		"squareChecker": "Checkerboard"
 	},
 
 	"target": {
