@@ -87,7 +87,9 @@
 		"cross": "Cross",
 		"cross2": "Cross with a hole",
 		"tarea": "tarea",
-		"line3": "Line until the target"
+		"line3": "Line until the target",
+		"fork": "Fork",
+		"rectangle": "Rectangle"
 	},
 
 	"target": {

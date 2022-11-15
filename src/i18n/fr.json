@@ -88,7 +88,9 @@
 		"cross": "Croix",
 		"cross2": "Croix avec un trou",
 		"tarea": "tarea",
-		"line3": "Ligne jusqu'à la cible"
+		"line3": "Ligne jusqu'à la cible",
+		"fork": "Fourchette",
+		"rectangle": "Rectangle"
 	},
 
 	"target": {
