@@ -11,23 +11,36 @@ td {
   position: relative;
 }
 
-
+.spellContainerContainer {
+  position: relative;
+}
+.spellContainer {
+  position: absolute; 
+  // margin-top: -30px; 
+  // margin-left: -50px; 
+  // width: 80%; 
+  // height: 35px;
+  top: 50%;
+  width: 80%;
+  height: 50%;
+}
 .spellHover {
     position: absolute;
-    width: 1000px;
+    width: 100%;
+    top: 100%;
+    left: 10%;
     height: auto;
     // background-color: #ffffff;
-    background-color: #f0f0f0;
-    border:rgb(0, 0, 0) 1px solid;
-    padding: 5px;
+    // background-color: #f0f0f0;
+    background-color: var(--spellhover-bg-color);
+    border: var(--spellhover-border-color) 1px solid;
+    padding: 10px;
 
     z-index: 94561239 !important;
     // pointer-events: none;
     cursor: default;
     display: block;
     visibility: collapse;
-    top: -0%;
-    left: 20%;
 }
 @media (max-width: 800px) and (max-width: 1199px) {
   .spellHover {
@@ -44,7 +57,7 @@ td {
     width: 300px;
 	}
 }
-td:hover > .spellHover, span:hover > .spellHover, p:hover > .spellHover {
+td:hover > .spellHover, span:hover > .spellHover, p:hover > .spellHover, .spellContainer:hover > .spellHover {
   visibility: visible;
   opacity: 100%;
 }

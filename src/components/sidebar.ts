@@ -1,16 +1,19 @@
+import { Themer } from './themes/themer';
 import { db } from '../DofusDB/db';
 import jsonBreeds from '../DofusDB/static/classes.json';
 
 import { inject } from 'aurelia';
-import { IRoute, IRouter, IRouteableComponent, ReloadBehavior, Navigation, Parameters, RoutingInstruction } from '@aurelia/router';
 import { I18N } from "@aurelia/i18n";
 
-@inject(db)
+
+@inject(Themer, db)
 export class sidebar {
 	public breeds: string[];
 	public db: db;
+	public themer: Themer;
 
-	constructor(db: db, @I18N private readonly i18n: I18N) {
+	constructor(themer: Themer, db: db, @I18N private readonly i18n: I18N) {
+		this.themer = themer;
 		this.db = db;
 		this.breeds = jsonBreeds.orderByIcon;
 	}

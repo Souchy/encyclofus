@@ -23,4 +23,4 @@ declare module '*.md' {
 	export const bindables: Record<string, PartialBindableDefinition>;
 	export const shadowOptions: { mode: 'open' | 'closed' } | undefined;
 	export function register(container: IContainer);
-  }
+}

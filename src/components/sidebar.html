@@ -61,9 +61,15 @@
 			style="color: inherit; text-decoration: inherit;">
 			<i class="fab fa-github"></i> Github 
 		</a> -->
-		<a href="https://twitter.com/Souchy7" target="_blank">
-			<i class="fab fa-twitter"></i> ${translate("sidebar.contact")}
-		</a>
+		<div>
+			<a href="https://twitter.com/Souchy7" target="_blank">
+				<i class="fab fa-twitter"></i> ${translate("sidebar.contact")}
+			</a>
+			<button class="btn btn-outline-dark btnRadio" click.delegate="themer.click()">
+				<!-- <i if.bind="themer.themeBool" class="fa-solid fa-moon"></i> -->
+				<i class="fa-regular fa-moon"></i>
+			</button>
+		</div>
 		<options></options>
 	</div>
 

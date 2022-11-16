@@ -3,6 +3,8 @@ import { I18N } from '@aurelia/i18n';
 import { inject, observable } from 'aurelia';
 import { db } from '../DofusDB/db';
 import jsonVersions from '../DofusDB/versions.json'
+// import themeLight from './themes/themelight.less'
+// import themeDark from './themes/themedark.less'
 
 @inject(db)
 export class Options {
@@ -12,6 +14,10 @@ export class Options {
 	public selectedVersion: string;
 	@observable
 	public selectedLang: string;
+
+
+	// public themeLight = import('./themes/themelight.less');
+	// public themeDark = import('./themes/themedark.less');
 
 	constructor(db: db, @I18N private readonly i18n: I18N) {
 		this.db = db;

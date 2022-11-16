@@ -4,7 +4,7 @@
 		<option>EN</option>
 	</select>
 	
-	<select class="form-select" style="width: auto;" value.bind="selectedVersion">
+	<select class="form-select" style="width: 100%; margin-left: auto;" value.bind="selectedVersion">
 		<option repeat.for="version of versions" model.bind="version" if.bind="version > '2.64'">
 			${version}
 		</option>

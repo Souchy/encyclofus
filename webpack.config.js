@@ -63,12 +63,12 @@ module.exports = function(env, { analyze }) {
     },
     devServer: {
       historyApiFallback: true,
-    //   open: !process.env.CI,
+      //open: !process.env.CI,
       open: false,
       port: 9000,
-	  liveReload: true,
-	  static: true,
-	  static: path.join(__dirname, '')
+      liveReload: true,
+      static: true,
+      static: path.join(__dirname, '')
     },
     module: {
       rules: [
@@ -88,9 +88,9 @@ module.exports = function(env, { analyze }) {
     },
     plugins: [
       new HtmlWebpackPlugin({ 
-		template: 'index.html', 
-		// favicon: 'favicon.ico' 
-		favicon: 'helmet.png'
+        template: 'index.html', 
+        // favicon: 'favicon.ico' 
+        favicon: 'helmet.png'
 	  }),
       new Dotenv({
         path: `./.env${production ? '' :  '.' + (process.env.NODE_ENV || 'development')}`,
