@@ -1,7 +1,7 @@
 # Encyclofus
 Encyclopédie des sorts Dofus à penchant pvp
 
-## TODO:  
+#### TODO:  
 - Combos
 - Équipements, Armes, Dofus/Prysma, items légendaires
 - Formules
