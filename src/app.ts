@@ -66,13 +66,14 @@ export class App {
 		}
 
 		// set routes
-		for (let b of jsonBreeds.orderByIcon) {
-			App.routes.push({
-				path: b,
-				component: import('./pages/breed'),
-				title: jsonBreeds.french[jsonBreeds.ids[b] - 1],
-				reloadBehavior: ReloadBehavior.refresh,
-			});
+		for (let breedName of jsonBreeds.orderByIcon) {
+			if(this.db.checkFeature(breedName))
+				App.routes.push({
+					path: breedName,
+					component: import('./pages/breed'),
+					title: jsonBreeds.french[jsonBreeds.ids[breedName] - 1],
+					reloadBehavior: ReloadBehavior.refresh,
+				});
 		}
 		// App.routes.push({
 		// 	path: "general",

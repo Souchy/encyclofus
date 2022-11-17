@@ -4,6 +4,8 @@ export class MissingPage {
   
 	public load(parameters: {id: string}): void {
 	  this.missingComponent = parameters.id;
+
+	  location.href = "/"
 	}
   }
   

@@ -9,7 +9,7 @@
 
 
 	<div class="d-flex p-2 flex-wrap">
-		<a load="${breeds[i]}" css="${getBreedIconStyle(i)}" repeat.for="i of breeds.length"></a>
+		<a load="${breeds[i]}" css="${getBreedIconStyle(i)}" repeat.for="i of breeds.length" if.bind="checkFeatures(i)"></a>
 	</div>
 
 	<!-- <div if.bind="isRouteClass && db.isLoaded">

@@ -5,7 +5,6 @@ import jsonBreeds from '../DofusDB/static/classes.json';
 import { inject } from 'aurelia';
 import { I18N } from "@aurelia/i18n";
 
-
 @inject(Themer, db)
 export class sidebar {
 	public breeds: string[];
@@ -38,6 +37,12 @@ export class sidebar {
 
 	public translate(obj: any) {
 		return this.i18n.tr(obj as string);
+	}
+
+
+	public checkFeatures(i: number) {
+		let name = jsonBreeds.orderByIcon[i];
+		return this.db.checkFeature(name);
 	}
 
 }

@@ -27,17 +27,18 @@ export class Options {
 		this.selectedLang = this.db.lang.toUpperCase();
 	}
 
-	selectedVersionChanged(newValue: string, oldValue: string) {
-		// console.log("selected version changed: " + oldValue + " -> " + newValue)
-		this.db.setVersion(newValue);
-	}
-
-	
-	selectedLangChanged(newValue: string, oldValue: string) {
+	public selectedLangChanged(newValue: string, oldValue: string) {
 		let lang = newValue.toLowerCase();
 		// console.log("selected language changed: " + oldValue + " -> " + newValue)
 		this.i18n.setLocale(lang);
 		this.db.setLanguage(lang);
+	}
+
+	public selectedVersionChanged(newValue: string, oldValue: string) {
+		// console.log("selected version changed: " + oldValue + " -> " + newValue)
+		this.db.setVersion(newValue);
+		if(oldValue)
+			location.reload();
 	}
 
 }
