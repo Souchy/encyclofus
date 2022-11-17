@@ -29,6 +29,9 @@
 		<a load="formules">${translate("sidebar.information.formulas")</a> -->
 		<br />
 		<a load="maps">${translate("sidebar.information.maps")</a>
+
+		<br />
+		<a if.bind="checkFeatureItems()" load="items">${translate("sidebar.information.items")}</a>
 	</div>
 	<div>
 		<strong>${translate("sidebar.pvp.pvp")}</strong>

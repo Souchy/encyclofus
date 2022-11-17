@@ -1,9 +1,11 @@
-import { Themer } from './themes/themer';
 import { db } from '../DofusDB/db';
-import jsonBreeds from '../DofusDB/static/classes.json';
-
 import { inject } from 'aurelia';
 import { I18N } from "@aurelia/i18n";
+import { Themer } from './themes/themer';
+import { Util } from '../ts/util';
+
+import jsonBreeds from '../DofusDB/static/classes.json';
+import features from '../DofusDB/features.json'
 
 @inject(Themer, db)
 export class sidebar {
@@ -43,6 +45,10 @@ export class sidebar {
 	public checkFeatures(i: number) {
 		let name = jsonBreeds.orderByIcon[i];
 		return this.db.checkFeature(name);
+	}
+
+	public checkFeatureItems() {
+		return Util.isLocal() && this.db.checkFeatureVersion(features.items);
 	}
 
 }

@@ -38,6 +38,7 @@ export class Breed { // implements IRouteableComponent {
 		if (this.db.jsonBreeds) {
 			// let basicName = asdf.navigation.instruction;
 			let breed = this.db.jsonBreeds[this.breedId]
+			// console.log("this.breedId: " + this.breedId + ", breed: " + JSON.stringify(breed))
 			let name = this.db.getI18n(breed.nameId);
 			return name;
 		} else {

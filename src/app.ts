@@ -8,8 +8,10 @@ import { Route, IRoute, IRouter, IRouteableComponent, RouterConfiguration, Reloa
 import { Parameters, RoutingInstruction } from '@aurelia/router';
 
 import { db } from './DofusDB/db';
+import { sidebar } from './components/sidebar'
 import jsonBreeds from './DofusDB/static/classes.json'
-import { sidebar } from './components/sidebar';
+import features from './DofusDB/features.json'
+import { Util } from './ts/util';
 
 @inject(IEventAggregator, db)
 export class App {
@@ -75,6 +77,15 @@ export class App {
 					reloadBehavior: ReloadBehavior.refresh,
 				});
 		}
+		if(Util.isLocal() && this.db.checkFeatureVersion(features.items)) {
+			App.routes.push({
+				path: 'items',
+				component: import('./pages/quickfus/items/items'),
+				title: "Items",
+				reloadBehavior: ReloadBehavior.refresh,
+			});
+		}
+
 		// App.routes.push({
 		// 	path: "general",
 		// 	component: import("./info/general.md"),
