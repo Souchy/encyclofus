@@ -4,7 +4,13 @@
 <itemfilteradvanced></itemfilteradvanced>
 
 
-<div>
-    Hi items
+<div if.bind="db.isLoaded">
+
+    ${items.length}
+
+    <div repeat.for="item of items">
+        ${db.getI18n(item.nameId)}
+    </div>
+    
 
 </div>
