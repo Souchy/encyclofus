@@ -11,12 +11,12 @@ export class items {
     public items: Object[] = [];
 
     public constructor(readonly db: db, @IEventAggregator readonly ea: IEventAggregator) {
-        this.ea.subscribe("quickfus:search", (filter: string) => this.updateSearch(filter));
-        this.updateSearch();
+        this.ea.subscribe("quickfus:search", (filter: string) => this.search(filter));
+        this.search();
     }
 
-    public async updateSearch(filter: string = "") {
-        this.db.items
+    public async search(filter: string = "") {
+        this.items = await this.db.items
         .find({ level: 200 })
         // .sort({ level: -1 })
         // .sort(i => i.level)

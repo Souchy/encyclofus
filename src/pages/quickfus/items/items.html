@@ -8,6 +8,8 @@
 
     ${items.length}
 
+    <button click.delegate="search()">Search</button>
+
     <div repeat.for="item of items">
         ${db.getI18n(item.nameId)}
     </div>
