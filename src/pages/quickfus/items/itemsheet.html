@@ -1,0 +1,12 @@
+<import from="../../breeds/spell/effect"></import>
+<import from="../../breeds/spell/effectlist"></import>
+
+
+<div>
+    ${db.getI18n(item.nameId)}
+
+    <!-- <effect repeat.for="e of possibleEffects"></effect> -->
+    <h6 t="effects"></h6>
+    <effectlist effects.bind="item.possibleEffects" iscrit.bind="false" depth.bind="0"></effectlist>
+
+</div>

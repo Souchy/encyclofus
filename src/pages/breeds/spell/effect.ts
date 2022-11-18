@@ -189,8 +189,20 @@ export class Effect {
 		return output;
 	}
 
+	public renderItemEffectI18n(e) {
+		let effect = this.db.jsonEffects.filter(ei => ei.id == e.effectId)[0];
+		let charac = this.db.jsonCharacteristics.filter(c => c.id == effect.characteristic)[0];
+		let text = this.db.getI18n(effect.descriptionId);
+		return e.diceNum + " " +  this.db.getI18n(charac.nameId);
+		// return "";
+	}
 
 	public renderEffectI18n(e) {
+		if(e.baseEffectId) {
+			let effect = this.db.jsonEffects.filter(ei => ei.id == e.effectId)[0];
+			e.effect = effect;
+			// return this.renderItemEffectI18n(e);
+		}
 		let text = this.db.getI18n(e.effect?.descriptionId);
 		if(!text) text = "#1";
 		let has1 = text.includes("#1");

@@ -1,4 +1,5 @@
 <import from="./itemfilteradvanced"></import>
+<import from="./itemsheet"></import>
 
 
 <itemfilteradvanced></itemfilteradvanced>
@@ -10,9 +11,8 @@
 
     <button click.delegate="search()">Search</button>
 
-    <div repeat.for="item of items">
-        ${db.getI18n(item.nameId)}
+    <div class="d-flex">
+        <itemsheet repeat.for="item of items" item.bind="item"></itemsheet>
     </div>
-    
 
 </div>
