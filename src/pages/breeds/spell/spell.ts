@@ -42,6 +42,7 @@ export class Spell {
 		return text;
 	}
 
+	/*
 	public get detailsObj(): any {
 		if (!this.spell) return null;
 		// console.log("detailsObj: " + JSON.stringify(this.db.jsonSpellsDetails))
@@ -70,6 +71,7 @@ export class Spell {
 		}
 		return str;
 	}
+	*/
 
 	public hasSummon(e: any) {
 		return this.db.isSummonEffect(e) && e.visibleInTooltip && this.db.jsonSummons[e.diceNum]; // e.effectId == 181 || e.effectId == 1011 || e.effectId == 1008;
