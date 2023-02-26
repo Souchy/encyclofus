@@ -13,13 +13,12 @@ export class items {
 
     public items: Object[] = [];
     
-	// public mason: Mason;
-	// public grid: HTMLDivElement;
+	public mason: Mason;
+	public grid: HTMLDivElement;
 
-    public constructor(readonly db: db, readonly emerald: Emerald, readonly ea: IEventAggregator) {
-        console.log("ITEMS")
-		// this.mason = new Mason();
-		// this.mason.obj = this;
+    public constructor(readonly db: db, readonly emerald: Emerald, @IEventAggregator readonly ea: IEventAggregator) {
+		this.mason = new Mason();
+		this.mason.obj = this;
         this.ea.subscribe("itemsheet:loaded", () => {
         //    util.debounce(() => {
         //         console.log("debounced reload")
@@ -36,10 +35,10 @@ export class items {
             this.search();
         })
         
-			// this.mason.index = 0; // reset index
-			// this.mason.data = [] //.splice(0, this.data.length); // reset select data
-			// this.mason.fulldata = this.items; //response.content; // store full data
-			// this.mason.showMore(100); // select data
+			this.mason.index = 0; // reset index
+			this.mason.data = [] //.splice(0, this.data.length); // reset select data
+			this.mason.fulldata = this.items; //response.content; // store full data
+			this.mason.showMore(100); // select data
 
 			// console.log("itemsearch query : " + response.content.length);
 			// console.log("itemsearch query : " + response.content);
