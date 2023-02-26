@@ -1,9 +1,14 @@
+<select class="form-select" style="width: 100%; margin-left: auto; margin-bottom: 10px;" value.bind="selectedEffectMode">
+	<option repeat.for="mode of modes" model.bind="mode" t="sidebar.${mode}">
+	</option>
+</select>
+
 <div class="d-flex">
 	<select class="form-select" style="width: auto; margin-right: 5px;" value.bind="selectedLang">
 		<option>FR</option>
 		<option>EN</option>
 	</select>
-	
+
 	<select class="form-select" style="width: 100%; margin-left: auto;" value.bind="selectedVersion">
 		<option repeat.for="version of versions" model.bind="version" if.bind="version > '2.64'">
 			${version}

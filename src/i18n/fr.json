@@ -61,7 +61,10 @@
 		"classes": {
 			"mecanics": "Mécaniques",
 			"situations": "Situations"
-		}
+		},
+		"debug": "Affichage extrême (debug)",
+		"detailed": "Affichage détaillé",
+		"basic": "Affichage de base"
 	},
 	"maps": {
 		"goultar": "Goultarminator",

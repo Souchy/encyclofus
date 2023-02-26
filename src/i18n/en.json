@@ -60,7 +60,10 @@
 		"classes": {
 			"mecanics": "Mechanics",
 			"situations": "Situations"
-		}
+		},
+		"debug": "Extreme display (debug)",
+		"detailed": "Detailed display",
+		"basic": "Base display"
 	},
 	"maps": {
 		"goultar": "Goultarminator",

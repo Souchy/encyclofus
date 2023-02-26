@@ -10,11 +10,14 @@ import jsonVersions from '../DofusDB/versions.json'
 export class Options {
 	public db: db;
 	public versions: string[];
+	public modes: string[] = ["debug", "detailed", "basic"];
+
 	@observable
 	public selectedVersion: string;
 	@observable
 	public selectedLang: string;
-
+	@observable
+	public selectedEffectMode: string
 
 	// public themeLight = import('./themes/themelight.less');
 	// public themeDark = import('./themes/themedark.less');
@@ -23,6 +26,7 @@ export class Options {
 		this.db = db;
 		this.versions = jsonVersions;
 
+		this.selectedEffectMode = this.db.effectMode;
 		this.selectedVersion = this.db.version;
 		this.selectedLang = this.db.lang.toUpperCase();
 	}
@@ -41,4 +45,10 @@ export class Options {
 			location.reload();
 	}
 
+	public selectedEffectModeChanged(newValue: string, oldValue: string) {
+		// console.log("selected effectMode changed: " + oldValue + " -> " + newValue)
+		this.db.setEffectMode(newValue);
+		if(oldValue)
+			location.reload();
+	}
 }
