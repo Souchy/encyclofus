@@ -1,6 +1,8 @@
 {
 	"true": "Yes",
 	"false": "No",
+	"and": " and ",
+	"or": " or ",
 	
 	"delay": "(in {{delay}} turns)",
 	"duration": "({{duration}} turns)",
@@ -101,6 +103,7 @@
 		"enemy": "Enemy",
 		"ally": "Ally",
 		"allyExceptCaster": "Ally except caster",
+		"allExceptCaster": "All except caster",
 		"summon": "Summon",
 		"summoner": "No-Summon",
 		"static": "Static",
@@ -108,10 +111,81 @@
 		"visible": "Visible",
 		"invisible": "Invisible",
 		"portal": "Portal",
-		"summonCaster": "Caster's summon",
 		"carried": "Carried",
 		"target": "Target",
 		"attacker": "Attacker",
-		"attackerCaster": "Attacker-Caster"
+		"attackerCaster": "Attacker-Caster",
+		"thestate": "the entities possessing the state",
+		"themonster": "the monster",
+
+
+		
+
+
+		"not": "not",
+		"summonCaster": "the summoner or its summons",
+		"theTarget": "the target",
+		"theCaster": "the caster",
+
+		"is": "is",
+		"isNot": "is not",
+		"a": "a",
+		"hasState": "has the state",
+		"hasNotState": "does not have the state",
+		"isSummonCaster": "is a summon of the caster",
+
+		"notStatesPrefix": "does not have",
+		"theState": "the state",
+		"throughPortal": "is through a portal",
+		"notThroughPortal": "is not through a portal",
+
+		"monster": {
+			"50000": "around the caster's summon",
+			"66666": "Ally except caster",
+			"99999": "is not an allied Bomb, Megabomb or Walking bomb"
+		},
+
+		"teamA": {
+			"a": "Ally",
+			"j": "Ally summon",
+			"s": "Ally static summon",
+			"i": "Ally non-static summon",
+			"h": "Ally player",
+			"g": "Ally except caster",
+			"c": "Caster",
+			"l": "Ally player or sidekick",
+			"d": "Ally sidekick",
+			"m": "Ally monster",
+			"l-comment": "joueur et non-invoc ou compagnon allié",
+			"m-comment": "non-joueur et non-invocation et non-static"
+		},
+		"teamB": {
+			"a": "Enemy",
+			"j": "Enemy summon",
+			"s": "Enemy static summon",
+			"i": "Enemy non-static summon",
+			"h": "Enemy player",
+			"g": "Enemy except caster",
+			"c": "Caster",
+			"l": "Enemy player or sidekick",
+			"d": "Enemy sidekick",
+			"m": "Enemy monster"
+		},
+		"condA": {
+			"comment": "*bBeEfFzZKoOPpTWUvVrRQq",
+			"b": "{{breed}}",
+			"e": "{{state}}",
+			"f": "{{monster}}",
+			"z": "{{sidekick}}",
+			"o": "cible = affecté",
+			"w": "teleported in invalid cell this turn",
+			"r": "est à travers un portail",
+			"p": "l'invocateur ou ses invocations",
+			"v": "percent life points",
+			"u": "l'invocation apparait",
+			"t": "telefrag",
+			"q": "limite d'invocation",
+			"k": "portée"
+		}
 	}
 }
