@@ -38,14 +38,14 @@ export class Mason {
 	}
 
 	public reloadMsnry() {
-		// console.log("mason reloadMsnry");
+		console.log("mason reloadMsnry");
 		if (this.msnry) {
 			this.msnry.reloadItems();
 			this.msnry.layout();
 		}
 	}
 	public layout() {
-		// console.log("mason layout()");
+		console.log("mason layout()");
 		if (this.msnry) {
 			this.msnry.layout();
 		}
@@ -140,6 +140,7 @@ export class util {
 	// be triggered. The function will be called after it stops being called for
 	// N milliseconds.
 	public static debounce(func, wait, immediate) {
+		// console.log("debouncing " + wait)
 		// 'private' variable for instance
 		// The returned function will be able to reference this due to closure.
 		// Each call to the returned function will share this common timer.
@@ -173,6 +174,7 @@ export class util {
 					// Call the original function with apply
 					// apply lets you define the 'this' object as well as the arguments
 					//    (both captured before setTimeout)
+					console.log("calling debounced func")
 					func.apply(context, args);
 				}
 			}, wait);

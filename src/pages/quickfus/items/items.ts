@@ -19,11 +19,11 @@ export class items {
     public constructor(readonly db: db, readonly emerald: Emerald, @IEventAggregator readonly ea: IEventAggregator) {
 		this.mason = new Mason();
 		this.mason.obj = this;
+
         this.ea.subscribe("itemsheet:loaded", () => {
-        //    util.debounce(() => {
-        //         console.log("debounced reload")
-        //         this.mason.reloadMsnry();
-        //     }, 100, false);
+           let bloop = util.debounce(() => {
+                this.mason.reloadMsnry();
+            }, 100, false);
         });
 
         this.ea.subscribe("quickfus:search", (filter: string) => this.search(filter));
@@ -34,11 +34,6 @@ export class items {
         this.ea.subscribe("emerald:loaded", () => {
             this.search();
         })
-        
-			this.mason.index = 0; // reset index
-			this.mason.data = [] //.splice(0, this.data.length); // reset select data
-			this.mason.fulldata = this.items; //response.content; // store full data
-			this.mason.showMore(100); // select data
 
 			// console.log("itemsearch query : " + response.content.length);
 			// console.log("itemsearch query : " + response.content);
@@ -60,6 +55,13 @@ export class items {
         // console.log("search0")
         this.scrollDown();
         console.log("search1")
+        
+			this.mason.index = 0; // reset index
+			this.mason.data = [] //.splice(0, this.data.length); // reset select data
+			this.mason.fulldata = this.items; //response.content; // store full data
+			this.mason.showMore(100); // select data
+            // this.mason.layout(); //.reloadMsnry();
+            this.mason.initMasonry();
     }
 
     public scrollDown() {
