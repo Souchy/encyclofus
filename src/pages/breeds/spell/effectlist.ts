@@ -12,7 +12,7 @@ export class Effectlist {
     public iscrit:boolean;
 
     public db: db;
-    public advanced: boolean = false;
+    public debug: boolean = false;
 
     public constructor(db: db, @I18N private readonly i18n: I18N) {
         this.db = db;
@@ -48,7 +48,8 @@ export class Effectlist {
 
     public isEffectVisible(e) {
         // 666 = ACTION_NOOP = "Pas d'effet supplémentaire"
-        return (this.isGreenList(e.effectUid) || e.visibleInTooltip || e.effect?.showInTooltip || this.advanced) // || e.visibleInBuffUi || e.visibleInFightLog) 
+        return this.debug ||
+            (this.isGreenList(e.effectUid) || e.visibleInTooltip || e.effect?.showInTooltip) // || e.visibleInBuffUi || e.visibleInFightLog) 
             && !this.isRedList(e.effectUid) && e.effectId != 666
     }
 

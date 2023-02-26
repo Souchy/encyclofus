@@ -1,6 +1,8 @@
 {
 	"true": "Oui",
 	"false": "Non",
+	"and": " et ",
+	"or": " ou ",
 
 	"delay": "(dans {{delay}} tours)",
 	"duration": "({{duration}} tours)",
@@ -102,6 +104,7 @@
 		"enemy": "Ennemi",
 		"ally": "Allié",
 		"allyExceptCaster": "Allié sauf lanceur",
+		"allExceptCaster": "Tous sauf lanceur",
 		"summon": "Invocation",
 		"summoner": "Non-Invocation",
 		"static": "Statique",
@@ -109,10 +112,86 @@
 		"visible": "Visible",
 		"invisible": "Invisible",
 		"portal": "Portail",
-		"summonCaster": "Invocation du lanceur",
 		"carried": "Porté",
 		"target": "Cible",
 		"attacker": "Attaquant",
-		"attackerCaster": "Attaquant-Lanceur"
+		"attackerCaster": "Attaquant-Lanceur",
+		"thestate": "les entités possédant l'état",
+
+		"themonster": "le monstre",
+		"affectsEntities": "Affecte",
+		"affectsEntitiesNot": "N'affecte pas",
+
+
+
+
+
+
+		"not": "pas",
+		"summonCaster": "l'invocateur ou ses invocations",
+		"theTarget": "la cible",
+		"theCaster": "le lanceur",
+
+		"is": "est",
+		"isNot": "n'est pas",
+		"a": "un(e)",
+		"hasState": "possède l'état",
+		"hasNotState": "ne possède pas l'état",
+		"isSummonCaster": "est une invocation du lanceur",
+
+		"notStatesPrefix": "ne possède pas",
+		"theState": "l'état",
+		"throughPortal": "est à travers un portail",
+		"notThroughPortal": "n'est pas à travers un portail",
+
+		"monster": {
+			"50000": "autour de l'invocation du lanceur",
+			"66666": "Allié sauf lanceur",
+			"99999": "n'est pas une Bombe, Mégabombee ou Bombe ambulante alliée"
+		},
+
+		"teamA": {
+			"a": "Allié",
+			"j": "Invocation alliée",
+			"s": "Invocation alliée statique",
+			"i": "Invocation alliée non-statique",
+			"h": "Joueur allié",
+			"g": "Allié sauf lanceur",
+			"c": "Lanceur",
+			"l": "Joueur allié ou Compagnon allié",
+			"d": "Compagnon allié",
+			"m": "Monstre allié",
+			"l-comment": "joueur et non-invoc ou compagnon allié",
+			"m-comment": "non-joueur et non-invocation et non-static"
+		},
+		"teamB": {
+			"a": "Ennemi",
+			"j": "Invocation ennemie",
+			"s": "Invocation ennemie statique",
+			"i": "Invocation ennemie non-statique",
+			"h": "Joueur ennemi",
+			"g": "Ennemi sauf lanceur",
+			"c": "Lanceur",
+			"l": "Joueur ennemi ou Compagnon ennemi",
+			"d": "Compagnon ennemi",
+			"m": "Monstre ennemi"
+		},
+		"condA": {
+			"comment": "*bBeEfFzZKoOPpTWUvVrRQq",
+			"b": "{{breed}}",
+			"e": "{{state}}",
+			"f": "{{monster}}",
+			"z": "{{sidekick}}",
+			"o": "cible = affecté",
+			"w": "teleported in invalid cell this turn",
+			"r": "est à travers un portail",
+			"p": "l'invocateur ou ses invocations",
+			"v": "percent life points",
+			"u": "l'invocation apparait",
+			"t": "telefrag",
+			"q": "limite d'invocation",
+			"k": "portée"
+		}
+
 	}
 }

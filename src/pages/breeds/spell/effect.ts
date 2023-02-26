@@ -2,6 +2,8 @@ import { I18N } from "@aurelia/i18n";
 import { bindable } from "aurelia";
 import { db } from "../../../DofusDB/db";
 import { SpellZone, Targets } from "../../../DofusDB/formulas";
+import { string } from "yargs";
+import { ConditionRenderer } from "../../conditions";
 
 export class Effect {
 
@@ -13,9 +15,11 @@ export class Effect {
 	public iscrit: boolean;
 
 	public db: db;
+	public conditionRenderer: ConditionRenderer;
 
-	public constructor(db: db, @I18N private readonly i18n: I18N) {
+	public constructor(db: db, conditionRenderer: ConditionRenderer, @I18N private readonly i18n: I18N) {
 		this.db = db;
+		this.conditionRenderer = conditionRenderer;
 	}
 
 	public get spell() {
@@ -100,51 +104,73 @@ export class Effect {
 	}
 
 	public hasTargetIcon(e) {
+		let str = this.conditionRenderer.getTeam(e);
+		// console.log("hasTargetIcon: " + str);
+		return str;
+		/*
 		let masks = Targets.mask(e.targetMask.split(","))
-        // console.log("masks: " + e.targetMask)
+        // console.log("hasTargetIcon? : " + e.targetMask)
 		// console.log("e: " + e.effectUid + ", targets: " + masks);
 		// if(masks.includes("fighter") && masks.includes("ally")) {
 		// 	console.log("!!ally fighter!!")
 		// }
 		return masks.length > 0 && (!masks.includes("fighter") || masks.length > 1)
+		*/
 	}
 	public getTargetIcon(e) {
+		let str = this.conditionRenderer.getTeam(e);
+		if(str)
+			return this.db.getFighterIconStyle(str);
+		return "";
+		/*
 		let masks = Targets.mask(e.targetMask.split(","))
+		console.log(`getTargetIcon masks: ${masks}`);
 		let types = ["caster", "enemy", "ally", "fighter"]
-		if(masks.includes("enemy") && masks.includes("allyExceptCaster")) {
-			return this.db.getFighterIconStyle("fighter");
-		}
 		for (let t of types) {
 			if (masks.includes(t))
 				return this.db.getFighterIconStyle(t);
 		}
-		if(masks.includes("allyExceptCaster"))
+		if (masks.includes("summonCaster"))
 			return this.db.getFighterIconStyle("ally");
+		if (masks.includes("allyExceptCaster"))
+			return this.db.getFighterIconStyle("ally");
+		if (masks.includes("allExceptCaster"))
+			return this.db.getFighterIconStyle("fighter");
 		return "";
+		*/
 	}
+
 	public getTargetString(e) {
+		// return this.conditionRenderer.renderTargetMask(e.targetMask);
+		return this.conditionRenderer.render(e);
+	}
+	public hasCondition(e) : boolean {
+		return Targets.hasCondition(e.targetMask);
+	}
+
+	/*
+	public getConditionString(e): string {
 		let masks = Targets.mask(e.targetMask.split(","))
 		let strs: string[] = [];
 
-		for (let m of masks) {
-			if (m.includes("creature") || m.includes("state")) continue;
-			if (m.includes("fighter")) continue;
-			if (m.includes("*summoner")) continue;
+		let positiveStr = this.i18n.tr("target.affectsEntities");
+		let negativeStr = this.i18n.tr("target.affectsEntitiesNot");
 
-			let not = m.includes("!");
-			let cond = m.includes("*");
-			m = m.replace("!", "");
-			m = m.replace("*", "");
-			let str = this.i18n.tr("target." + m);
-			if (str == "target." + m)
-				continue;
-			if (cond) str = this.i18n.tr("target.caster") + "-" + str;
-			strs.push(not ? this.i18n.tr(!not + "") + "-" + str : str);
+		for(let m of masks) {
+			if (!m.includes("*")) 
+				positiveStr += " " + (this.i18n.tr("target." + m));
 		}
 
+		let positive: string[] = [];
+		let negative: string[] = [];
+
 		for (let m of masks) {
+			if (!m.includes("*")) {
+				// console.log("ignore condition: " + m);
+				continue;
+			}
 			let not = m.includes("!");
-			let cond = m.includes("*");
+			// let cond = m.includes("*");
 			m = m.replace("!", "");
 			m = m.replace("*", "");
 			if (m.includes("creature")) {
@@ -154,15 +180,18 @@ export class Effect {
 					console.log("summon doesnt exist: " + summonId)
 					continue;
 				}
-				let summonName = this.db.getI18n(summon.nameId);
 				// summons like steamer's
+				let summonName = this.db.getI18n(summon.nameId);
+				let fullstr = this.i18n.tr("target.themonster") + " " + summonName;
 				if (not)
-					summonName = this.i18n.tr(!not + "") + "-" + summonName;
-				if (cond)
-					summonName = this.i18n.tr("target.caster") + "-" + summonName;
-				strs.push("" + summonName);
+					negative.push(fullstr);
+				else
+					positive.push(fullstr);
+				if (not)
+					summonName = this.i18n.tr("target.not") + " " + summonName;
+				strs.push(summonName);
 				continue;
-			}
+			} else
 			if (m.includes("state")) {
 				let stateId = +m.substring("state".length);
 				let state = this.db.jsonStates[stateId];
@@ -176,18 +205,34 @@ export class Effect {
 					stateName = stateName.substring(0, stateName.indexOf("</u>"));
 				}
 				// states like saoul
+				let fullstr = this.i18n.tr("target.thestate") + " " + stateName;
 				if (not)
-					stateName = this.i18n.tr(!not + "") + "-" + stateName;
-				if (cond)
-					stateName = this.i18n.tr("target.caster") + "-" + stateName;
+					negative.push(fullstr);
+				else
+					positive.push(fullstr);
+				// if (cond)
+				// 	stateName = this.i18n.tr("target.caster") + "-" + stateName;
+				if (not)
+					stateName = this.i18n.tr("target.not") + " " + stateName;
 				strs.push(stateName);
 				continue;
+			} else {
+				let str = this.i18n.tr("target." + m);
+				if (str == "target." + m)
+					continue;
+				// if (cond) str = this.i18n.tr("target.caster") + "-" + str;
+				if (not)
+					str = this.i18n.tr("target.not") + " " + str; // his.i18n.tr(!not + "") + "-" + str
+				strs.push(str);
 			}
 		}
-
-		let output = strs.join(", ");
+		let output = strs.join(" et ");
+		// output = positiveStr + " et " + positive.join(" et ").toLowerCase();
+		// output += "\n";
+		// output += negativeStr + " " + negative.join(" et ").toLowerCase();
 		return output;
 	}
+	*/
 
 	public renderItemEffectI18n(e) {
 		let effect = this.db.jsonEffects.filter(ei => ei.id == e.effectId)[0];
