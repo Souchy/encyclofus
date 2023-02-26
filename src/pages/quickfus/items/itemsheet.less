@@ -1,8 +1,72 @@
 
+:root {
+  /* --bg0: #212121; */
+  --bg0: #121212; /* level 0 dark */
+  --bg1: #212121; /* level 1 dark */
+  --front0: rgba(255, 255, 255, 0.87); /* #bdbdbd; /* text on background */
+  --front1: black; /* text on accent */
+  --accent0: #BB86FC; /* purple */
+  --accent1: #03DAC5; /* teal */
+  --accent2: darkred; /* #CF6679; /* red error */
+  --accent1a: rgba(3, 218, 197, 0.5); /* teal with alpha */
+  --shadow: black;
+
+  --surface: #FFFFFF;
+  --onsurface: #121212;
+  --primarysurface: #3700B3;
+}
+
 itemsheet {
+    --sheetaccent: var(--accent1);
+    --sheetaccenthover: var(--accent0);
+
+    width: 250px;
+    min-height: 150px;
+    display: block;
+    cursor: pointer;
     margin: 5px;
     padding: 5px;
-    border: 1px black solid;
-    display: block;
-    width: 250px;
+
+    border: 1px solid transparent;
+
+    img {
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+    }
+
+    table {
+        // --bs-table-accent-bg: 
+        --bs-table-striped-bg: rgba(0, 0, 0, 0.00) !important;
+    }
+
+    .title {
+        color: var(--sheetaccent);
+        font-size: 1.1rem;
+    }
+
+    .weaponEffects {
+        display: block;
+        // padding-bottom: 5px !important;
+        // border-bottom: 1px dashed var(--accent1);
+    }
+
+    .conditions {
+        border-top: 1px dashed var(--sheetaccent);
+        opacity: 0.5;
+    }
+}
+
+
+itemsheet:hover {
+    border-color: var(--sheetaccenthover);
+    .title {
+        color: var(--sheetaccenthover);
+    }
+    .conditions {
+        border-color: var(--sheetaccenthover);
+    }
+    .weaponEffects {
+        border-color: var(--sheetaccenthover);
+    }
 }

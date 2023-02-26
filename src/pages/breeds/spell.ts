@@ -1,7 +1,7 @@
 import { bindable, DI, inject } from "aurelia";
-import { db } from '../../../DofusDB/db';
+import { db } from '../../DofusDB/db';
 import { I18N } from '@aurelia/i18n';
-import { SpellZone } from "../../../DofusDB/formulas";
+import { SpellZone } from "../../DofusDB/formulas";
 
 @inject(db)
 export class Spell {

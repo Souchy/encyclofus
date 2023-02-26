@@ -1,20 +1,19 @@
 <import from="./effectlist"></import>
-<import from="./spell"></import>
+<import from="../breeds/spell"></import>
 
 <!-- ${effect.effectId} - ${effect.effectUid} -->
 
-
-<table class="table table-striped table-sm table-borderless" style="--bs-table-striped-bg: none; margin-bottom: 0px;">
+<table class="table table-striped table-sm table-borderless ${effectTypeStyle}" css="--bs-table-striped-bg: none; margin-bottom: 0px;" if.bind="emerald.effects">
     <tbody>
         <tr id="${effect.effectUid}">
             <td style="width: 20px; padding: 0px; padding-left: 4px;" if.bind="getIcon(effect)">
                 <div style.bind="getIcon(effect)"></div>
             </td>
-            <td style="vertical-align: middle;" innerHtml.bind="renderEffectI18n(effect)"></td>
-            <td style="vertical-align: middle; position: absolute; left: 0px; width: 100%; height: 100%;" if.bind="isStateSubspell(effect)">
+            <td innerHtml.bind="renderEffectI18n(effect)" style="vertical-align: middle;"></td>
+            <td if.bind="isStateSubspell(effect)" style="vertical-align: middle; position: absolute; left: 0px; width: 100%; height: 100%;">
                 <spell class="spellHover" if.bind="depth <= 1" spellid.bind="getStateSubspellId(effect)" depth.bind="depth+1"></spell>
             </td>
-            <td if.bind="isDuration(effect)" style="vertical-align: middle; width: 25px; height: 32px; ">
+            <td if.bind="isDuration(effect)" class="tooltipx" style="vertical-align: middle; width: 25px; height: 32px; ">
                 <img style="vertical-align: middle; margin-left: -10px; margin-right: -10px;" src.bind="getDispellIcon(effect)"></img>
                 <div class="tooltiptext">${getDispellString(effect)}</div>
             </td>
@@ -29,11 +28,12 @@
         </tr>
     </tbody>
 </table>
+
 <!--
-<table class="table table-striped table-sm table-borderless" style="--bs-table-striped-bg: none; margin-bottom: 0px;">
+<table class="table table-striped table-sm table-borderless ${effectTypeStyle}" css="--bs-table-striped-bg: none; margin-bottom: 0px;" if.bind="emerald.effects">
     <tbody>
         <tr if.bind="hasCondition(effect)">
-            <td style="vertical-align: middle;">Si ${getConditionString(effect)}:</td>
+            <td style="vertical-align: middle;" innerHtml.bind="getTargetConditions(effect)"></td>
             <td if.bind="db.getAoeIconUrl(effect)" class="tooltipx" style="width: 37px; height: 32px; padding: 0px; vertical-align: middle;">
                 <img style="width: 36px; height: 18px;" src.bind="db.getAoeIconUrl(effect)"></img>
                 <span class="tooltiptext">${getZoneString(effect)}</span>

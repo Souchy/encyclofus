@@ -2,17 +2,27 @@
 <import from="./itemsheet"></import>
 
 
-<itemfilteradvanced></itemfilteradvanced>
+<!-- <itemfilteradvanced></itemfilteradvanced> -->
 
+<!-- spinner -->
+<div if.bind="items.length == 0" class="loaderContainer">
+    <div class="loader"></div>
+</div>
 
-<div if.bind="db.isLoaded">
+<div if.bind="db.isLoaded && isLoaded && items.length > 0">
 
     ${items.length}
 
     <button click.delegate="search()">Search</button>
 
-    <div class="d-flex">
-        <itemsheet repeat.for="item of items" item.bind="item"></itemsheet>
-    </div>
+    <!-- <div class="d-flex"> -->
+    <itemsheet repeat.for="item of items" item.bind="item"></itemsheet>
+    <!-- </div> -->
+
+    <!-- <div class="grid-wrapper">
+        <div class="grid" ref="grid" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 200 }'>
+            <itemsheet class="grid-item" repeat.for="item of items" item.bind="item"></itemsheet>
+        </div>
+    </div> -->
 
 </div>

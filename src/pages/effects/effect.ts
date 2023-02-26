@@ -1,10 +1,11 @@
+import { Emerald } from './../../ts/emerald';
 import { I18N } from "@aurelia/i18n";
-import { bindable } from "aurelia";
-import { db } from "../../../DofusDB/db";
-import { SpellZone, Targets } from "../../../DofusDB/formulas";
-import { string } from "yargs";
-import { ConditionRenderer } from "../../conditions";
+import { bindable, inject } from "aurelia";
+import { db } from "../../DofusDB/db";
+import { SpellZone, Targets } from "../../DofusDB/formulas";	
+import { ConditionRenderer } from "../conditions";
 
+// @inject(db, Emerald, ConditionRenderer)
 export class Effect {
 
 	@bindable
@@ -14,12 +15,15 @@ export class Effect {
 	@bindable
 	public iscrit: boolean;
 
-	public db: db;
+	public db: db;	
+	public emerald: Emerald;
 	public conditionRenderer: ConditionRenderer;
 
-	public constructor(db: db, conditionRenderer: ConditionRenderer, @I18N private readonly i18n: I18N) {
+	public constructor(db: db, conditionRenderer: ConditionRenderer, emerald: Emerald, @I18N private readonly i18n: I18N) {
+		// console.log("ctor: " + conditionRenderer)
 		this.db = db;
 		this.conditionRenderer = conditionRenderer;
+		this.emerald = emerald;
 	}
 
 	public get spell() {
@@ -35,11 +39,11 @@ export class Effect {
 	public getDispellString(e) {
 		if (e.dispellable == db.IS_DISPELLABLE) {
 			return this.i18n.tr("dispell");
-		}  
-		if(e.dispellable == db.IS_DISPELLABLE_ONLY_BY_DEATH) {
+		}
+		if (e.dispellable == db.IS_DISPELLABLE_ONLY_BY_DEATH) {
 			return this.i18n.tr("?dispell");
 		}
-		if(e.dispellable == db.IS_NOT_DISPELLABLE) {
+		if (e.dispellable == db.IS_NOT_DISPELLABLE) {
 			return this.i18n.tr("!dispell");
 		}
 	}
@@ -54,7 +58,7 @@ export class Effect {
 			return name;
 		}
 		let minHole = "";
-		if(zone.zoneMinSize > 0) {
+		if (zone.zoneMinSize > 0) {
 			minHole = this.i18n.tr("zone.minZone", { minSize: zone.zoneMinSize })
 		}
 		return this.i18n.tr("zone.zone", { shape: name, size: zone.zoneSize }) + minHole;
@@ -88,9 +92,67 @@ export class Effect {
 		return this.db.jsonSpells[key];
 	}
 
-	public getIcon(val: string) {
-		if (val) {
-			return this.db.getModIconStyle(this.renderEffectI18n(val));
+	public isItem(effect) {
+		// console.log("effect: " + effect.spellId)
+		return effect.spellId === -1;
+	}
+
+	public get effectTypeStyle() {
+		if (this.isItem(this.effect)) return "itemEffect"
+		else return "spellEffect"
+	}
+
+	public getEffect() {
+		let effect = this.emerald.effects?.filter(e => e.id == this.effect.effectId)[0];
+		return effect;
+	}
+	public getCharacteristic() {
+		let charac = this.emerald.characteristics?.filter(c => c.id == this.getEffect().characteristic)[0];
+		return charac;
+	}
+
+	// public getEffectMinMax() {
+	// 	let min = this.effect.diceNum;
+	// 	let max = this.effect.diceSide;
+	// 	return "";
+	// }
+	// public getCharacteristicName() {
+	// 	let c = this.getCharacteristic();
+	// 	return this.db.getI18n(c.nameId);
+	// }
+
+	public get isFightEffect() {
+		if(!this.isItem(this.effect)) {
+			// console.log("not a item effect")
+			return true;
+		}
+		let effect = this.getEffect();
+		return effect.useInFight
+	}
+
+	public getIcon(eff) {
+		// try {
+		// 	let effect = this.getEffect();
+		// 	if(effect) {
+		// 		let carac = this.getCharacteristic();
+		// 		if(carac) {
+		// 			console.log("icon by carac")
+		// 			return "vertical-align: middle; width: 22px; height: 32px; background-image: url('" + this.db.commonUrlPath + "characteristics/" + carac.keyword + ".png');"
+		// 				// + "background-position: -" + x + "px; background-position-y: -" + y + "px;"
+		// 		}
+		// 		// return "";
+		// 	}
+		// } catch(err) {
+		// 	console.error(err);
+		// }
+		if (!this.isFightEffect) {
+			// console.log("not a fight effect")
+			return "";
+		}
+		if (eff) {
+			// console.log("render for icon")
+			let str = this.db.getModIconStyle(this.renderEffectI18n(eff), this.isItem(eff));
+			return str;
 		}
 		return "";
 	}
@@ -105,158 +167,47 @@ export class Effect {
 
 	public hasTargetIcon(e) {
 		let str = this.conditionRenderer.getTeam(e);
-		// console.log("hasTargetIcon: " + str);
 		return str;
-		/*
-		let masks = Targets.mask(e.targetMask.split(","))
-        // console.log("hasTargetIcon? : " + e.targetMask)
-		// console.log("e: " + e.effectUid + ", targets: " + masks);
-		// if(masks.includes("fighter") && masks.includes("ally")) {
-		// 	console.log("!!ally fighter!!")
-		// }
-		return masks.length > 0 && (!masks.includes("fighter") || masks.length > 1)
-		*/
 	}
 	public getTargetIcon(e) {
 		let str = this.conditionRenderer.getTeam(e);
 		if(str)
 			return this.db.getFighterIconStyle(str);
 		return "";
-		/*
-		let masks = Targets.mask(e.targetMask.split(","))
-		console.log(`getTargetIcon masks: ${masks}`);
-		let types = ["caster", "enemy", "ally", "fighter"]
-		for (let t of types) {
-			if (masks.includes(t))
-				return this.db.getFighterIconStyle(t);
-		}
-		if (masks.includes("summonCaster"))
-			return this.db.getFighterIconStyle("ally");
-		if (masks.includes("allyExceptCaster"))
-			return this.db.getFighterIconStyle("ally");
-		if (masks.includes("allExceptCaster"))
-			return this.db.getFighterIconStyle("fighter");
-		return "";
-		*/
 	}
-
 	public getTargetString(e) {
-		// return this.conditionRenderer.renderTargetMask(e.targetMask);
 		return this.conditionRenderer.render(e);
+	}
+	public getTargetConditions(e) {
+		return this.conditionRenderer.renderConditionsOnly(e);
 	}
 	public hasCondition(e) : boolean {
 		return Targets.hasCondition(e.targetMask);
 	}
 
-	/*
-	public getConditionString(e): string {
-		let masks = Targets.mask(e.targetMask.split(","))
-		let strs: string[] = [];
-
-		let positiveStr = this.i18n.tr("target.affectsEntities");
-		let negativeStr = this.i18n.tr("target.affectsEntitiesNot");
-
-		for(let m of masks) {
-			if (!m.includes("*")) 
-				positiveStr += " " + (this.i18n.tr("target." + m));
-		}
-
-		let positive: string[] = [];
-		let negative: string[] = [];
-
-		for (let m of masks) {
-			if (!m.includes("*")) {
-				// console.log("ignore condition: " + m);
-				continue;
-			}
-			let not = m.includes("!");
-			// let cond = m.includes("*");
-			m = m.replace("!", "");
-			m = m.replace("*", "");
-			if (m.includes("creature")) {
-				let summonId = +m.substring("creature".length);
-				let summon = this.db.jsonSummons[summonId];
-				if (!summon) {
-					console.log("summon doesnt exist: " + summonId)
-					continue;
-				}
-				// summons like steamer's
-				let summonName = this.db.getI18n(summon.nameId);
-				let fullstr = this.i18n.tr("target.themonster") + " " + summonName;
-				if (not)
-					negative.push(fullstr);
-				else
-					positive.push(fullstr);
-				if (not)
-					summonName = this.i18n.tr("target.not") + " " + summonName;
-				strs.push(summonName);
-				continue;
-			} else
-			if (m.includes("state")) {
-				let stateId = +m.substring("state".length);
-				let state = this.db.jsonStates[stateId];
-				if (!state) {
-					console.log("state doesnt exist: " + stateId)
-					continue;
-				}
-				let stateName = this.db.getI18n(state.nameId);
-				if (stateName.includes("{")) {
-					stateName = stateName.substring(stateName.indexOf("<u>") + 3);
-					stateName = stateName.substring(0, stateName.indexOf("</u>"));
-				}
-				// states like saoul
-				let fullstr = this.i18n.tr("target.thestate") + " " + stateName;
-				if (not)
-					negative.push(fullstr);
-				else
-					positive.push(fullstr);
-				// if (cond)
-				// 	stateName = this.i18n.tr("target.caster") + "-" + stateName;
-				if (not)
-					stateName = this.i18n.tr("target.not") + " " + stateName;
-				strs.push(stateName);
-				continue;
-			} else {
-				let str = this.i18n.tr("target." + m);
-				if (str == "target." + m)
-					continue;
-				// if (cond) str = this.i18n.tr("target.caster") + "-" + str;
-				if (not)
-					str = this.i18n.tr("target.not") + " " + str; // his.i18n.tr(!not + "") + "-" + str
-				strs.push(str);
-			}
-		}
-		let output = strs.join(" et ");
-		// output = positiveStr + " et " + positive.join(" et ").toLowerCase();
-		// output += "\n";
-		// output += negativeStr + " " + negative.join(" et ").toLowerCase();
-		return output;
-	}
-	*/
-
 	public renderItemEffectI18n(e) {
-		let effect = this.db.jsonEffects.filter(ei => ei.id == e.effectId)[0];
-		let charac = this.db.jsonCharacteristics.filter(c => c.id == effect.characteristic)[0];
+		let effect = this.emerald.effects.filter(ei => ei.id == e.effectId)[0];
+		let charac = this.emerald.characteristics.filter(c => c.id == effect.characteristic)[0];
 		let text = this.db.getI18n(effect.descriptionId);
-		return e.diceNum + " " +  this.db.getI18n(charac.nameId);
+		return e.diceNum + " " + this.db.getI18n(charac.nameId);
 		// return "";
 	}
 
 	public renderEffectI18n(e) {
-		if(e.baseEffectId) {
-			let effect = this.db.jsonEffects.filter(ei => ei.id == e.effectId)[0];
+		if (e.baseEffectId) {
+			let effect = this.emerald.effects.filter(ei => ei.id == e.effectId)[0];
 			e.effect = effect;
 			// return this.renderItemEffectI18n(e);
 		}
 		let text = this.db.getI18n(e.effect?.descriptionId);
-		if(!text) text = "#1";
+		if (!text) text = "#1";
 		let has1 = text.includes("#1");
 		let has2 = text.includes("#2");
 		let has3 = text.includes("#3");
 		// invocation
 		if (this.hasSummon(e)) {
 			let summon = this.getSummon(e);
-			if(summon) {
+			if (summon) {
 				// console.log("monster: " + JSON.stringify(summon));
 				let name = this.db.getI18n(summon.nameId);
 				text = text.replace("#1", name);
@@ -279,7 +230,7 @@ export class Effect {
 					let data = obj.split(",");
 					let subSpellId = data[1];
 					let stateSpell = this.db.jsonSpells[subSpellId];
-					obj = obj.split("::")[1]; 
+					obj = obj.split("::")[1];
 					name += obj;
 				}
 				text = text.replace("#1", name);
@@ -288,7 +239,7 @@ export class Effect {
 		// augmente ou réduit le cooldown du sort 
 		if (this.db.isEffectChargeCooldown(e)) {
 			let subspell = this.getSubSpell(e);
-			if(subspell) {
+			if (subspell) {
 				let name = this.db.getI18n(subspell.nameId);
 				text = text.replace("#1", name); // this.name
 				text = text.replace("#3", e.value);
@@ -329,17 +280,45 @@ export class Effect {
 			text = text.replace("#3", e.value);
 		}
 
+		text = this.renderEffectPart2(e, text);
+		return text;
+	}
+
+	public renderEffectPart2(e, text: string): string {
 		// min/max
 		let min = e.diceNum;
 		let max = e.diceSide;
 		text = text.replace("#1", min);
 		if (max) {
+			let values = text.split("#2")[0];
+			let str = text.split("#2")[1];
+
+			if(str) {
+				str = str.trim();
+				text = values + "#2";
+				let color = this.getStatColor(str);
+				if(color) str = "<span style='"+color+"'>"+str+"</span>"
+			}
+
 			text = text.replace("{~1~2", "")
 			text = text.replace("}", "")
 			text = text.replace("#2", max);
+			if(str) text += " " + str;
 		} else {
+			let values = text.split("#2")[0];
+			let str = text.split("#2")[1];
+			
+			if(str) {
+				str = str.trim();
+				text = values + "#2";
+				let color = this.getStatColor(str);
+				if(color) str = "<span style='"+color+"'>"+str+"</span>"
+			}
+
 			text = text.substring(0, text.indexOf("{")) + text.substring(text.indexOf("}") + 1)
 			text = text.replace("#2", "");
+			
+			if(str) text += " " + str;
 		}
 		// conjugaison
 		if (min > 1 || max > 1) {
@@ -377,6 +356,33 @@ export class Effect {
 			}
 		}
 		return false;
+	}
+
+	public getStatColor(name: string) {
+		switch (name) {
+			case "PA": return "color: gold;"
+			case "PM": return "color: #03fc3d;"
+			case "Vitalité": return "color: #e1c699;";
+			// case "Vitalité": return "color: beige;";
+			// case "Sagesse": return "color: purple;";
+			case "% Résistance Neutre":
+				return "color: gray;";
+			case "% Résistance Terre":
+			case "Force":
+				return "color: #965948;"; // brown
+			case "% Résistance Feu":
+			case "Intelligence":
+				return "color: #c42b00;" // red
+			case "% Résistance Eau":
+			case "Chance":
+				return "color: #34bdeb;" // blue
+			case "% Résistance Air":
+			case "Agilité":
+				return "color: #0d9403;" // green
+			case "Puissance":
+				return "color: #cf03fc;"; //
+			default: return "";
+		}
 	}
 
 	public getStateSubspellId(e) {

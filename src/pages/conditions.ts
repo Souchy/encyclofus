@@ -82,6 +82,19 @@ export class ConditionRenderer {
         // output = this.getTargetString(effect.targetMask);
         return output;
     }
+    public renderConditionsOnly(effect): string {
+        let targetMask = effect.targetMask;
+        let masks = targetMask.split(","); //Targets.mask(targetMask.split(","))
+        // console.log("condition master: " + targetMask + " -> " + masks);
+        let output = "";
+        // let team = this.teamCondition(targetMask);
+        let caster = this.conditionCaster(masks);
+        let target = this.conditionTarget(masks);
+        // output += `<div class='tooltipLine'>${team}</div>`;
+        if (caster) output += `<div class='tooltipLine'>${caster}</div>`;
+        if (target) output += `<div class='tooltipLine'>${target}</div>`;
+        return output;
+    }
 
     public getTeam(effect): string {
         // caster, ally, enemy, fighter
@@ -112,9 +125,21 @@ export class ConditionRenderer {
         let team = this.teamCondition(targetMask);
         let caster = this.conditionCaster(masks);
         let target = this.conditionTarget(masks);
-        output += `<div>${team}</div>`;
-        if (caster) output += `<div class='tooltipLine'>${caster}</div>`;
-        if (target) output += `<div class='tooltipLine'>${target}</div>`;
+        
+        if(team) {
+            if (!caster && !target) 
+                output += `<div >${team}</div>`;
+            if (caster || target)
+                output += `<div class='tooltipLineBorder'>${team}</div>`;
+        }
+        if(caster) {
+            if (!target)
+                output += `<div class='tooltipLine'>${caster}</div>`;
+            if (target)
+                output += `<div class='tooltipLine tooltipLineBorder'>${caster}</div>`;
+        }
+        if (target)
+            output += `<div class='tooltipLine'>${target}</div>`;
         return output;
     }
 
@@ -141,58 +166,8 @@ export class ConditionRenderer {
                 return this.i18n.tr("target.teamB." + t.toLowerCase());
         });
         let output = translated.join(this.i18n.tr("or"));
-
-        // if(masks.filter(t => t == t.toLowerCase()).length == masks.length) {
-        //     let teamname = this.i18n.tr("target.ally");
-        //     while(output.includes(teamname))
-        //         output = output.replace(`${teamname}`, ``);
-        //     output = teamname + " " + output;
-        // }
-        // if(masks.filter(t => t == t.toUpperCase()).length == masks.length) {
-        //     let teamname = this.i18n.tr("target.enemy");
-        //     while(output.includes(teamname))
-        //         output = output.replace(`${teamname}`, ``);
-        //     // console.log(`HI ENEMIES (${teamname}): ` + output);
-        //     output = teamname + " " + output;
-        // }
-        // translated = translated.map(t => t.replace("  ", " ").trim());
-        // output = output.replace(`  `, ` `).trim();
-
         output = this.capitalizeFirstLetter(output);
         return output;
-        /*
-        // if(masks.includes("!summonCaster"))
-        //     return this.i18n.tr("target.not") + " " + this.i18n.tr("target.summonCaster");
-        // if(masks.includes("summonCaster"))
-        //     return this.i18n.tr("target.summonCaster");
-        // if(masks.includes("fighter"))
-
-        // let masks = Targets.mask(e.targetMask.split(","))
-        let strs: string[] = [];
-
-        for (let m of masks) {
-            // if (m.includes("creature") || m.includes("state")) continue;
-            // if (m.includes("fighter")) continue;
-            // if (m.includes("*summoner")) continue;
-            if (m.includes("*")) continue;
-
-            let not = m.includes("!");
-            // let cond = m.includes("*");
-            m = m.replace("!", "");
-            // m = m.replace("*", "");
-            let str = this.i18n.tr("target." + m);
-            if (str == "target." + m)
-                continue;
-            // if (cond) str = this.i18n.tr("target.caster") + "-" + str;
-            if (not)
-                this.i18n.tr(!not + "") + "-" + str
-            strs.push(str);
-        }
-
-        let output = strs.join(this.i18n.tr("or")); // ", "
-        output = this.capitalizeFirstLetter(output);
-        return output;
-        */
     }
 
     private conditionCaster(masks: string[]) {
@@ -326,135 +301,6 @@ export class ConditionRenderer {
             return this.i18n.tr("target.isNot") + " " + this.i18n.tr("target.summonCaster");
     }
     //#endregion
-
-
-
-    // public letsDoConditions(masks: string[]) {
-    // 	let positives = masks.filter(t => !t.includes("!"));
-    // 	{
-    // 		let states = positives.filter(t => t.includes("state"));
-    // 		[this.i18n.tr("statesPrefix"), this.i18n.tr("theState")].concat()
-    // 	}
-    // 	let negatives = masks.filter(t => t.includes("!")).map(t => t.replace("!", ""));
-    // 	{
-    // 		let states = positives.filter(t => t.includes("state"));
-
-    // 	}
-
-    // 	let stateId = +m.substring("state".length);
-    // 	let state = this.db.jsonStates[stateId];
-    // 	if (!state) {
-    // 		console.log("state doesnt exist: " + stateId)
-    // 		continue;
-    // 	}
-    // 	let stateName = this.db.getI18n(state.nameId);
-    // 	if (stateName.includes("{")) {
-    // 		stateName = stateName.substring(stateName.indexOf("<u>") + 3);
-    // 		stateName = stateName.substring(0, stateName.indexOf("</u>"));
-    // 	}
-    // 	// states like saoul
-    // 	str = this.i18n.tr("target.thestate") + " " + stateName;
-    // }
-
-
-    public getTargetString(e) {
-        let masks = Targets.mask(e.targetMask.split(","))
-        let strs: string[] = [];
-
-        for (let m of masks) {
-            // if (m.includes("creature") || m.includes("state")) continue;
-            // if (m.includes("fighter")) continue;
-            // if (m.includes("*summoner")) continue;
-            if (m.includes("*")) continue;
-
-            let not = m.includes("!");
-            // let cond = m.includes("*");
-            m = m.replace("!", "");
-            // m = m.replace("*", "");
-            let str = this.i18n.tr("target." + m);
-            if (str == "target." + m)
-                continue;
-            // if (cond) str = this.i18n.tr("target.caster") + "-" + str;
-            if (not)
-                this.i18n.tr(!not + "") + "-" + str
-            strs.push(str);
-        }
-
-        let output = "<div>" + strs.join(", ") + "</div>";
-        output += this.getConditionString(e);
-        return output;
-    }
-    public getConditionString(targetMask): string {
-        let masks = Targets.mask(targetMask.split(","))
-        let strs: string[] = [];
-
-        console.log("masks: " + targetMask + " -> " + masks);
-
-        let positiveStr = this.i18n.tr("target.affectsEntities");
-        let negativeStr = this.i18n.tr("target.affectsEntitiesNot");
-
-        // for(let m of masks) {
-        // 	if (!m.includes("*")) 
-        // 		positiveStr += " " + (this.i18n.tr("target." + m));
-        // }
-
-        let positive: string[] = [];
-        let negative: string[] = [];
-
-
-        for (let m of masks) {
-            if (!m.includes("*")) {
-                // console.log("ignore condition: " + m);
-                continue;
-            }
-            let not = m.includes("!");
-            // let cond = m.includes("*");
-            m = m.replace("!", "");
-            m = m.replace("*", "");
-            let str = "";
-            if (m.includes("creature")) {
-                let summonId = +m.substring("creature".length);
-                let summon = this.db.jsonSummons[summonId];
-                if (!summon) {
-                    console.log("summon doesnt exist: " + summonId)
-                    continue;
-                }
-                // summons like steamer's
-                let summonName = this.db.getI18n(summon.nameId);
-                str = this.i18n.tr("target.themonster") + " " + summonName;
-            } else
-                if (m.includes("state")) {
-                    let stateId = +m.substring("state".length);
-                    let state = this.db.jsonStates[stateId];
-                    if (!state) {
-                        console.log("state doesnt exist: " + stateId)
-                        continue;
-                    }
-                    let stateName = this.db.getI18n(state.nameId);
-                    if (stateName.includes("{")) {
-                        stateName = stateName.substring(stateName.indexOf("<u>") + 3);
-                        stateName = stateName.substring(0, stateName.indexOf("</u>"));
-                    }
-                    // states like saoul
-                    str = this.i18n.tr("target.thestate") + " " + stateName;
-                } else {
-                    str = this.i18n.tr("target." + m);
-                    if (str == "target." + m)
-                        continue;
-                }
-            if (not)
-                negative.push(str);
-            else
-                positive.push(str);
-        }
-        let output = "";
-        if (positive.length > 0)
-            output += "<div class='tooltipLine'>" + positiveStr + " " + positive.join(" et ") + "</div>";
-        if (negative.length > 0)
-            output += "<div class='tooltipLine'>" + negativeStr + " " + negative.join(" et ") + "</div>";
-        return output;
-    }
-
 
 }
 

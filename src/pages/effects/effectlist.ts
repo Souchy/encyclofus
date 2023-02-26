@@ -1,6 +1,6 @@
 import { I18N } from "@aurelia/i18n";
 import { bindable } from "aurelia";
-import { db } from "../../../DofusDB/db";
+import { db } from "../../DofusDB/db";
 
 export class Effectlist {
 
@@ -19,38 +19,33 @@ export class Effectlist {
     }
 
     public get paddingLeft() {
+        if(this.depth == 0) return 0;
         let paddingLeft = this.depth * 15 + 4;
         return paddingLeft;
     }
 
-    public get tdStyle() {
-        let style = "padding: 0px;";
-        if (this.depth > 0)
-            return style + "padding-left: " + this.paddingLeft + "px;"
-        else 
-            return style;
-    }
+    // public get tdStyle() {
+    //     let style = "padding: 0px;";
+    //     if (this.depth > 0)
+    //         return style + "padding-left: " + this.paddingLeft + "px;"
+    //     else 
+    //         return style;
+    // }
 
-    public get tableStyle() {
-        if (this.depth > 0)
-            return "width: 100%; margin-bottom: 0px;";
-        else 
-            return "";
-    }
-
-    public isGreenList(e) {
+    public isGreenList(e: number) {
         return this.db.jsonGreenListEffects.green.includes(e);
     }
-    public isRedList(e) {
+    public isRedList(e: number) {
         // console.log("redlist: " + JSON.stringify(this.db.jsonGreenListEffects))
         return this.db.jsonGreenListEffects.red.includes(e);
     }
 
-    public isEffectVisible(e) {
+    public isEffectVisible(e: any) {
+        let mode = this.db.effectMode;
+        if(mode == "debug") return true;
         // 666 = ACTION_NOOP = "Pas d'effet supplémentaire"
-        return this.debug ||
-            (this.isGreenList(e.effectUid) || e.visibleInTooltip || e.effect?.showInTooltip) // || e.visibleInBuffUi || e.visibleInFightLog) 
-            && !this.isRedList(e.effectUid) && e.effectId != 666
+        return (this.isGreenList(e.effectUid) || e.visibleInTooltip || (e.effect?.showInTooltip && mode == "detailed")) // || e.visibleInBuffUi || e.visibleInFightLog) 
+                && !this.isRedList(e.effectUid) && e.effectId != 666
     }
 
 }

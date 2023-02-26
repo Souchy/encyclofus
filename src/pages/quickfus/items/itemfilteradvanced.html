@@ -1,0 +1,114 @@
+<!-- Search -->
+<div class="row">
+    <input class="search" type="text" value.bind="filterText" placeholder="search..." focus="true" />
+</div>
+
+<!-- tagify search box ? = search sur item names, panoplies, effets, types d'items (capecoiffe..).... -->
+<!-- exemple tu clic sur [() Agilité ] et ça remplace le text par 2 box min/max à côté de l'icône d'agi -->
+
+<div class="row">
+    <!--Generic filters left side -->
+    <div class="leftside col">
+
+        <!-- Level -->
+        <div class="d-flex align-items-center">
+            <input class="checkbox mr-1" type="checkbox" id="level" checked.bind="filterLevel" />
+            <label class="title mr-auto" for="level">Level</label>
+            <input class="mr-2" type="number" value.bind="levelMin" placeholder="min" />
+            <input class="" type="number" value.bind="levelMax" placeholder="max" />
+        </div>
+
+        <!-- Types base -->
+        <input class="checkbox" type="checkbox" id="type" checked.bind="filterType" onclick.call="filterTypeClicked()" />
+        <label class="title" for="type">Type</label>
+        <div class="d-flex flex-wrap">
+            <div class="toggle" repeat.for="[type, value] of types" onclick.call="checkType(type)" style.bind="value ? styleChecked : styleUnchecked">
+                <!-- <input type="checkbox" id="${type}" value="type" checked /> -->
+                <label for="${type}" innerHTML.bind="type"></label>
+            </div>
+        </div>
+
+        <!-- Types weapons -->
+        <input class="checkbox" type="checkbox" id="armes" checked.bind="filterWeapon" onclick.call="filterWeaponClicked()" />
+        <label class="title" for="armes">Armes</label>
+        <div class="d-flex flex-wrap">
+            <div class="toggle" repeat.for="[arme, value] of armes" onclick.call="checkWeapon(arme)" style.bind="value ? styleChecked : styleUnchecked">
+                <!-- <input type="checkbox" id="${arme}" value="arme" checked /> -->
+                <label for="${arme}" innerHTML.bind="arme"></label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mods -->
+    <div class="rightside col">
+        <!-- Mods -->
+        <input class="checkbox" type="checkbox" id="mods" checked />
+        <label class="title" for="mods">Mods</label>
+        <div class="blocklist" ref="blocklist">
+            <!-- block list  -->
+            <div class="block" repeat.for="i of blocks.length" id.bind="i">
+                <!-- block properties -->
+                <div class="d-flex align-items-center">
+                    <input class="checkbox mr-1" type="checkbox" id="${i}" checked.bind="blocks[i].activate" />
+                    <select class="mr-auto blocktitle" name="type" value.bind="blocks[i].type">
+                        <option value="$and">And</option>
+                        <option value="$or">Or</option>
+                        <option value="$nor">Not</option>
+                        <option value="$sum">Sum</option>
+                    </select>
+                    <!-- <label class="mr-auto blocktitle" for="${i}">${blocks[i].type}</label> -->
+                    <button class="btnDelete" onclick.call="deleteBlock(i)">x</button>
+                </div>
+                <!-- mod list -->
+                <div class="mod d-flex align-items-center" repeat.for="j of blocks[i].mods.length" id.bind="j">
+
+                    <!-- checkbox -->
+                    <input class="checkbox mr-1" type="checkbox" checked.bind="blocks[i].mods[j].activate" />
+                    <!-- mod select -->
+                    <div name="modsearch" class="searchable">
+                        <input name="modsearchinput" type="text" autocomplete="off" placeholder="+Add Stat Mod" onkeyup.call="filterFunction2($this,$event)" value.bind="blocks[i].mods[j].name" onchange.call="oninput($this, $event)"
+                            onfocus.call="onModInputFocus($this, $event, i, j)" onblur.call="onModInputBlur($this, $event, i, j)">
+                        <dl name="modsearchlist" class="modlist">
+                            <!-- automatically filled with mods -->
+                            <!-- <dt></dt> -->
+                            <!-- <dd></dd> -->
+                            <!-- <modlist title.bind="section" mods.bind="modsSections."></modlist> -->
+                            <section repeat.for="[section, mods] of modsSections">
+                                <dt>${section}</dt>
+                                <dd repeat.for="modname of mods" onmouseover.call="onDDHover($this, $event, i, j, modname)" onclick.call="onDDClick($this, $event, i, j, modname)">${modname}</dd>
+                            </section>
+                        </dl>
+                    </div>
+                    <!-- mod min/max -->
+                    <input class="ml-2 mr-2" type="number" value.bind="blocks[i].mods[j].min" placeholder="min" />
+                    <input class="mr-2" type="number" value.bind="blocks[i].mods[j].max" placeholder="max" />
+                    <!-- mod delete -->
+                    <button class="btnDelete" onclick.call="deleteMod(i, blocks[i].mods[j].name)">x</button>
+
+                </div>
+                <!-- create mod -->
+                <div>
+                    <button class="btnAdd" click.delegate="addStatMod($this, $event, i)">+Add Stat Mod</button>
+                    <div name="modsearch" class="searchable">
+                        <dl name="modsearchlist" class="modlist">
+                            <section repeat.for="[section, mods] of modsSections">
+                                <dt>${section}</dt>
+                                <dd repeat.for="modname of mods" onmouseover.call="onDDHover($this, $event, i, j, modname)" onclick.call="onDDClick($this, $event, i, j, modname)">${modname}</dd>
+                            </section>
+                        </dl>
+                    </div>
+                </div> <!-- end of create mod -->
+            </div> <!-- end of block list -->
+
+            <!-- create block -->
+            <div class="block">
+                <button class="btnAdd" onclick.call="addBlock()">+Add Stat Block</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Search button -->
+<div class="row">
+    <button class="btnSearch" onclick.call="search()">Search</button>
+</div>

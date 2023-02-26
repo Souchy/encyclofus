@@ -1,12 +1,35 @@
-<import from="../../breeds/spell/effect"></import>
-<import from="../../breeds/spell/effectlist"></import>
+<import from="../../effects/effect"></import>
+<import from="../../effects/effectlist"></import>
 
 
 <div>
-    ${db.getI18n(item.nameId)}
+    <div class="d-flex">
+        <img src="${itemIconUrl}"/>
+        <div>
+            ${db.getI18n(item.nameId)}
+            <br>
+            ${item.level} 
+            - ${item.id}
+            <!-- typeId -->
+        </div>
+    </div>
 
-    <!-- <effect repeat.for="e of possibleEffects"></effect> -->
-    <h6 t="effects"></h6>
-    <effectlist effects.bind="item.possibleEffects" iscrit.bind="false" depth.bind="0"></effectlist>
+    <!-- weapon effects -->
+    <effectlist class="weaponEffects" if.bind="isWeapon" effects.bind="weaponEffects" iscrit.bind="false" depth.bind="0"></effectlist>
+
+    <!-- boost effects -->
+    <effectlist effects.bind="sortedEffects" iscrit.bind="false" depth.bind="0"></effectlist>
+
+    <!-- weapon stuff -->
+    <div if.bind="isWeapon">
+        <!-- minrange, range, apCost, maxCastPerTurn, criticalHitProbability, criticalHitBonus  -->
+        <!-- castInDiagonal, castTestLos -->
+    </div>
+
+    <!-- conditions -->
+    <div class="conditions" if.bind="hasConditions">
+        <!-- "criteria": "CS>300&CI>300", -->
+        ${conditionsString}
+    </div>
 
 </div>
