@@ -5,48 +5,30 @@ export class Mason {
 
 	// full data
 	public fulldata: any[] = [];
-	public index: number = 0;
 
 	// chosen data
 	public data: any[] = [];
 	public msnry: Masonry;
 
+	public page: number = 0;
+	public itemsPerPage: number = 25;
+
 	public constructor() {
-		console.log("mason ctor");
+		// console.log("mason ctor");
 	}
 
-	public showMore(count?) {
-		var numPerPage = 50;
-		if (count) numPerPage = count;
-		// this.data.concat(response.content); //JSON.stringify(response.content);
-		// console.log("itemsearch fulldata : " + this.fulldata);
-		for (var j = 0; j < numPerPage; j++) {
-			if (this.index >= this.fulldata.length) return;
-			// console.log("itemsearch fulldata[" + this.index + "] : " + this.fulldata[this.index]);
-			this.data.push(this.fulldata[this.index]);
-			this.index++;
-		}
-		// this.initMasonry();
-		// this.msnry.reloadItems();
-		// this.reloadMsnry();  // cant reload here because it takes time before the item sheets are actually added to the HTML
-		// this.layout();
-	}
-
-	// event
-	public loadedCountChanged() {
-		this.reloadMsnry();
+	public showMore() {
+		let length = this.page * this.itemsPerPage;
+		let slice = this.fulldata.slice(length, this.itemsPerPage + length); // emerald.items
+		// console.log("mason slice: " + slice)
+		this.data.push(...slice);
+		this.page++;
 	}
 
 	public reloadMsnry() {
-		console.log("mason reloadMsnry");
+		// console.log("mason reloadMsnry");
 		if (this.msnry) {
 			this.msnry.reloadItems();
-			this.msnry.layout();
-		}
-	}
-	public layout() {
-		console.log("mason layout()");
-		if (this.msnry) {
 			this.msnry.layout();
 		}
 	}
@@ -55,14 +37,6 @@ export class Mason {
 		console.log("mason init grid: " + this.obj.grid);
 		if (!this.obj.grid) return;
 		if (this.msnry) this.msnry.destroy();
-		// if (!this.obj.attachedb || !this.obj.queriedb) return;
-		// if (this.msnry != null) {
-		// 	if (this.msnry.getItemElements().length != 0) return;
-		// }
-
-		var ref = this;
-		// if (this.obj.grid) console.log("mason count : " + this.obj.grid.children.length);
-		// else console.log("mason val : " + this.obj.grid);
 
 		this.msnry = new Masonry(this.obj.grid, {
 			itemSelector: '.grid-item',
@@ -73,25 +47,7 @@ export class Mason {
 			fitWidth: true,
 			// initLayout: true,
 		});
-		function onLayout(items) {
-			var gridlength = ref.obj.grid ? ref.obj.grid.children.length : 0;
-			var datalength = ref.data ? ref.data.length : 0;
-			// console.log(" mason layout : " + items.length + " / " + gridlength + " / " + datalength);
-			// console.log(" mason element : " + items.keys());
-			// console.log(" mason element : " + JSON.stringify(items[0]));
-			// for (var i = 0; i < this.msnry.getItemElements().length; i++) {
-			// 	console.log("mason element : " + this.msnry.getItemElements()[i]);
-			// }
-		}
-		function onLayoutOnce(items) {
-			// console.log("itemsearch mason layout once : " + items.length);
-		}
-		// bind event listener
-		this.msnry.on('layoutComplete', onLayout);
-		this.msnry.once('onLayoutOnce', onLayout);
 		this.msnry.layout();
-		// if (this.grid) console.log("itemsearch mason 2 : " + this.grid.children.length);
-		// else console.log("itemsearch mason 2 : " + this.grid);
 	}
 
 }
@@ -140,7 +96,6 @@ export class util {
 	// be triggered. The function will be called after it stops being called for
 	// N milliseconds.
 	public static debounce(func, wait, immediate) {
-		console.log("debouncing " + wait)
 		// 'private' variable for instance
 		// The returned function will be able to reference this due to closure.
 		// Each call to the returned function will share this common timer.
@@ -174,7 +129,6 @@ export class util {
 					// Call the original function with apply
 					// apply lets you define the 'this' object as well as the arguments
 					//    (both captured before setTimeout)
-					// console.log("calling debounced func")
 					func.apply(context, args);
 				}
 			}, wait);

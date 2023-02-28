@@ -8,22 +8,21 @@ var merge = require('deepmerge');
 @inject(db, Emerald)
 export class items {
 
-    public itemsPerPage: number = 25;
-    public page: number = 0;
-
-    public items: Object[] = [];
-    
 	public mason: Mason;
 	public grid: HTMLDivElement;
+    private pageHost: Element;
+    private debouncedShowMore = util.debounce(() => {
+        this.mason.showMore();
+    }, 500, true);
 
     public constructor(readonly db: db, readonly emerald: Emerald, @IEventAggregator readonly ea: IEventAggregator) {
 
-        let bloop = util.debounce(() => {
+        let onItemSheetAttached = util.debounce(() => {
             this.mason.reloadMsnry();
         }, 200, false);
 
         this.ea.subscribe("itemsheet:loaded", () => {
-           bloop();
+           onItemSheetAttached();
         });
 
         this.ea.subscribe("quickfus:search", (filter: string) => this.search(filter));
@@ -31,6 +30,7 @@ export class items {
         this.ea.subscribe("db:loaded", () => {
             // this.search();
         });
+        // when emerald loads, auto search
         this.ea.subscribe("emerald:loaded", () => {
 			this.mason.fulldata = this.emerald.items; // store full data
             this.search();
@@ -41,29 +41,47 @@ export class items {
         return this.emerald.items
     //     return this.db.jsonItemTypes && this.db.jsonItemTypes && this.db.jsonEffects && this.db.jsonCharacteristics
     }
-    attached() {
-        console.log("itemsearch attached grid: " + this.grid);
+    public attached() {
+        // console.log("itemsearch attached grid: " + this.grid);
         this.mason = new Mason();
         this.mason.obj = this;
-        this.mason.index = 0; // reset index
-        this.mason.data = [] //.splice(0, this.data.length); // reset select data
-        // this.mason.fulldata = this.emerald.items; // store full data
-        // this.mason.showMore(100); // select data
         this.mason.initMasonry();
+
+        // scroll handler
+        this.pageHost = document.getElementsByClassName("page-host")[0];
+        let handler =  (e) => {
+            if(!this.grid) {
+                this.pageHost.removeEventListener('scroll', handler, false);
+                return;
+            }
+            setTimeout(() => this.onScroll(e));
+        };
+        this.pageHost.addEventListener('scroll', handler);
+
+        // if already loaded emerald, auto search
+        if(this.emerald.items?.length > 1) {
+            this.mason.fulldata = this.emerald.items;
+            this.search();
+        }
+    }
+
+    private async onScroll(e?) {
+        let h1 = this.pageHost.clientHeight;
+        let h2 = this.grid.scrollHeight + this.grid.offsetTop;
+        let maxScroll = h2 - h1;
+        let currScroll = this.pageHost.scrollTop;
+        // console.log("ph: " + h1 + ", au: " + h2 + ", max: " + maxScroll + ", curr: " + currScroll)
+        if(Math.abs(currScroll - maxScroll) <= 15) {
+            this.debouncedShowMore();
+        }
     }
 
     public async search(filter: string = "") {
         // this.search1();
-        this.items = [];
-        this.scrollDown();
+        this.mason.data = []; // this.items = [];
+        this.mason.page = 0;
+        this.mason.showMore(); //this.scrollDown();
         console.log("search1")
-    }
-
-    public scrollDown() {
-        let slice = this.emerald.items.slice(this.page * this.itemsPerPage, this.itemsPerPage);
-        this.items.push(...slice);
-        // console.log("scrolldown items count " + this.emerald.items.length)
-        this.mason.showMore(100); // select data
     }
 
     public async search1(filter: string = "") {
@@ -95,8 +113,8 @@ export class items {
 
         console.log({p})
 
-        this.items = await p.toArray();
-        console.log("this.items: " + this.items.length);
+        this.mason.data = await p.toArray(); //this.items = await p.toArray();
+        console.log("this.items: " + this.mason.data.length);
         // p.forEach(i => {
         //     console.log("i: " + i)
         // })
@@ -108,7 +126,7 @@ export class items {
     }
 
     private async search0(filter: string = "") {
-        this.items = await this.db.items
+        this.mason.data = await this.db.items
             .find({ })
 
             .sort({ level: -1 })
