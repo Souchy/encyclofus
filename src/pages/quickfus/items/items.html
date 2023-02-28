@@ -4,25 +4,27 @@
 
 <itemfilteradvanced></itemfilteradvanced>
 
+    ${items.length}
+
+    <button click.delegate="search()">Search</button>
+    
 <!-- spinner -->
 <div if.bind="items.length == 0" class="loaderContainer">
     <div class="loader"></div>
 </div>
 
-<div if.bind="db.isLoaded && isLoaded && items.length > 0">
+<!-- <div if.bind="db.isLoaded && isLoaded && items.length > 0"> -->
 
-    ${items.length}
-
-    <button click.delegate="search()">Search</button>
 
     <!-- <div class="d-flex"> -->
     <!-- <itemsheet repeat.for="item of items" item.bind="item"></itemsheet> -->
     <!-- </div> -->
 
     <div class="grid-wrapper">
-        <div class="grid" ref="grid" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 200 }'>
+        <!--  data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 200 }' -->
+        <div class="grid" ref="grid">
             <itemsheet class="grid-item" repeat.for="item of items" item.bind="item"></itemsheet>
         </div>
     </div>
 
-</div>
+<!-- </div> -->

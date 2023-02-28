@@ -15,11 +15,8 @@ export class itemsheet {
 
     }
 
-    load() {
-        console.log("on item sheet load")
-    }
     attached() {
-        console.log("on attached")
+        // console.log("on attached")
         this.ea.publish("itemsheet:loaded");
     }
 

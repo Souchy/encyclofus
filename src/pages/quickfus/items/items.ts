@@ -17,13 +17,13 @@ export class items {
 	public grid: HTMLDivElement;
 
     public constructor(readonly db: db, readonly emerald: Emerald, @IEventAggregator readonly ea: IEventAggregator) {
-		this.mason = new Mason();
-		this.mason.obj = this;
+
+        let bloop = util.debounce(() => {
+            this.mason.reloadMsnry();
+        }, 200, false);
 
         this.ea.subscribe("itemsheet:loaded", () => {
-           let bloop = util.debounce(() => {
-                this.mason.reloadMsnry();
-            }, 100, false);
+           bloop();
         });
 
         this.ea.subscribe("quickfus:search", (filter: string) => this.search(filter));
@@ -32,44 +32,38 @@ export class items {
             // this.search();
         });
         this.ea.subscribe("emerald:loaded", () => {
+			this.mason.fulldata = this.emerald.items; // store full data
             this.search();
         })
-
-			// console.log("itemsearch query : " + response.content.length);
-			// console.log("itemsearch query : " + response.content);
-
-			// this.data = response.content;
-			// this.queriedb = true;
-			// if (msn != false) 
-                // this.mason.initMasonry();
     }
 
     public isLoaded() {
         return this.emerald.items
     //     return this.db.jsonItemTypes && this.db.jsonItemTypes && this.db.jsonEffects && this.db.jsonCharacteristics
     }
+    attached() {
+        console.log("itemsearch attached grid: " + this.grid);
+        this.mason = new Mason();
+        this.mason.obj = this;
+        this.mason.index = 0; // reset index
+        this.mason.data = [] //.splice(0, this.data.length); // reset select data
+        // this.mason.fulldata = this.emerald.items; // store full data
+        // this.mason.showMore(100); // select data
+        this.mason.initMasonry();
+    }
 
     public async search(filter: string = "") {
         // this.search1();
         this.items = [];
-        // console.log("search0")
         this.scrollDown();
         console.log("search1")
-        
-			this.mason.index = 0; // reset index
-			this.mason.data = [] //.splice(0, this.data.length); // reset select data
-			this.mason.fulldata = this.items; //response.content; // store full data
-			this.mason.showMore(100); // select data
-            // this.mason.layout(); //.reloadMsnry();
-            this.mason.initMasonry();
     }
 
     public scrollDown() {
-        // for(let i = this.page * this.itemsPerPage; i < this.itemsPerPage; i++) {
-        //     this.items.push(this.emerald.items[i]);
-        // }
         let slice = this.emerald.items.slice(this.page * this.itemsPerPage, this.itemsPerPage);
         this.items.push(...slice);
+        // console.log("scrolldown items count " + this.emerald.items.length)
+        this.mason.showMore(100); // select data
     }
 
     public async search1(filter: string = "") {

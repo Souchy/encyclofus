@@ -52,10 +52,10 @@ export class Mason {
 	}
 
 	public initMasonry() {
-		console.log("mason init");
+		console.log("mason init grid: " + this.obj.grid);
 		if (!this.obj.grid) return;
 		if (this.msnry) this.msnry.destroy();
-		if (!this.obj.attachedb || !this.obj.queriedb) return;
+		// if (!this.obj.attachedb || !this.obj.queriedb) return;
 		// if (this.msnry != null) {
 		// 	if (this.msnry.getItemElements().length != 0) return;
 		// }
@@ -140,7 +140,7 @@ export class util {
 	// be triggered. The function will be called after it stops being called for
 	// N milliseconds.
 	public static debounce(func, wait, immediate) {
-		// console.log("debouncing " + wait)
+		console.log("debouncing " + wait)
 		// 'private' variable for instance
 		// The returned function will be able to reference this due to closure.
 		// Each call to the returned function will share this common timer.
@@ -163,7 +163,7 @@ export class util {
 			clearTimeout(timeout);
 
 			// Set the new timeout
-			timeout = setTimeout(function() {
+			timeout = setTimeout(() => {
 
 				// Inside the timeout function, clear the timeout variable
 				// which will let the next execution run when in 'immediate' mode
@@ -174,7 +174,7 @@ export class util {
 					// Call the original function with apply
 					// apply lets you define the 'this' object as well as the arguments
 					//    (both captured before setTimeout)
-					console.log("calling debounced func")
+					// console.log("calling debounced func")
 					func.apply(context, args);
 				}
 			}, wait);
