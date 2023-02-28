@@ -11,7 +11,7 @@ export class items {
 	public mason: Mason;
 	public grid: HTMLDivElement;
     private pageHost: Element;
-    private itemFilter: string = "";
+    private itemFilter: Object = null;
     private debouncedShowMore = util.debounce(() => {
         // this.mason.showMore();
         this.search1();
@@ -81,7 +81,7 @@ export class items {
     /**
      * new search : clear current items and search for new
      */
-    public async search(filter: string = "") {
+    public async search(filter: Object = null) {
         this.itemFilter = filter;
         this.mason.data = []; // this.items = [];
         this.mason.fulldata = [];
@@ -99,18 +99,17 @@ export class items {
         //     return;
         // }
 
-        this.itemFilter;
-        var mongofilter = { $and: [
+        console.log("search1 filter: " + JSON.stringify(this.itemFilter))
 
-        ] };
         var pipeline = [];
         {
-            pipeline.push({ $sort: { "level": -1, "id": -1 } });
+            // actual filter
+            pipeline.push({ $match: this.itemFilter ?? "" });
             // sums
             //   if(Object.keys(adds.$addFields).length > 0)
             //     pipeline.push(adds);
-            // actual filter
-            pipeline.push({ $match: this.itemFilter });
+            // sort
+            pipeline.push({ $sort: { "level": -1, "id": -1 } });
             // skip
             pipeline.push({ $skip: this.mason.page * this.mason.itemsPerPage });
             // limit

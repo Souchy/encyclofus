@@ -93,6 +93,12 @@ export class Emerald {
 		if (!arr || arr.length == 0) {
 			await this.db.fetchJson(this.db.gitFolderPath + name + ".json", (json) => {
 				arr = json;
+				for(let i of json) {
+					if(i.nameId) {
+						i["namefr"] = this.db.i18n_fr[i.nameId];
+						i["nameen"] = this.db.i18n_en[i.nameId];
+					}
+				}
 				console.log("got arr from db fetch")
 				this.zdb.collection(name).insert(json);
 			})

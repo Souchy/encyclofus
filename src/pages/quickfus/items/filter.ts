@@ -2,6 +2,7 @@
 import { IEventAggregator, inject } from "aurelia";
 import { db } from "../../../DofusDB/db";
 import itemTypes from "../../../DofusDB/scraped/2.66.5.18/itemtypes.json"
+import { util } from "../util";
 
 @inject(db)
 export class filter {
@@ -12,8 +13,8 @@ export class filter {
     // filter data
 	public filterText: string = "";
 	public filterLevel: boolean = true;
-    public levelMin: number;
-    public levelMax: number;
+    public levelMin: number = 1;
+    public levelMax: number = 200;
 	public types: Map<string, boolean> = new Map<string, boolean>();
 	public armes: Map<string, boolean> = new Map<string, boolean>();
 	// @observable({ changeHandler: 'filterTypeChanged' })
@@ -44,7 +45,44 @@ export class filter {
     }
 
 	public search() {
-		this.ea.publish("items:search", "myfilter");
+		let filter = this.generateFilter();
+		this.ea.publish("items:search", filter);
+	}
+
+	public generateFilter() {
+		var adds = { $addFields: {} };
+		var mongofilter = { $and: [] };
+		var types = { $or: [] };
+		// Level
+		if(this.filterLevel) {
+			mongofilter.$and.push({ "level": { "$gte": parseInt(this.levelMin + "") } });
+			mongofilter.$and.push({ "level": { "$lte": parseInt(this.levelMax + "") } });
+		}	
+		// Types
+		if (this.filterType) {
+			this.types.forEach((v, k) => {
+				if (v) types.$or.push({ "type": k });
+			})
+		}
+		// Weapons
+		if (this.filterWeapon) {
+			this.armes.forEach((v, k) => {
+				if (v) types.$or.push({ "type": k });
+			})
+		}
+		if (this.filterType || this.filterWeapon) {
+			mongofilter.$and.push(types);
+		}
+		// Text
+		if (this.filterText && this.filterText != "") {
+			let regex  = { "$regex": util.caseAndAccentInsensitive(this.filterText), "$options": "gi" }
+			if (this.db.lang == "fr")
+				mongofilter.$and.push({ "namefr": regex })
+			else
+				mongofilter.$and.push({ "nameen": regex })
+		}
+		//
+		return mongofilter;
 	}
 
 }

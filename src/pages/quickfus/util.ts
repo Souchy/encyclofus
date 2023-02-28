@@ -87,7 +87,8 @@ export class util {
 				let charAt = text.charAt(idx);
 				textFold += accentMap[charAt] || charAt;
 			}
-			return "(?i)" + textFold;
+			// return "(?i)" + textFold;
+			return textFold;
 		}
 		return f(text);
 	}
