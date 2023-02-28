@@ -1,9 +1,10 @@
 // import { observable } from "aurelia";
 import { IEventAggregator, inject } from "aurelia";
 import { db } from "../../../DofusDB/db";
+import itemTypes from "../../../DofusDB/scraped/2.66.5.18/itemtypes.json"
 
 @inject(db)
-export class itemfilteradvanced {
+export class filter {
 
     // Static data
 	public modsSections: Map<string, string[]>;
@@ -13,8 +14,8 @@ export class itemfilteradvanced {
 	public filterLevel: boolean = true;
     public levelMin: number;
     public levelMax: number;
-	public types: Map<string, boolean>;
-	public armes: Map<string, boolean>;
+	public types: Map<string, boolean> = new Map<string, boolean>();
+	public armes: Map<string, boolean> = new Map<string, boolean>();
 	// @observable({ changeHandler: 'filterTypeChanged' })
 	public filterType: boolean = false;
 	// @observable({ changeHandler: 'filterWeaponChanged' })
@@ -33,8 +34,18 @@ export class itemfilteradvanced {
 			"(Pseudo) Total #% res",
 			"(Pseudo) Total #% res élémentaires",
 		]);
+
+		itemTypes.filter(t => t.superTypeId == 2).forEach(element => {
+			this.armes.set(this.db.getI18n(element.nameId + ""), true);
+		});
+		itemTypes.filter(t => t.superTypeId != 2).forEach(element => {
+			this.types.set(this.db.getI18n(element.nameId + ""), true);
+		});
     }
 
+	public search() {
+		this.ea.publish("items:search", "myfilter");
+	}
 
 }
 

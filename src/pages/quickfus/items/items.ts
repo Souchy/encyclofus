@@ -11,30 +11,32 @@ export class items {
 	public mason: Mason;
 	public grid: HTMLDivElement;
     private pageHost: Element;
+    private itemFilter: string = "";
     private debouncedShowMore = util.debounce(() => {
-        this.mason.showMore();
+        // this.mason.showMore();
+        this.search1();
     }, 500, true);
 
     public constructor(readonly db: db, readonly emerald: Emerald, @IEventAggregator readonly ea: IEventAggregator) {
-
         let onItemSheetAttached = util.debounce(() => {
             this.mason.reloadMsnry();
         }, 200, false);
 
-        this.ea.subscribe("itemsheet:loaded", () => {
-           onItemSheetAttached();
-        });
-
-        this.ea.subscribe("quickfus:search", (filter: string) => this.search(filter));
-
+        //
         this.ea.subscribe("db:loaded", () => {
             // this.search();
         });
         // when emerald loads, auto search
         this.ea.subscribe("emerald:loaded", () => {
-			this.mason.fulldata = this.emerald.items; // store full data
+			// this.mason.fulldata = this.emerald.items; // store full data
             this.search();
         })
+        // on sheet attached
+        this.ea.subscribe("itemsheet:loaded", () => {
+           onItemSheetAttached();
+        });
+        // on click search in the filter
+        this.ea.subscribe("items:search", (filter: string) => this.search(filter));
     }
 
     public isLoaded() {
@@ -60,7 +62,7 @@ export class items {
 
         // if already loaded emerald, auto search
         if(this.emerald.items?.length > 1) {
-            this.mason.fulldata = this.emerald.items;
+            // this.mason.fulldata = this.emerald.items;
             this.search();
         }
     }
@@ -76,57 +78,57 @@ export class items {
         }
     }
 
+    /**
+     * new search : clear current items and search for new
+     */
     public async search(filter: string = "") {
-        // this.search1();
+        this.itemFilter = filter;
         this.mason.data = []; // this.items = [];
+        this.mason.fulldata = [];
         this.mason.page = 0;
-        this.mason.showMore(); //this.scrollDown();
-        console.log("search1")
+        this.search1();
+        // console.log("search1")
     }
 
-    public async search1(filter: string = "") {
+    /**
+     * ongoing search: add new items to current
+     */
+    public async search1() {
         // if (!this.isLoaded || !this.db.isLoaded) {
         //     console.log("search when not loaded")
         //     return;
         // }
 
+        this.itemFilter;
         var mongofilter = { $and: [
 
         ] };
         var pipeline = [];
         {
-            // sort // , "ankamaID": -1
-            pipeline.push({ $sort: { "level": -1 } });
+            pipeline.push({ $sort: { "level": -1, "id": -1 } });
             // sums
             //   if(Object.keys(adds.$addFields).length > 0)
             //     pipeline.push(adds);
             // actual filter
-            pipeline.push({ $match: mongofilter });
-            // limit
-            pipeline.push({ $limit: 50 });
+            pipeline.push({ $match: this.itemFilter });
             // skip
-            pipeline.push({ $skip: 0 });
+            pipeline.push({ $skip: this.mason.page * this.mason.itemsPerPage });
+            // limit
+            pipeline.push({ $limit: this.mason.itemsPerPage });
         };
+        // console.log("search 1, limit: " + this.mason.itemsPerPage + ", skip: " + this.mason.page * this.mason.itemsPerPage)
 
-        let p = this.db.items
-            .aggregate(pipeline);
+        let cursor = this.emerald.collectionItems.aggregate(pipeline);
+        // console.log({cursor})
+        let arr = await cursor.toArray(); 
+        this.mason.fulldata.push(...arr);
+        // console.log("arr: " + arr + ", fulldata: " + this.mason.fulldata.length);
 
-        console.log({p})
-
-        this.mason.data = await p.toArray(); //this.items = await p.toArray();
-        console.log("this.items: " + this.mason.data.length);
-        // p.forEach(i => {
-        //     console.log("i: " + i)
-        // })
-
-        // let objects = await p;
-        // this.items = objects;
-
-        return;
+        this.mason.showMore(); 
     }
 
     private async search0(filter: string = "") {
-        this.mason.data = await this.db.items
+        this.mason.data = await this.emerald.collectionItems
             .find({ })
 
             .sort({ level: -1 })

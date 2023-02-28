@@ -11,7 +11,7 @@ export class Mason {
 	public msnry: Masonry;
 
 	public page: number = 0;
-	public itemsPerPage: number = 25;
+	public itemsPerPage: number = 50;
 
 	public constructor() {
 		// console.log("mason ctor");
@@ -20,7 +20,7 @@ export class Mason {
 	public showMore() {
 		let length = this.page * this.itemsPerPage;
 		let slice = this.fulldata.slice(length, this.itemsPerPage + length); // emerald.items
-		// console.log("mason slice: " + slice)
+		// console.log("mason slice ("+this.fulldata.length+"): " + slice)
 		this.data.push(...slice);
 		this.page++;
 	}

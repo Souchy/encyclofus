@@ -66,20 +66,27 @@ body {
 	#collapseBtn {
 		display: none;
 	}
+
 	#collapseSidebar {
 		display: none;
 	}
 }
+
 // landscape tablet
-@media /* (min-width: 981) and */ (max-width: 1199px) {
+@media
+
+/* (min-width: 981) and */
+(max-width: 1199px) {
 	.page-host {
 		width: 100%;
 		padding-left: 7%;
 		padding-right: 5%;
 	}
+
 	#normalSidebar {
 		display: none;
 	}
+
 	#collapseBtn {
 		z-index: 3;
 		display: block;
@@ -88,6 +95,7 @@ body {
 		left: 15px;
 		color: var(--bs-body-color);
 	}
+
 	#collapseSidebar {
 		z-index: 2;
 		// width: 250px;
@@ -115,6 +123,7 @@ body {
 		width: 100%;
 	}
 }
+
 // Landscape phones and down
 @media (max-width: 480px) {
 	.page-host {
@@ -133,22 +142,135 @@ body {
 
 
 .loaderContainer {
-    width: 100%;
+	width: 100%;
 }
 
 .loader {
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 50px;
-    border: 16px solid #f3f3f3; /* Light grey */
-    border-top: 16px solid #3498db; /* Blue */
-    border-radius: 50%;
-    width: 120px;
-    height: 120px;
-    animation: spin 2s linear infinite;
-  }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 50px;
+	border: 16px solid #f3f3f3;
+	/* Light grey */
+	border-top: 16px solid #3498db;
+	/* Blue */
+	border-radius: 50%;
+	width: 120px;
+	height: 120px;
+	animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+
+
+
+
+// Quickfus
+.sheet {
+	background: var(--bg1);
+	color: var(--front0);
+}
+
+.sheettip {
+	background: var(--bg1);
+	color: var(--front0);
+	opacity: 0.7;
+}
+
+.surface {
+	background: var(--surface);
+	color: var(--onsurface);
+}
+/* button */
+/* this button is accent>transparent and turns black>accent on hover */
+.btn0 {
+	color: var(--accent1);
+	background: var(--bg0);
+	border: 1px solid transparent;
+}
+
+.btn0:hover {
+	color: var(--front1);
+	background: var(--accent1);
+	border-color: var(--accent1);
+}
+
+/* this button is white>gray with an accent border */
+.btn1 {
+	color: var(--front0);
+	background: var(--bg1);
+	border: 1px solid var(--accent1);
+}
+
+.btnDelete {
+	color: var(--accent1);
+	background: var(--bg0);
+	border: 1px solid transparent;
+	width: 38px;
+	height: 30px;
+}
+
+.btnDelete:hover {
+	color: var(--front1);
+	background: var(--accent1);
+	border-color: var(--accent1);
+}
+
+.btnSearch {
+	color: var(--front0);
+	background: var(--bg1);
+	border: 1px solid var(--accent1);
+	width: 30%;
+	height: 40px;
+	margin: 0 auto;
+}
+
+.btnAdd {
+	color: var(--front0);
+	background: var(--bg1);
+	border: 1px solid var(--accent1);
+	margin: 0 auto;
+	width: 80%;
+	height: 40px;
+}
+
+/* Text input */
+input[type=text] {
+	background: var(--bg1);
+	color: var(--front0);
+	border: 1px solid var(--accent1);
+}
+
+/* Number input */
+input[type=number] {
+	width: 70px;
+	background: var(--bg1);
+	text-align: center;
+	color: var(--front0);
+	border: 1px solid var(--accent1);
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+// Bootstrap remake
+.mr-1 {
+	margin-right: 0.25rem !important;
+}
+.mr-2 {
+	margin-right: 0.5rem !important;
+}
+.mr-auto {
+	margin-right: auto !important;
+}

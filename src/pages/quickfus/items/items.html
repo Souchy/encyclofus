@@ -1,30 +1,35 @@
-<import from="./itemfilteradvanced"></import>
+<import from="./filter"></import>
 <import from="./itemsheet"></import>
 
 
-<itemfilteradvanced></itemfilteradvanced>
 
-    ${items.length}
 
-    <button click.delegate="search()">Search</button>
+
+
+
+
+<filter if.bind="db.isLoaded && mason.data.length != 0"></filter>
+
+<!-- ${mason.data.length} -->
+<!-- <button if.bind="mason.data.length != 0" click.delegate="search()">Search</button> -->
 
 <!-- spinner -->
-<div if.bind="items.length == 0" class="loaderContainer">
+<div if.bind="mason.data.length == 0" class="loaderContainer">
     <div class="loader"></div>
 </div>
 
 <!-- <div if.bind="db.isLoaded && isLoaded && items.length > 0"> -->
 
 
-    <!-- <div class="d-flex"> -->
-    <!-- <itemsheet repeat.for="item of items" item.bind="item"></itemsheet> -->
-    <!-- </div> -->
+<!-- <div class="d-flex"> -->
+<!-- <itemsheet repeat.for="item of items" item.bind="item"></itemsheet> -->
+<!-- </div> -->
 
-    <div class="grid-wrapper">
-        <!--  data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 200 }' -->
-        <div class="grid" ref="grid">
-            <itemsheet class="grid-item" repeat.for="item of mason.data" item.bind="item"></itemsheet>
-        </div>
+<div class="grid-wrapper">
+    <!--  data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 200 }' -->
+    <div class="grid" ref="grid">
+        <itemsheet class="grid-item" repeat.for="item of mason.data" item.bind="item"></itemsheet>
     </div>
+</div>
 
 <!-- </div> -->

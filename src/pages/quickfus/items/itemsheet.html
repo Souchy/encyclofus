@@ -15,10 +15,11 @@
     </div>
 
     <!-- weapon stuff -->
-    <div if.bind="isWeapon">
+    <div class="weaponConditions" if.bind="isWeapon">
         <!-- minrange, range, apCost, maxCastPerTurn, criticalHitProbability, criticalHitBonus  -->
         <!-- castInDiagonal, castTestLos -->
-        ${item.apCost} PA - ${item.range} PO - ${item.maxCastPerTurn} / tour
+        <div>${item.apCost}PA ${item.range}PO ${item.maxCastPerTurn}/t ${item.criticalHitProbability}% +${item.criticalHitBonus}</div>
+        <div></div>
     </div>
 
     <!-- weapon effects -->

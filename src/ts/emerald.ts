@@ -1,3 +1,4 @@
+import { Characteristics } from './characteristics';
 import { Db, Collection, Cursor } from 'zangodb';
 import * as Realm from "realm-web";
 import { DI, IEventAggregator, inject, Registration } from 'aurelia';
@@ -31,8 +32,13 @@ export class Emerald {
 	}
 
 	private async loadup() {
-		// console.log("loadup0")
-		this.zdb = new Db(this.db.version);
+		this.zdb = new Db("cyclo:" + this.db.version, 2, {
+			items: { id: true },
+			itemsets: { id: true },
+			itemtypes: { id: true },
+			effects: { id: true },
+			characteristics: { id: true }
+		});
 		if(this.db.checkFeatureVersion(jsonFeatures.items) && Util.isLocal()) {
 			this._items = await this.getFromZango("items")
 			this._itemTypes = await this.getFromZango("itemtypes")
@@ -80,12 +86,14 @@ export class Emerald {
 		let arr: Object[];
 		try {
 			arr = await this.zdb.collection(name).find({}).toArray();
+			console.log("got arr from zango")
 		} catch (error) {
-
+			console.error(error);
 		}
 		if (!arr || arr.length == 0) {
 			await this.db.fetchJson(this.db.gitFolderPath + name + ".json", (json) => {
 				arr = json;
+				console.log("got arr from db fetch")
 				this.zdb.collection(name).insert(json);
 			})
 		}
