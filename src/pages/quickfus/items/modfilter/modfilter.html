@@ -1,0 +1,36 @@
+
+
+
+<div class="mod d-flex align-items-center">
+    <!-- checkbox -->
+    <input class="checkbox mr-1" type="checkbox" checked.bind="activate" />
+    <!-- mod select -->
+    <div name="modsearch" class="searchable">
+        <input name="modsearchinput" type="text" autocomplete="off" value.bind="name" t="[placeholder]quickfus.filter.addMod" 
+            onkeyup.call="onKeyup($event)" onchange.call="onChange($event)"
+            onfocus.call="onFocus()" onblur.call="onUnfocus()">
+        <dl name="modsearchlist" class="modlist">
+            <!-- pseudo stats -->
+            <section>
+                <dt t.bind="quickfus.filter.sections.pseudo"></dt>
+                <dd repeat.for="mod of getModsForSection(section)" 
+                 innerHtml.bind="getI18n(mod.nameId)">
+                </dd>
+            </section>
+            <!-- automatically filled with mods -->
+            <section repeat.for="[sectionName, section] of getStatSections()">
+                <dt t.bind="sectionName"></dt>
+                <dd repeat.for="mod of getModsForSection(section)" 
+                 innerHtml.bind="getI18n(mod.nameId)">
+                </dd>
+                <!-- onmouseover.call="onDDHover($this, $event, i, j, mod)"  -->
+                <!-- onclick.call="onDDClick($this, $event, i, j, mod)" -->
+            </section>
+        </dl>
+    </div>
+    <!-- mod min/max -->
+    <input class="ml-2 mr-2" type="number" value.bind="min" placeholder="min" />
+    <input class="mr-2" type="number" value.bind="max" placeholder="max" />
+    <!-- mod delete -->
+    <button class="btnDelete" onclick.call="onDelete()">x</button>
+</div>

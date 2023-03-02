@@ -6,23 +6,23 @@
 <!-- tagify search box ? = search sur item names, panoplies, effets, types d'items (capecoiffe..).... -->
 <!-- exemple tu clic sur [() Agilité ] et ça remplace le text par 2 box min/max à côté de l'icône d'agi -->
 
-<div class="row">
+<div class="row" if.bind="emerald.items && emerald.characteristics">
     <!--Generic filters left side -->
     <div class="leftside col">
 
         <!-- Level -->
         <div class="d-flex align-items-center">
             <input class="checkbox mr-1" type="checkbox" id="level" checked.bind="filterLevel" />
-            <label class="title mr-auto" for="level">Level</label>
+            <label class="title mr-auto" for="level" t="quickfus.filter.level"></label>
             <input class="mr-2" type="number" value.bind="levelMin" placeholder="min" />
             <input class="" type="number" value.bind="levelMax" placeholder="max" />
         </div>
 
         <!-- Types base -->
         <input class="checkbox" type="checkbox" id="type" checked.bind="filterType" onclick.call="filterTypeClicked()" />
-        <label class="title" for="type">Type</label>
+        <label class="title" for="type" t="quickfus.filter.type"></label>
         <div class="d-flex flex-wrap">
-            <div class="toggle" repeat.for="[type, value] of types" onclick.call="checkType(type)" style.bind="value ? styleChecked : styleUnchecked">
+            <div repeat.for="[type, value] of types" class="toggle ${value ? 'styleChecked' : 'styleUnchecked'}" onclick.call="checkType(type)">
                 <!-- <input type="checkbox" id="${type}" value="type" checked /> -->
                 <label for="${type}" innerHTML.bind="type"></label>
             </div>
@@ -30,9 +30,9 @@
 
         <!-- Types weapons -->
         <input class="checkbox" type="checkbox" id="armes" checked.bind="filterWeapon" onclick.call="filterWeaponClicked()" />
-        <label class="title" for="armes">Armes</label>
+        <label class="title" for="armes" t="quickfus.filter.weapons"></label>
         <div class="d-flex flex-wrap">
-            <div class="toggle" repeat.for="[arme, value] of armes" onclick.call="checkWeapon(arme)" style.bind="value ? styleChecked : styleUnchecked">
+            <div repeat.for="[arme, value] of armes" class="toggle ${value ? 'styleChecked' : 'styleUnchecked'}" onclick.call="checkWeapon(arme)">
                 <!-- <input type="checkbox" id="${arme}" value="arme" checked /> -->
                 <label for="${arme}" innerHTML.bind="arme"></label>
             </div>
@@ -43,7 +43,7 @@
     <div class="rightside col">
         <!-- Mods -->
         <input class="checkbox" type="checkbox" id="mods" checked />
-        <label class="title" for="mods">Mods</label>
+        <label class="title" for="mods" t="quickfus.filter.mods"></label>
         <div class="blocklist" ref="blocklist">
             <!-- block list  -->
             <div class="block" repeat.for="i of blocks.length" id.bind="i">
@@ -51,31 +51,30 @@
                 <div class="d-flex align-items-center">
                     <input class="checkbox mr-1" type="checkbox" id="${i}" checked.bind="blocks[i].activate" />
                     <select class="mr-auto blocktitle" name="type" value.bind="blocks[i].type">
-                        <option value="$and">And</option>
-                        <option value="$or">Or</option>
-                        <option value="$nor">Not</option>
-                        <option value="$sum">Sum</option>
+                        <option value="$and" t="quickfus.filter.and"></option>
+                        <option value="$or"  t="quickfus.filter.or"></option>
+                        <option value="$nor" t="quickfus.filter.nor"></option>
+                        <option value="$sum" t="quickfus.filter.sum"></option>
                     </select>
-                    <!-- <label class="mr-auto blocktitle" for="${i}">${blocks[i].type}</label> -->
                     <button class="btnDelete" onclick.call="deleteBlock(i)">x</button>
                 </div>
                 <!-- mod list -->
                 <div class="mod d-flex align-items-center" repeat.for="j of blocks[i].mods.length" id.bind="j">
-
                     <!-- checkbox -->
                     <input class="checkbox mr-1" type="checkbox" checked.bind="blocks[i].mods[j].activate" />
                     <!-- mod select -->
                     <div name="modsearch" class="searchable">
-                        <input name="modsearchinput" type="text" autocomplete="off" placeholder="+Add Stat Mod" onkeyup.call="filterFunction2($this,$event)" value.bind="blocks[i].mods[j].name" onchange.call="oninput($this, $event)"
-                            onfocus.call="onModInputFocus($this, $event, i, j)" onblur.call="onModInputBlur($this, $event, i, j)">
+                        <input name="modsearchinput" type="text" autocomplete="off" 
+                            value.bind="blocks[i].mods[j].name" t="[placeholder]quickfus.filter.addMod"
+                            onkeyup.call="filterFunction2($this,$event)" onchange.call="oninput($this, $event)"
+                            onfocus.call="onModInputFocus($this, $event, i, j)" onblur.call="onModInputUnfocus($this, $event, i, j)"
+                        >
                         <dl name="modsearchlist" class="modlist">
                             <!-- automatically filled with mods -->
-                            <!-- <dt></dt> -->
-                            <!-- <dd></dd> -->
-                            <!-- <modlist title.bind="section" mods.bind="modsSections."></modlist> -->
-                            <section repeat.for="[section, mods] of modsSections">
-                                <dt>${section}</dt>
-                                <dd repeat.for="modname of mods" onmouseover.call="onDDHover($this, $event, i, j, modname)" onclick.call="onDDClick($this, $event, i, j, modname)">${modname}</dd>
+                            <section repeat.for="[sectionName, section] of getStatSections()">
+                                <dt t.bind="sectionName"></dt>
+                                <dd repeat.for="mod of getModsForSection(section)" onmouseover.call="onDDHover($this, $event, i, j, mod)" 
+                                    onclick.call="onDDClick($this, $event, i, j, mod)" innerHtml.bind="getI18n(mod.nameId)"></dd>
                             </section>
                         </dl>
                     </div>
@@ -88,12 +87,13 @@
                 </div>
                 <!-- create mod -->
                 <div>
-                    <button class="btnAdd" click.delegate="addStatMod($this, $event, i)">+Add Stat Mod</button>
+                    <button class="btnAdd" click.delegate="addStatMod($this, $event, i)" t="quickfus.filter.addMod"></button>
                     <div name="modsearch" class="searchable">
                         <dl name="modsearchlist" class="modlist">
                             <section repeat.for="[section, mods] of modsSections">
                                 <dt>${section}</dt>
-                                <dd repeat.for="modname of mods" onmouseover.call="onDDHover($this, $event, i, j, modname)" onclick.call="onDDClick($this, $event, i, j, modname)">${modname}</dd>
+                                <dd repeat.for="modname of mods" onmouseover.call="onDDHover($this, $event, i, j, modname)" 
+                                    onclick.call="onDDClick($this, $event, i, j, modname)">${modname}</dd>
                             </section>
                         </dl>
                     </div>
@@ -102,7 +102,7 @@
 
             <!-- create block -->
             <div class="block">
-                <button class="btnAdd" onclick.call="addBlock()">+Add Stat Block</button>
+                <button class="btnAdd" onclick.call="addBlock()" t="quickfus.filter.addBlock"></button>
             </div>
         </div>
     </div>

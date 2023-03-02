@@ -192,5 +192,28 @@
 			"k": "portée"
 		}
 
+	},
+
+	"quickfus": {
+		"filter": {
+			"level": "Niveau",
+			"type": "Type",
+			"weapons": "Armes",
+			"mods": "Filtres de stats",
+			"addMod": "+Ajouter une stat",
+			"addBlock": "+Ajouter un groupe de stats",
+			"and": "Et",
+			"or": "Ou",
+			"sum": "Somme",
+			"nor": "Sans",
+			"search": "Recherche",
+			"sections": {
+				"pseudo": "Pseudo",
+				"primary": "Caractéristiques primaires",
+				"damage": "Dommages",
+				"secondary": "Caractéristiques secondaires",
+				"resistance": "Résistances"
+			}
+		}
 	}
 }

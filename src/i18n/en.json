@@ -190,5 +190,27 @@
 			"q": "limite d'invocation",
 			"k": "portée"
 		}
+	},
+	"quickfus": {
+		"filter": {
+			"level": "Level",
+			"type": "Type",
+			"weapons": "Weapons",
+			"mods": "Stats filters",
+			"addMod": "+Add a stat",
+			"addBlock": "+Add a stat group",
+			"and": "And",
+			"or": "Or",
+			"sum": "Sum",
+			"nor": "Not",
+			"search": "Search",
+			"sections": {
+				"pseudo": "Pseudo",
+				"primary": "Caractéristiques primaires",
+				"damage": "Dommages",
+				"secondary": "Caractéristiques secondaires",
+				"resistance": "Résistances"
+			}
+		}
 	}
 }

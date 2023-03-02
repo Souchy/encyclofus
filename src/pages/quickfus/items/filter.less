@@ -29,7 +29,7 @@
 }
 
 .searchable dl {
-  width: 100%;
+  width: 90%;
   // float:left;
   position: absolute;
   display: none;
@@ -165,6 +165,7 @@ filter .blocklist .block .blocktitle:focus {
 
 filter .blocklist .block .mod {
   margin-bottom: 10px;
+  position: relative;
 }
 
 filter .blocklist .block .mod label {
@@ -192,3 +193,12 @@ filter .btnAdd {
   padding-right: 1px;
 }
 
+filter .toggle.styleChecked {
+  color: var(--front1);
+  background: var(--accent1);
+}
+
+filter .toggle.styleUnchecked {
+  color: var(--front0);
+  background: transparent;
+}

@@ -3,6 +3,8 @@ import { pipeline } from "stream";
 import { db } from "../../../DofusDB/db";
 import { Emerald } from "../../../ts/emerald";
 import { Mason, util } from "../util";
+import { BlockFilter, filter as Filter } from "./filter";
+import { ModFilter } from "./modfilter/modfilter";
 var merge = require('deepmerge');
 
 @inject(db, Emerald)
@@ -13,7 +15,6 @@ export class items {
     private pageHost: Element;
     private itemFilter: Object = null;
     private debouncedShowMore = util.debounce(() => {
-        // this.mason.showMore();
         this.search1();
     }, 500, true);
 
@@ -21,22 +22,12 @@ export class items {
         let onItemSheetAttached = util.debounce(() => {
             this.mason.reloadMsnry();
         }, 200, false);
-
-        //
-        this.ea.subscribe("db:loaded", () => {
-            // this.search();
-        });
-        // when emerald loads, auto search
-        this.ea.subscribe("emerald:loaded", () => {
-			// this.mason.fulldata = this.emerald.items; // store full data
-            this.search();
-        })
         // on sheet attached
         this.ea.subscribe("itemsheet:loaded", () => {
            onItemSheetAttached();
         });
         // on click search in the filter
-        this.ea.subscribe("items:search", (filter: string) => this.search(filter));
+        this.ea.subscribe("items:search", (filter: Filter) => this.search(filter));
     }
 
     public isLoaded() {
@@ -81,8 +72,11 @@ export class items {
     /**
      * new search : clear current items and search for new
      */
-    public async search(filter: Object = null) {
-        this.itemFilter = filter;
+    public async search(filter: Filter = null) {
+        console.log("on search: " + filter)
+        // if(filter.filterLevel)
+        // this.itemFilter = filter;
+        this.itemFilter = this.generateFilter(filter);
         this.mason.data = []; // this.items = [];
         this.mason.fulldata = [];
         this.mason.page = 0;
@@ -94,11 +88,6 @@ export class items {
      * ongoing search: add new items to current
      */
     public async search1() {
-        // if (!this.isLoaded || !this.db.isLoaded) {
-        //     console.log("search when not loaded")
-        //     return;
-        // }
-
         console.log("search1 filter: " + JSON.stringify(this.itemFilter))
 
         var pipeline = [];
@@ -141,20 +130,164 @@ export class items {
             .limit(50)
             .toArray()
     }
-    // private search01() {
-    // .then(a => {
-    //     a.sort((x, y) => y["level"] - x["level"]);
-    //     a = a.slice(0, 50);
-    //     return a;
-    // })
 
+	public generateFilter(filt: Filter) {
+		var adds = { $addFields: {} };
+		var mongofilter = { $and: [] };
+		var types = { $or: [] };
+		// Level
+		if(filt.filterLevel) {
+			mongofilter.$and.push({ "level": { "$gte": parseInt(filt.levelMin + "") } });
+			mongofilter.$and.push({ "level": { "$lte": parseInt(filt.levelMax + "") } });
+		}	
+		// Types
+		if (filt.filterType) {
+			filt.types.forEach((v, k) => {
+				if (v) types.$or.push({ "type": k });
+			})
+		}
+		// Weapons
+		if (filt.filterWeapon) {
+			filt.armes.forEach((v, k) => {
+				if (v) types.$or.push({ "type": k });
+			})
+		}
+		if (filt.filterType || filt.filterWeapon) {
+			mongofilter.$and.push(types);
+		}
+		// Text
+		if (filt.filterText && filt.filterText != "") {
+			let regex  = { "$regex": util.caseAndAccentInsensitive(filt.filterText), "$options": "gi" }
+			if (this.db.lang == "fr")
+				mongofilter.$and.push({ "namefr": regex })
+			else
+				mongofilter.$and.push({ "nameen": regex })
+		}
+		// blocks
+		// let mod = new ModFilter();
+		// mod.effectId = 174;
+		// mod.min = 400;
+		// let filterMod = this.filterStat(mod);
+		// mongofilter.$and.push(filterMod);
+		
+		// let block = new BlockFilter()
+		// block.mods.push(mod);
+		// filt.blocks.push(block);
 
-    // .forEach(i => {
-    //     console.log("i: " + i)
-    // })
-    // this.db.items.find({}).sort(i => i.level).skip(this.itemsPerPage * this.page).limit(this.itemsPerPage).toArray().then(a => {
-    //     this.items = a;
-    // })
-    // }
+		let bi = 0;
+		filt.blocks.forEach(block => {
+			if (block.activate) {
+				if (block.type == "$sum") {
+					this.filterSum(mongofilter, adds, bi, block);
+				} else {
+					let arr = block.mods.filter(m => m.activate && m.effectId != undefined).map((m: ModFilter) => {
+						if (m.pseudoName.includes("Pseudo")) 
+							return this.filterStatPseudo(m);
+						else 
+							return this.filterStat(m);
+					});
+					// console.log("filter block : " + func + " : " + JSON.stringify(arr));
+					if (arr.length > 0) {
+						mongofilter.$and.push({
+							[block.type]: arr
+						});
+					}
+				}
+			}
+		});
+		return mongofilter;
+	}
+	private filterSum(mongofilter, adds, bi, block: BlockFilter) {
+		let blockid = block.mods.map(m => m.effectId).reduce((acc, m) => acc + m) + bi;
+		// filter what stats we need to sum
+		let conds = [];
+		block.mods.forEach(m => {
+			conds.push({
+				"$eq": [
+					"$$stat.name",
+					m.effectId
+				]
+			});
+		});
+		// create a field with the sum of stats
+		adds.$addFields[blockid] = {
+			"$sum": {
+				"$map": {
+					"input": {
+						"$filter": {
+							"input": "$statistics",
+							"as": "stat",
+							"cond": {
+								"$or": conds
+							}
+						}
+					},
+					"as": "stat",
+					"in": "$$stat.max"
+				}
+			}
+		};
+		// filter match on that sum
+		mongofilter.$and.push({
+			[blockid]: {
+				$gte: parseInt((block.mods[0].min || -100000) + ""),
+				$lte: parseInt((block.mods[0].max || 100000) + "")
+			}
+		});
+	}
+	private filterStatPseudo(m: ModFilter) {
+		let min: number = parseInt(m.min + "");
+		let max: number = parseInt(m.max + "");
+		if (!m.min) min = -100000;
+		let filter = {
+			"$and": []
+		};
+		// if (m.min) {
+		filter.$and.push(
+			{
+				["(Pseudo) statistics." + m.effectId]: {
+					"$gte": min
+				}
+			}
+		)
+		// }
+		if (m.max) {
+			filter.$and.push(
+				{
+					["(Pseudo) statistics." + m.effectId]: {
+						"$lte": max
+					}
+				}
+			)
+		}
+		return filter;
+	}
+	private filterStat(m: ModFilter) {
+		let min: number = parseInt(m.min + "");
+		let max: number = parseInt(m.max + "");
+		// console.log("filter mod (" + min + "," + max + ") : " + JSON.stringify(m));
+		if (!m.min) min = -100000;
+		let minfilter = {
+			"effectId": m.effectId,
+			"diceNum": { "$gte": min }
+		};
+		let maxfilter = {
+			"effectId": m.effectId
+		};
+		if (m.max) {
+			minfilter["diceSide"] = { "$lte": max };
+			maxfilter["diceSide"] = { "$lte": max, "$gte": min };
+		} else {
+			maxfilter["diceSide"] = { "$gte": min };
+		}
+		let mm = {
+			"possibleEffects": {
+				"$elemMatch": {
+					"$or": [minfilter, maxfilter]
+				}
+			}
+		};
+		return mm;
+	}
 
 }
