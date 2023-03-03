@@ -28,7 +28,6 @@ export class Effectlist {
         return this.db.jsonGreenListEffects.green.includes(e);
     }
     public isRedList(e: number) {
-        // console.log("redlist: " + JSON.stringify(this.db.jsonGreenListEffects))
         return this.db.jsonGreenListEffects.red.includes(e);
     }
 
@@ -36,8 +35,18 @@ export class Effectlist {
         let mode = this.db.effectMode;
         if(mode == "debug") return true;
         // 666 = ACTION_NOOP = "Pas d'effet supplémentaire"
+
         return (this.isGreenList(e.effectUid) || e.visibleInTooltip || (e.effect?.showInTooltip && mode == "detailed")) // || e.visibleInBuffUi || e.visibleInFightLog) 
                 && !this.isRedList(e.effectUid) && e.effectId != 666
+        /*
+        if(mode == "basic") {
+            return (e.visibleInTooltip) && e.effectId != 666
+        }
+        if(mode == "detailed") {
+            return (this.isGreenList(e.effectUid) || e.visibleInTooltip || e.effect?.showInTooltip) // || e.visibleInBuffUi || e.visibleInFightLog) 
+                && !this.isRedList(e.effectUid) && e.effectId != 666
+        }
+        */
     }
 
 }

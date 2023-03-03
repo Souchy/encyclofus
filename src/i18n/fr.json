@@ -25,14 +25,14 @@
 	"fire": "Feu",
 	"water": "Eau",
 	"air": "Air",
-
+	
 	"otherCharac": "Autres caractéristiques",
 	"maxStack": "Cumul max. des effets",
 	"castInDiagonal": "Lancer en diagonale",
 	"castInLine": "Lancer en ligne",
 	"needTakenCell": "Cellule pleine",
 	"needFreeCell": "Cellule libre",
-	"castTestLos": "Ligne de vue",
+	"castTestLos": "Ligne de vue nécessaire",
 	"globalCooldown": "Intervalle de relance global",
 	"initialCooldown": "Intervalle de relance initial",
 	"minCastInterval": "Intervalle de relance",
@@ -41,7 +41,9 @@
 	"criticalHitProbability": "Probabilité de coup critique",
 	"dodge": "Fuite",
 	"lock": "Tacle",
-
+	
+	"rangeCanBeBoosted": "Portée modifiable",
+	"castTestLosNot": "Ligne de vue non-nécessaire",
 
 	"help": "Aide",
 	"sidebar" : {

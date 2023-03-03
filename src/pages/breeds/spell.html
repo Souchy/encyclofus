@@ -19,8 +19,19 @@
 	</span>
 	<span>
 		${spell.minRange} - ${spell.range} <span t="po"></span>
-		<img if.bind="spell.rangeCanBeBoosted" src="${db.getIconPath('icons/editable_range.webp')}" />
-		<img if.bind="!spell.rangeCanBeBoosted" src="${db.getIconPath('icons/fixed_range.webp')}" />
+		<span if.bind="spell.rangeCanBeBoosted" class="tooltipx">
+			<img src="${db.getIconPath('picto_portee_modif.png')}" />
+			<span class="tooltiptext" t="rangeCanBeBoosted"></span>
+		</span>
+		<!-- <img if.bind="!spell.rangeCanBeBoosted" src="${db.getIconPath('picto_spell_line.png')}" /> -->
+		<span if.bind="spell.castTestLos" class="tooltipx">
+			<img src="${db.getIconPath('ligne_vu.png')}" />
+			<span class="tooltiptext" t="castTestLos"></span>
+		</span>
+		<span if.bind="!spell.castTestLos" class="tooltipx">
+			<img src="${db.getIconPath('ligne_not_vu.png')}" />
+			<span class="tooltiptext" t="castTestLosNot"></span>
+		</span>
 	</span>
 
 	<!-- description -->
