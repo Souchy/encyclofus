@@ -19,9 +19,6 @@ export class Options {
 	@observable
 	public selectedEffectMode: string
 
-	// public themeLight = import('./themes/themelight.less');
-	// public themeDark = import('./themes/themedark.less');
-
 	constructor(db: db, @I18N private readonly i18n: I18N) {
 		this.db = db;
 		this.versions = jsonVersions;
