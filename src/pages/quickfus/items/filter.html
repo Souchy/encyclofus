@@ -1,3 +1,7 @@
+
+<import from="./modfilter/modfilterbox"></import>
+
+
 <!-- Search -->
 <div class="row">
     <input class="search" type="text" value.bind="filterText" placeholder="search..." focus="true" />
@@ -6,7 +10,7 @@
 <!-- tagify search box ? = search sur item names, panoplies, effets, types d'items (capecoiffe..).... -->
 <!-- exemple tu clic sur [() Agilité ] et ça remplace le text par 2 box min/max à côté de l'icône d'agi -->
 
-<div class="row" if.bind="emerald.items && emerald.characteristics">
+<div class="row" if.bind="db.isLoaded && emerald.items && emerald.characteristics">
     <!--Generic filters left side -->
     <div class="leftside col">
 
@@ -58,33 +62,10 @@
                     </select>
                     <button class="btnDelete" onclick.call="deleteBlock(i)">x</button>
                 </div>
-                <!-- mod list -->
-                <div class="mod d-flex align-items-center" repeat.for="j of blocks[i].mods.length" id.bind="j">
-                    <!-- checkbox -->
-                    <input class="checkbox mr-1" type="checkbox" checked.bind="blocks[i].mods[j].activate" />
-                    <!-- mod select -->
-                    <div name="modsearch" class="searchable">
-                        <input name="modsearchinput" type="text" autocomplete="off" 
-                            value.bind="blocks[i].mods[j].name" t="[placeholder]quickfus.filter.addMod"
-                            onkeyup.call="filterFunction2($this,$event)" onchange.call="oninput($this, $event)"
-                            onfocus.call="onModInputFocus($this, $event, i, j)" onblur.call="onModInputUnfocus($this, $event, i, j)"
-                        >
-                        <dl name="modsearchlist" class="modlist">
-                            <!-- automatically filled with mods -->
-                            <section repeat.for="[sectionName, section] of getStatSections()">
-                                <dt t.bind="sectionName"></dt>
-                                <dd repeat.for="mod of getModsForSection(section)" onmouseover.call="onDDHover($this, $event, i, j, mod)" 
-                                    onclick.call="onDDClick($this, $event, i, j, mod)" innerHtml.bind="getI18n(mod.nameId)"></dd>
-                            </section>
-                        </dl>
-                    </div>
-                    <!-- mod min/max -->
-                    <input class="ml-2 mr-2" type="number" value.bind="blocks[i].mods[j].min" placeholder="min" />
-                    <input class="mr-2" type="number" value.bind="blocks[i].mods[j].max" placeholder="max" />
-                    <!-- mod delete -->
-                    <button class="btnDelete" onclick.call="deleteMod(i, blocks[i].mods[j].name)">x</button>
 
-                </div>
+                <!-- mod list -->
+                <modfilterbox repeat.for="mod of blocks[i].mods" data.bind="mod"></modfilterbox>
+
                 <!-- create mod -->
                 <div>
                     <button class="btnAdd" click.delegate="addStatMod($this, $event, i)" t="quickfus.filter.addMod"></button>

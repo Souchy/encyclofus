@@ -193,7 +193,6 @@
 		}
 
 	},
-
 	"quickfus": {
 		"filter": {
 			"level": "Niveau",
@@ -209,10 +208,16 @@
 			"search": "Recherche",
 			"sections": {
 				"pseudo": "Pseudo",
-				"primary": "Caractéristiques primaires",
+				"primary": "Primaires",
 				"damage": "Dommages",
-				"secondary": "Caractéristiques secondaires",
+				"secondary": "Secondaires",
 				"resistance": "Résistances"
+			},
+			"pseudo": {
+				"numres": 	 "# res",
+				"numresele": "# res élémentaires",
+				"totres": 	 "Total #% res",
+				"totresele": "Total #% res élémentaires"
 			}
 		}
 	}

@@ -3,8 +3,7 @@ import { pipeline } from "stream";
 import { db } from "../../../DofusDB/db";
 import { Emerald } from "../../../ts/emerald";
 import { Mason, util } from "../util";
-import { BlockFilter, filter as Filter } from "./filter";
-import { ModFilter } from "./modfilter/modfilter";
+import { BlockFilter, ModFilter, filter as Filter } from "./filter";
 var merge = require('deepmerge');
 
 @inject(db, Emerald)
@@ -50,12 +49,6 @@ export class items {
             setTimeout(() => this.onScroll(e));
         };
         this.pageHost.addEventListener('scroll', handler);
-
-        // if already loaded emerald, auto search
-        if(this.emerald.items?.length > 1) {
-            // this.mason.fulldata = this.emerald.items;
-            this.search();
-        }
     }
 
     private async onScroll(e?) {

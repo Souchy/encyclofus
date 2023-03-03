@@ -206,10 +206,16 @@
 			"search": "Search",
 			"sections": {
 				"pseudo": "Pseudo",
-				"primary": "Caractéristiques primaires",
-				"damage": "Dommages",
-				"secondary": "Caractéristiques secondaires",
-				"resistance": "Résistances"
+				"primary": "Primary",
+				"secondary": "Secondary",
+				"damage": "Damages",
+				"resistance": "Resistances"
+			},
+			"pseudo": {
+				"numres": 	 "# res",
+				"numresele": "# res elementary",
+				"totres": 	 "Total #% res",
+				"totresele": "Total #% res elementary"
 			}
 		}
 	}

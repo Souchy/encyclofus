@@ -1,0 +1,67 @@
+<div class="mod d-flex align-items-center" >
+    <!-- checkbox -->
+    <input class="checkbox mr-1" type="checkbox" checked.bind="data.activate" />
+    <!-- mod select -->
+    <div name="modsearch" class="searchable">
+
+        <!-- input + text over -->
+        <div class="modsearchinput">
+            <input name="modsearchinput" type="text" autocomplete="off" 
+            ref="inputHtml"
+            value.bind="inputText" 
+            onkeyup.call="onKeyup($event)" onkeydown.call="onKeyDown($event)"
+            onfocus.call="onFocus($event)" onblur.call="onBlur($event)"
+            >
+            <label if.bind="!selectedMod && !inputText" class="inputPlaceholder" t="quickfus.filter.addMod"></label>
+            <label if.bind="selectedMod && !inputText" class="inputOverlay" for="modsearchinput" 
+                innerHtml.bind="renderCharac(selectedMod, true)">
+            </label>
+        </div>
+        <!-- <button>${outputText}</button> -->
+
+        <!-- list of options -->
+        <!--  if.bind="!listHidden" -->
+        <dl name="modsearchlist" class="modlist" style="display: none;" ref="modList">
+            <!-- automatically filled with mods -->
+            <section repeat.for="[sectionName, section] of filteredSects">
+                <!-- name: ${sectionName} -->
+                <dt t.bind="sectionName" style="text-align: center;"></dt>
+                <!-- getModsForSection(section) -->
+                <dd repeat.for="mod of section" 
+                    style="padding-left: 10px;" class="${mod == selectedMod ? 'selected' : ''}"
+                    title="${mod.id}"
+                    innerHtml.bind="renderCharac(mod)"
+                    onmouseover.call="onHoverMod(mod)"
+                    onclick.call="onClickMod(mod)"
+                    >
+                </dd>
+            </section>
+        </dl>
+
+    </div>
+    <!-- mod min/max -->
+    <input class="ml-2 mr-2" type="number" value.bind="data.min" placeholder="min" />
+    <input class="mr-2" type="number" value.bind="data.max" placeholder="max" />
+    <!-- mod delete -->
+    <button class="btnDelete" onclick.call="onDelete()">x</button>
+</div>
+
+<!-- <div if.bind="filteredSects">
+    allo
+    <div repeat.for="[sectionName, section] of filteredSects">
+        ${sectionName}  - ${section}
+    </div>
+</div> -->
+<!--
+<div class="combobox">
+	<input type="text" [(ngModel)]="inputItem" (ngModelChange)="getFilteredList()" class="combobox-input" 
+    (keyup)="onKeyPress($event)" (blur)="toggleListDisplay(0)" (focus)="toggleListDisplay(1)" 
+    placeholder="Select one..." [ngClass]="{'error': showError}">
+  <span *ngIf="showError" class="error-text"><i>Invalid Selection.</i></span>
+  <div class="combobox-options" *ngIf="!listHidden">
+    <list-item *ngFor="let item of filteredList;let i = index" (click)="selectItem(i)" 
+        [ngClass]="{'selected': i===selectedIndex}">{{item}}
+    </list-item>
+  </div>
+</div>
+-->

@@ -1,0 +1,34 @@
+
+
+modfilterbox {
+    .selected {
+        background-color: red !important;
+    }
+    .modsearchinput {
+        position: relative;
+        input {
+            display: block;
+            // color: transparent;
+        }
+        label { //.inputOverlay {
+            pointer-events: none;
+            /// z-index: 2;
+            float: left;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0px;
+            left: 0px;
+            // margin: 1px;
+            padding-left: 3px;
+            padding-top: 2px;
+            // background-color: var(--bg1);
+
+        }
+        .inputOverlay {}
+        
+        .inputPlaceholder {
+            opacity: 0.5;
+        }
+    }
+}
