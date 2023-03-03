@@ -29,54 +29,6 @@
     </tbody>
 </table>
 
-<!--
-<table class="table table-striped table-sm table-borderless ${effectTypeStyle}" css="--bs-table-striped-bg: none; margin-bottom: 0px;" if.bind="emerald.effects">
-    <tbody>
-        <tr if.bind="hasCondition(effect)">
-            <td style="vertical-align: middle;" innerHtml.bind="getTargetConditions(effect)"></td>
-            <td if.bind="db.getAoeIconUrl(effect)" class="tooltipx" style="width: 37px; height: 32px; padding: 0px; vertical-align: middle;">
-                <img style="width: 36px; height: 18px;" src.bind="db.getAoeIconUrl(effect)"></img>
-                <span class="tooltiptext">${getZoneString(effect)}</span>
-            </td>
-            <td if.bind="hasTargetIcon(effect)" style="width: 22px; height: 32px; padding: 4px; vertical-align: middle;">
-                <img style="vertical-align: middle; margin-left: 2px;" src.bind="getTargetIcon(effect)"></img>
-                <span class="tooltiptext">${getTargetString(effect)}</span>
-            </td>
-        </tr>
-        <tr>
-            <table class="table table-striped table-sm table-borderless" style="--bs-table-striped-bg: none; margin-bottom: 0px;">
-                <tbody>
-                    <tr id="${effect.effectUid}">
-                        <td style="width: 20px;" if.bind="hasCondition(effect)">
-                            <div></div>
-                        </td>
-                        <td style="width: 20px; padding: 0px; padding-left: 4px;" if.bind="getIcon(effect)">
-                            <div style.bind="getIcon(effect)"></div>
-                        </td>
-                        <td style="vertical-align: middle;" innerHtml.bind="renderEffectI18n(effect)"></td>
-                        <td style="vertical-align: middle; position: absolute; left: 0px; width: 100%; height: 100%;" if.bind="isStateSubspell(effect)">
-                            <spell class="spellHover" if.bind="depth == 0" spellid.bind="getStateSubspellId(effect)" depth.bind="depth+1"></spell>
-                        </td>
-                        <td if.bind="isDuration(effect)" style="vertical-align: middle; width: 25px; height: 32px; ">
-                            <img style="vertical-align: middle; margin-left: -10px; margin-right: -10px;" src.bind="getDispellIcon(effect)"></img>
-                            <span class="tooltiptext">${getDispellString(effect)}</span>
-                        </td>
-                        <td if.bind="db.getAoeIconUrl(effect) && !hasCondition(effect)" class="tooltipx" style="width: 37px; height: 32px; padding: 0px; vertical-align: middle;">
-                            <img style="width: 36px; height: 18px;" src.bind="db.getAoeIconUrl(effect)"></img>
-                            <span class="tooltiptext">${getZoneString(effect)}</span>
-                        </td>
-                        <td if.bind="hasTargetIcon(effect) && !hasCondition(effect)" style="width: 22px; height: 32px; padding: 4px; vertical-align: middle;">
-                            <img style="vertical-align: middle; margin-left: 2px;" src.bind="getTargetIcon(effect)"></img>
-                            <span class="tooltiptext">${getTargetString(effect)}</span>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </tr>
-    </tbody>
-</table>
--->
-
 <!-- TRAPS -->
 <!-- normal effects -->
 <effectlist if.bind="hasTrapGlyph(effect) && !iscrit" effects.bind="getTrapGlyph(effect).effects" depth.bind="depth+1"></effectlist>

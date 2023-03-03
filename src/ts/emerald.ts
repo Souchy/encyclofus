@@ -4,7 +4,7 @@ import * as Realm from "realm-web";
 import { DI, IEventAggregator, inject, Registration } from 'aurelia';
 import { db } from '../DofusDB/db';
 import { Util } from './util';
-import jsonFeatures from '../DofusDB/features.json';
+// import jsonFeatures from '../DofusDB/features.json';
 
 
 @inject(db)
@@ -39,13 +39,13 @@ export class Emerald {
 			effects: { id: true },
 			characteristics: { id: true }
 		});
-		if(this.db.checkFeatureVersion(jsonFeatures.items) && Util.isLocal()) {
+		// if(this.db.checkFeatureVersion(jsonFeatures.items) && Util.isLocal()) {
 			this._items = await this.getFromZango("items")
 			this._itemTypes = await this.getFromZango("itemtypes")
 			this._itemSets = await this.getFromZango("itemsets")
 			this.effects = await this.getFromZango("effects")
 			this.characteristics = await this.getFromZango("characteristics")
-		}
+		// }
 		// console.log("loadup1")
 		this.ea.publish("emerald:loaded");
 	}
@@ -86,7 +86,7 @@ export class Emerald {
 		let arr: Object[];
 		try {
 			arr = await this.zdb.collection(name).find({}).toArray();
-			console.log("got arr from zango")
+			// console.log("got arr from zango")
 		} catch (error) {
 			console.error(error);
 		}
@@ -99,7 +99,7 @@ export class Emerald {
 						i["nameen"] = this.db.i18n_en[i.nameId];
 					}
 				}
-				console.log("got arr from db fetch")
+				// console.log("got arr from db fetch")
 				this.zdb.collection(name).insert(json);
 			})
 		}

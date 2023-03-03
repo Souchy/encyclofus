@@ -24,14 +24,6 @@ export class Effectlist {
         return paddingLeft;
     }
 
-    // public get tdStyle() {
-    //     let style = "padding: 0px;";
-    //     if (this.depth > 0)
-    //         return style + "padding-left: " + this.paddingLeft + "px;"
-    //     else 
-    //         return style;
-    // }
-
     public isGreenList(e: number) {
         return this.db.jsonGreenListEffects.green.includes(e);
     }
