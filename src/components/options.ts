@@ -17,7 +17,7 @@ export class Options {
 	@observable
 	public selectedLang: string;
 	@observable
-	public selectedEffectMode: string
+	public selectedEffectMode: string;
 
 	constructor(db: db, @I18N private readonly i18n: I18N) {
 		this.db = db;
