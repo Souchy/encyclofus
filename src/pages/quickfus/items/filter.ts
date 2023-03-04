@@ -7,6 +7,7 @@ import { util } from "../util";
 import { Emerald } from "../../../ts/emerald";
 import * as $ from 'jquery';
 import { IContainer, newInstanceOf } from "@aurelia/kernel";
+import { watch } from '@aurelia/runtime-html';
 
 @inject(db)
 export class filter {
@@ -42,10 +43,15 @@ export class filter {
 		this.addBlock();
 		this.loadFilter();
 
+		// replace with (do we have connection token for mongodb)
+		// this.db.getToken();
         // if already loaded emerald, auto search
-        if(this.emerald.items?.length > 1) {
-            this.search();
-        }
+        // if(this.emerald.items?.length > 1) {
+        //     this.search();
+        // }
+		// this.ea.subscribe("mongo:login", () => {
+		// 	this.search();
+		// });
 		// when emerald loads, auto search
 		this.ea.subscribe("emerald:loaded", () => {
 			// this.mason.fulldata = this.emerald.items; // store full data
@@ -59,6 +65,10 @@ export class filter {
 			}
 		});
 	}
+
+    public get isLoaded() {
+		return this.db.isLoaded && this.db.isConnected() && this.emerald.characteristics //&& this.emerald.effects
+    }
 
 	public loadFilter() {
 		let json = localStorage.getItem("filter");

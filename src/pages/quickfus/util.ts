@@ -11,13 +11,13 @@ export class Mason {
 	public msnry: Masonry;
 
 	public page: number = 0;
-	public itemsPerPage: number = 50;
+	public itemsPerPage: number = 40;
 
 	public constructor() {
 		// console.log("mason ctor");
 	}
 
-	public showMore() {
+	public async showMore() {
 		let length = this.page * this.itemsPerPage;
 		let slice = this.fulldata.slice(length, this.itemsPerPage + length); // emerald.items
 		// console.log("mason slice ("+this.fulldata.length+"): " + slice)

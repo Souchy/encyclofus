@@ -10,7 +10,7 @@ import { Util } from './util';
 @inject(db)
 export class Emerald {
 
-	private _items: Object[]
+	// private _items: Object[]
 	private _itemTypes: Object[]
 	private _itemSets: Object[]
 	public effects: any[]
@@ -19,13 +19,13 @@ export class Emerald {
 	public zdb: Db;
 	// public static encyclofus: Collection;
 
-	public app: Realm.App;
-	public user: Realm.User;
+	// public app: Realm.App;
+	// public user: Realm.User;
 
 	constructor(readonly db: db, @IEventAggregator readonly ea: IEventAggregator) {
 		// Emerald.encyclofus = Emerald.zango.collection("encyclofus");
 		let APP_ID = "data-ewvjc";
-		this.app = new Realm.App({ id: APP_ID });
+		// this.app = new Realm.App({ id: APP_ID });
 		// ea.subscribe("db:loaded", async () => {
 		// });
 		this.loadup();
@@ -40,7 +40,7 @@ export class Emerald {
 			characteristics: { id: true }
 		});
 		// if(this.db.checkFeatureVersion(jsonFeatures.items) && Util.isLocal()) {
-			this._items = await this.getFromZango("items")
+			// this._items = await this.getFromZango("items")
 			this._itemTypes = await this.getFromZango("itemtypes")
 			this._itemSets = await this.getFromZango("itemsets")
 			this.effects = await this.getFromZango("effects")
@@ -49,22 +49,23 @@ export class Emerald {
 		// console.log("loadup1")
 		this.ea.publish("emerald:loaded");
 	}
+	
 
-	private async login() {
-		const credentials = Realm.Credentials.anonymous();
-		// Authenticate the user
-		this.user = await this.app.logIn(credentials);
-		// `App.currentUser` updates to match the logged in user
-		console.assert(this.user.id === this.app.currentUser.id);
-	}
+	// private async login() {
+	// 	const credentials = Realm.Credentials.anonymous();
+	// 	// Authenticate the user
+	// 	this.user = await this.app.logIn(credentials);
+	// 	// `App.currentUser` updates to match the logged in user
+	// 	console.assert(this.user.id === this.app.currentUser.id);
+	// }
 
-	public asdf() {
-		this.user.mongoClient("myClusterName").db("encyclofus");
-	}
+	// public asdf() {
+	// 	this.user.mongoClient("myClusterName").db("encyclofus");
+	// }
 
-	public get items() {
-		return this._items
-	}
+	// public get items() {
+	// 	return this._items
+	// }
 	public get itemTypes() {
 		return this._itemTypes
 	}
@@ -72,9 +73,9 @@ export class Emerald {
 		return this._itemSets
 	}
 
-	public get collectionItems() {
-		return this.zdb.collection("items")
-	}
+	// public get collectionItems() {
+	// 	return this.zdb.collection("items")
+	// }
 	public get collectionItemTypes() {
 		return this.zdb.collection("itemtypes")
 	}

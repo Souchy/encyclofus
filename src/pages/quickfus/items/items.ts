@@ -14,7 +14,8 @@ export class items {
     private pageHost: Element;
     private itemFilter: Object = null;
     private debouncedShowMore = util.debounce(() => {
-        this.search1();
+        // this.search1();
+        this.mason.showMore(); 
     }, 500, true);
 
     public constructor(readonly db: db, readonly emerald: Emerald, @IEventAggregator readonly ea: IEventAggregator) {
@@ -30,7 +31,8 @@ export class items {
     }
 
     public isLoaded() {
-        return this.emerald.items
+		return this.db.isLoaded && this.db.isConnected() // && this.emerald.characteristics && this.emerald.effects
+        // return this.emerald.items
     //     return this.db.jsonItemTypes && this.db.jsonItemTypes && this.db.jsonEffects && this.db.jsonCharacteristics
     }
     public attached() {
@@ -73,16 +75,19 @@ export class items {
         this.mason.data = []; // this.items = [];
         this.mason.fulldata = [];
         this.mason.page = 0;
-        this.search1();
+        // this.search1();
         // console.log("search1")
+		
+		// load data in the background in increments
+		await this.loadData(0, 25); // just await the first data
+		this.loadData(25, 75);
+		this.loadData(75, 0);
+        this.mason.showMore(); 
     }
 
-    /**
-     * ongoing search: add new items to current
-     */
-    public async search1() {
-        console.log("search1 filter: " + JSON.stringify(this.itemFilter))
-
+	private async loadData(skip: number, limit: number) { //pageId: number) {
+		// just load the rest of the .fulldata in the background
+		// maybe do 25 items (show), 50 (bg), infinite (bg)
         var pipeline = [];
         {
             // actual filter
@@ -92,37 +97,36 @@ export class items {
             //     pipeline.push(adds);
             // sort
             pipeline.push({ $sort: { "level": -1, "id": -1 } });
-            // skip
-            pipeline.push({ $skip: this.mason.page * this.mason.itemsPerPage });
-            // limit
-            pipeline.push({ $limit: this.mason.itemsPerPage });
+            // // skip
+            pipeline.push({ $skip: skip }); // this.mason.page * this.mason.itemsPerPage
+            // // limit
+            if(limit != 0) pipeline.push({ $limit: limit }); // this.mason.itemsPerPage
         };
         // console.log("search 1, limit: " + this.mason.itemsPerPage + ", skip: " + this.mason.page * this.mason.itemsPerPage)
 
-        let cursor = this.emerald.collectionItems.aggregate(pipeline);
-        // console.log({cursor})
-        let arr = await cursor.toArray(); 
+        // let cursor = this.emerald.collectionItems.aggregate(pipeline);
+        // let arr = await cursor.toArray(); 
+		let arr = await this.db.mongoItemsAggregate(pipeline);
         this.mason.fulldata.push(...arr);
+		console.log("loaded data: " + arr.length);
         // console.log("arr: " + arr + ", fulldata: " + this.mason.fulldata.length);
+	}
 
-        this.mason.showMore(); 
-    }
-
+	/*
     private async search0(filter: string = "") {
         this.mason.data = await this.emerald.collectionItems
             .find({ })
-
             .sort({ level: -1 })
             // .sort(i => i.level)
             // .sort({ level: 1 })
             // .sort({ "level": 1 })
             // .sort((a, b) => a.level > b.level)
             // .sort({ level: -1 })
-
             .skip(0)
             .limit(50)
             .toArray()
     }
+	*/
 
 	public generateFilter(filt: Filter) {
 		var adds = { $addFields: {} };
