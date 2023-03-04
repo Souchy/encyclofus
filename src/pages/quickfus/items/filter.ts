@@ -9,7 +9,7 @@ export class filter {
 	// filter data
 	public filterText: string = "";
 	public filterLevel: boolean = true;
-	public levelMin: number = 1;
+	public levelMin: number = 150;
 	public levelMax: number = 200;
 	public types: Map<number, boolean> = new Map<number, boolean>();
 	public armes: Map<number, boolean> = new Map<number, boolean>();

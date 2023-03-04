@@ -10,7 +10,7 @@ import { Util } from './util';
 @inject(db)
 export class Emerald {
 
-	// private _items: Object[]
+	private _items: any[]
 	private _itemTypes: any[]
 	private _itemSets: any[]
 	public effects: any[]
@@ -24,7 +24,7 @@ export class Emerald {
 
 	constructor(readonly db: db, @IEventAggregator readonly ea: IEventAggregator) {
 		// Emerald.encyclofus = Emerald.zango.collection("encyclofus");
-		let APP_ID = "data-ewvjc";
+		// let APP_ID = "data-ewvjc";
 		// this.app = new Realm.App({ id: APP_ID });
 		// ea.subscribe("db:loaded", async () => {
 		// });
@@ -40,7 +40,8 @@ export class Emerald {
 			characteristics: { id: true }
 		});
 		// if(this.db.checkFeatureVersion(jsonFeatures.items) && Util.isLocal()) {
-			// this._items = await this.getFromZango("items")
+			this._items = await this.getFromZango("items")
+			this.ea.publish("emerald:loaded:items");
 			this._itemTypes = await this.getFromZango("itemtypes")
 			this.ea.publish("emerald:loaded:itemtypes");
 			this._itemSets = await this.getFromZango("itemsets")
@@ -53,22 +54,23 @@ export class Emerald {
 		this.ea.publish("emerald:loaded");
 	}
 	
+	/*
+	private async login() {
+		const credentials = Realm.Credentials.anonymous();
+		// Authenticate the user
+		this.user = await this.app.logIn(credentials);
+		// `App.currentUser` updates to match the logged in user
+		console.assert(this.user.id === this.app.currentUser.id);
+	}
 
-	// private async login() {
-	// 	const credentials = Realm.Credentials.anonymous();
-	// 	// Authenticate the user
-	// 	this.user = await this.app.logIn(credentials);
-	// 	// `App.currentUser` updates to match the logged in user
-	// 	console.assert(this.user.id === this.app.currentUser.id);
-	// }
+	public asdf() {
+		this.user.mongoClient("myClusterName").db("encyclofus");
+	}
+	*/
 
-	// public asdf() {
-	// 	this.user.mongoClient("myClusterName").db("encyclofus");
-	// }
-
-	// public get items() {
-	// 	return this._items
-	// }
+	public get items() {
+		return this._items
+	}
 	public get itemTypes() {
 		return this._itemTypes
 	}
@@ -76,9 +78,9 @@ export class Emerald {
 		return this._itemSets
 	}
 
-	// public get collectionItems() {
-	// 	return this.zdb.collection("items")
-	// }
+	public get collectionItems() {
+		return this.zdb.collection("items")
+	}
 	public get collectionItemTypes() {
 		return this.zdb.collection("itemtypes")
 	}
@@ -90,7 +92,7 @@ export class Emerald {
 		let arr: Object[];
 		try {
 			arr = await this.zdb.collection(name).find({}).toArray();
-			// console.log("got arr from zango")
+			console.log("got arr from zango")
 		} catch (error) {
 			console.error(error);
 		}
@@ -103,7 +105,7 @@ export class Emerald {
 						i["nameen"] = this.db.i18n_en[i.nameId];
 					}
 				}
-				// console.log("got arr from db fetch")
+				console.log("got arr from db fetch")
 				this.zdb.collection(name).insert(json);
 			})
 		}

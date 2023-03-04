@@ -79,11 +79,69 @@ export class items {
         // console.log("search1")
 		
 		// load data in the background in increments
-		await this.loadData(itemFilter, 0, 25); // just await the first data
-		this.loadData(itemFilter, 25, 75);
-		this.loadData(itemFilter, 75, 0);
+		// await this.loadData(itemFilter, 0, 25); // just await the first data
+		// this.loadData(itemFilter, 25, 75);
+		// this.loadData(itemFilter, 75, 0);
+		this.filterData(filter);
         this.mason.showMore(); 
     }
+
+	private async filterData(filter: Filter = null) {
+		if(!filter) return;
+		
+		let arr = this.emerald.items
+		.filter(item => {
+			// level
+			if(filter.filterLevel) {
+				if(item.level < filter.levelMin) return false;
+				if(item.level > filter.levelMax) return false;
+			}	
+			// Types
+			if (filter.filterType) {
+				if(!filter.types.get(item.typeId)) return false;
+			}
+			// Weapons
+			if (filter.filterWeapon) {
+				if(!filter.armes.get(item.typeId)) return false;
+			}
+			// Text
+			if (filter.filterText && filter.filterText.trim() != "") {
+       		 	let regex = new RegExp(util.caseAndAccentInsensitive(filter.filterText.trim()), "i"); 
+				let name = this.db.getI18n(item.nameId);
+				if(!regex.test(name)) return false;
+			}
+			// blocks
+			for(let block of filter.blocks) {
+				if (block.activate) {
+					if (block.type == "$sum") {
+						// this.filterSum(mongofilter, adds, bi, block);
+						let min = 0, max = 0;
+					} else {
+						let arr = block.mods.filter(m => m.activate && m.effectId != undefined).map((m: ModFilter) => {
+							if (m.pseudoName.includes("Pseudo")) 
+								return this.filterStatPseudo(m);
+							else 
+								return this.filterStat(m);
+						});
+						// console.log("filter block : " + func + " : " + JSON.stringify(arr));
+						if (arr.length > 0) {
+							// mongofilter.$and.push({
+							// 	[block.type]: arr
+							// });
+						}
+					}
+				}
+			}
+			return true;
+		})
+		.sort((a, b) => {
+			let ld = b.level - a.level;
+			if(ld != 0) return ld;
+			else return b.id - a.id;
+		})
+		
+        this.mason.fulldata.push(...arr);
+	}
 
 	private async loadData(itemFilter, skip: number, limit: number) { //pageId: number) {
 		// just load the rest of the .fulldata in the background
@@ -104,11 +162,11 @@ export class items {
         };
         // console.log("search 1, limit: " + this.mason.itemsPerPage + ", skip: " + this.mason.page * this.mason.itemsPerPage)
 
-        // let cursor = this.emerald.collectionItems.aggregate(pipeline);
-        // let arr = await cursor.toArray(); 
-		let arr = await this.db.mongoItemsAggregate(pipeline);
+        let cursor = this.emerald.collectionItems.aggregate(pipeline);
+        let arr = await cursor.toArray(); 
+		// let arr = await this.db.mongoItemsAggregate(pipeline);
         this.mason.fulldata.push(...arr);
-		console.log("loaded data: " + arr.length);
+		// console.log("loaded data: " + arr.length);
         // console.log("arr: " + arr + ", fulldata: " + this.mason.fulldata.length);
 	}
 
@@ -261,5 +319,20 @@ export class items {
 		};
 		return mm;
 	}
+	private filterStatMemory(m: ModFilter, item): boolean {
+		let min: number = parseInt(m.min + "");
+		let max: number = parseInt(m.max + "");
+		if (!m.min) min = -100000;
+		let effects: any[] = item.possibleEffects;
+		return effects.some(e => {
+			let effectModel = this.getEffect(e);
+			if(effectModel.characteristic != m.effectId) return false;
+			
+		});
+	}
 
+    public getEffect(possibleEffect) {
+        possibleEffect.effect ??= this.emerald.effects.filter(e => e.id == possibleEffect.effectId)[0];
+        return possibleEffect.effect;
+    }
 }
