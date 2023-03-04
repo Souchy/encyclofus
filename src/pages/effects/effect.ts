@@ -107,7 +107,8 @@ export class Effect {
 		return effect;
 	}
 	public getCharacteristic() {
-		let charac = this.emerald.characteristics?.filter(c => c.id == this.getEffect().characteristic)[0];
+		let cid = this.getEffect().characteristic;
+		let charac = this.emerald.characteristics?.filter(c => c.id == cid)[0];
 		return charac;
 	}
 
@@ -194,11 +195,14 @@ export class Effect {
 	}
 
 	public renderEffectI18n(e) {
-		if (e.baseEffectId) {
-			let effect = this.emerald.effects.filter(ei => ei.id == e.effectId)[0];
-			e.effect = effect;
-			// return this.renderItemEffectI18n(e);
-		}
+		// if it's an itemEffect
+		e.effect ??= this.getEffect();
+		// if (e.baseEffectId) {
+		// 	// add the effect model from effects.json 
+		// 	let effect = this.emerald.effects.filter(ei => ei.id == e.effectId)[0];
+		// 	e.effect = effect;
+		// 	// return this.renderItemEffectI18n(e);
+		// }
 		let text = this.db.getI18n(e.effect?.descriptionId);
 		if (!text) text = "#1";
 		let has1 = text.includes("#1");

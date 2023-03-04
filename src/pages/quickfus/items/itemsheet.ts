@@ -52,7 +52,8 @@ export class itemsheet {
     }
 
     public getEffect(possibleEffect) {
-        return this.emerald.effects.filter(e => e.id == possibleEffect.effectId)[0];
+        possibleEffect.effect ??= this.emerald.effects.filter(e => e.id == possibleEffect.effectId)[0];
+        return possibleEffect.effect;
     }
 
     public get weaponEffects(): any[] {
