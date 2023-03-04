@@ -12,7 +12,7 @@ export class items {
 	public mason: Mason;
 	public grid: HTMLDivElement;
     private pageHost: Element;
-    private itemFilter: Object = null;
+    // private itemFilter: Object = null;
     private debouncedShowMore = util.debounce(() => {
         // this.search1();
         this.mason.showMore(); 
@@ -71,7 +71,7 @@ export class items {
         console.log("on search: " + filter)
         // if(filter.filterLevel)
         // this.itemFilter = filter;
-        this.itemFilter = this.generateFilter(filter);
+        let itemFilter = this.generateFilter(filter);
         this.mason.data = []; // this.items = [];
         this.mason.fulldata = [];
         this.mason.page = 0;
@@ -79,19 +79,19 @@ export class items {
         // console.log("search1")
 		
 		// load data in the background in increments
-		await this.loadData(0, 25); // just await the first data
-		this.loadData(25, 75);
-		this.loadData(75, 0);
+		await this.loadData(itemFilter, 0, 25); // just await the first data
+		this.loadData(itemFilter, 25, 75);
+		this.loadData(itemFilter, 75, 0);
         this.mason.showMore(); 
     }
 
-	private async loadData(skip: number, limit: number) { //pageId: number) {
+	private async loadData(itemFilter, skip: number, limit: number) { //pageId: number) {
 		// just load the rest of the .fulldata in the background
 		// maybe do 25 items (show), 50 (bg), infinite (bg)
         var pipeline = [];
         {
             // actual filter
-            pipeline.push({ $match: this.itemFilter ?? "" });
+            pipeline.push({ $match: itemFilter ?? "" });
             // sums
             //   if(Object.keys(adds.$addFields).length > 0)
             //     pipeline.push(adds);
@@ -112,49 +112,33 @@ export class items {
         // console.log("arr: " + arr + ", fulldata: " + this.mason.fulldata.length);
 	}
 
-	/*
-    private async search0(filter: string = "") {
-        this.mason.data = await this.emerald.collectionItems
-            .find({ })
-            .sort({ level: -1 })
-            // .sort(i => i.level)
-            // .sort({ level: 1 })
-            // .sort({ "level": 1 })
-            // .sort((a, b) => a.level > b.level)
-            // .sort({ level: -1 })
-            .skip(0)
-            .limit(50)
-            .toArray()
-    }
-	*/
-
-	public generateFilter(filt: Filter) {
+	public generateFilter(filter: Filter) {
 		var adds = { $addFields: {} };
 		var mongofilter = { $and: [] };
 		var types = { $or: [] };
 		// Level
-		if(filt.filterLevel) {
-			mongofilter.$and.push({ "level": { "$gte": parseInt(filt.levelMin + "") } });
-			mongofilter.$and.push({ "level": { "$lte": parseInt(filt.levelMax + "") } });
+		if(filter.filterLevel) {
+			mongofilter.$and.push({ "level": { "$gte": parseInt(filter.levelMin + "") } });
+			mongofilter.$and.push({ "level": { "$lte": parseInt(filter.levelMax + "") } });
 		}	
 		// Types
-		if (filt.filterType) {
-			filt.types.forEach((v, k) => {
-				if (v) types.$or.push({ "type": k });
+		if (filter.filterType) {
+			filter.types.forEach((v, k) => {
+				if (v) types.$or.push({ "typeId": k });
 			})
 		}
 		// Weapons
-		if (filt.filterWeapon) {
-			filt.armes.forEach((v, k) => {
-				if (v) types.$or.push({ "type": k });
+		if (filter.filterWeapon) {
+			filter.armes.forEach((v, k) => {
+				if (v) types.$or.push({ "typeId": k });
 			})
 		}
-		if (filt.filterType || filt.filterWeapon) {
+		if (filter.filterType || filter.filterWeapon) {
 			mongofilter.$and.push(types);
 		}
 		// Text
-		if (filt.filterText && filt.filterText != "") {
-			let regex  = { "$regex": util.caseAndAccentInsensitive(filt.filterText), "$options": "gi" }
+		if (filter.filterText && filter.filterText != "") {
+			let regex  = { "$regex": util.caseAndAccentInsensitive(filter.filterText), "$options": "gi" }
 			if (this.db.lang == "fr")
 				mongofilter.$and.push({ "namefr": regex })
 			else
@@ -172,7 +156,7 @@ export class items {
 		// filt.blocks.push(block);
 
 		let bi = 0;
-		filt.blocks.forEach(block => {
+		filter.blocks.forEach(block => {
 			if (block.activate) {
 				if (block.type == "$sum") {
 					this.filterSum(mongofilter, adds, bi, block);

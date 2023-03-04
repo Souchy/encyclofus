@@ -11,8 +11,8 @@ import { Util } from './util';
 export class Emerald {
 
 	// private _items: Object[]
-	private _itemTypes: Object[]
-	private _itemSets: Object[]
+	private _itemTypes: any[]
+	private _itemSets: any[]
 	public effects: any[]
 	public characteristics: any[]
 
@@ -42,11 +42,14 @@ export class Emerald {
 		// if(this.db.checkFeatureVersion(jsonFeatures.items) && Util.isLocal()) {
 			// this._items = await this.getFromZango("items")
 			this._itemTypes = await this.getFromZango("itemtypes")
+			this.ea.publish("emerald:loaded:itemtypes");
 			this._itemSets = await this.getFromZango("itemsets")
+			this.ea.publish("emerald:loadeditemsets:");
 			this.effects = await this.getFromZango("effects")
+			this.ea.publish("emerald:loaded:effects");
 			this.characteristics = await this.getFromZango("characteristics")
+			this.ea.publish("emerald:loaded:characteristics");
 		// }
-		// console.log("loadup1")
 		this.ea.publish("emerald:loaded");
 	}
 	
