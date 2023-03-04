@@ -4,7 +4,7 @@ import { DI, IEventAggregator, Registration, inject } from "aurelia";
 import { db } from "../../../../DofusDB/db";
 import { Emerald } from "../../../../ts/emerald";
 import * as $ from 'jquery';
-import { watch } from '@aurelia/runtime-html';
+import { bindable, watch } from '@aurelia/runtime-html';
 import { util } from '../../util';
 
 
@@ -15,7 +15,8 @@ export class ModFilterBox {
     public inputHtml: HTMLElement;
 
     // dynamic
-    public data: ModFilter;
+	@bindable
+    public data; // : ModFilter
 
     // input
     public inputText: string = "";
@@ -73,16 +74,16 @@ export class ModFilterBox {
         this.toggleListVisibility(false);
     }
     public onDelete() {
-        this.ea.publish("quickfus:mod:delete", this);
+        this.ea.publish("quickfus:mod:delete", this.data);
     }
     //#endregion
 
 
     //#region Mod list events
-    public onClickMod(mod) {
-        this.selectedMod = mod;
-        this.data.pseudoName = this.selectedMod["name"] ?? "";
-        this.data.effectId = this.selectedMod["id"];
+    public onClickMod(charac) {
+        // this.selectedMod = mod;
+        this.data.pseudoName = charac["name"] ?? "";
+        this.data.effectId = charac["id"];
         this.inputText = "";
         this.inputHtml.blur();
     }
@@ -92,21 +93,18 @@ export class ModFilterBox {
     }
     //#endregion
 
+
+    //#region Util
     public toggleListVisibility(bool: boolean) {
         if(bool) {
-            // $(event.target).closest(".searchable").find("dl").show();
-            // $(event.target).closest(".searchable").find("dl section dd").show();
             this.modList.style.display = "block";
         } else {
             let modlist = this.modList;
             setTimeout(function() {
                 modlist.style.display = "none";
-                // $(event.target).closest(".searchable").find("dl").hide();
             }, 100);
         }
     }
-
-    //#region Util
     public scrollToSelected() {
         if(!this.selectedMod) return;
         let id = this.selectedMod["id"];
@@ -141,9 +139,9 @@ export class ModFilterBox {
             }
         }
     }
-    public getModName(mod) {
-        if(mod.nameId) return this.getI18n(mod.nameId)
-        if(mod.name) return this.i18n.tr("quickfus.filter.pseudo." + mod.name);
+    public getModName(charac) {
+        if(charac.nameId) return this.getI18n(charac.nameId)
+        if(charac.name) return this.i18n.tr("quickfus.filter.pseudo." + charac.name);
     }
     public getModAtIndex(index: number) {
         let i = 0;
@@ -163,6 +161,7 @@ export class ModFilterBox {
         return size;
     }
     public renderCharac(mod: any, includeCategory: boolean) {
+        // let charac = this.emerald.characteristics.find(c => c.id == mod);
         let name = this.getModName(mod);
         let sty = "";
         if(mod.asset) {
