@@ -144,17 +144,7 @@ export class items {
 			else
 				mongofilter.$and.push({ "nameen": regex })
 		}
-		// blocks
-		// let mod = new ModFilter();
-		// mod.effectId = 174;
-		// mod.min = 400;
-		// let filterMod = this.filterStat(mod);
-		// mongofilter.$and.push(filterMod);
-		
-		// let block = new BlockFilter()
-		// block.mods.push(mod);
-		// filt.blocks.push(block);
-
+		/* TODO BLOCKS & MODS
 		let bi = 0;
 		filter.blocks.forEach(block => {
 			if (block.activate) {
@@ -176,6 +166,7 @@ export class items {
 				}
 			}
 		});
+		*/
 		return mongofilter;
 	}
 	private filterSum(mongofilter, adds, bi, block: BlockFilter) {

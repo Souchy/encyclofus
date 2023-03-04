@@ -5,7 +5,7 @@
 
 <table class="table table-striped table-sm table-borderless ${effectTypeStyle}" css="--bs-table-striped-bg: none; margin-bottom: 0px;" if.bind="emerald.effects">
     <tbody>
-        <tr id="${effect.effectUid}">
+        <tr id="${effect.effectUid}" title="eid=${effect.effectId}, charac=${effect.effect.characteristic}">
             <td style="width: 20px; padding: 0px; padding-left: 4px;" if.bind="getIcon(effect)">
                 <div style.bind="getIcon(effect)"></div>
             </td>
