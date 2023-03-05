@@ -49,13 +49,13 @@ export class filter {
 			// search
 			this.search();
 		})
-		this.ea.subscribe("quickfus:mod:delete", (blockId: number, mod: any) => {
-			console.log("filter onDeleteMod: " + Object.keys(mod)); //JSON.stringify(mod));
+		this.ea.subscribe("quickfus:mod:delete", (data: any) => {
+			console.log("filter onDeleteMod ["+data.blockid+"]: " + JSON.stringify(data.data));
 			// if(!mod.blockId) return;
-			let m = this.blocks[blockId].mods.find(e => e.effectId == mod.effectId);
+			let m = this.blocks[data.blockid].mods.find(e => e.effectId == data.data.effectId);
 			if (m) {
-				let i = this.blocks[blockId].mods.indexOf(m);
-				this.blocks[blockId].mods.splice(i, 1);
+				let i = this.blocks[data.blockid].mods.indexOf(m);
+				this.blocks[data.blockid].mods.splice(i, 1);
 			}
 		});
 	}

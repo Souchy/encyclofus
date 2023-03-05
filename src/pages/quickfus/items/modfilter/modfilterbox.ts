@@ -16,6 +16,8 @@ export class ModFilterBox {
 
     // dynamic
 	@bindable
+    public blockid: number; 
+	@bindable
     public data; // : ModFilter
 
     // input
@@ -74,7 +76,7 @@ export class ModFilterBox {
         this.toggleListVisibility(false);
     }
     public onDelete() {
-        this.ea.publish("quickfus:mod:delete", this.data);
+        this.ea.publish("quickfus:mod:delete", { data: this.data, blockid: this.blockid });
     }
     //#endregion
 
@@ -169,6 +171,7 @@ export class ModFilterBox {
     public renderCharac(id: any, includeCategory: boolean) {
         let charac = this.getCharac(id);
         let name = this.getModName(charac);
+        console.log("render charac ["+this.blockid+"]: " + JSON.stringify(charac));
         let sty = "";
         if(charac.asset) {
             let url = this.db.commonUrlPath + "characteristics/" + charac.asset?.replace("tx_", "") + ".png";
@@ -178,7 +181,7 @@ export class ModFilterBox {
         }
         let cat = "";
         if(includeCategory) {
-            let sectionId = this.selectedMod["categoryId"] - 1;
+            let sectionId = charac["categoryId"] - 1;
             if(sectionId < 0) sectionId = 0;
             let keys = Array.from(db.getStatSections().keys());
             let trkey = keys[sectionId];

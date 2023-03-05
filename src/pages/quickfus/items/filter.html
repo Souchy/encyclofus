@@ -67,7 +67,7 @@
                 </div>
 
                 <!-- mod list -->
-                <modfilterbox repeat.for="mod of blocks[i].mods" data.bind="mod"></modfilterbox>
+                <modfilterbox repeat.for="mod of blocks[i].mods" data.bind="mod" blockid.bind="i"></modfilterbox>
 
                 <!-- create mod -->
                 <button class="btnAdd" click.delegate="addStatMod($event, i)" t="quickfus.filter.addMod"></button>
