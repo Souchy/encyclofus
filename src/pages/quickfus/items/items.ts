@@ -64,11 +64,14 @@ export class items {
         }
     }
 
+	public searching: boolean = true;
+
     /**
      * new search : clear current items and search for new
      */
     public async search(filter: Filter = null) {
-        console.log("on search: " + filter)
+		this.searching = true;
+        // console.log("on search: " + filter)
         // if(filter.filterLevel)
         // this.itemFilter = filter;
         let itemFilter = this.generateFilter(filter);
@@ -84,6 +87,7 @@ export class items {
 		// this.loadData(itemFilter, 75, 0);
 		this.filterData(filter);
         this.mason.showMore(); 
+		this.searching = false;
     }
 
 	private async filterData(filter: Filter = null) {

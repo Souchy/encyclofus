@@ -6,13 +6,14 @@
 
 
 <!-- if.bind="db.isLoaded && mason.data.length != 0" -->
-<filter ></filter>
+<filter></filter>
 
 <!-- ${mason.data.length} -->
 <!-- <button if.bind="mason.data.length != 0" click.delegate="search()">Search</button> -->
 
 <!-- spinner -->
-<div if.bind="mason.data.length == 0" class="loaderContainer">
+<!-- mason.data.length == 0 -->
+<div if.bind="searching" class="loaderContainer">
     <div class="loader"></div>
 </div>
 
