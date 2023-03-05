@@ -189,7 +189,7 @@ export class ModFilter {
     // public blockId: number = -1;
     public pseudoName: string = "";
     public effectId: number = -1;
-    public min: number = 0;
-    public max: number = 0;
+    public min: number;
+    public max: number;
     public activate: boolean = true;
 }

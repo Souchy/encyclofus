@@ -111,25 +111,26 @@ export class items {
 				if(!regex.test(name)) return false;
 			}
 			// blocks
-			for(let block of filter.blocks) {
-				if (block.activate) {
-					if (block.type == "$sum") {
-						// this.filterSum(mongofilter, adds, bi, block);
-						let min = 0, max = 0;
-					} else {
-						let arr = block.mods.filter(m => m.activate && m.effectId != undefined).map((m: ModFilter) => {
-							if (m.pseudoName.includes("Pseudo")) 
-								return this.filterStatPseudo(m);
-							else 
-								return this.filterStat(m);
-						});
-						// console.log("filter block : " + func + " : " + JSON.stringify(arr));
-						if (arr.length > 0) {
-							// mongofilter.$and.push({
-							// 	[block.type]: arr
-							// });
+			for (let block of filter.blocks) {
+				if (!block.activate) continue;
+				if (block.type == "$sum") {
+					if(!this.filterSumMemory(block, item))
+						return false;
+				} else {
+					let arr = block.mods.filter(m => m.activate && m.effectId != undefined).map((m: ModFilter) => {
+						if(m.effectId >= 10000) {
+							return this.filterStatMemoryPseudo(m, item);
+						} else {
+							return this.filterStatMemory(m, item);
 						}
-					}
+					});
+					// console.log("filterBlock result: " + JSON.stringify(arr));
+					if (block.type == "$and" && arr.includes(false))
+						return false;
+					if (block.type == "$or" && !arr.includes(true))
+						return false;
+					if (block.type == "$nor" && arr.includes(true))
+						return false;
 				}
 			}
 			return true;
@@ -319,16 +320,84 @@ export class items {
 		};
 		return mm;
 	}
-	private filterStatMemory(m: ModFilter, item): boolean {
-		let min: number = parseInt(m.min + "");
-		let max: number = parseInt(m.max + "");
-		if (!m.min) min = -100000;
+	
+	private filterSumMemory(block: BlockFilter, item) {
+		let mask = block.mods.map(m => m.effectId);
+		let effects: any[] = item.possibleEffects;
+		let maskResult = effects.filter(e => mask.includes(this.getEffect(e).characteristic))
+		
+		let sum: number = maskResult.reduce((part: number, e) => {
+			let effectModel = this.getEffect(e);
+			let eMin = e.diceNum * effectModel.bonusType
+			let eMax = e.diceSide * effectModel.bonusType
+			// console.log("filterPseudoSum: " + eMax);
+			if(eMax == 0) return part + eMin;
+			else return part + eMax;
+		}, 0);
+		// take min/max from first item
+		let theoMin = block.mods[0].min || -100000
+		let theoMax = block.mods[0].max || 100000
+		// pseudo stat
+		// console.log("filterPseudoSum: " + sum + ", mod: " + modMin + ", " + modMax);
+		if(sum < theoMin) return false;
+		if(sum > theoMax) return false;
+		return true;
+	}
+	private filterStatMemory(mod: ModFilter, item): boolean {
+		let modMin: number = parseInt(mod.min + "");
+		let modMax: number = parseInt(mod.max + "");
+		if (!mod.min) modMin = -100000;
 		let effects: any[] = item.possibleEffects;
 		return effects.some(e => {
+			// charac
 			let effectModel = this.getEffect(e);
-			if(effectModel.characteristic != m.effectId) return false;
-			
+			if(effectModel.characteristic != mod.effectId) return false;
+			if(effectModel.useInFight) return false; // can't filter weapon effects for now
+			// min max
+			let eMin = e.diceNum * effectModel.bonusType
+			let eMax = e.diceSide * effectModel.bonusType
+			// console.log("filterStat: effect: " + eMin + "," + eMax + ",  mod: " + modMin + "," + modMax);
+			if(mod.max) {
+				let minFilter = eMin >= modMin && eMin <= modMax;
+				let maxFilter = eMax >= modMin && eMax <= modMax;
+				return minFilter || maxFilter
+			} else {
+				let minFilter = eMin >= modMin;
+				let maxFilter = eMax >= modMin;
+				return minFilter || maxFilter
+			} 
 		});
+	}
+	private filterStatMemoryPseudo(mod: ModFilter, item): boolean {
+		let modMin: number = parseInt(mod.min + "");
+		let modMax: number = parseInt(mod.max + "");
+		if (!mod.min) modMin = -100000;
+		// pseudo stat
+		let charac = this.db.pseudoCharacs.find(c => c.id == mod.effectId);
+		// get resistance effects
+		let effects: any[] = item.possibleEffects;
+		let resis = effects.filter(e => charac.mask.includes(this.getEffect(e).characteristic))
+		// console.log("filterPseudo mask: " + charac.mask ); //+ " res: " + JSON.stringify(resis));
+
+		if(charac.count) {
+			let count = resis.length;
+			// console.log("filterPseudoCount: " + count + ", mod: " + modMin + ", " + modMax);
+			if(mod.min && count < modMin) return false;
+			if(mod.max && count > modMax) return false;
+		} else {
+			let sum: number = resis.reduce((part: number, e) => {
+				let effectModel = this.getEffect(e);
+				let eMin = e.diceNum * effectModel.bonusType
+				let eMax = e.diceSide * effectModel.bonusType
+				// console.log("filterPseudoSum: " + eMax);
+				if(eMax == 0) return part + eMin;
+				else return part + eMax;
+			}, 0);
+			// console.log("filterPseudoSum: " + sum + ", mod: " + modMin + ", " + modMax);
+			if(mod.min && sum < modMin) return false;
+			if(mod.max && sum > modMax) return false;
+		}
+		return true;
 	}
 
     public getEffect(possibleEffect) {
