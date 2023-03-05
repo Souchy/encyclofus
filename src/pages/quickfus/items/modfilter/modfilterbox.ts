@@ -160,12 +160,18 @@ export class ModFilterBox {
         }
         return size;
     }
-    public renderCharac(mod: any, includeCategory: boolean) {
-        // let charac = this.emerald.characteristics.find(c => c.id == mod);
-        let name = this.getModName(mod);
+    public getCharac(id) {
+        let charac = this.emerald.characteristics.find(c => c.id == id);
+        if(!charac) 
+            charac = this.db.pseudoCharacs.find(c => c.id == id);
+        return charac;
+    }
+    public renderCharac(id: any, includeCategory: boolean) {
+        let charac = this.getCharac(id);
+        let name = this.getModName(charac);
         let sty = "";
-        if(mod.asset) {
-            let url = this.db.commonUrlPath + "characteristics/" + mod.asset?.replace("tx_", "") + ".png";
+        if(charac.asset) {
+            let url = this.db.commonUrlPath + "characteristics/" + charac.asset?.replace("tx_", "") + ".png";
             sty = "background: transparent url('" + url + "');" +
                 "background-size: contain; background-repeat: no-repeat;" +
                 "width: 22px; height: 22px; margin-right: 5px;";

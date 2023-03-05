@@ -12,9 +12,9 @@
             onkeyup.call="onKeyup($event)" onkeydown.call="onKeyDown($event)"
             onfocus.call="onFocus($event)" onblur.call="onBlur($event)"
             >
-            <label if.bind="!selectedMod && !inputText" class="inputPlaceholder" t="quickfus.filter.addMod"></label>
-            <label if.bind="selectedMod && !inputText" class="inputOverlay" for="modsearchinput" 
-                innerHtml.bind="renderCharac(selectedMod, true)">
+            <label if.bind="!data.effectId && !inputText" class="inputPlaceholder" t="quickfus.filter.addMod"></label>
+            <label if.bind="data.effectId && !inputText" class="inputOverlay" for="modsearchinput" 
+                innerHtml.bind="renderCharac(data.effectId, true)">
             </label>
         </div>
         <!-- <button>${outputText}</button> -->
@@ -30,7 +30,7 @@
                 <dd repeat.for="mod of section" 
                     style="padding-left: 10px;" class="${mod == selectedMod ? 'selected' : ''}"
                     title="${mod.id}"
-                    innerHtml.bind="renderCharac(mod)"
+                    innerHtml.bind="renderCharac(mod.id)"
                     onmouseover.call="onHoverMod(mod)"
                     onclick.call="onClickMod(mod)"
                     >
