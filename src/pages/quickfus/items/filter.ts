@@ -179,16 +179,16 @@ export class filter {
 
 export class BlockFilter {
 	public type: string = "$and";
-	public min: number = 0;
-	public max: number = 0;
+	public min: number;
+	public max: number;
 	public activate: boolean = true;
 	public mods: ModFilter[] = [];
 }
 
 export class ModFilter {
     // public blockId: number = -1;
-    public pseudoName: string = "";
-    public effectId: number = -1;
+    public pseudoName: string;
+    public effectId: number;
     public min: number;
     public max: number;
     public activate: boolean = true;

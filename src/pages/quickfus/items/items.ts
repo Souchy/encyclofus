@@ -117,7 +117,7 @@ export class items {
 					if(!this.filterSumMemory(block, item))
 						return false;
 				} else {
-					let arr = block.mods.filter(m => m.activate && m.effectId != undefined).map((m: ModFilter) => {
+					let arr = block.mods.filter(m => m.activate && m.effectId).map((m: ModFilter) => {
 						if(m.effectId >= 10000) {
 							return this.filterStatMemoryPseudo(m, item);
 						} else {
@@ -344,6 +344,7 @@ export class items {
 		return true;
 	}
 	private filterStatMemory(mod: ModFilter, item): boolean {
+		if(!mod.effectId) return true;
 		let modMin: number = parseInt(mod.min + "");
 		let modMax: number = parseInt(mod.max + "");
 		if (!mod.min) modMin = -100000;
