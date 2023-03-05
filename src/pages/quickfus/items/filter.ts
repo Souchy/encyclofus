@@ -6,6 +6,9 @@ import * as $ from 'jquery';
 @inject(db)
 export class filter {
 
+	// need to wait for filter before rendering ui
+	private isSaveLoaded = false;
+
 	// filter data
 	public filterText: string = "";
 	public filterLevel: boolean = true;
@@ -18,12 +21,13 @@ export class filter {
 	// @observable({ changeHandler: 'filterWeaponChanged' })
 	public filterWeapon: boolean = false;
 	// mods blocks
+	public filterStats: boolean = true;
 	public blocks: BlockFilter[] = [];
 
 	// html elements
 	public blocklist: HTMLDivElement;
 
-	private redListTypes = [265, 267, 169, 99, 83, 20, 21] // badges, idoles d'expédition, compagnons, filet de capture, pierre d'ame, outil, pioche
+	public redListTypes = [265, 267, 169, 99, 83, 20, 21] // badges, idoles d'expédition, compagnons, filet de capture, pierre d'ame, outil, pioche
 
 	constructor(readonly db: db, readonly emerald: Emerald, @IEventAggregator readonly ea: IEventAggregator) {
 		ea.subscribe("emerald:loaded:itemtypes", () => {
@@ -45,7 +49,7 @@ export class filter {
 		// when emerald loads, auto search
 		this.ea.subscribe("emerald:loaded", () => {
 			// load filter only after
-			// this.loadFilter();
+			this.loadFilter();
 			// search
 			this.search();
 		})
@@ -62,7 +66,7 @@ export class filter {
 
     public get isLoaded() {
 		// && this.db.isConnected()
-		return this.db.isLoaded && this.emerald.characteristics && this.emerald.itemTypes //&& this.emerald.effects
+		return this.db.isLoaded && this.emerald.characteristics && this.emerald.itemTypes && this.isSaveLoaded //&& this.emerald.effects
     }
 
 	public loadFilter() {
@@ -76,17 +80,20 @@ export class filter {
 			this.levelMax = data.levelMax;
 			for(let t of data.types) {
 				if(this.types.has(t[0])) 
-					this.types.set(t[0], t[1]);
+				this.types.set(t[0], t[1]);
 			}
 			for(let t of data.armes) {
 				if(this.armes.has(t[0])) 
-					this.armes.set(t[0], t[1]);
+				this.armes.set(t[0], t[1]);
 			}
 			this.filterLevel = data.filterLevel;
 			this.filterType = data.filterType;
 			this.filterWeapon = data.filterWeapon;
+			this.filterStats = data.filterStats;
 			this.blocks = data.blocks;
 		}
+		this.isSaveLoaded = true;
+		// console.log("load filter: " + JSON.stringify(this.blocks))
 	}
 	public saveFilter() {
 		let obj = {
@@ -98,6 +105,7 @@ export class filter {
 			filterLevel: this.filterLevel,
 			filterType: this.filterType,
 			filterWeapon: this.filterWeapon,
+			filterStats: this.filterStats,
 			blocks: this.blocks
 		};
 		localStorage.setItem("filter", JSON.stringify(obj));
@@ -123,6 +131,9 @@ export class filter {
 		let input = ele.previousElementSibling.getElementsByTagName("input")[1];
 		// console.log("addStatMod : " + input.getAttribute("name")); 
 		input.focus();
+	}
+	public deleteBlock(blockIndex: number) {
+		this.blocks.splice(blockIndex, 1);
 	}
 
 	public filterTypeClicked() {

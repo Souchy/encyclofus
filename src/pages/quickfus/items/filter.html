@@ -47,21 +47,20 @@
     <!-- Mods -->
     <div class="rightside col">
         <!-- Mods -->
-        <input class="checkbox" type="checkbox" id="mods" checked />
+        <input class="checkbox" type="checkbox" id="mods" checked.bind="filterStats" />
         <label class="title" for="mods" t="quickfus.filter.mods"></label>
         <!-- block list  -->
         <div class="blocklist" ref="blocklist">
-
             <!-- blocks  -->
             <div class="block" repeat.for="i of blocks.length" id.bind="i">
                 <!-- block properties -->
                 <div class="d-flex align-items-center">
                     <input class="checkbox mr-1" type="checkbox" id="${i}" checked.bind="blocks[i].activate" />
                     <select class="mr-auto blocktitle" name="type" value.bind="blocks[i].type">
-                        <option value="$and" t="quickfus.filter.and"></option>
-                        <option value="$or"  t="quickfus.filter.or"></option>
-                        <option value="$nor" t="quickfus.filter.nor"></option>
-                        <option value="$sum" t="quickfus.filter.sum"></option>
+                        <option value="$and"  t="quickfus.filter.and"></option>
+                        <option value="$or"   t="quickfus.filter.or"></option>
+                        <option value="$nor"  t="quickfus.filter.nor"></option>
+                        <option value="$sum"  t="quickfus.filter.sum"></option>
                     </select>
                     <button class="btnDelete" onclick.call="deleteBlock(i)">x</button>
                 </div>

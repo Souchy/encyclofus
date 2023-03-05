@@ -81,10 +81,11 @@ export class itemsheet {
     public get conditionsString() {
         let str = "";
 
-        let criterias = Citerions.parseGroup(this.item.criteria)
-        for(let c of criterias) {
+        // commented out bc this crashes with musamune (id 23590)
+        // let criterias = Citerions.parseGroup(this.item.criteria)
+        // for(let c of criterias) {
             
-        }
+        // }
 
         return str;
     }

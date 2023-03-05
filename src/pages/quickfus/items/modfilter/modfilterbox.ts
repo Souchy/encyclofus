@@ -171,7 +171,7 @@ export class ModFilterBox {
     public renderCharac(id: any, includeCategory: boolean) {
         let charac = this.getCharac(id);
         let name = this.getModName(charac);
-        console.log("render charac ["+this.blockid+"]: " + JSON.stringify(charac));
+        // console.log("render charac ["+this.blockid+"]: " + JSON.stringify(charac));
         let sty = "";
         if(charac.asset) {
             let url = this.db.commonUrlPath + "characteristics/" + charac.asset?.replace("tx_", "") + ".png";

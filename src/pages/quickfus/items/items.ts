@@ -70,29 +70,26 @@ export class items {
      * new search : clear current items and search for new
      */
     public async search(filter: Filter = null) {
-		this.searching = true;
+		// this.searching = true;
         // console.log("on search: " + filter)
-        // if(filter.filterLevel)
-        // this.itemFilter = filter;
-        let itemFilter = this.generateFilter(filter);
-        this.mason.data = []; // this.items = [];
+        this.mason.data = []; 
         this.mason.fulldata = [];
         this.mason.page = 0;
-        // this.search1();
-        // console.log("search1")
 		
 		// load data in the background in increments
+        // let itemFilter = this.generateFilter(filter);
 		// await this.loadData(itemFilter, 0, 25); // just await the first data
 		// this.loadData(itemFilter, 25, 75);
 		// this.loadData(itemFilter, 75, 0);
 		this.filterData(filter);
         this.mason.showMore(); 
+		// console.log("mason showed more")
 		this.searching = false;
     }
 
-	private async filterData(filter: Filter = null) {
+	private filterData(filter: Filter = null) {
 		if(!filter) return;
-		
+		// console.log({filter});
 		let arr = this.emerald.items
 		.filter(item => {
 			// level
@@ -101,13 +98,17 @@ export class items {
 				if(item.level > filter.levelMax) return false;
 			}	
 			// Types
+			let goodType = !(filter.filterType || filter.filterWeapon);
 			if (filter.filterType) {
-				if(!filter.types.get(item.typeId)) return false;
+				// if(!filter.types.get(item.typeId)) return false;
+				goodType = goodType || filter.types.get(item.typeId);
 			}
 			// Weapons
 			if (filter.filterWeapon) {
-				if(!filter.armes.get(item.typeId)) return false;
+				// if(!filter.armes.get(item.typeId)) return false;
+				goodType = goodType || filter.armes.get(item.typeId);
 			}
+			if(!goodType) return false;
 			// Text
 			if (filter.filterText && filter.filterText.trim() != "") {
        		 	let regex = new RegExp(util.caseAndAccentInsensitive(filter.filterText.trim()), "i"); 
@@ -115,26 +116,30 @@ export class items {
 				if(!regex.test(name)) return false;
 			}
 			// blocks
-			for (let block of filter.blocks) {
-				if (!block.activate) continue;
-				if (block.type == "$sum") {
-					if(!this.filterSumMemory(block, item))
-						return false;
-				} else {
-					let arr = block.mods.filter(m => m.activate && m.effectId).map((m: ModFilter) => {
-						if(m.effectId >= 10000) {
-							return this.filterStatMemoryPseudo(m, item);
-						} else {
-							return this.filterStatMemory(m, item);
+			if (filter.filterStats) {
+				for (let block of filter.blocks) {
+					if (!block.activate) continue;
+					if (block.type == "$sum") {
+						if (!this.filterSumMemory(block, item))
+							return false;
+					} else {
+						let arr = block.mods.filter(m => m.activate && m.effectId).map((m: ModFilter) => {
+							if (m.effectId >= 10000) {
+								return this.filterStatMemoryPseudo(m, item);
+							} else {
+								return this.filterStatMemory(m, item);
+							}
+						});
+						// console.log("filterBlock result: " + JSON.stringify(arr));
+						if (arr.length > 0) {
+							if (block.type == "$and" && arr.includes(false))
+								return false;
+							if (block.type == "$or" && !arr.includes(true))
+								return false;
+							if (block.type == "$nor" && arr.includes(true))
+								return false;
 						}
-					});
-					// console.log("filterBlock result: " + JSON.stringify(arr));
-					if (block.type == "$and" && arr.includes(false))
-						return false;
-					if (block.type == "$or" && !arr.includes(true))
-						return false;
-					if (block.type == "$nor" && arr.includes(true))
-						return false;
+					}
 				}
 			}
 			return true;
@@ -144,6 +149,7 @@ export class items {
 			if(ld != 0) return ld;
 			else return b.id - a.id;
 		})
+		// console.log("filter result: " + arr.length + ", from " + this.emerald.items.length);
 		
         this.mason.fulldata.push(...arr);
 	}

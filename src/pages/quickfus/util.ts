@@ -18,9 +18,9 @@ export class Mason {
 	}
 
 	public async showMore() {
-		let length = this.page * this.itemsPerPage;
-		let slice = this.fulldata.slice(length, this.itemsPerPage + length); // emerald.items
-		// console.log("mason slice ("+this.fulldata.length+"): " + slice)
+		let start = this.page * this.itemsPerPage;
+		let slice = this.fulldata.slice(start, start + this.itemsPerPage); 
+		// console.log("mason slice (" + this.fulldata.length + ") vs (" + slice.length + ") vs (" + this.data.length + "): " + slice)
 		this.data.push(...slice);
 		this.page++;
 	}
