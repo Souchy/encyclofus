@@ -20,4 +20,8 @@ export class Summon {
 		return this.summon.grades[this.side - 1];
 	}
 
+	public get life() {
+		return Math.floor(this.grade.lifePoints * 3 + this.grade.vitality + 1050 * (this.grade.bonusCharacteristics.lifePoints / 100))
+	}
+
 }
