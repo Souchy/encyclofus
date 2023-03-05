@@ -9,7 +9,7 @@ export class filter {
 	// filter data
 	public filterText: string = "";
 	public filterLevel: boolean = true;
-	public levelMin: number = 150;
+	public levelMin: number = 1;
 	public levelMax: number = 200;
 	public types: Map<number, boolean> = new Map<number, boolean>();
 	public armes: Map<number, boolean> = new Map<number, boolean>();
@@ -42,19 +42,10 @@ export class filter {
 
 		this.addBlock();
 
-		// replace with (do we have connection token for mongodb)
-		// this.db.getToken();
-        // if already loaded emerald, auto search
-        // if(this.emerald.items?.length > 1) {
-        //     this.search();
-        // }
-		// this.ea.subscribe("mongo:login", () => {
-		// 	this.search();
-		// });
 		// when emerald loads, auto search
 		this.ea.subscribe("emerald:loaded", () => {
 			// load filter only after
-			this.loadFilter();
+			// this.loadFilter();
 			// search
 			this.search();
 		})

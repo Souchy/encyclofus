@@ -11,7 +11,7 @@ export class Mason {
 	public msnry: Masonry;
 
 	public page: number = 0;
-	public itemsPerPage: number = 40;
+	public itemsPerPage: number = 30;
 
 	public constructor() {
 		// console.log("mason ctor");
