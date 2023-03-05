@@ -73,6 +73,9 @@ export class Spell {
 	}
 	*/
 
+	public get summonEffects() {
+		return this.spell.effects.filter(e => this.hasSummon(e));
+	}
 	public hasSummon(e: any) {
 		return this.db.isSummonEffect(e) && e.visibleInTooltip && this.db.jsonSummons[e.diceNum]; // e.effectId == 181 || e.effectId == 1011 || e.effectId == 1008;
 	}

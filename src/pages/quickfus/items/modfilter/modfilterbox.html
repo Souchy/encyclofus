@@ -29,7 +29,7 @@
                 <!-- getModsForSection(section) -->
                 <dd repeat.for="mod of section" 
                     style="padding-left: 10px;" class="${mod == selectedMod ? 'selected' : ''}"
-                    title="${mod.id}"
+                    data-charac="${mod.id}"
                     innerHtml.bind="renderCharac(mod.id)"
                     onmouseover.call="onHoverMod(mod)"
                     onclick.call="onClickMod(mod)"

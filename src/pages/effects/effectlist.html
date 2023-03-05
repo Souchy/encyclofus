@@ -2,7 +2,7 @@
 
 
 <!-- style.bind="tableStyle" -->
-<table if.bind="db.isLoaded" class="table table-striped table-sm table-borderless" >
+<table if.bind="db.isLoaded && emerald.effects" class="table table-striped table-sm table-borderless" >
     <tbody>
         <tr repeat.for="e of effects" if.bind="isEffectVisible(e)">
             <td css="padding: 0px; padding-left: ${paddingLeft}px;">

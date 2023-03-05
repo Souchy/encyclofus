@@ -41,8 +41,9 @@ export class Effectlist {
         // 666 = ACTION_NOOP = "Pas d'effet supplémentaire"
 
         let effectModel = e.effect ?? this.getEffect(e);
-        return (this.isGreenList(e.effectUid) || e.visibleInTooltip || (effectModel.showInTooltip && mode == "detailed")) // || e.visibleInBuffUi || e.visibleInFightLog) 
+        let show = (this.isGreenList(e.effectUid) || e.visibleInTooltip || (effectModel.showInTooltip && mode == "detailed")) // || e.visibleInBuffUi || e.visibleInFightLog) 
                 && !this.isRedList(e.effectUid) && e.effectId != 666
+        return show;
         /*
         if(mode == "basic") {
             return (e.visibleInTooltip) && e.effectId != 666

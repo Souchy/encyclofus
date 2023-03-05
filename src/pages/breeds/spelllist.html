@@ -18,7 +18,7 @@
 </div>
 
 <!-- osa summons -->
-<div class="spellList d-flex flex-wrap" if.bind="breedId == 2">
+<div class="spellList d-flex flex-wrap" if.bind="db.isLoaded && breedId == 2">
 	<!-- <let ss="${db.jsonSpells[13997].effects}"></let>
 	${ss} -->
 	<div repeat.for="e of db.jsonSpells[13997].effects" click.delegate="selectSummon($index)" class="spell ${ db.selectedOsaSlot == $index ? 'spellactive' : ''}">
