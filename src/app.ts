@@ -77,7 +77,7 @@ export class App {
 					reloadBehavior: ReloadBehavior.refresh,
 				});
 		}
-		if(Util.isLocal() && this.db.checkFeatureVersion(features.items)) {
+		if(this.db.checkFeatureVersion(features.items)) {
 			App.routes.push({
 				path: 'items',
 				component: import('./pages/quickfus/items/items'),

@@ -48,7 +48,7 @@ export class sidebar {
 	}
 
 	public checkFeatureItems() {
-		return Util.isLocal() && this.db.checkFeatureVersion(features.items);
+		return this.db.checkFeatureVersion(features.items);
 	}
 
 }
