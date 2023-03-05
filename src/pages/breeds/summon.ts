@@ -16,8 +16,9 @@ export class Summon {
 	}
 
 	public get grade() {
-		// console.log("grades: " + JSON.stringify(this.summon.grades))
-		return this.summon.grades[this.side - 1];
+		let g = Math.max(0, this.side - 1);
+		// console.log("grades: " + g + ", " + JSON.stringify(this.summon.grades))
+		return this.summon.grades[g];
 	}
 
 	public get life() {

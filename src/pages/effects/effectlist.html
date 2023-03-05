@@ -7,6 +7,7 @@
         <tr repeat.for="e of effects" if.bind="isEffectVisible(e)">
             <td css="padding: 0px; padding-left: ${paddingLeft}px;">
                  <!-- style.bind="tdStyle"> -->
+                 <!-- ${e.order} - in ${e.group} -->
                 <effect effect.bind="e" depth.bind="depth" iscrit.bind="iscrit"></effect>
             </td>
         </tr>

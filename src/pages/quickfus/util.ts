@@ -21,6 +21,7 @@ export class Mason {
 		let start = this.page * this.itemsPerPage;
 		let slice = this.fulldata.slice(start, start + this.itemsPerPage); 
 		// console.log("mason slice (" + this.fulldata.length + ") vs (" + slice.length + ") vs (" + this.data.length + "): " + slice)
+		// console.log("slice ids: " + slice.map(s => s.id))
 		this.data.push(...slice);
 		this.page++;
 	}

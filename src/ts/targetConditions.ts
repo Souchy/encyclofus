@@ -3,18 +3,10 @@ import { db } from "../DofusDB/db";
 import { I18N } from "@aurelia/i18n";
 import { Targets } from "../DofusDB/formulas";
 import { tsThisType } from "@babel/types";
+import { Util } from "./util";
 
 
-
-export class ConditionRenderer {
-
-
-    @bindable
-    public effect;
-    @bindable
-    public depth: number = 0;
-    @bindable
-    public iscrit: boolean;
+export class TargetConditionRenderer {
 
     public db: db;
 
@@ -60,11 +52,6 @@ export class ConditionRenderer {
 
     public constructor(db: db, @I18N private readonly i18n: I18N) {
         this.db = db;
-    }
-
-    public capitalizeFirstLetter(str: string) {
-        if (str.length == 0) return "";
-        return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
     /// La cible est un Arbre et possède l'état Enraciné et Feuillu et 
@@ -166,7 +153,7 @@ export class ConditionRenderer {
                 return this.i18n.tr("target.teamB." + t.toLowerCase());
         });
         let output = translated.join(this.i18n.tr("or"));
-        output = this.capitalizeFirstLetter(output);
+        output = Util.capitalizeFirstLetter(output);
         return output;
     }
 
@@ -175,7 +162,7 @@ export class ConditionRenderer {
         let conditions = this.mergeConditions(masks);
         let output = "";
         if (conditions.length > 0) output = this.i18n.tr("target.theCaster") + " " + conditions;
-        output = this.capitalizeFirstLetter(output);
+        output = Util.capitalizeFirstLetter(output);
         return output;
     }
 
@@ -184,7 +171,7 @@ export class ConditionRenderer {
         let conditions = this.mergeConditions(masks);
         let output = "";
         if (conditions.length > 0) output = this.i18n.tr("target.theTarget") + " " + conditions;
-        output = this.capitalizeFirstLetter(output);
+        output = Util.capitalizeFirstLetter(output);
         return output;
     }
 
@@ -213,29 +200,9 @@ export class ConditionRenderer {
         if (tags.length > 0) {
             output += isPositive ? this.i18n.tr("target.hasState") : this.i18n.tr("target.hasNotState");
             output += " ";
-            output += tags.map(t => this.parseStateToString(t)).join(contraction);
+            output += tags.map(t => this.db.parseStateToString(t)).join(contraction);
         }
         return output;
-    }
-    private parseStateToString(mask) {
-        let stateId = +mask; 
-        let state = this.db.jsonStates[stateId];
-        if (!state) {
-            console.log("state doesnt exist: " + stateId)
-            return "";
-        }
-        let stateName = this.db.getI18n(state.nameId);
-        if(stateName.includes("{") ){
-            stateName = stateName.replace("{", "").replace("}", "");
-            let data = stateName.split(",");
-            let html = data.find(t => t.includes("::")).split("::")[1]; 
-            // console.log("state: " + html);
-            return html;
-        }
-        else
-            return `<font color="#ebc304">${stateName}</font>`
-        // console.log("state: " + stateName);
-        // return stateName;
     }
     //#endregion
 
@@ -306,5 +273,5 @@ export class ConditionRenderer {
 
 const container = DI.createContainer();
 container.register(
-    Registration.singleton(ConditionRenderer, ConditionRenderer)
+    Registration.singleton(TargetConditionRenderer, TargetConditionRenderer)
 );

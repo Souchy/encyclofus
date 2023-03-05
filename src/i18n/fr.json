@@ -14,6 +14,10 @@
 	"!dispell": "Non-désenvoutable",
 	"?dispell": "Désenvoutable à la mort",
 
+	"total": "Total",
+	"base": "Base",
+	"add": "Additionel",
+
 	"po": "PO",
 	"pa": "PA",
 	"pm": "PM",
@@ -25,6 +29,21 @@
 	"fire": "Feu",
 	"water": "Eau",
 	"air": "Air",
+
+	"ap": "PA",
+	"mp": "PM",
+	"vitality": "Vitalité",
+	"wisdom": "Sagesse",
+	"agility": "Agilité",
+	"intelligence": "Intelligence",
+	"chance": "Chance",
+	"strength": "Force",
+	"energy": "Énergie",
+	"honour": "Points d'honneur",
+	"dishonour": "Points de déshonneur",
+	"hp": "PV",
+	"evade": "Fuite",
+	"block": "Tacle",
 	
 	"otherCharac": "Autres caractéristiques",
 	"maxStack": "Cumul max. des effets",
@@ -126,8 +145,6 @@
 
 
 
-
-
 		"not": "pas",
 		"summonCaster": "l'invocateur ou ses invocations",
 		"theTarget": "la cible",
@@ -150,7 +167,6 @@
 			"66666": "Allié sauf lanceur",
 			"99999": "n'est pas une Bombe, Mégabombe ou Bombe ambulante alliée"
 		},
-
 		"teamA": {
 			"a": "Allié",
 			"j": "Invocation alliée",
@@ -222,5 +238,10 @@
 				"totresele": "Total #% res élémentaires"
 			}
 		}
+	},
+	"condition": {
+		"condition": "Condition: ",
+		"hasItem": "Possède l'objet '{{itemName}}'",
+		"hasNotItem": "Ne possède pas l'objet '{{itemName}}'"
 	}
 }

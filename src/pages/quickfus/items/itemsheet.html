@@ -2,7 +2,7 @@
 <import from="../../effects/effectlist"></import>
 
 
-<div>
+<div data-id="${item.id}">
     <div class="d-flex">
         <img src="${itemIconUrl}"/>
         <div>
@@ -31,7 +31,7 @@
     <!-- conditions -->
     <div class="conditions" if.bind="hasConditions">
         <!-- "criteria": "CS>300&CI>300", -->
-        ${conditionsString}
+        ${getConditionsString()}
     </div>
 
 </div>

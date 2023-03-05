@@ -6,10 +6,10 @@
 <!-- ${spellid} -->
 
 <!-- Spell Description -->
-<div class="spellDescription" if.bind="spell && db.isLoaded">
+<div class="spellDescription" if.bind="spell && db.isLoaded" id="${spellid}">
 	<!-- name -->
 	<h5 if.bind="!issummon">${name}</h5>
-	<h6 if.bind="issummon" id="${spellid}">
+	<h6 if.bind="issummon">
 		<img src="${db.getSpellIconPath(spellid)}" style="width: 28px; height: 28px;" />
 		${name}
 	</h6>
@@ -43,6 +43,11 @@
 		</div>
 	</div>
 
+	<!-- conditions -->
+	<div if.bind="hasCondition">
+		<p innerHtml.bind="getConditionsString(spell)"></p>
+	</div>
+
 	<!-- effects -->
 	<div class="d-flex effects">
 		<!-- normal -->
@@ -72,7 +77,7 @@
 
 
 <!-- Invoc -->
-<div if.bind="db.isLoaded" repeat.for="e1 of summonEffects">
+<div if.bind="spell && db.isLoaded" repeat.for="e1 of summonEffects">
 	<summon if.bind="hasSummon(e1)" summon.bind="getSummon(e1)" side.bind="e1.diceSide"></summon>
 </div>
 

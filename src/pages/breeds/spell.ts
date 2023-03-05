@@ -1,21 +1,26 @@
+import { Citerions, CriteriaGroup } from './../../DofusDB/static/formulas/criterions';
 import { bindable, DI, inject } from "aurelia";
 import { db } from '../../DofusDB/db';
 import { I18N } from '@aurelia/i18n';
 import { SpellZone } from "../../DofusDB/formulas";
+import { ConditionRenderer } from '../../ts/conditions';
 
 @inject(db)
 export class Spell {
-	private db: db;
-
+	
 	@bindable
 	public spellid: number;
 	@bindable
 	public issummon: boolean = false;
 	@bindable
 	public depth: number = 0;
+	
+	private db: db;
+	private conditionRenderer: ConditionRenderer;
 
-	public constructor(db: db, @I18N private readonly i18n: I18N) {
+	public constructor(db: db, conditionRenderer: ConditionRenderer, @I18N private readonly i18n: I18N) {
 		this.db = db;
+		this.conditionRenderer = conditionRenderer;
 	}
 
 	public get dbLoaded() {
@@ -160,5 +165,22 @@ export class Spell {
 		if (grade) key += "-" + grade;
 		return this.db.jsonSpells[key];
 	}
+
+	public get hasCondition() {
+		return this.spell.statesCriterion && this.spell.statesCriterion != 'null';
+	}
+    public getConditionsString(spell) {
+        let str = "";
+
+        // commented out bc this crashes with musamune (id 23590)
+        // console.log("conds: " + this.item.criteria);
+        let root: CriteriaGroup = Citerions.parse(spell.statesCriterion);
+        str = JSON.stringify(root)
+        // console.log({root})
+        // console.log("conditionRenderer: " + this.conditionRenderer)
+
+        return this.i18n.tr("condition.condition") + this.conditionRenderer.render(root);
+        return str;
+    }
 
 }

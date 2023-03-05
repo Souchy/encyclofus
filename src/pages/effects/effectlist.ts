@@ -6,7 +6,7 @@ import { Emerald } from "../../ts/emerald";
 export class Effectlist {
 
     @bindable
-    public effects: [];
+    public effects: any[];
     @bindable
     public depth: number = 0;
     @bindable
@@ -17,6 +17,9 @@ export class Effectlist {
 
     public constructor(db: db, readonly emerald: Emerald, @I18N private readonly i18n: I18N) {
         this.db = db;
+    }
+    public get effectsOrdered() {
+        return this.effects.sort((a, b) => a.order - b.order);
     }
 
     public get paddingLeft() {

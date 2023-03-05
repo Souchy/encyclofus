@@ -1,18 +1,28 @@
+import { ConditionRenderer } from './../../../ts/conditions';
+import { CriteriaGroup } from './../../../DofusDB/static/formulas/criterions';
 import { Emerald } from './../../../ts/emerald';
 import { bindable, IEventAggregator, inject } from "aurelia";
 import { db } from "../../../DofusDB/db";
 import { Citerions, CriterionUtil, Criteria } from '../../../DofusDB/static/formulas/criterions';
+import { json } from 'body-parser';
+import { I18N } from "@aurelia/i18n";
 
-@inject(db, Emerald)
+// @inject(db, Emerald, ConditionRenderer)
 export class itemsheet {
 
     @bindable
     public item;
 
     // public sortedEffects: any[];
+    private conditionRenderer: ConditionRenderer;
+	private db: db;	
+	private emerald: Emerald;
 
-    public constructor(readonly db: db, readonly emerald: Emerald, @IEventAggregator readonly ea: IEventAggregator) {
-
+	public constructor(db: db, conditionRenderer: ConditionRenderer, emerald: Emerald, @I18N private readonly i18n: I18N, @IEventAggregator readonly ea: IEventAggregator) {
+        // console.log("renderer: " + conditionRenderer)
+		this.db = db;
+		this.conditionRenderer = conditionRenderer;
+		this.emerald = emerald;
     }
 
     attached() {
@@ -78,15 +88,17 @@ export class itemsheet {
     public get hasConditions() {
         return this.item.criteria && this.item.criteria != "null";
     }
-    public get conditionsString() {
+    public getConditionsString() {
         let str = "";
 
         // commented out bc this crashes with musamune (id 23590)
-        // let criterias = Citerions.parseGroup(this.item.criteria)
-        // for(let c of criterias) {
-            
-        // }
+        // console.log("conds: " + this.item.criteria);
+        let root: CriteriaGroup = Citerions.parse(this.item.criteria);
+        str = JSON.stringify(root)
+        // console.log({root})
+        // console.log("conditionRenderer: " + this.conditionRenderer)
 
+        return this.conditionRenderer.render(root);
         return str;
     }
 
