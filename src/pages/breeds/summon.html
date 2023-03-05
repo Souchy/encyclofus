@@ -11,7 +11,7 @@
 	<!-- if.bind="showDescriptions"> -->
 	<tbody>
 		<tr>
-			<td><span t="pv"></span> : ${grade.lifePoints * 3}</td>
+			<td><span t="pv"></span> : ${grade.lifePoints * 3 + grade.vitality + 1050 *  (grade.bonusCharacteristics.lifePoints / 100)}</td>
 			<td></td>
 			<td><span t="neutral"></span> (%) : ${grade.neutralResistance}</td>
 		</tr>
@@ -31,7 +31,7 @@
 			<td><span t="water"></span> (%) : ${grade.waterResistance}</td>
 		</tr>
 		<tr>
-			<td><span t="esqpm"></span>: ${gradee.pmDodge + grade.wisdom * 3 / 10}</td>
+			<td><span t="esqpm"></span>: ${grade.pmDodge + grade.wisdom * 3 / 10}</td>
 			<td></td>
 			<td><span t="air"></span> (%) : ${grade.airResistance}</td>
 		</tr>
