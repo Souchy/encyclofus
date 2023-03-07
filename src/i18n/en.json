@@ -60,6 +60,9 @@
 	"criticalHitProbability": "Critical chance",
 	"dodge": "Dodge",
 	"lock": "Lock",
+	
+	"rangeCanBeBoosted": "Modifiable range",
+	"castTestLosNot": "Line of sight not necessary",
 
 	"help": "Help",
 	"sidebar" : {
