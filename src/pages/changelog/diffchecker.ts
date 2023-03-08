@@ -33,7 +33,8 @@ export class Diffchecker {
         "duration",
         "diceNum",
         "diceSide",
-        "effectId"
+        "effectId",
+        "value"
     ]
 
 	public constructor(
@@ -56,7 +57,10 @@ export class Diffchecker {
         if(!newSpell) return true;
         if(!oldSpell) return true;
         for(let prop of this.spellProperties) {
-            if(this.diffProperty(newSpell, oldSpell, prop)) return true;
+            if(this.diffProperty(newSpell, oldSpell, prop)) {
+                // if(spellid == 14436) console.log("14436: prop diff: " + prop)
+                return true;
+            }
         }
 
         let newEffects = newSpell.effects.filter(e1 => !oldSpell.effects.find(e2 => e1.effectUid == e2.effectUid));
@@ -66,88 +70,51 @@ export class Diffchecker {
         if(newEffects.length > 0) return true;
         if(oldEffects.length > 0) return true;
         for(let eff of commonEffects) {
-            if(this.effectDiff(spellid, eff.effectUid)) return true;
+            if(this.effectDiff(spellid, eff.effectUid)) {
+                return true;
+            }
         }
         return false;
     }
-    /*
-    public ap(newSpell, oldSpell) {
-        if (newSpell.apCost !== oldSpell.apCost)
-            return this.i18n.tr("pa") + ": "  + oldSpell.apCost + " -> " + newSpell.apCost;
-        return "";
-    }
-    public range(newSpell, oldSpell) {
-        if (newSpell.minRange != oldSpell.minRange || newSpell.range != oldSpell.range)
-            return this.i18n.tr("po") + ": " + oldSpell.minRange + " - " + oldSpell.range + " -> " + newSpell.minRange + " - " + newSpell.range
-        return "";
-    }
-    public lineOfSight(newSpell, oldSpell) {
-        if (newSpell.castTestLos != oldSpell.castTestLos)
-            return this.i18n.tr("castTestLos") + ": " + this.i18n.tr(oldSpell.castTestLos) + " -> " + this.i18n.tr(newSpell.castTestLos);
-        return "";
-    }
-    public modifiableRange(newSpell, oldSpell) {
-        if (newSpell.rangeCanBeBoosted != oldSpell.rangeCanBeBoosted)
-            return this.i18n.tr("rangeCanBeBoosted") + ": " + this.i18n.tr(oldSpell.rangeCanBeBoosted) + " -> " + this.i18n.tr(newSpell.rangeCanBeBoosted);
-        return "";
-    }
-    */
     //#endregion
 
     //#region Effect diff
     public effectDiff(spellid: number, effectid: number) {
         let newEffect = this.db.data.jsonSpells[spellid].effects.find(e => e.effectUid == effectid);
         let oldEffect = this.db.data2.jsonSpells[spellid].effects.find(e => e.effectUid == effectid);
+        newEffect.effect ??= this.db.data.jsonEffects.find(e => e.id == newEffect.effectId);
+        oldEffect.effect ??= this.db.data2.jsonEffects.find(e => e.id == oldEffect.effectId);
         for(let prop of this.effectProperties) {
-            if(this.diffProperty(newEffect, oldEffect, prop)) return true;
+            if(this.diffProperty(newEffect, oldEffect, prop) && (/* this.isEffectVisible(oldEffect) ||  */this.isEffectVisible(newEffect))) {
+                if(prop == "rawZone" && (newEffect[prop] == oldEffect[prop] + ",0,0" || oldEffect[prop] == newEffect[prop] + ",0,0"))
+                    continue
+                // if(spellid == 14436) console.log("14436: prop diff: " + prop + " on " + effectid)
+                return true;
+            }
         }   
         return false;
-        // return this.rawZone != "" || this.targetMask != "" || this.values != "" || this.delay != "" || this.duration != "";
-        // let arr = [
-        //     this.dispellable(newEffect, oldEffect),
-        //     this.rawZone(newEffect, oldEffect),
-        //     this.targetMask(newEffect, oldEffect),
-        //     this.delay(newEffect, oldEffect),
-        //     this.duration(newEffect, oldEffect),
-        //     this.values(newEffect, oldEffect),
-        // ];
-        // return arr.filter(s => s != "");
     }
-    public dispellable(newEffect, oldEffect) {
-        if(newEffect.dispellable != oldEffect.dispellable) {
-            return "dispellable: " + oldEffect.dispellable + " -> " + newEffect.dispellable;
-        }
-        return "";
+    public getEffectModel(e) {
+        return this.db.data.jsonEffects.find(e => e.id == e.effectId);
     }
-    public rawZone(newEffect, oldEffect) {
-        if(newEffect.rawZone != oldEffect.rawZone) {
-            return "rawZone: " + oldEffect.rawZone + " -> " + newEffect.rawZone;
-        }
-        return "";
+    public isElemental(effectModel) {
+        return effectModel.elementId >= 0;
     }
-    public targetMask(newEffect, oldEffect) {
-        if(newEffect.targetMask != oldEffect.targetMask) {
-            return "targetMask: " + oldEffect.targetMask + " -> " + newEffect.targetMask;
-        }
-        return "";
+    public isEffectVisible(e) {
+        let mode = this.db.effectMode;
+        if(mode == "debug") return true;
+        // 666 = ACTION_NOOP = "Pas d'effet supplémentaire"
+        // let e = this.newEffect;
+        let effectModel = e.effect; // ?? this.getEffectModel(e);
+        let show = (this.isGreenList(e.effectUid) || e.visibleInTooltip || (effectModel.showInTooltip && mode == "detailed")) // || e.visibleInBuffUi || e.visibleInFightLog) 
+                && !this.isRedList(e.effectUid) && e.effectId != 666
+        return show;
     }
-    public delay(newEffect, oldEffect) {
-        if(newEffect.delay != oldEffect.delay) {
-            return "delay: " + oldEffect.delay + " -> " + newEffect.delay;
-        }
-        return "";
+    public isGreenList(e: number) {
+        return this.db.jsonGreenListEffects.green.includes(e);
     }
-    public duration(newEffect, oldEffect) {
-        if(newEffect.duration != oldEffect.duration) {
-            return "duration: " + oldEffect.duration + " -> " + newEffect.duration;
-        }
-        return "";
-    }
-    public values(newEffect, oldEffect) {
-        if(newEffect.diceNum != oldEffect.diceNum || newEffect.diceSide != oldEffect.diceSide) {
-            return "values: " + oldEffect.diceNum + " - " + oldEffect.diceSide + " -> " + newEffect.diceNum + " - " + newEffect.diceSide
-        }   
-        return "";
+    public isRedList(e: number) {
+        return this.db.jsonGreenListEffects.red.includes(e);
     }
     //#endregion
     

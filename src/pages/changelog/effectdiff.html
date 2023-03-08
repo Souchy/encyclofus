@@ -34,27 +34,19 @@
 
 <div if.bind="newEffect && oldEffect && isDiff && isEffectVisible(newEffect)" style="border-top: 1px dotted grey;">
     <!-- • -->
-    <!-- e: ${effectid} -->
 
-    <!-- <div>
-        ${delay}
-    </div> -->
-    <!-- <div>
-        ${duration}
-    </div> -->
-
-    <!-- <div>
-        ${values}
-    </div> -->
-
-    <div if.bind="values">
+    <div if.bind="values || duration || delay || effectId"> <!-- -->
         <span innerHtml.bind="effectRenderer.renderEffectI18n(oldEffect)"></span>
         ->
         <span innerHtml.bind="effectRenderer.renderEffectI18n(newEffect)"></span>
     </div>
-    <div if.bind="!values">
+    <div if.bind="!(values || duration || delay || effectId)">
         <span innerHtml.bind="effectRenderer.renderEffectI18n(newEffect)"></span>
     </div>
+    
+    <!-- <div repeat.for="prop of diffchecker.effectProperties">
+        ${diffProp(prop)}
+    </div> -->
 
     <div if.bind="dispellable != ''">
         <span if.bind="effectRenderer.isDuration(oldEffect)" class="tooltipx" style="vertical-align: middle; width: 25px; height: 32px; ">
@@ -67,7 +59,6 @@
             <div class="tooltiptext">${effectRenderer.getDispellString(newEffect)}</div>
         </span>
     </div>
-
     <div if.bind="targetMask != ''">
         Conditions de cible:
         <span class="tooltipx" style="width: 22px; height: 32px; padding: 4px; vertical-align: middle;">

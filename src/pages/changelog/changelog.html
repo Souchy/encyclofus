@@ -9,7 +9,8 @@
         <h1 style="border-bottom: 1px white solid;">
             ${getBreedName(b)}
         </h1>
-        <div repeat.for="s of spellsFor(b)" style="padding-left: 10px;">
+        <div repeat.for="s of spellsFor(b)">
+            <!--  style="padding-left: 10px;" -->
             <spelldiff breedid.bind="b" spellid.bind="s"></spelldiff>
         </div>
     </div>

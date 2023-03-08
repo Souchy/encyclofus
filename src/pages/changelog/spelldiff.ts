@@ -71,10 +71,10 @@ export class spelldiff {
         let news: any[] = this.newSpell.effects.filter(e1 => {
             return !this.oldSpell.effects.find(e2 => e1.id == e2.id);
         })
-        if(news.length > 0) {
-            console.log("news: " + news)
-            console.log({news})
-        }
+        // if(news.length > 0) {
+        //     console.log("news: " + news)
+        //     console.log({news})
+        // }
         return news;
     }
     public removedEffects() {

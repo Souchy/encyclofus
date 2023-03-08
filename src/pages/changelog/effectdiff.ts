@@ -69,6 +69,12 @@ export class effectdiff {
         return this.diffchecker.effectDiff(this.spellid, this.effectid)
         // return this.rawZone != "" || this.targetMask != "" || this.values != "" || this.delay != "" || this.duration != "";
     }
+    public diffProp(prop) {
+        let newprop = this.newEffect[prop]
+        let oldprop = this.oldEffect[prop]
+        if(newprop == oldprop) return "";
+        return this.i18n.tr(prop) + ": " + this.i18n.tr(oldprop) + " -> " + this.i18n.tr(newprop);
+    }
     public get dispellable() {
         if(this.newEffect.dispellable != this.oldEffect.dispellable) {
             return "rawZone: " + this.oldEffect.dispellable + " -> " + this.newEffect.dispellable;
@@ -99,13 +105,18 @@ export class effectdiff {
         }
         return "";
     }
-    public get values() {
-        if(this.effectid == 220805) {
-            console.log("220805: " + this.newEffect.diceNum + ", " + this.oldEffect.diceNum);
+    public get effectId() {
+        if(this.newEffect.effectId != this.oldEffect.effectId) {
+            return "effectId: " + this.oldEffect.effectId + " -> " + this.newEffect.effectId;
         }
+        return "";
+    }
+    public get values() {
         if(this.newEffect.diceNum != this.oldEffect.diceNum || this.newEffect.diceSide != this.oldEffect.diceSide) {
             return "values: " + this.oldEffect.diceNum + " - " + this.oldEffect.diceSide + " -> " + this.newEffect.diceNum + " - " + this.newEffect.diceSide
         }   
+        if(this.newEffect.value != this.oldEffect.value)
+            return "value: " + this.oldEffect.value + " -> " + this.newEffect.value;
         return "";
     }
     

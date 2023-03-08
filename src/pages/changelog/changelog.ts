@@ -26,7 +26,7 @@ export class Changelog {
     }
     //#region Data loading
 	public get isLoaded() {
-        console.log("d: " + this.db.data.isLoaded + ", " + this.db.data2.isLoaded);
+        // console.log("d: " + this.db.data.isLoaded + ", " + this.db.data2.isLoaded);
 		return this.db.data.isLoaded && this.db.data2.isLoaded;
 	}
     //#endregion
