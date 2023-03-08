@@ -181,6 +181,7 @@ export class items {
         // console.log("arr: " + arr + ", fulldata: " + this.mason.fulldata.length);
 	}
 
+	/*
 	public generateFilter(filter: Filter) {
 		var adds = { $addFields: {} };
 		var mongofilter = { $and: [] };
@@ -235,7 +236,7 @@ export class items {
 				}
 			}
 		});
-		*/
+		* /
 		return mongofilter;
 	}
 	private filterSum(mongofilter, adds, bi, block: BlockFilter) {
@@ -330,6 +331,7 @@ export class items {
 		};
 		return mm;
 	}
+	*/
 	
 	private filterSumMemory(block: BlockFilter, item) {
 		let mask = block.mods.map(m => m.effectId);

@@ -87,7 +87,7 @@ export class EffectRenderer {
 				console.log("error at uid " + e.effectUid)
 			} else {
 				let name = this.db.getI18n(subspell.nameId);
-				if (name.includes("{")) {
+				if (name && name.includes("{")) {
 					let obj = name.substring(name.indexOf("{"), name.indexOf("}"))
 					name = name.substring(0, name.indexOf("{"));
 					// name = name.replace("{", "").replace("}", "");

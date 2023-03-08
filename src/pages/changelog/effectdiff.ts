@@ -39,7 +39,7 @@ export class effectdiff {
         // 666 = ACTION_NOOP = "Pas d'effet supplémentaire"
         // let e = this.newEffect;
         let effectModel = e.effect ?? this.effectModel;
-        let show = (this.isGreenList(e.effectUid) || e.visibleInTooltip || (effectModel.showInTooltip && mode == "detailed")) // || e.visibleInBuffUi || e.visibleInFightLog) 
+        let show = (this.isGreenList(e.effectUid) || e.visibleInTooltip || (effectModel?.showInTooltip && mode == "detailed")) // || e.visibleInBuffUi || e.visibleInFightLog) 
                 && !this.isRedList(e.effectUid) && e.effectId != 666
         return show;
     }
