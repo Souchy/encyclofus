@@ -45,9 +45,9 @@
 	"evade": "Dodge",
 	"block": "Lock",
 	
-	"apCost": "PA",
-	"range": "Portée max.",
-	"minRange": "Portée min.",
+	"apCost": "AP",
+	"range": "Range max.",
+	"minRange": "Range min.",
 
 	"otherCharac": "Other characteristics",
 	"maxStack": "Max effect stacks",

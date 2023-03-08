@@ -15,9 +15,6 @@ export class spelldiff {
     @bindable 
     public breedid;
 
-
-    public spellDiff;
-    
 	public constructor(
         private readonly diffchecker: Diffchecker,
         private readonly db: db, 
@@ -47,13 +44,6 @@ export class spelldiff {
     public get hasDiff(): boolean {
         // return true; // FIXME : need a util classe to calculate effect differences and spell differences
         return this.diffchecker.spellDiff(this.spellid)
-        return this.spellDiff && this.spellDiff != "undefined"
-    }
-
-
-    attached() {
-        this.generateDiffSpell();
-        // console.log(this.spellDiff)
     }
 
     public diffProp(prop) {
@@ -63,52 +53,12 @@ export class spelldiff {
         return this.i18n.tr(prop) + ": " + this.i18n.tr(oldprop) + " -> " + this.i18n.tr(newprop);
     }
 
-    private generateDiffSpell() { //s1, s2) {
-        this.spellDiff = null;
-        let arr = [];
-        let breakk = false;
-        if(this.newSpell == undefined) {
-            arr.push("removed spell")
-            breakk = true;
-        }
-        if(this.oldSpell == undefined) {
-            arr.push("new spell")
-            breakk = true;
-        }
-        if(!breakk) {
-            arr.push(this.ap())
-            arr.push(this.range())
-            arr.push(this.lineOfSight())
-        }
-        if (arr.length > 0)
-            this.spellDiff = arr.filter(s => s != "").join(",");
-    }
 
     public isNew() {
         return this.oldSpell == undefined;
     }
     public isRemoved() {
         return this.newSpell == undefined;
-    }
-    public ap() {
-        if (this.newSpell.apCost !== this.oldSpell.apCost)
-            return this.i18n.tr("pa") + ": "  + this.oldSpell.apCost + " -> " + this.newSpell.apCost;
-        return "";
-    }
-    public range() {
-        if (this.newSpell.minRange != this.oldSpell.minRange || this.newSpell.range != this.oldSpell.range)
-            return this.i18n.tr("po") + ": " + this.oldSpell.minRange + " - " + this.oldSpell.range + " -> " + this.newSpell.minRange + " - " + this.newSpell.range
-        return "";
-    }
-    public lineOfSight() {
-        if (this.newSpell.castTestLos != this.oldSpell.castTestLos)
-            return this.i18n.tr("castTestLos") + ": " + this.i18n.tr(this.oldSpell.castTestLos) + " -> " + this.i18n.tr(this.newSpell.castTestLos);
-        return "";
-    }
-    public modifiableRange() {
-        if (this.newSpell.rangeCanBeBoosted != this.oldSpell.rangeCanBeBoosted)
-            return this.i18n.tr("rangeCanBeBoosted") + ": " + this.i18n.tr(this.oldSpell.rangeCanBeBoosted) + " -> " + this.i18n.tr(this.newSpell.rangeCanBeBoosted);
-        return "";
     }
 
     public commonEffects() {
