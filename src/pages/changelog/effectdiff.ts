@@ -8,6 +8,7 @@ import { DI, IEventAggregator, Registration } from 'aurelia';
 import _ from 'lodash';
 import { Util } from '../../ts/util';
 import { EffectRenderer } from '../effects/effectRenderer';
+import { Diffchecker } from './diffchecker';
 
 export class effectdiff {
  
@@ -17,9 +18,10 @@ export class effectdiff {
     public effectid;
     
 	public constructor(
+        private readonly diffchecker: Diffchecker,
         private readonly effectRenderer: EffectRenderer,
         private readonly db: db, 
-        private readonly emerald: Emerald, 
+        // private readonly emerald: Emerald, 
         @I18N private readonly i18n: I18N, 
         @IEventAggregator readonly ea: IEventAggregator
     ) {
@@ -64,7 +66,8 @@ export class effectdiff {
 
 
     public get isDiff() {
-        return this.rawZone != "" || this.targetMask != "" || this.values != "" || this.delay != "" || this.duration != "";
+        return this.diffchecker.effectDiff(this.spellid, this.effectid)
+        // return this.rawZone != "" || this.targetMask != "" || this.values != "" || this.delay != "" || this.duration != "";
     }
     public get dispellable() {
         if(this.newEffect.dispellable != this.oldEffect.dispellable) {

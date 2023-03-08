@@ -45,6 +45,10 @@
 	"evade": "Fuite",
 	"block": "Tacle",
 	
+	"apCost": "PA",
+	"range": "Portée max.",
+	"minRange": "Portée min.",
+
 	"otherCharac": "Autres caractéristiques",
 	"maxStack": "Cumul max. des effets",
 	"castInDiagonal": "Lancer en diagonale",

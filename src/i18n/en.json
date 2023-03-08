@@ -44,6 +44,10 @@
 	"hp": "HP",
 	"evade": "Dodge",
 	"block": "Lock",
+	
+	"apCost": "PA",
+	"range": "Portée max.",
+	"minRange": "Portée min.",
 
 	"otherCharac": "Other characteristics",
 	"maxStack": "Max effect stacks",

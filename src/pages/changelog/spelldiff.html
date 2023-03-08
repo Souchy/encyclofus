@@ -15,7 +15,7 @@
     </div>
         
     <div if.bind="!isNew() && !isRemoved()">
-        <div>
+        <!-- <div>
             ${ap()}
         </div>
         <div>
@@ -26,8 +26,11 @@
         </div>
         <div>
             ${modifiableRange()}
-        </div>
+        </div> -->
 
+        <div repeat.for="prop of diffchecker.spellProperties">
+            ${diffProp(prop)}
+        </div>
 
         <!-- <div if.bind="newEffects().length > 0">
             new

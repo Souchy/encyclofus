@@ -6,6 +6,7 @@ import { I18N } from "@aurelia/i18n";
 import { db } from "../../DofusDB/db";
 import { DI, IEventAggregator, Registration } from 'aurelia';
 import _ from 'lodash';
+import { Diffchecker } from './diffchecker';
 
 export class spelldiff {
  
@@ -18,8 +19,8 @@ export class spelldiff {
     public spellDiff;
     
 	public constructor(
-        readonly db: db, 
-        readonly emerald: Emerald, 
+        private readonly diffchecker: Diffchecker,
+        private readonly db: db, 
         @I18N private readonly i18n: I18N, 
         @IEventAggregator readonly ea: IEventAggregator
     ) {
@@ -44,7 +45,8 @@ export class spelldiff {
     }
 
     public get hasDiff(): boolean {
-        return true; // FIXME : need a util classe to calculate effect differences and spell differences
+        // return true; // FIXME : need a util classe to calculate effect differences and spell differences
+        return this.diffchecker.spellDiff(this.spellid)
         return this.spellDiff && this.spellDiff != "undefined"
     }
 
@@ -52,6 +54,13 @@ export class spelldiff {
     attached() {
         this.generateDiffSpell();
         // console.log(this.spellDiff)
+    }
+
+    public diffProp(prop) {
+        let newprop = this.newSpell[prop]
+        let oldprop = this.oldSpell[prop]
+        if(newprop == oldprop) return "";
+        return this.i18n.tr(prop) + ": " + this.i18n.tr(oldprop) + " -> " + this.i18n.tr(newprop);
     }
 
     private generateDiffSpell() { //s1, s2) {
