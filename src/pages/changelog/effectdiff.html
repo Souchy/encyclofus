@@ -1,0 +1,96 @@
+<div if.bind="!newEffect && isEffectVisible(oldEffect)" style="border-top: 1px dotted grey;">
+    Effet supprimé:
+    <span innerHtml.bind="effectRenderer.renderEffectI18n(oldEffect)"></span>
+    <span if.bind="effectRenderer.isDuration(oldEffect)" class="tooltipx" style="vertical-align: middle; width: 25px; height: 32px; ">
+        <img style="vertical-align: middle; margin-left: -10px; margin-right: -10px;" src.bind="effectRenderer.getDispellIcon(oldEffect)"></img>
+        <div class="tooltiptext">${effectRenderer.getDispellString(oldEffect)}</div>
+    </span>
+    <span class="tooltipx" style="width: 22px; height: 32px; padding: 4px; vertical-align: middle;">
+        <img style="vertical-align: middle; margin-left: 2px;" src.bind="effectRenderer.getTargetIcon(oldEffect)"></img>
+        <div class="tooltiptext" innerHtml.bind="effectRenderer.getTargetString(oldEffect)"></div>
+    </span>
+    <span if.bind="db.getAoeIconUrl(oldEffect)" class="tooltipx" style="width: 37px; height: 32px; padding: 0px; vertical-align: middle;">
+        <img style="width: 36px; height: 18px;" src.bind="db.getAoeIconUrl(oldEffect)"></img>
+        <div class="tooltiptext">${effectRenderer.getZoneString(oldEffect)}</div>
+    </span>
+</div>
+
+<div if.bind="!oldEffect && isEffectVisible(newEffect)" style="border-top: 1px dotted grey;">
+    Nouvel effet: 
+    <span innerHtml.bind="effectRenderer.renderEffectI18n(newEffect)"></span>
+    <span if.bind="effectRenderer.isDuration(newEffect)" class="tooltipx" style="vertical-align: middle; width: 25px; height: 32px; ">
+        <img style="vertical-align: middle; margin-left: -10px; margin-right: -10px;" src.bind="effectRenderer.getDispellIcon(newEffect)"></img>
+        <div class="tooltiptext">${effectRenderer.getDispellString(newEffect)}</div>
+    </span>
+    <span class="tooltipx" style="width: 22px; height: 32px; padding: 4px; vertical-align: middle;">
+        <img style="vertical-align: middle; margin-left: 2px;" src.bind="effectRenderer.getTargetIcon(newEffect)"></img>
+        <div class="tooltiptext" innerHtml.bind="effectRenderer.getTargetString(newEffect)"></div>
+    </span>
+    <span if.bind="db.getAoeIconUrl(newEffect)" class="tooltipx" style="width: 37px; height: 32px; padding: 0px; vertical-align: middle;">
+        <img style="width: 36px; height: 18px;" src.bind="db.getAoeIconUrl(newEffect)"></img>
+        <div class="tooltiptext">${effectRenderer.getZoneString(newEffect)}</div>
+    </span>
+</div>
+
+<div if.bind="newEffect && oldEffect && isDiff && isEffectVisible(newEffect)" style="border-top: 1px dotted grey;">
+    <!-- • -->
+    <!-- e: ${effectid} -->
+
+    <!-- <div>
+        ${delay}
+    </div> -->
+    <!-- <div>
+        ${duration}
+    </div> -->
+
+    <!-- <div>
+        ${values}
+    </div> -->
+
+    <div if.bind="values">
+        <span innerHtml.bind="effectRenderer.renderEffectI18n(oldEffect)"></span>
+        ->
+        <span innerHtml.bind="effectRenderer.renderEffectI18n(newEffect)"></span>
+    </div>
+    <div if.bind="!values">
+        <span innerHtml.bind="effectRenderer.renderEffectI18n(newEffect)"></span>
+    </div>
+
+    <div if.bind="dispellable != ''">
+        <span if.bind="effectRenderer.isDuration(oldEffect)" class="tooltipx" style="vertical-align: middle; width: 25px; height: 32px; ">
+            <img style="vertical-align: middle; margin-left: -10px; margin-right: -10px;" src.bind="effectRenderer.getDispellIcon(oldEffect)"></img>
+            <div class="tooltiptext">${effectRenderer.getDispellString(oldEffect)}</div>
+        </span>
+        ->
+        <span if.bind="effectRenderer.isDuration(newEffect)" class="tooltipx" style="vertical-align: middle; width: 25px; height: 32px; ">
+            <img style="vertical-align: middle; margin-left: -10px; margin-right: -10px;" src.bind="effectRenderer.getDispellIcon(newEffect)"></img>
+            <div class="tooltiptext">${effectRenderer.getDispellString(newEffect)}</div>
+        </span>
+    </div>
+
+    <div if.bind="targetMask != ''">
+        Conditions de cible:
+        <span class="tooltipx" style="width: 22px; height: 32px; padding: 4px; vertical-align: middle;">
+            <img style="vertical-align: middle; margin-left: 2px;" src.bind="effectRenderer.getTargetIcon(oldEffect)"></img>
+            <div class="tooltiptext" innerHtml.bind="effectRenderer.getTargetString(oldEffect)"></div>
+        </span>
+        ->
+        <span class="tooltipx" style="width: 22px; height: 32px; padding: 4px; vertical-align: middle;">
+            <img style="vertical-align: middle; margin-left: 2px;" src.bind="effectRenderer.getTargetIcon(newEffect)"></img>
+            <div class="tooltiptext" innerHtml.bind="effectRenderer.getTargetString(newEffect)"></div>
+        </span>
+    </div>
+    <div if.bind="rawZone != ''">
+        Zone:
+        <span if.bind="db.getAoeIconUrl(oldEffect)" class="tooltipx" style="width: 37px; height: 32px; padding: 0px; vertical-align: middle;">
+            <img style="width: 36px; height: 18px;" src.bind="db.getAoeIconUrl(oldEffect)"></img>
+            <div class="tooltiptext">${effectRenderer.getZoneString(oldEffect)}</div>
+        </span>
+        ->
+        <span if.bind="db.getAoeIconUrl(newEffect)" class="tooltipx" style="width: 37px; height: 32px; padding: 0px; vertical-align: middle;">
+            <img style="width: 36px; height: 18px;" src.bind="db.getAoeIconUrl(newEffect)"></img>
+            <div class="tooltiptext">${effectRenderer.getZoneString(newEffect)}</div>
+        </span>
+    </div>
+
+</div>

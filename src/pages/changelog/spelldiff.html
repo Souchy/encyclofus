@@ -1,0 +1,58 @@
+<import from="./effectdiff"></import>
+
+
+<div if.bind="hasDiff" style="padding-left: 10px;">
+
+    <h4>
+        ${db.getI18n(newSpell.nameId)}
+    </h4>
+
+    <div if.bind="isNew()">
+        Nouveau sort
+    </div>
+    <div if.bind="isRemoved()">
+        Sort supprimé
+    </div>
+        
+    <div if.bind="!isNew() && !isRemoved()">
+        <div>
+            ${ap()}
+        </div>
+        <div>
+            ${range()}
+        </div>
+        <div>
+            ${lineOfSight()}
+        </div>
+        <div>
+            ${modifiableRange()}
+        </div>
+
+
+        <!-- <div if.bind="newEffects().length > 0">
+            new
+            ${newEffects()}
+        </div> -->
+        <!-- <div if.bind="removeEffects().length > 0">
+            removed
+            ${removeEffects()}
+        </div> -->
+
+        <!-- <div if.bind="commonEffects()">
+            ${commonEffects()}
+        </div> -->
+        <div repeat.for="e of newSpell.effects" data-id="${e.effectUid}" style="padding-left: 10px;">
+            <effectdiff spellid.bind="spellid" effectid.bind="e.effectUid"></effectdiff>
+        </div>
+        <!-- <table class="table table-striped table-sm table-borderless ${effectTypeStyle}" css="--bs-table-striped-bg: none; margin-bottom: 0px;">
+            <tbody>
+                <tr repeat.for="e of commonEffects()" data-id="${e.effectUid}">
+                    <td>
+                        <effectdiff spellid.bind="spellid" effectid.bind="e.effectUid"></effectdiff>
+                    </td>
+                </tr>
+            </tbody>
+        </table> -->
+
+    </div>
+</div>

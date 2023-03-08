@@ -38,6 +38,11 @@
 - Redirigent l'érosion
 - Le sacrifice + égide dépend de l'ordre de lancement
 
+### Glyphes, Pièges et Portails
+- Glyphe d'excursion, aveuglement, enflammé, gravitationel, barrière
+- Portail
+- Piège mortel, dérive, répulsif, immobilisation
+
 ### États
 
 - Indéplaçable (portail, porter, déplacer, téléporter, échanger)

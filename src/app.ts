@@ -52,6 +52,10 @@ export class App {
 			path: "maps",
 			component: import("./pages/maps/maplist"),
 		},
+		{
+			path: "changelog",
+			component: import("./pages/changelog/changelog"),
+		},
 	];
 
 	// collapsing sidebar reference

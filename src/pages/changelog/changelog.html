@@ -1,0 +1,16 @@
+<import from="./spelldiff"></import>
+
+<div if.bind="!isLoaded" class="loaderContainer">
+    <div class="loader"></div>
+</div>
+
+<div if.bind="isLoaded">
+    <div repeat.for="b of breeds">
+        <h1 style="border-bottom: 1px white solid;">
+            ${getBreedName(b)}
+        </h1>
+        <div repeat.for="s of spellsFor(b)" style="padding-left: 10px;">
+            <spelldiff breedid.bind="b" spellid.bind="s"></spelldiff>
+        </div>
+    </div>
+</div>

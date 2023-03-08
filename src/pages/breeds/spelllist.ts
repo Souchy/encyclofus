@@ -1,3 +1,5 @@
+import { filter } from './../quickfus/items/filter';
+import { Changelog } from './../changelog/changelog';
 import { bindable, IEventAggregator, inject } from "aurelia";
 import { IRouter, IRouteableComponent, Navigation, Parameters, RoutingInstruction } from '@aurelia/router';
 
@@ -10,9 +12,13 @@ export class SpellList {
 
 	public db: db;
 
-    constructor(db: db, @IEventAggregator readonly ea: IEventAggregator) {
+    constructor(db: db, changelog: Changelog, @IEventAggregator readonly ea: IEventAggregator) {
         this.db = db;
     }
+
+	public get isLoaded() {
+		return this.db.isLoaded && this.spells
+	}
 
 	public get dbJsonSpells() {
 		return this.db.data.jsonSpells;
@@ -30,7 +36,8 @@ export class SpellList {
 	}
 	public get spells(): any[] {
 		if (!this.breed) return null;
-		return this.breed.spells;
+		return this.breed.spells
+			.filter(s => s != 25201 && s != 25122); // remove admin spells (doom style, ankatchoum)
 	}
 	public get selectedSpellId() {
 		if (!this.spells) return null;
@@ -41,6 +48,7 @@ export class SpellList {
 		if (!this.selectedSpellId) return null;
 		return this.db.data.jsonSpells[this.selectedSpellId];
 	}
+
 
 	public selectSlot(slot: number): void {
 		this.db.selectedSpellSlot = slot;

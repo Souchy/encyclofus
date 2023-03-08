@@ -10,21 +10,21 @@
             <td style="width: 20px; padding: 0px; padding-left: 4px;" if.bind="getIcon(effect)">
                 <div style.bind="getIcon(effect)"></div>
             </td>
-            <td innerHtml.bind="renderEffectI18n(effect)" style="vertical-align: middle;"></td>
+            <td innerHtml.bind="effectRenderer.renderEffectI18n(effect)" style="vertical-align: middle;"></td>
             <td if.bind="isStateSubspell(effect)" style="vertical-align: middle; position: absolute; left: 0px; width: 100%; height: 100%;">
                 <spell class="spellHover" if.bind="depth <= 1" spellid.bind="getStateSubspellId(effect)" depth.bind="depth+1"></spell>
             </td>
-            <td if.bind="isDuration(effect)" class="tooltipx" style="vertical-align: middle; width: 25px; height: 32px; ">
-                <img style="vertical-align: middle; margin-left: -10px; margin-right: -10px;" src.bind="getDispellIcon(effect)"></img>
-                <div class="tooltiptext">${getDispellString(effect)}</div>
+            <td if.bind="effectRenderer.isDuration(effect)" class="tooltipx" style="vertical-align: middle; width: 25px; height: 32px; ">
+                <img style="vertical-align: middle; margin-left: -10px; margin-right: -10px;" src.bind="effectRenderer.getDispellIcon(effect)"></img>
+                <div class="tooltiptext">${effectRenderer.getDispellString(effect)}</div>
             </td>
-            <td if.bind="hasTargetIcon(effect)" class="tooltipx" style="width: 22px; height: 32px; padding: 4px; vertical-align: middle;">
-                <img style="vertical-align: middle; margin-left: 2px;" src.bind="getTargetIcon(effect)"></img>
-                <div class="tooltiptext" innerHtml.bind="getTargetString(effect)"></div>
+            <td if.bind="effectRenderer.hasTargetIcon(effect)" class="tooltipx" style="width: 22px; height: 32px; padding: 4px; vertical-align: middle;">
+                <img style="vertical-align: middle; margin-left: 2px;" src.bind="effectRenderer.getTargetIcon(effect)"></img>
+                <div class="tooltiptext" innerHtml.bind="effectRenderer.getTargetString(effect)"></div>
             </td>
             <td if.bind="db.getAoeIconUrl(effect)" class="tooltipx" style="width: 37px; height: 32px; padding: 0px; vertical-align: middle;">
                 <img style="width: 36px; height: 18px;" src.bind="db.getAoeIconUrl(effect)"></img>
-                <div class="tooltiptext">${getZoneString(effect)}</div>
+                <div class="tooltiptext">${effectRenderer.getZoneString(effect)}</div>
             </td>
         </tr>
     </tbody>

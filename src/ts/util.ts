@@ -13,4 +13,32 @@ export class Util {
         return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
+    
+	public static getStatColor(name: string) {
+		switch (name) {
+			case "PA": return "color: gold;"
+			case "PM": return "color: #03fc3d;"
+			case "Vitalité": return "color: #e1c699;";
+			// case "Vitalité": return "color: beige;";
+			// case "Sagesse": return "color: purple;";
+			case "% Résistance Neutre":
+				return "color: gray;";
+			case "% Résistance Terre":
+			case "Force":
+				return "color: #965948;"; // brown
+			case "% Résistance Feu":
+			case "Intelligence":
+				return "color: #c42b00;" // red
+			case "% Résistance Eau":
+			case "Chance":
+				return "color: #34bdeb;" // blue
+			case "% Résistance Air":
+			case "Agilité":
+				return "color: #0d9403;" // green
+			case "Puissance":
+				return "color: #cf03fc;"; //
+			default: return "";
+		}
+	}
+    
 }
