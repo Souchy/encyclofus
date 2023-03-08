@@ -72,7 +72,8 @@
 			"general": "General",
 			"formulas": "Formulas",
 			"maps": "Maps",
-			"items": "Items"
+			"items": "Items",
+			"changelog": "Changelog"
 		},
 		"pvp": {
 			"pvp": "Pvp Community",

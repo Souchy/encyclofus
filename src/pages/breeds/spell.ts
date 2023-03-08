@@ -28,7 +28,7 @@ export class Spell {
 	}
 
 	public get spell() {
-		return this.db.jsonSpells[this.spellid];
+		return this.db.data.jsonSpells[this.spellid];
 	}
 	public get name() {
 		return this.db.getI18n(this.spell.nameId);
@@ -82,11 +82,11 @@ export class Spell {
 		return this.spell.effects.filter(e => this.hasSummon(e));
 	}
 	public hasSummon(e: any) {
-		return this.db.isSummonEffect(e) && e.visibleInTooltip && this.db.jsonSummons[e.diceNum]; // e.effectId == 181 || e.effectId == 1011 || e.effectId == 1008;
+		return this.db.isSummonEffect(e) && e.visibleInTooltip && this.db.data.jsonSummons[e.diceNum]; // e.effectId == 181 || e.effectId == 1011 || e.effectId == 1008;
 	}
 	public getSummon(e: any): any {
 		if (!this.hasSummon(e)) return null;
-		return this.db.jsonSummons[e.diceNum];
+		return this.db.data.jsonSummons[e.diceNum];
 	}
 
 	public get hasSubSpell() {
@@ -105,7 +105,7 @@ export class Spell {
 			let data = sub.split("::")[0].split(",");
 			let spellid = data[1]
 			let grade = data[2];
-			if (this.db.jsonSpells[spellid])
+			if (this.db.data.jsonSpells[spellid])
 				return spellid;
 			else
 				return spellid + "-" + grade;
@@ -115,7 +115,7 @@ export class Spell {
 
 	public isStateSubspell(e) {
 		if (this.db.isEffectState(e)) {
-			let state = this.db.jsonStates[e.value]
+			let state = this.db.data.jsonStates[e.value]
 			if (!state) return false;
 			let name = this.db.getI18n(state.nameId);
 			if (name.includes("{")) {
@@ -143,7 +143,7 @@ export class Spell {
 		let spellString;
 		// état
 		if (this.db.isEffectState(e)) {
-			let state = this.db.jsonStates[e.value]
+			let state = this.db.data.jsonStates[e.value]
 			spellString = this.db.getI18n(state.nameId);
 		}
 		if (this.db.isSubSpell(e)) {
@@ -163,7 +163,7 @@ export class Spell {
 		let grade = e.diceSide;
 		let key = e.diceNum + "";
 		if (grade) key += "-" + grade;
-		return this.db.jsonSpells[key];
+		return this.db.data.jsonSpells[key];
 	}
 
 	public get hasCondition() {

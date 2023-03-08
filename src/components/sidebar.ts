@@ -28,7 +28,7 @@ export class sidebar {
 		return jsonBreeds.orderById[this.db.breedId - 1];
 	}
 	public get breedNameI18n(): string {
-		let breed = this.db.jsonBreeds[this.db.breedId];
+		let breed = this.db.data.jsonBreeds[this.db.breedId];
 		if(!breed) return "nobreed";
 		let name = this.db.getI18n(breed.nameId);
 		return name;

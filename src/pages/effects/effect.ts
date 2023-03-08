@@ -27,7 +27,7 @@ export class Effect {
 	}
 
 	public get spell() {
-		return this.db.jsonSpells[this.effect.spellId];
+		return this.db.data.jsonSpells[this.effect.spellId];
 	}
 
 	public isDuration(e) {
@@ -69,7 +69,7 @@ export class Effect {
 	}
 	public getSummon(e: any): any {
 		if (!this.hasSummon(e)) return null;
-		return this.db.jsonSummons[e.diceNum];
+		return this.db.data.jsonSummons[e.diceNum];
 	}
 
 	public hasSubSpell(e: any) {
@@ -79,7 +79,7 @@ export class Effect {
 		let grade = e.diceSide;
 		let key = e.diceNum + "";
 		if (grade) key += "-" + grade;
-		return this.db.jsonSpells[key];
+		return this.db.data.jsonSpells[key];
 	}
 	public hasTrapGlyph(e: any) {
 		return this.db.isCellEffect(e) && e.diceNum != e.spellId;
@@ -89,7 +89,7 @@ export class Effect {
 		let grade = e.diceSide;
 		let key = e.diceNum + "";
 		if (grade) key += "-" + grade;
-		return this.db.jsonSpells[key];
+		return this.db.data.jsonSpells[key];
 	}
 
 	public isItem(effect) {
@@ -233,7 +233,7 @@ export class Effect {
 					// name = name.replace("{", "").replace("}", "");
 					let data = obj.split(",");
 					let subSpellId = data[1];
-					let stateSpell = this.db.jsonSpells[subSpellId];
+					let stateSpell = this.db.data.jsonSpells[subSpellId];
 					obj = obj.split("::")[1];
 					name += obj;
 				}
@@ -260,7 +260,7 @@ export class Effect {
 		// état
 		if (this.db.isEffectState(e)) {
 			// if (e.value) {
-			let state = this.db.jsonStates[e.value]
+			let state = this.db.data.jsonStates[e.value]
 			if (!state) { }
 			// "968135": "{spell,24036,1::<u>Saoul</u>}",
 			if (state) {
@@ -270,7 +270,7 @@ export class Effect {
 						stateName = stateName.replace("{", "").replace("}", "");
 						let data = stateName.split(",");
 						let subSpellId = data[1];
-						let stateSpell = this.db.jsonSpells[subSpellId];
+						let stateSpell = this.db.data.jsonSpells[subSpellId];
 						stateName = stateName.split("::")[1];
 					}
 				}
@@ -343,7 +343,7 @@ export class Effect {
 
 	public isStateSubspell(e) {
 		if (this.db.isEffectState(e)) {
-			let state = this.db.jsonStates[e.value]
+			let state = this.db.data.jsonStates[e.value]
 			if (!state) return false;
 			let name = this.db.getI18n(state.nameId);
 			if (name.includes("{")) {
@@ -393,7 +393,7 @@ export class Effect {
 		let spellString;
 		// état
 		if (this.db.isEffectState(e)) {
-			let state = this.db.jsonStates[e.value]
+			let state = this.db.data.jsonStates[e.value]
 			spellString = this.db.getI18n(state.nameId);
 		}
 		if (this.db.isSubSpell(e)) {

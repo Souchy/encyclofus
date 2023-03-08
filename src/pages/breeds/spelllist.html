@@ -19,9 +19,7 @@
 
 <!-- osa summons -->
 <div class="spellList d-flex flex-wrap" if.bind="db.isLoaded && breedId == 2">
-	<!-- <let ss="${db.jsonSpells[13997].effects}"></let>
-	${ss} -->
-	<div repeat.for="e of db.jsonSpells[13997].effects" click.delegate="selectSummon($index)" class="spell ${ db.selectedOsaSlot == $index ? 'spellactive' : ''}">
+	<div repeat.for="e of dbJsonSpells[13997].effects" click.delegate="selectSummon($index)" class="spell ${ db.selectedOsaSlot == $index ? 'spellactive' : ''}">
 		<img src="${db.getMonsterIconPath(e.diceNum)}" style="width: 45px; height: 45px;" />
 	</div>
 </div>

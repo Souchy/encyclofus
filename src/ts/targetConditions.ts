@@ -223,7 +223,7 @@ export class TargetConditionRenderer {
 
     private parseMonsterToString(mask) {
         let summonId = +mask; 
-        let summon = this.db.jsonSummons[summonId];
+        let summon = this.db.data.jsonSummons[summonId];
         let name = "";
         if (!summon) {
             name = this.i18n.tr("target.monster." + summonId);
@@ -251,7 +251,7 @@ export class TargetConditionRenderer {
         if(!mask) return "";
         let isPositive = mask == mask.toUpperCase();
         let value = +mask.substring(1);
-        let nameid = this.db.jsonBreeds[value].nameId;
+        let nameid = this.db.data.jsonBreeds[value].nameId;
         let name = this.db.getI18n(nameid);
         if (isPositive)
             return this.i18n.tr("target.is") + " " + name;

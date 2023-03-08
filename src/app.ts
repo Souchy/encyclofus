@@ -62,7 +62,7 @@ export class App {
 		// load data the first time
 		if(!this.db.isLoaded) {
 			// console.log("app loading db")
-			this.db.loadJson();
+			this.db.data.loadJson();
 		} else {
 			// console.log("app already loaded db")
 		}
@@ -95,7 +95,7 @@ export class App {
 		
 		this.ea.subscribe("db:loaded", () => {
 			if(this.db.breedId > 0) {
-				let breed = db.jsonBreeds[this.db.breedId]
+				let breed = db.data.jsonBreeds[this.db.breedId]
 				let name = db.getI18n(breed.nameId);
 				let ele = document.getElementsByTagName("title").item(0);
 				ele.innerHTML = name + " | Encyclofus"
@@ -124,8 +124,8 @@ export class App {
 			// console.log("nav end: " + this.db.jsonBreeds + ", " + Object.keys(jsonBreeds.ids).includes(basicName) + ", " + asdf.navigation.instruction + " in? " + Object.keys(jsonBreeds.ids) + "")
 			if(Object.keys(jsonBreeds.ids).includes(basicName)) {
 				this.db.breedId = jsonBreeds.ids[basicName];
-				if(this.db.jsonBreeds) {
-					let breed = db.jsonBreeds[this.db.breedId]
+				if(this.db.data.jsonBreeds) {
+					let breed = db.data.jsonBreeds[this.db.breedId]
 					let name = db.getI18n(breed.nameId);
 					// console.log("app nav: " + JSON.stringify(asdf.navigation.instruction))
 					let ele = document.getElementsByTagName("title").item(0);

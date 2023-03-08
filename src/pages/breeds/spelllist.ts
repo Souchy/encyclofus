@@ -14,6 +14,9 @@ export class SpellList {
         this.db = db;
     }
 
+	public get dbJsonSpells() {
+		return this.db.data.jsonSpells;
+	}
 	public get isDbLoaded() {
 		return this.db.isLoaded;
 	}
@@ -21,9 +24,9 @@ export class SpellList {
 		return this.db.breedId;
 	}
 	public get breed(): any {
-		if (!this.db.jsonBreeds) return null;
+		if (!this.db.data.jsonBreeds) return null;
 		if (!this.breedId) return null;
-		return this.db.jsonBreeds[this.breedId + ""];
+		return this.db.data.jsonBreeds[this.breedId + ""];
 	}
 	public get spells(): any[] {
 		if (!this.breed) return null;
@@ -36,7 +39,7 @@ export class SpellList {
 	}
 	public get selectedSpell() {
 		if (!this.selectedSpellId) return null;
-		return this.db.jsonSpells[this.selectedSpellId];
+		return this.db.data.jsonSpells[this.selectedSpellId];
 	}
 
 	public selectSlot(slot: number): void {
@@ -54,7 +57,7 @@ export class SpellList {
 
 	public getSpellName(spellId: number): string {
 		// console.log("getSpellName " + JSON.stringify(this.db.jsonSpells[spellId].nameId))
-		let nameid = this.db.jsonSpells[spellId].nameId;
+		let nameid = this.db.data.jsonSpells[spellId].nameId;
 		return this.db.getI18n(nameid);
 	}
 
@@ -72,12 +75,12 @@ export class SpellList {
 		let e = this.summonEffect;
 		if (!this.hasSummon()) return null;
 		// console.log("getSummon json why: " + e)
-		return this.db.jsonSummons[e.diceNum];
+		return this.db.data.jsonSummons[e.diceNum];
 	}
 
 	public get summonEffect() {
 		// console.log("get effect")
-		let s = this.db.jsonSpells[13997];
+		let s = this.db.data.jsonSpells[13997];
 		let e = s.effects[this.db.selectedOsaSlot];
 		// console.log("summon effect: " + s + ", " + e)
 		return e;

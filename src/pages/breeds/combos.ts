@@ -19,9 +19,9 @@ export class Combos {
 		return this.db.breedId;
 	}
 	public get breed(): any {
-		if (!this.db.jsonBreeds) return null;
+		if (!this.db.data.jsonBreeds) return null;
 		if (!this.breedId) return null;
-		return this.db.jsonBreeds[this.breedId + ""];
+		return this.db.data.jsonBreeds[this.breedId + ""];
 	}
 	public get spells(): any[] {
 		if (!this.breed) return null;
@@ -38,7 +38,7 @@ export class Combos {
 
 	public getSpellName(spellId: number): string {
 		// console.log("getSpellName " + JSON.stringify(this.db.jsonSpells[spellId].nameId))
-		let nameid = this.db.jsonSpells[spellId].nameId;
+		let nameid = this.db.data.jsonSpells[spellId].nameId;
 		return this.db.getI18n(nameid);
 	}
 
