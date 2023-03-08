@@ -4,6 +4,10 @@
 	"and": " and ",
 	"or": " or ",
 	
+	"newEffect": "New effect: ",
+	"oldEffect": "Removed effect: ",
+	"targetConditions": "Target conditions: ",
+	
 	"delay": "(in {{delay}} turns)",
 	"duration": "({{duration}} turns)",
 	"in": "in",

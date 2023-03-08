@@ -1,5 +1,5 @@
 <div if.bind="!newEffect && isEffectVisible(oldEffect)" style="border-top: 1px dotted grey;">
-    Effet supprimé:
+    <span t="oldEffect"></span>
     <span innerHtml.bind="effectRenderer.renderEffectI18n(oldEffect)"></span>
     <span if.bind="effectRenderer.isDuration(oldEffect)" class="tooltipx" style="vertical-align: middle; width: 25px; height: 32px; ">
         <img style="vertical-align: middle; margin-left: -10px; margin-right: -10px;" src.bind="effectRenderer.getDispellIcon(oldEffect)"></img>
@@ -16,7 +16,7 @@
 </div>
 
 <div if.bind="!oldEffect && isEffectVisible(newEffect)" style="border-top: 1px dotted grey;">
-    Nouvel effet: 
+    <span t="newEffect"></span>
     <span innerHtml.bind="effectRenderer.renderEffectI18n(newEffect)"></span>
     <span if.bind="effectRenderer.isDuration(newEffect)" class="tooltipx" style="vertical-align: middle; width: 25px; height: 32px; ">
         <img style="vertical-align: middle; margin-left: -10px; margin-right: -10px;" src.bind="effectRenderer.getDispellIcon(newEffect)"></img>
@@ -60,7 +60,7 @@
         </span>
     </div>
     <div if.bind="targetMask != ''">
-        Conditions de cible:
+        <span t="targetConditions"></span>
         <span class="tooltipx" style="width: 22px; height: 32px; padding: 4px; vertical-align: middle;">
             <img style="vertical-align: middle; margin-left: 2px;" src.bind="effectRenderer.getTargetIcon(oldEffect)"></img>
             <div class="tooltiptext" innerHtml.bind="effectRenderer.getTargetString(oldEffect)"></div>
