@@ -4,10 +4,10 @@ import map_ids from '../../DofusDB/scraped/common/mapIds.json'
 import { bindable, IEventAggregator, inject } from 'aurelia';
 import { db } from '../../DofusDB/db';
 
-@inject(db)
 export class MapList {
 
-    public db: db;
+    public isLoaded: boolean = false
+    
     public mapIds = map_ids;
     public goultars: number[]
     public tournois: number[]
@@ -20,14 +20,20 @@ export class MapList {
     public showAmakna = false;
     public showHelp = false;
 
-    public constructor(db: db, @IEventAggregator readonly ea: IEventAggregator) {
-        this.db = db;
-        ea.subscribe("db:loaded", () => {
-            this.goultars = map_ids.goultar.sort((a,b) => this.sortMaps(a, b));
-            this.tournois = map_ids.tournoi.sort((a,b) => this.sortMaps(a, b));
-            this.duels = map_ids.duel.sort((a,b) => this.sortMaps(a, b));
-            this.amaknas = map_ids.amakna.sort();
-        })
+    public constructor(private readonly db: db, @IEventAggregator readonly ea: IEventAggregator) {
+        if(this.db.isLoaded) {
+            this.onLoad();
+        } else
+            ea.subscribe("db:loaded", () => this.onLoad());
+    }
+
+
+    private onLoad() {
+        this.goultars = map_ids.goultar.sort((a, b) => this.sortMaps(a, b));
+        this.tournois = map_ids.tournoi.sort((a, b) => this.sortMaps(a, b));
+        this.duels = map_ids.duel.sort((a, b) => this.sortMaps(a, b));
+        this.amaknas = map_ids.amakna.sort();
+        this.isLoaded = true;
     }
 
     private sortMaps(id0: number, id1: number) {
