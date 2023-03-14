@@ -1,7 +1,6 @@
 import { I18N } from "@aurelia/i18n";
 import { bindable } from "aurelia";
 import { db } from "../../DofusDB/db";
-import { Emerald } from "../../ts/emerald";
 
 export class Effectlist {
 
@@ -15,7 +14,7 @@ export class Effectlist {
     public db: db;
     public debug: boolean = false;
 
-    public constructor(db: db, readonly emerald: Emerald, @I18N private readonly i18n: I18N) {
+    public constructor(db: db, @I18N private readonly i18n: I18N) {
         this.db = db;
     }
     public get effectsOrdered() {
@@ -36,7 +35,7 @@ export class Effectlist {
     }
 
 	public getEffect(effect) {
-		return this.emerald.effects?.filter(e => e.id == effect.effectId)[0];
+		return this.db.data.jsonEffects?.filter(e => e.id == effect.effectId)[0];
 	}
     public isEffectVisible(e: any) {
         let mode = this.db.effectMode;

@@ -1,12 +1,11 @@
 import { IEventAggregator, inject } from "aurelia";
 import { pipeline } from "stream";
 import { db } from "../../../DofusDB/db";
-import { Emerald } from "../../../ts/emerald";
 import { Mason, util } from "../util";
 import { BlockFilter, ModFilter, filter as Filter } from "./filter";
 var merge = require('deepmerge');
 
-@inject(db, Emerald)
+@inject(db)
 export class items {
 
 	public mason: Mason;
@@ -18,7 +17,11 @@ export class items {
         this.mason.showMore(); 
     }, 500, true);
 
-    public constructor(readonly db: db, readonly emerald: Emerald, @IEventAggregator readonly ea: IEventAggregator) {
+
+    public constructor(readonly db: db, @IEventAggregator readonly ea: IEventAggregator) {
+		console.log("items ctor")
+        this.mason = new Mason();
+
         let onItemSheetAttached = util.debounce(() => {
             this.mason.reloadMsnry();
         }, 200, false);
@@ -31,13 +34,11 @@ export class items {
     }
 
     public isLoaded() {
-		return this.db.isLoaded && this.db.isConnected() // && this.emerald.characteristics && this.emerald.effects
-        // return this.emerald.items
-    //     return this.db.jsonItemTypes && this.db.jsonItemTypes && this.db.jsonEffects && this.db.jsonCharacteristics
+		return this.db.isLoaded
     }
-    public attached() {
-        // console.log("itemsearch attached grid: " + this.grid);
-        this.mason = new Mason();
+
+    attached() {
+        console.log("itemsearch attached grid: " + this.grid);
         this.mason.obj = this;
         this.mason.initMasonry();
 
@@ -71,7 +72,7 @@ export class items {
      */
     public async search(filter: Filter = null) {
 		// this.searching = true;
-        // console.log("on search: " + filter)
+        console.log("on search: " + filter)
         this.mason.data = []; 
         this.mason.fulldata = [];
         this.mason.page = 0;
@@ -90,8 +91,9 @@ export class items {
 	private filterData(filter: Filter = null) {
 		if(!filter) return;
 		// console.log({filter});
-		let arr = this.emerald.items
+		let arr = this.db.data.jsonItems
 		.filter(item => {
+			// console.log("filtering...")
 			// level
 			if(filter.filterLevel) {
 				if(item.level < filter.levelMin) return false;
@@ -149,11 +151,12 @@ export class items {
 			if(ld != 0) return ld;
 			else return b.id - a.id;
 		})
-		// console.log("filter result: " + arr.length + ", from " + this.emerald.items.length);
+		console.log("filter result: " + arr.length + ", from " + this.db.data.jsonItems.length);
 		
         this.mason.fulldata.push(...arr);
 	}
 
+	/*
 	private async loadData(itemFilter, skip: number, limit: number) { //pageId: number) {
 		// just load the rest of the .fulldata in the background
 		// maybe do 25 items (show), 50 (bg), infinite (bg)
@@ -180,6 +183,7 @@ export class items {
 		// console.log("loaded data: " + arr.length);
         // console.log("arr: " + arr + ", fulldata: " + this.mason.fulldata.length);
 	}
+	*/
 
 	/*
 	public generateFilter(filter: Filter) {
@@ -414,7 +418,7 @@ export class items {
 	}
 
     public getEffect(possibleEffect) {
-        possibleEffect.effect ??= this.emerald.effects.filter(e => e.id == possibleEffect.effectId)[0];
+        possibleEffect.effect ??= this.db.data.jsonEffects.filter(e => e.id == possibleEffect.effectId)[0];
         return possibleEffect.effect;
     }
 }

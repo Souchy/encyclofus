@@ -1,7 +1,6 @@
 import { filter } from './../quickfus/items/filter';
 import { Changelog } from './changelog';
 import { bindable } from "aurelia";
-import { Emerald } from './../../ts/emerald';
 import { I18N } from "@aurelia/i18n";
 import { db } from "../../DofusDB/db";
 import { DI, IEventAggregator, Registration } from 'aurelia';

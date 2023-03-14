@@ -1,6 +1,5 @@
 import { ConditionRenderer } from './../../../ts/conditions';
 import { CriteriaGroup } from './../../../DofusDB/static/formulas/criterions';
-import { Emerald } from './../../../ts/emerald';
 import { bindable, IEventAggregator, inject } from "aurelia";
 import { db } from "../../../DofusDB/db";
 import { Citerions, CriterionUtil, Criteria } from '../../../DofusDB/static/formulas/criterions';
@@ -16,13 +15,11 @@ export class itemsheet {
     // public sortedEffects: any[];
     private conditionRenderer: ConditionRenderer;
 	private db: db;	
-	private emerald: Emerald;
 
-	public constructor(db: db, conditionRenderer: ConditionRenderer, emerald: Emerald, @I18N private readonly i18n: I18N, @IEventAggregator readonly ea: IEventAggregator) {
+	public constructor(db: db, conditionRenderer: ConditionRenderer, @I18N private readonly i18n: I18N, @IEventAggregator readonly ea: IEventAggregator) {
         // console.log("renderer: " + conditionRenderer)
 		this.db = db;
 		this.conditionRenderer = conditionRenderer;
-		this.emerald = emerald;
     }
 
     attached() {
@@ -39,7 +36,7 @@ export class itemsheet {
             let eff = this.getEffect(e);
             return !eff.useInFight;
         })
-
+        /*
         let effects: any[] = this.item.possibleEffects;
 
         effects.sort((a, b) => {
@@ -59,10 +56,11 @@ export class itemsheet {
         });
 
         return effects;
+        */
     }
 
     public getEffect(possibleEffect) {
-        possibleEffect.effect ??= this.emerald.effects.filter(e => e.id == possibleEffect.effectId)[0];
+        possibleEffect.effect ??= this.db.data.jsonEffects.filter(e => e.id == possibleEffect.effectId)[0];
         return possibleEffect.effect;
     }
 

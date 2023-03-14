@@ -4,7 +4,7 @@
 <!-- ${effect.effectId} - ${effect.effectUid} -->
 <!-- ${effect.effect?.effectPriority} - ${effect.effect?.effectPowerRate} -->
 
-<table class="table table-striped table-sm table-borderless ${effectTypeStyle}" css="--bs-table-striped-bg: none; margin-bottom: 0px;" if.bind="emerald.effects">
+<table class="table table-striped table-sm table-borderless ${effectTypeStyle}" css="--bs-table-striped-bg: none; margin-bottom: 0px;" if.bind="isLoaded">
     <tbody>
         <tr id="${effect.effectUid}" data-effect="${effect?.effectId}" data-charac="${effect?.effect?.characteristic}">
             <td style="width: 20px; padding: 0px; padding-left: 4px;" if.bind="getIcon(effect)">

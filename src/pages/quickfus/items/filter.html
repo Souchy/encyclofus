@@ -3,15 +3,13 @@
 
 
 <!-- Search -->
-<div class="row">
+<div class="row" if.bind="isLoaded">
     <input class="search" type="text" value.bind="filterText" placeholder="search..." focus="true" />
 </div>
 
 <!-- tagify search box ? = search sur item names, panoplies, effets, types d'items (capecoiffe..).... -->
 <!-- exemple tu clic sur [() Agilité ] et ça remplace le text par 2 box min/max à côté de l'icône d'agi -->
 
-<!-- isLoaded -->
-<!-- db.isLoaded && emerald.characteristics -->
 <div class="row" if.bind="isLoaded">
     <!--Generic filters left side -->
     <div class="leftside col">
@@ -81,6 +79,6 @@
 </div>
 
 <!-- Search button -->
-<div class="row">
+<div class="row" if.bind="isLoaded">
     <button class="btnSearch" onclick.call="search()">Search</button>
 </div>

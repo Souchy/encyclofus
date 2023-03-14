@@ -1,5 +1,4 @@
 import { EffectRenderer } from './effectRenderer';
-import { Emerald } from './../../ts/emerald';
 import { I18N } from "@aurelia/i18n";
 import { bindable, inject } from "aurelia";
 import { db } from "../../DofusDB/db";
@@ -18,23 +17,19 @@ export class Effect {
 	public iscrit: boolean;
 
 	public db: db;	
-	public emerald: Emerald;
 	public conditionRenderer: TargetConditionRenderer;
 	public effectRenderer: EffectRenderer
 
-	public constructor(db: db, effectRenderer: EffectRenderer, conditionRenderer: TargetConditionRenderer, emerald: Emerald, @I18N private readonly i18n: I18N) {
+	public constructor(db: db, effectRenderer: EffectRenderer, conditionRenderer: TargetConditionRenderer, @I18N private readonly i18n: I18N) {
 		// console.log("ctor: " + conditionRenderer)
 		this.db = db;
 		this.conditionRenderer = conditionRenderer;
 		this.effectRenderer = effectRenderer;
-		this.emerald = emerald;
 	}
 
-	// public get spell() {
-	// 	return this.db.data.jsonSpells[this.effect.spellId];
-	// }
-
-
+	public get isLoaded() {
+		return this.db.isLoaded
+	}
 
 
 	public isItem(effect) {
@@ -48,12 +43,12 @@ export class Effect {
 	}
 
 	public getEffect() {
-		let effect = this.emerald.effects?.filter(e => e.id == this.effect.effectId)[0];
+		let effect = this.db.data.jsonEffects?.filter(e => e.id == this.effect.effectId)[0];
 		return effect;
 	}
 	public getCharacteristic() {
 		let cid = this.getEffect().characteristic;
-		let charac = this.emerald.characteristics?.filter(c => c.id == cid)[0];
+		let charac = this.db.data.jsonCharacteristics?.filter(c => c.id == cid)[0];
 		return charac;
 	}
 

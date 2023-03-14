@@ -1,7 +1,5 @@
 import { IEventAggregator, inject } from "aurelia";
 import { db } from "../../../DofusDB/db";
-import { Emerald } from "../../../ts/emerald";
-import * as $ from 'jquery';
 
 @inject(db)
 export class filter {
@@ -29,30 +27,26 @@ export class filter {
 
 	public redListTypes = [265, 267, 169, 99, 83, 20, 21] // badges, idoles d'expédition, compagnons, filet de capture, pierre d'ame, outil, pioche
 
-	constructor(readonly db: db, readonly emerald: Emerald, @IEventAggregator readonly ea: IEventAggregator) {
-		ea.subscribe("emerald:loaded:itemtypes", () => {
-			// console.log("init types in filter");
-			if(this.types.size == 0)
-				this.emerald.itemTypes
-				.filter(t => t.superTypeId != 2 && !this.redListTypes.includes(t.id)) 
-				.forEach(element => this.types.set(+element.id, false));
-			if(this.armes.size == 0)
-				this.emerald.itemTypes
-				.filter(t => t.superTypeId == 2 && !this.redListTypes.includes(t.id))
-				.forEach(element => this.armes.set(+element.id, false));
-			// console.log("loaded item stypes: " + this.emerald.itemTypes.length)
-			// console.log("armes: " + this.armes.size)
-		});
+	constructor(readonly db: db, @IEventAggregator readonly ea: IEventAggregator) {
+		console.log("filter ctor")
+		// ea.subscribe("emerald:loaded:itemtypes", () => {
+		// 	// console.log("init types in filter");
+		// 	// console.log("loaded item stypes: " + this.emerald.itemTypes.length)
+		// 	// console.log("armes: " + this.armes.size)
+		// });
 
 		this.addBlock();
 
 		// when emerald loads, auto search
-		this.ea.subscribe("emerald:loaded", () => {
-			// load filter only after
-			this.loadFilter();
-			// search
-			this.search();
-		})
+		if(this.db.isLoaded) {
+			console.log("filter ctor1")
+			this.onLoad();
+		} else {
+			console.log("filter ctor2")
+			this.ea.subscribe("db:loaded", () => {
+				this.onLoad();
+			})
+		}
 		this.ea.subscribe("quickfus:mod:delete", (data: any) => {
 			console.log("filter onDeleteMod ["+data.blockid+"]: " + JSON.stringify(data.data));
 			// if(!mod.blockId) return;
@@ -66,8 +60,24 @@ export class filter {
 
     public get isLoaded() {
 		// && this.db.isConnected()
-		return this.db.isLoaded && this.emerald.characteristics && this.emerald.itemTypes && this.isSaveLoaded //&& this.emerald.effects
+		return this.db.isLoaded && this.isSaveLoaded //&& this.emerald.characteristics && this.emerald.itemTypes //&& this.emerald.effects
     }
+
+	private onLoad() {
+		console.log("filter onLoad")
+		if (this.types.size == 0)
+			this.db.data.jsonItemTypes
+				.filter(t => t.superTypeId != 2 && !this.redListTypes.includes(t.id))
+				.forEach(element => this.types.set(+element.id, false));
+		if (this.armes.size == 0)
+			this.db.data.jsonItemTypes
+				.filter(t => t.superTypeId == 2 && !this.redListTypes.includes(t.id))
+				.forEach(element => this.armes.set(+element.id, false));
+		// load filter only after
+		this.loadFilter();
+		// search
+		this.search();
+	}
 
 	public loadFilter() {
 		let json = localStorage.getItem("filter");
@@ -163,7 +173,7 @@ export class filter {
 		return sec;
 	}
 	public getModsForSection(section: number) {
-		return this.emerald.characteristics
+		return this.db.data.jsonCharacteristics
 			.filter(c => c.categoryId == section)
 			.sort((a, b) => a.order - b.order);
 	}
@@ -171,7 +181,7 @@ export class filter {
 		return this.db.getI18n(nameId.toString());
 	}
 	public translateItemType(type) {
-		let it = this.emerald.itemTypes.find(t => t.id == type);
+		let it = this.db.data.jsonItemTypes.find(t => t.id == type);
 		return this.getI18n(it.nameId);
 	}
 

@@ -66,7 +66,11 @@ export class App {
 		// load data the first time
 		if(!this.db.isLoaded) {
 			// console.log("app loading db")
-			this.db.data.loadJson();
+			this.db.data.loadJson().then((b) => {
+				// console.log("db publish loaded")
+				this.db.data.isLoaded = true;
+				this.ea.publish("db:loaded");
+			})
 		} else {
 			// console.log("app already loaded db")
 		}

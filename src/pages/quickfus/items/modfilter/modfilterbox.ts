@@ -2,7 +2,6 @@ import { I18N } from '@aurelia/i18n';
 import { ModFilter } from './../filter';
 import { DI, IEventAggregator, Registration, inject } from "aurelia";
 import { db } from "../../../../DofusDB/db";
-import { Emerald } from "../../../../ts/emerald";
 import * as $ from 'jquery';
 import { bindable, watch } from '@aurelia/runtime-html';
 import { util } from '../../util';
@@ -28,7 +27,7 @@ export class ModFilterBox {
     public selectedIndex = 0;
     public selectedMod: Object;
 
-    public constructor(readonly db: db, readonly emerald: Emerald, @I18N readonly i18n: I18N, @IEventAggregator readonly ea: IEventAggregator) {
+    public constructor(readonly db: db, @I18N readonly i18n: I18N, @IEventAggregator readonly ea: IEventAggregator) {
         this.filteredSects = new Map<string, Object[]>();
         for (let sec of this.getStatSections()) {
             this.filteredSects.set(sec[0], this.getModsForSection(sec[1]));
@@ -163,7 +162,7 @@ export class ModFilterBox {
         return size;
     }
     public getCharac(id) {
-        let charac = this.emerald.characteristics.find(c => c.id == id);
+        let charac = this.db.data.jsonCharacteristics.find(c => c.id == id);
         if(!charac) 
             charac = this.db.pseudoCharacs.find(c => c.id == id);
         return charac;
@@ -203,7 +202,7 @@ export class ModFilterBox {
         if(section == 0) {
             return this.db.pseudoCharacs;
         }
-        return this.emerald.characteristics
+        return this.db.data.jsonCharacteristics
             .filter(c => c.categoryId == section)
             .sort((a, b) => a.order - b.order);
     }

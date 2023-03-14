@@ -1,4 +1,3 @@
-import { Emerald } from './emerald';
 import { Criteria, CriteriaGroup, CriterionUtil } from './../DofusDB/static/formulas/criterions';
 import { DI, Registration, bindable } from "aurelia";
 import { db } from "../DofusDB/db";
@@ -9,7 +8,7 @@ import { Util } from './util';
 
 export class ConditionRenderer {
 
-    public constructor(private readonly db: db, private readonly emerald: Emerald, @I18N private readonly i18n: I18N) {
+    public constructor(private readonly db: db, @I18N private readonly i18n: I18N) {
         // console.log("render ctor: " + db + ", " + i18n)
     }
 
@@ -83,7 +82,7 @@ export class ConditionRenderer {
     }
 
     private parseItem(c: Criteria) {
-        let item = this.emerald.items.find(i => i.id == c.value);
+        let item = this.db.data.jsonItems.find(i => i.id == c.value);
         let itemName = this.db.getI18n(item.nameId);
 
         let arr = []

@@ -1,4 +1,3 @@
-import { Emerald } from './../../ts/emerald';
 import { I18N } from "@aurelia/i18n";
 import { db } from "../../DofusDB/db";
 import versions from '../../DofusDB/versions.json'
@@ -13,12 +12,12 @@ export class Changelog {
 
 	public constructor(
         readonly db: db, 
-        readonly emerald: Emerald, 
         @I18N private readonly i18n: I18N, 
         @IEventAggregator readonly ea: IEventAggregator
     ) {
         // this.diffVersion = versions[1];
-		this.db.data2.loadJson();
+        // console.log("changelog ctor")
+		// this.db.data2.loadJson(); // dont load this every in every ctor bc it activates on every page change
 	}
 
     public generate() {

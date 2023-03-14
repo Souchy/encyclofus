@@ -1,4 +1,3 @@
-import { Emerald } from './../../ts/emerald';
 import { I18N } from "@aurelia/i18n";
 import { DI, Registration, bindable, inject } from "aurelia";
 import { db } from "../../DofusDB/db";
@@ -9,14 +8,12 @@ import { Util } from '../../ts/util';
 export class EffectRenderer {
 
 	public db: db;	
-	public emerald: Emerald;
 	public conditionRenderer: TargetConditionRenderer;
 
-	public constructor(db: db, conditionRenderer: TargetConditionRenderer, emerald: Emerald, @I18N private readonly i18n: I18N) {
+	public constructor(db: db, conditionRenderer: TargetConditionRenderer, @I18N private readonly i18n: I18N) {
 		// console.log("ctor: " + conditionRenderer)
 		this.db = db;
 		this.conditionRenderer = conditionRenderer;
-		this.emerald = emerald;
 	}
     
 	public getEffectModel(e) {

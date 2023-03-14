@@ -1,4 +1,3 @@
-import { Emerald } from './../../ts/emerald';
 import { I18N } from "@aurelia/i18n";
 import { db } from "../../DofusDB/db";
 import versions from '../../DofusDB/versions.json'
