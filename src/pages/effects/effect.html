@@ -32,9 +32,9 @@
 
 <!-- TRAPS -->
 <!-- normal effects -->
-<effectlist if.bind="hasTrapGlyph(effect) && !iscrit" effects.bind="getTrapGlyph(effect).effects" depth.bind="depth+1"></effectlist>
+<effectlist if.bind="effectRenderer.hasTrapGlyph(effect) && !iscrit" effects.bind="effectRenderer.getTrapGlyph(effect).effects" depth.bind="depth+1"></effectlist>
 <!-- have no crit effects -->
-<effectlist if.bind="hasTrapGlyph(effect) && iscrit" effects.bind="getTrapGlyph(effect).effects" depth.bind="depth+1" ></effectlist>
+<effectlist if.bind="effectRenderer.hasTrapGlyph(effect) && iscrit" effects.bind="effectRenderer.getTrapGlyph(effect).effects" depth.bind="depth+1" ></effectlist>
 
 <!-- SUB SPELLS -->
 <!-- normal effects -->
