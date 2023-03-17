@@ -254,5 +254,15 @@
 		"condition": "Condition: ",
 		"hasItem": "Has the object '{{itemName}}'",
 		"hasNotItem": "Does not have the object '{{itemName}}'"
+	},
+	"summon": {
+		"useSummonSlot": "Uses a summon slot",
+		"canPlay": "Can play",
+		"canBeCarried": "Can be carried",
+		"canBePushed": "Can be pushed",
+		"canSwitchPos": "Can switch position",
+		"canSwitchPosOnTarget": "Can switch position on target",
+		"canTackle": "Can lock",
+		"canUsePortal": "Can use portals"
 	}
 }

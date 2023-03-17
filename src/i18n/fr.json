@@ -252,5 +252,15 @@
 		"condition": "Condition: ",
 		"hasItem": "Possède l'objet '{{itemName}}'",
 		"hasNotItem": "Ne possède pas l'objet '{{itemName}}'"
+	},
+	"summon": {
+		"useSummonSlot": "Utilise un slot d'invocation",
+		"canPlay": "Peut jouer",
+		"canBeCarried": "Peut être portée",
+		"canBePushed": "Peut être poussée",
+		"canSwitchPos": "Peut échanger de place",
+		"canSwitchPosOnTarget": "Peut échanger de place sur la cible",
+		"canTackle": "Peut tacler",
+		"canUsePortal": "Peut utiliser des portails"
 	}
 }

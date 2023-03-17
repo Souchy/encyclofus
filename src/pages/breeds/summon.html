@@ -11,34 +11,89 @@
 	<!-- if.bind="showDescriptions"> -->
 	<tbody>
 		<tr>
-			<td><span t="pv"></span> : ${life}</td>
-			<td></td>
-			<td><span t="neutral"></span> (%) : ${grade.neutralResistance}</td>
 		</tr>
 		<tr>
-			<td><span t="pa"></span> : ${grade.actionPoints}</td>
-			<td></td>
-			<td><span t="earth"></span> (%) : ${grade.earthResistance}</td>
+			<td>
+				<span t="pv"></span>
+				<span>: ${life}</span>
+				<span if.bind="bonusLife"> (+${bonusLife}%)</span>
+			</td>
+			<td>
+				<span t="wisdom"></span>
+				<span>: ${grade.wisdom * 3}</span>
+				<span if.bind="grade.bonusCharacteristics.wisdom"> (+${grade.bonusCharacteristics.wisdom}%)</span>
+			</td>
+			<td><span t="neutral"></span> (%): ${grade.neutralResistance}</td>
 		</tr>
 		<tr>
-			<td><span t="pm"></span> : ${grade.movementPoints}</td>
-			<td></td>
-			<td><span t="fire"></span> (%) : ${grade.fireResistance}</td>
+			<td><span t="pa"></span>: ${grade.actionPoints}</td>
+			<td>
+				<span t="strength"></span>
+				<span>: ${grade.strength * 3}</span>
+				<span if.bind="grade.bonusCharacteristics.strength"> (+${grade.bonusCharacteristics.strength}%)</span>
+			</td>
+			<td><span t="earth"></span> (%): ${grade.earthResistance}</td>
 		</tr>
 		<tr>
-			<td><span t="esqpa"></span> : ${grade.paDodge + grade.wisdom * 3 / 10}</td>
-			<td></td>
-			<td><span t="water"></span> (%) : ${grade.waterResistance}</td>
+			<td><span t="pm"></span>: ${grade.movementPoints}</td>
+			<td>
+				<span t="intelligence"></span>
+				<span>: ${grade.intelligence * 3}</span>
+				<span if.bind="grade.bonusCharacteristics.intelligence"> (+${grade.bonusCharacteristics.intelligence}%)</span>
+			</td>
+			<td><span t="fire"></span> (%): ${grade.fireResistance}</td>
+		</tr>
+		<tr>
+			<td><span t="esqpa"></span>: ${grade.paDodge + grade.wisdom * 3 / 10}</td>
+			<td>
+				<span t="chance"></span>
+				<span>: ${grade.chance * 3}</span> 
+				<span if.bind="grade.bonusCharacteristics.chance"> (+${grade.bonusCharacteristics.chance}%)</span>
+			</td>
+			<td><span t="water"></span> (%): ${grade.waterResistance}</td>
 		</tr>
 		<tr>
 			<td><span t="esqpm"></span>: ${grade.pmDodge + grade.wisdom * 3 / 10}</td>
-			<td></td>
-			<td><span t="air"></span> (%) : ${grade.airResistance}</td>
+			<td>
+				<span t="agility"></span>
+				<span>: ${grade.agility * 3}</span> 
+				<span if.bind="grade.bonusCharacteristics.agility"> (+${grade.bonusCharacteristics.agility}%)</span>
+			</td>
+			<td><span t="air"></span> (%): ${grade.airResistance}</td>
 		</tr>
 		<tr>
-			<td><span t="dodge"></span>: ${grade.agility * 2 / 10}</td>
+			<td>
+				<span t="lock"></span>
+				<span>: ${grade.agility * 3 / 10}</span>
+				<span if.bind="grade.bonusCharacteristics.tackleBlock"> (+${grade.bonusCharacteristics.tackleBlock}%)</span>
+			</td>
+			<td>
+				<span t="dodge"></span>
+				<span>: ${grade.agility * 3 / 10}</span>
+				<span if.bind="grade.bonusCharacteristics.tackleEvade"> (+${grade.bonusCharacteristics.tackleEvade}%)</span>
+			</td>
 			<td></td>
-			<td><span t="lock"></span>: ${grade.agility * 2 / 10}</td>
+		</tr>
+	</tbody>
+</table>
+
+<table class="table table-striped table-sm table-borderless">
+	<tbody>
+		<tr>
+			<td><span t="summon.useSummonSlot"></span>: <span t="${summon.useSummonSlot}"></span></td>
+			<td><span t="summon.canPlay"></span>: <span t="${summon.canPlay}"></span></td>
+		</tr>
+		<tr>
+			<td><span t="summon.canBePushed"></span>: <span t="${summon.canBePushed}"></span></td>
+			<td><span t="summon.canBeCarried"></span>: <span t="${summon.canBeCarried}"></span></td>
+		</tr>
+		<tr>
+			<td><span t="summon.canUsePortal"></span>: <span t="${summon.canUsePortal}"></span></td>
+			<td><span t="summon.canTackle"></span>: <span t="${summon.canTackle}"></span></td>
+		</tr>
+		<tr>
+			<td><span t="summon.canSwitchPos"></span>: <span t="${summon.canSwitchPos}"></span></td>
+			<td><span t="summon.canSwitchPosOnTarget"></span>: <span t="${summon.canSwitchPosOnTarget}"></span></td>
 		</tr>
 	</tbody>
 </table>

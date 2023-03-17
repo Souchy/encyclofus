@@ -25,4 +25,16 @@ export class Summon {
 		return Math.floor(this.grade.lifePoints * 3 + this.grade.vitality + 1050 * (this.grade.bonusCharacteristics.lifePoints / 100))
 	}
 
+	public get bonusLife() {
+		// pour les pv arbres ou la lance immortelle p.ex., 
+		// ça prend 100% mais seulement de la vita de base (1050)
+		// if(this.grade.lifePoints == 0) {
+
+		// seulement les tourelles steam scale avec la vita
+		if(this.summon.race != 221) { 
+			return 0;
+		}
+		return this.grade.bonusCharacteristics.lifePoints;
+	}
+
 }
