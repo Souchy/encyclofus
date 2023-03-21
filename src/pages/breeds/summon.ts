@@ -1,6 +1,7 @@
 import { bindable, inject } from "aurelia";
 import { db } from '../../DofusDB/db';
 import { I18N } from '@aurelia/i18n';
+import features from '../../DofusDB/features.json';
 
 @inject(db)
 export class Summon {
@@ -38,7 +39,7 @@ export class Summon {
 	}
 
 	public get isBomb() {
-		return this.summon.race == 95;
+		return this.summon.race == 95 && this.db.checkFeatureVersion(features.bombspells);
 	}
 
 
