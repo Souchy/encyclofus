@@ -18,7 +18,7 @@
     <div class="weaponConditions" if.bind="isWeapon">
         <!-- minrange, range, apCost, maxCastPerTurn, criticalHitProbability, criticalHitBonus  -->
         <!-- castInDiagonal, castTestLos -->
-        <div>${item.apCost}PA ${item.range}PO ${item.maxCastPerTurn}/t ${item.criticalHitProbability}% +${item.criticalHitBonus}</div>
+        <div>${item.apCost}PA ${item.minRange}-${item.range}PO ${item.maxCastPerTurn}/t ${item.criticalHitProbability}% +${item.criticalHitBonus}</div>
         <div></div>
     </div>
 
