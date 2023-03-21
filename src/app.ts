@@ -67,12 +67,12 @@ export class App {
 		if(!this.db.isLoaded) {
 			// console.log("app loading db")
 			this.db.data.loadJson().then((b) => {
-				console.log("db1 publish loaded")
+				// console.log("db1 publish loaded")
 				this.db.data.isLoaded = true;
 				this.ea.publish("db:loaded");
 			})
 			this.db.data2.loadJson().then((b) => {
-				console.log("db2 publish loaded")
+				// console.log("db2 publish loaded")
 				this.db.data2.isLoaded = true;
 				this.ea.publish("db:loaded:2");
 			})

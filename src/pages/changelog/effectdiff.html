@@ -1,4 +1,5 @@
-<div if.bind="!newEffect && isEffectVisible(oldEffect)" style="border-top: 1px dotted grey;">
+<div if.bind="!newEffect && isEffectVisible(oldEffect) && isoldspell" style="border-top: 1px dotted grey;">
+    <!-- [a] -->
     <span t="oldEffect"></span>
     <span innerHtml.bind="effectRenderer.renderEffectI18n(oldEffect)"></span>
     <span if.bind="effectRenderer.isDuration(oldEffect)" class="tooltipx" style="vertical-align: middle; width: 25px; height: 32px; ">
@@ -15,7 +16,8 @@
     </span>
 </div>
 
-<div if.bind="!oldEffect && isEffectVisible(newEffect)" style="border-top: 1px dotted grey;">
+<div if.bind="!oldEffect && isEffectVisible(newEffect) && !isoldspell" style="border-top: 1px dotted grey;">
+    <!-- [b] -->
     <span t="newEffect"></span>
     <span innerHtml.bind="effectRenderer.renderEffectI18n(newEffect)"></span>
     <span if.bind="effectRenderer.isDuration(newEffect)" class="tooltipx" style="vertical-align: middle; width: 25px; height: 32px; ">
@@ -32,7 +34,8 @@
     </span>
 </div>
 
-<div if.bind="newEffect && oldEffect && isDiff && isEffectVisible(newEffect)" style="border-top: 1px dotted grey;">
+<div if.bind="newEffect && oldEffect && isDiff && isEffectVisible(newEffect) && !isoldspell" style="border-top: 1px dotted grey;">
+    <!-- [c] -->
     <!-- • -->
 
     <div if.bind="values || duration || delay || effectId"> <!-- -->
