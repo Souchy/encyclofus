@@ -4,6 +4,10 @@
 	"and": " and ",
 	"or": " or ",
 	
+	"newSummon": "New summon: ",
+	"oldSummon": "Removed summon: ",
+	"newSpell": "New spell: ",
+	"oldSpell": "Removed spell: ",
 	"newEffect": "New effect: ",
 	"oldEffect": "Removed effect: ",
 	"targetConditions": "Target conditions: ",

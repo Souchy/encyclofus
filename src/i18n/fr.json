@@ -4,6 +4,10 @@
 	"and": " et ",
 	"or": " ou ",
 
+	"newSummon": "Nouvelle invocation: ",
+	"oldSummon": "Invocation supprimée: ",
+	"newSpell": "Nouveau sort: ",
+	"oldSpell": "Sort supprimé: ",
 	"newEffect": "Nouvel effet: ",
 	"oldEffect": "Effet supprimé: ",
 	"targetConditions": "Conditions de cible: ",
