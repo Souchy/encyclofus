@@ -50,6 +50,7 @@ export class Diffchecker {
 
     //#region Spell diff
     public spellDiff(spellid: number) {
+        // console.log("check diff spell: " + spellid)
         let newSpell = this.db.data.jsonSpells[spellid];
         let oldSpell = this.db.data2.jsonSpells[spellid];
 

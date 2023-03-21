@@ -35,6 +35,7 @@ export class Changelog {
 		return Object.keys(this.db.data.jsonBreeds);
 	}
 	public spellsFor(breedid): number {
+        // console.log("check diff breed: " + breedid)
 		return this.db.data.jsonBreeds[breedid].spells
             .filter(s => s != 25201 && s != 25122); // remove admin spells (doom style, ankatchoum)
 	}
