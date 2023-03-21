@@ -1,10 +1,12 @@
 <import from="./effectdiff"></import>
+<import from="./summondiff"></import>
 
 
-<div if.bind="hasDiff">
+<div if.bind="spellid != 0 && hasDiff" data-id="${spellid}">
     <!-- style="padding-left: 10px;"> -->
 
     <h4>
+		<img src="${db.getSpellIconPath(spellid)}" style="width: 28px; height: 28px;" />
         ${db.getI18n(newSpell.nameId)}
     </h4>
 
@@ -16,35 +18,11 @@
     </div>
         
     <div if.bind="!isNew() && !isRemoved()">
-        <!-- <div>
-            ${ap()}
-        </div>
-        <div>
-            ${range()}
-        </div>
-        <div>
-            ${lineOfSight()}
-        </div>
-        <div>
-            ${modifiableRange()}
-        </div> -->
-
+        
         <div repeat.for="prop of diffchecker.spellProperties">
             ${diffProp(prop)}
         </div>
 
-        <!-- <div if.bind="newEffects().length > 0">
-            new
-            ${newEffects()}
-        </div> -->
-        <!-- <div if.bind="removeEffects().length > 0">
-            removed
-            ${removeEffects()}
-        </div> -->
-
-        <!-- <div if.bind="commonEffects()">
-            ${commonEffects()}
-        </div> -->
         <!-- [1] -->
         <div repeat.for="e of newSpell.effects" data-id="${e.effectUid}" style="padding-left: 10px;">
             <effectdiff spellid.bind="spellid" effectid.bind="e.effectUid"></effectdiff>
@@ -54,15 +32,10 @@
             <effectdiff spellid.bind="spellid" effectid.bind="e.effectUid" isoldspell.bind="true"></effectdiff>
         </div>
 
-        <!-- <table class="table table-striped table-sm table-borderless ${effectTypeStyle}" css="--bs-table-striped-bg: none; margin-bottom: 0px;">
-            <tbody>
-                <tr repeat.for="e of commonEffects()" data-id="${e.effectUid}">
-                    <td>
-                        <effectdiff spellid.bind="spellid" effectid.bind="e.effectUid"></effectdiff>
-                    </td>
-                </tr>
-            </tbody>
-        </table> -->
+        <!-- Invoc -->
+        <div repeat.for="e1 of newSpell.effects">
+            <summondiff if.bind="summonUtils.hasSummon(e1)" summonid.bind="summonUtils.getSummonId(e1)" side.bind="e1.diceSide"></summondiff>
+        </div>
 
     </div>
 </div>

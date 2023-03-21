@@ -1,4 +1,5 @@
 <import from="./spelldiff"></import>
+<import from="./summondiff"></import>
 
 <div if.bind="!isLoaded" class="loaderContainer">
     <div class="loader"></div>
@@ -11,7 +12,13 @@
         </h1>
         <div repeat.for="s of spellsFor(b)">
             <!--  style="padding-left: 10px;" -->
-            <spelldiff breedid.bind="b" spellid.bind="s"></spelldiff>
+            <spelldiff spellid.bind="s"></spelldiff>
+        </div>
+        <!-- osa summons -->
+        <div if.bind="b == 2">
+            <div repeat.for="e of dbJsonSpells[13997].effects">
+                <summondiff if.bind="summonUtils.hasSummon(e1)" summonid.bind="summonUtils.getSummonId(e1)" side.bind="e1.diceSide"></summondiff>
+            </div>
         </div>
     </div>
 </div>

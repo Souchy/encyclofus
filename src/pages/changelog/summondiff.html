@@ -1,0 +1,31 @@
+<import from="./spelldiff"></import>
+
+
+
+<div if.bind="hasDiff">
+    <!-- invoc diff -->
+    
+    <!-- spells -->
+    <!-- <spell if.bind="db.isLoaded" repeat.for="summonSpellId of summon.spells" issummon.bind="true" spellid.bind="summonSpellId" depth.bind="0"></spell> -->
+
+
+    <div if.bind="isNew()">
+        Nouvelle invocation
+    </div>
+    <div if.bind="isRemoved()">
+        Invocation supprimée
+    </div>
+
+    
+    <div if.bind="!isNew() && !isRemoved()">
+        <!-- TODO properties / stats diff -->
+        <!-- <div repeat.for="prop of diffchecker.spellProperties">
+            ${diffProp(prop)}
+        </div> -->
+
+        <spelldiff repeat.for="summonSpellId of getCombinedSpells()" spellid.bind="summonSpellId"></spelldiff>
+
+    </div>
+
+</div>
+

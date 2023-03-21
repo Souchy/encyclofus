@@ -6,15 +6,15 @@ import { db } from "../../DofusDB/db";
 import { DI, IEventAggregator, Registration } from 'aurelia';
 import _ from 'lodash';
 import { Diffchecker } from './diffchecker';
+import { SummonUtils } from '../../ts/summonUtils';
 
 export class spelldiff {
  
     @bindable
     public spellid;
-    @bindable 
-    public breedid;
 
 	public constructor(
+        private readonly summonUtils: SummonUtils,
         private readonly diffchecker: Diffchecker,
         private readonly db: db, 
         @I18N private readonly i18n: I18N, 
@@ -41,7 +41,6 @@ export class spelldiff {
     }
 
     public get hasDiff(): boolean {
-        // return true; // FIXME : need a util classe to calculate effect differences and spell differences
         return this.diffchecker.spellDiff(this.spellid)
     }
 

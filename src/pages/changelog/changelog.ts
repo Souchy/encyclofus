@@ -2,6 +2,7 @@ import { I18N } from "@aurelia/i18n";
 import { db } from "../../DofusDB/db";
 import versions from '../../DofusDB/versions.json'
 import { DI, IEventAggregator, Registration } from 'aurelia';
+import { SummonUtils } from "../../ts/summonUtils";
 
 export class Changelog {
     
@@ -11,7 +12,8 @@ export class Changelog {
 	// private loadedPrevious: boolean = false;
 
 	public constructor(
-        readonly db: db, 
+        private readonly summonUtils: SummonUtils,
+        private readonly db: db, 
         @I18N private readonly i18n: I18N, 
         @IEventAggregator readonly ea: IEventAggregator
     ) {

@@ -48,6 +48,28 @@ export class Diffchecker {
        return o1[propKey] != o2[propKey]
     }
 
+    //#region Summon diff
+    public summonDiff(summonid: number): boolean {
+        let newSummon = this.db.data.jsonSummons[summonid];
+        let oldSummon = this.db.data2.jsonSummons[summonid];
+        if(!newSummon) return true;
+        if(!oldSummon) return true;
+        
+        let newSpells = newSummon.spells.filter(s1 => !oldSummon.spells.find(s2 => s1 == s2));
+        let oldSpells = oldSummon.spells.filter(s1 => !newSummon.spells.find(s2 => s1 == s2));
+        let commonSpells = oldSummon.spells.filter(s1 => newSummon.spells.find(s2 =>s1 == s2));
+        
+        if(newSpells.length > 0) return true;
+        if(oldSpells.length > 0) return true;
+        for(let spellid of commonSpells) {
+            if(this.spellDiff(spellid)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    //#endregion
+
     //#region Spell diff
     public spellDiff(spellid: number) {
         // console.log("check diff spell: " + spellid)
