@@ -98,5 +98,20 @@
 	</tbody>
 </table>
 
-<!-- showDescriptions -->
-<spell if.bind="db.isLoaded" repeat.for="summonSpellId of summon.spells" issummon.bind="true" spellid.bind="summonSpellId" depth.bind="0"></spell>
+<!-- spells -->
+
+<div if.bind="!isBomb">
+	<!-- isbomb.bind="isBomb" -->
+	<spell if.bind="db.isLoaded" repeat.for="summonSpellId of summon.spells" issummon.bind="true" spellid.bind="summonSpellId" depth.bind="0"></spell>
+</div>
+
+
+<!-- bomb spells -->
+<div if.bind="isBomb">
+	<h5 t="bomb.chainReaction"></h5>
+	<spell if.bind="db.isLoaded" issummon.bind="true" spellid.bind="summon.spells[0]" depth.bind="0"></spell>
+	<h5 t="bomb.explosion"></h5>
+	<spell if.bind="db.isLoaded" issummon.bind="true" spellid.bind="summon.spells[1]" depth.bind="0"></spell>
+	<h5 t="bomb.instant"></h5>
+	<spell if.bind="db.isLoaded" issummon.bind="true" spellid.bind="summon.spells[2]" depth.bind="0"></spell>
+</div>

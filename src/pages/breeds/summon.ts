@@ -37,4 +37,9 @@ export class Summon {
 		return this.grade.bonusCharacteristics.lifePoints;
 	}
 
+	public get isBomb() {
+		return this.summon.race == 95;
+	}
+
+
 }

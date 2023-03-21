@@ -11,6 +11,12 @@
 	"newEffect": "New effect: ",
 	"oldEffect": "Removed effect: ",
 	"targetConditions": "Target conditions: ",
+
+	"bomb": {
+		"chainReaction": "Chain reaction:",
+		"explosion": "Explosion:",
+		"instant": "Thrown on a target:"
+	},
 	
 	"delay": "(in {{delay}} turns)",
 	"duration": "({{duration}} turns)",

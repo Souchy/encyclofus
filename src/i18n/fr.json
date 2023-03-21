@@ -12,6 +12,12 @@
 	"oldEffect": "Effet supprimé: ",
 	"targetConditions": "Conditions de cible: ",
 
+	"bomb": {
+		"chainReaction": "Réaction en chaîne:",
+		"explosion": "Explosion:",
+		"instant": "Lancé sur une cible:"
+	},
+
 	"delay": "(dans {{delay}} tours)",
 	"duration": "({{duration}} tours)",
 	"in": "dans",
