@@ -118,7 +118,7 @@ export class Spell {
 			let state = this.db.data.jsonStates[e.value]
 			if (!state) return false;
 			let name = this.db.getI18n(state.nameId);
-			if (name.includes("{")) {
+			if (name && name.includes("{")) {
 				return true;
 			}
 		}
@@ -127,7 +127,7 @@ export class Spell {
 			let subspell = this.getSubSpell(e);
 			if (!subspell) return false;
 			let name = this.db.getI18n(subspell.nameId);
-			if (name.includes("{")) {
+			if (name && name.includes("{")) {
 				return true;
 			}
 		}

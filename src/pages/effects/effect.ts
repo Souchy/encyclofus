@@ -90,7 +90,7 @@ export class Effect {
 			let state = this.db.data.jsonStates[e.value]
 			if (!state) return false;
 			let name = this.db.getI18n(state.nameId);
-			if (name.includes("{")) {
+			if (name && name.includes("{")) {
 				return true;
 			}
 		}
@@ -99,7 +99,7 @@ export class Effect {
 			let subspell = this.effectRenderer.getSubSpell(e);
 			if (!subspell) return false;
 			let name = this.db.getI18n(subspell.nameId);
-			if (name.includes("{")) {
+			if (name && name.includes("{")) {
 				return true;
 			}
 		}
