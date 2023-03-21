@@ -14,7 +14,8 @@ Aurelia
 				resources: {
 					en: { translation: en },
 					fr: { translation: fr },
-				}
+				},
+				fallbackLng: "fr"
 			};
 		})
 	)
