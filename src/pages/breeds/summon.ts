@@ -2,6 +2,7 @@ import { bindable, inject } from "aurelia";
 import { db } from '../../DofusDB/db';
 import { I18N } from '@aurelia/i18n';
 import features from '../../DofusDB/features.json';
+import summonOverridesJson from '../../DofusDB/static/summonOverrides.json';
 
 @inject(db)
 export class Summon {
@@ -27,15 +28,20 @@ export class Summon {
 	}
 
 	public get bonusLife() {
-		// pour les pv arbres ou la lance immortelle p.ex., 
-		// ça prend 100% mais seulement de la vita de base (1050)
-		// if(this.grade.lifePoints == 0) {
-
 		// seulement les tourelles steam scale avec la vita
 		if(this.summon.race != 221) { 
 			return 0;
 		}
 		return this.grade.bonusCharacteristics.lifePoints;
+	}
+
+	public get lockDodge() {
+		if(Object.keys(summonOverridesJson).includes(this.summon.id.toString())) {
+			let val = this.grade.agility / 10 * summonOverridesJson[this.summon.id.toString()].agiToLockMultiplier;
+			return Math.round(val);
+		} else {
+			return this.grade.agility * 3 / 10;
+		}
 	}
 
 	public get isBomb() {
