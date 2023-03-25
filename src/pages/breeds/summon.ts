@@ -35,8 +35,23 @@ export class Summon {
 		return this.grade.bonusCharacteristics.lifePoints;
 	}
 
-	public get lockDodge() {
-		if(Object.keys(summonOverridesJson).includes(this.summon.id.toString())) {
+	public get dodge() {
+		let overrides = summonOverridesJson[this.summon.id.toString()];
+
+		if(overrides?.agiToLockMultiplier) {
+			let val = this.grade.agility / 10 * summonOverridesJson[this.summon.id.toString()].agiToLockMultiplier;
+			return Math.round(val);
+		} else {
+			return this.grade.agility * 3 / 10;
+		}
+	}
+	public get lock() {
+		let overrides = summonOverridesJson[this.summon.id.toString()];
+
+		if(overrides?.lock) {
+			return overrides.lock;
+		} else
+		if(overrides?.agiToLockMultiplier) {
 			let val = this.grade.agility / 10 * summonOverridesJson[this.summon.id.toString()].agiToLockMultiplier;
 			return Math.round(val);
 		} else {
