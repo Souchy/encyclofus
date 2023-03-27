@@ -114,7 +114,11 @@
 		"clickl": "Left click to place the target",
 		"clickr": "Right click to place an obstacle"
 	},
-	
+	"effect": {
+		"removeRunes": "Remove the runes",
+		"removeGlyphs": "Remove the glyphs",
+		"removeTraps": "Remove the traps"
+	},
 	"zone": {
 		"zone": "{{shape}} of {{size}} cells",
 		"minZone": " with a hole of {{minSize}}",

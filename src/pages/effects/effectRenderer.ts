@@ -4,6 +4,7 @@ import { db } from "../../DofusDB/db";
 import { SpellZone, Targets } from "../../DofusDB/formulas";	
 import { TargetConditionRenderer } from "../../ts/targetConditions";
 import { Util } from '../../ts/util';
+import { ActionIds } from "../../DofusDB/code/ActionIds";
 
 export class EffectRenderer {
 
@@ -67,6 +68,16 @@ export class EffectRenderer {
 		let has1 = text.includes("#1");
 		let has2 = text.includes("#2");
 		let has3 = text.includes("#3");
+		// remove glyph/trap
+		if(e.effectId == ActionIds.ACTION_DISPEL_GLYPHS_OF_TARGET) {
+			text = this.i18n.tr("effect.removeGlyphs");
+		}
+		if(e.effectId == ActionIds.ACTION_DISPEL_TRAPS_OF_TARGET) {
+			text = this.i18n.tr("effect.removeTraps");
+		}
+		if(e.effectId == ActionIds.ACTION_DISPEL_RUNES_OF_TARGET) {
+			text = this.i18n.tr("effect.removeRunes");
+		}
 		// invocation
 		if (this.hasSummon(e)) {
 			let summon = this.getSummon(e);

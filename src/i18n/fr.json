@@ -114,7 +114,11 @@
 		"clickl": "Click gauche pour placer la cible",
 		"clickr": "Click droit pour placer un obstacle"
 	},
-
+	"effect": {
+		"removeRunes": "Enlève les runes",
+		"removeGlyphs": "Enlève les glyphes",
+		"removeTraps": "Enlève les pièges"
+	},
 	"zone": {
 		"zone": "{{shape}} de {{size}} cases",
 		"minZone": " avec un trou de {{minSize}}",
