@@ -11,6 +11,8 @@ import { Themer } from '../../components/themes/themer';
 // @inject(db, Emerald, ConditionRenderer)
 export class Effect {
 
+	@bindable 
+	public spellGrade = 0;
 	@bindable
 	public effect;
 	@bindable
@@ -51,7 +53,7 @@ export class Effect {
 
 	// @watch('themeBool')
 	public get EffectRenderClass() {
-		if(this.effectRenderer.hasSubSpell(this.effect) && !this.isStateSubspell(this.effect)) {
+		if(this.effectRenderer.hasSubSpell(this.effect, this.spellGrade) && !this.isStateSubspell(this.effect)) {
 			if(this.themer.themeBool) return "foldableSubspellLight";
 			else return "foldableSubspellDark";
 		} else {
@@ -159,7 +161,7 @@ export class Effect {
 	}
 
 	public hasSub(e) {
-		return this.effectRenderer.hasSubSpell(e) || this.effectRenderer.hasTrapGlyph(e);
+		return this.effectRenderer.hasSubSpell(e, this.spellGrade) || this.effectRenderer.hasTrapGlyph(e, this.spellGrade);
 	}
 
 }

@@ -272,5 +272,11 @@
 		"canSwitchPosOnTarget": "Peut échanger de place sur la cible",
 		"canTackle": "Peut tacler",
 		"canUsePortal": "Peut utiliser des portails"
+	},
+
+	"triggers": {
+		"TB": " (au début du tour)",
+		"TE": " (à la fin du tour)"
 	}
+	
 }

@@ -274,5 +274,11 @@
 		"canSwitchPosOnTarget": "Can switch position on target",
 		"canTackle": "Can lock",
 		"canUsePortal": "Can use portals"
+	},
+	
+	"triggers": {
+		"TB": " (on turn start)",
+		"TE": " (on turn end)"
 	}
+
 }

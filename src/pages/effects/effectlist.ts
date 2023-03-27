@@ -5,6 +5,8 @@ import { db } from "../../DofusDB/db";
 export class Effectlist {
 
     @bindable
+    public spellGrade = 0;
+    @bindable
     public effects: any[];
     @bindable
     public depth: number = 0;

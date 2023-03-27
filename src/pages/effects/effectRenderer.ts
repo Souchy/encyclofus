@@ -111,8 +111,10 @@ export class EffectRenderer {
 			// let subspellid = e.diceNum;
 			// let subspell = this.db.jsonSpells[subspellid];
 			let subspell = this.getSubSpell(e);
-			text = text.replace("#1", this.db.getI18n(subspell.nameId));
-			text = text.replace("#3", e.value);
+			if(subspell) {
+				text = text.replace("#1", this.db.getI18n(subspell.nameId));
+				text = text.replace("#3", e.value);
+			}
 		}
 		// état
 		if (this.db.isEffectState(e)) {
@@ -142,6 +144,10 @@ export class EffectRenderer {
 		}
 
 		text = this.renderEffectPart2(e, text);
+		if(e.triggers.includes("TB"))
+			text += this.i18n.tr("triggers.TB") //" (au début du tour)";
+		if(e.triggers.includes("TE"))
+			text += this.i18n.tr("triggers.TE") //" (à la fin du tour)";
 		return text;
 	}
 
@@ -206,23 +212,23 @@ export class EffectRenderer {
 		return this.db.data.jsonSummons[e.diceNum];
 	}
 
-	public hasSubSpell(e: any) {
-		return this.db.isSubSpell(e) && e.diceNum != e.spellId;
+	public hasSubSpell(e: any, spellGrade) {
+		return this.db.isSubSpell(e) && !(e.diceNum == e.spellId && e.diceSide == spellGrade);
 	}
 	public getSubSpell(e: any) {
-		let grade = e.diceSide;
 		let key = e.diceNum + "";
+		let grade = e.diceSide;
 		if (grade) key += "-" + grade;
 		if(key == "0") return undefined;
 		return this.db.data.jsonSpells[key];
 	}
-	public hasTrapGlyph(e: any) {
-		return this.db.isCellEffect(e) && e.diceNum != e.spellId;
+	public hasTrapGlyph(e: any, spellGrade) {
+		return this.db.isCellEffect(e) && !(e.diceNum == e.spellId && e.diceSide == spellGrade);
 	}
 	public getTrapGlyph(e: any): any {
 		// if (!this.hasTrapGlyph(e)) return null;
-		let grade = e.diceSide;
 		let key = e.diceNum + "";
+		let grade = e.diceSide;
 		if (grade) key += "-" + grade;
 		if(key == "0") return undefined;
 		return this.db.data.jsonSpells[key];
