@@ -12,9 +12,11 @@ export class Spell {
 	@bindable
 	public spellid: number;
 	@bindable
+	public depth: number = 0;
+	@bindable
 	public issummon: boolean = false;
 	@bindable
-	public depth: number = 0;
+	public ispassive:boolean = false;
 
 	public showbit: boolean[] = []
 	public thing = false;

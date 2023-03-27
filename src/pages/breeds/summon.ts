@@ -63,5 +63,15 @@ export class Summon {
 		return this.summon.race == 95 && this.db.checkFeatureVersion(features.bombspells);
 	}
 
+	public get startingSpellId() {
+		let startingSpellId = this.grade.startingSpellId;
+		let spelllevel: any = Object.values(this.db.data.jsonSpells).find((l: any) => l?.id == startingSpellId) //jsonLevels.find(l => l.id == startingSpellId)
+		// let index = this.db.data.jsonSpells.
+		if(spelllevel) {
+			return spelllevel.spellId + "-" + spelllevel.grade;
+		}
+		return 0;
+	}
+
 
 }

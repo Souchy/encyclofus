@@ -273,7 +273,8 @@
 		"canSwitchPos": "Can switch position",
 		"canSwitchPosOnTarget": "Can switch position on target",
 		"canTackle": "Can lock",
-		"canUsePortal": "Can use portals"
+		"canUsePortal": "Can use portals",
+		"passive": "Passive: "
 	},
 	
 	"triggers": {

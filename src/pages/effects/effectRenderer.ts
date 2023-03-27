@@ -60,6 +60,8 @@ export class EffectRenderer {
 	public renderEffectI18n(e) {
 		e.effect ??= this.getEffectModel(e);
 		let text = this.db.getI18n(e.effect?.descriptionId);
+		// if(e.effectUid == 293889)
+		// 	console.log("monster!! " + this.hasSummon(e));
         
 		if (!text) text = "#1";
 		let has1 = text.includes("#1");
@@ -69,8 +71,9 @@ export class EffectRenderer {
 		if (this.hasSummon(e)) {
 			let summon = this.getSummon(e);
 			if (summon) {
-				// console.log("monster: " + JSON.stringify(summon));
 				let name = this.db.getI18n(summon.nameId);
+				//if(e.effectUid == 293889)
+				//console.log("monster: " + summon.id + ", " + summon.nameId + " = " + name + " for " + text);
 				text = text.replace("#1", name);
 			}
 
@@ -205,7 +208,7 @@ export class EffectRenderer {
 	}
 
 	public hasSummon(e: any) {
-		return this.db.isSummonEffect(e) && e.visibleInTooltip;
+		return this.db.isSummonEffect(e) //&& e.visibleInTooltip;
 	}
 	public getSummon(e: any): any {
 		if (!this.hasSummon(e)) return null;

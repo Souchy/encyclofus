@@ -98,8 +98,13 @@
 	</tbody>
 </table>
 
-<!-- spells -->
 
+<!-- starting spell -->
+<div if.bind="grade.startingSpellId">
+	<spell if.bind="db.isLoaded" issummon.bind="true" spellid.bind="startingSpellId" depth.bind="0" ispassive="true"></spell>
+</div>
+
+<!-- spells -->
 <div if.bind="!isBomb">
 	<!-- isbomb.bind="isBomb" -->
 	<spell if.bind="db.isLoaded" repeat.for="summonSpellId of summon.spells" issummon.bind="true" spellid.bind="summonSpellId" depth.bind="0"></spell>

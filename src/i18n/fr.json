@@ -271,7 +271,8 @@
 		"canSwitchPos": "Peut échanger de place",
 		"canSwitchPosOnTarget": "Peut échanger de place sur la cible",
 		"canTackle": "Peut tacler",
-		"canUsePortal": "Peut utiliser des portails"
+		"canUsePortal": "Peut utiliser des portails",
+		"passive": "Passif: "
 	},
 
 	"triggers": {

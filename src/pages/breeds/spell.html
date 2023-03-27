@@ -7,6 +7,7 @@
 
 <!-- Spell Description -->
 <div class="spellDescription" if.bind="db.isLoaded && spell" id="${spellid}" click.trigger="clickHidePopup()">
+
 	<!-- name -->
 	<h5 if.bind="!issummon">
 		<img if.bind="depth > 0" src="${db.getSpellIconPath(spellid)}" style="width: 28px; height: 28px;" />
@@ -14,6 +15,7 @@
 	</h5>
 	<h6 if.bind="issummon">
 		<img src="${db.getSpellIconPath(spellid)}" style="width: 28px; height: 28px;" />
+		<span if.bind="ispassive" t="summon.passive"></span>
 		${name}
 	</h6>
 
