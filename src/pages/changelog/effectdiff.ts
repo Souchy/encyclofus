@@ -79,7 +79,8 @@ export class effectdiff {
     }
     public get dispellable() {
         if(this.newEffect?.dispellable != this.oldEffect?.dispellable) {
-            return "rawZone: " + this.oldEffect?.dispellable + " -> " + this.newEffect?.dispellable;
+            // console.log("dispel1 " + this.newEffect?.dispellable + " -> " + this.oldEffect?.dispellable)
+            return "dispellable: " + this.oldEffect?.dispellable + " -> " + this.newEffect?.dispellable;
         }
         return "";
     }

@@ -82,6 +82,11 @@ export class spelldiff {
         return olds;
     }
 
+    public get shouldDisplayOldName() {
+        if(!this.oldSpell) return false;
+        return (this.oldSpell.nameId != this.newSpell.nameId && this.db.hasI18n(this.oldSpell.nameId)) 
+    }
+
     /*
     "12937": {
         "id": 43797,

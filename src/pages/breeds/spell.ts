@@ -40,6 +40,11 @@ export class Spell {
 	}
 
 	public get cutDescription(): string[] {
+		if(!this.spell) {
+			// happens when going from changelog to breed page, this.spellid is still null
+			// console.log("spell null: " + this.spellid) 
+			return [""];
+		}
 		let text = this.db.getI18n(this.spell.descriptionId);
 		if (!text) return [""]; // les invoc chafer n'ont pas de description sur leurs sorts par exemple
 		let data = [];

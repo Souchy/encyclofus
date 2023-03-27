@@ -6,7 +6,7 @@
 <!-- ${spellid} -->
 
 <!-- Spell Description -->
-<div class="spellDescription" if.bind="spell && db.isLoaded" id="${spellid}" click.trigger="clickHidePopup()">
+<div class="spellDescription" if.bind="db.isLoaded && spell" id="${spellid}" click.trigger="clickHidePopup()">
 	<!-- name -->
 	<h5 if.bind="!issummon">
 		<img if.bind="depth > 0" src="${db.getSpellIconPath(spellid)}" style="width: 28px; height: 28px;" />

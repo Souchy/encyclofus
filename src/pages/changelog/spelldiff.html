@@ -8,6 +8,7 @@
     <h4>
 		<img src="${db.getSpellIconPath(spellid)}" style="width: 28px; height: 28px;" />
         ${db.getI18n(newSpell.nameId)}
+        <span if.bind="shouldDisplayOldName"> (${db.getI18n(oldSpell.nameId)})</span>
     </h4>
 
     <div if.bind="isNew()">
