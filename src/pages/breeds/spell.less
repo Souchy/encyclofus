@@ -20,16 +20,15 @@ td {
 
 .spellContainerContainer {
   position: relative;
+  z-index: 10 !important;
 }
 .spellContainer {
   position: absolute; 
-  // margin-top: -30px; 
-  // margin-left: -50px; 
-  // width: 80%; 
-  // height: 35px;
-  top: 50%;
+  top: 49%;
   width: 80%;
   height: 50%;
+
+  z-index: -1 !important;
 }
 .spellHover {
     position: absolute;
@@ -67,10 +66,27 @@ tr .spellHover {
     width: 300px;
 	}
 }
-td:hover > .spellHover, span:hover > .spellHover, p:hover > .spellHover, .spellContainer:hover > .spellHover {
+
+// description hover a keyword
+span:hover + .spellContainer > .spellHover {
   visibility: visible;
   opacity: 100%;
 }
+// keep hovering when over the popup
+.spellHover:hover {
+  visibility: visible;
+  opacity: 100%;
+}
+// td = hover on an effect
+td:hover > .spellHover, span:hover > .spellHover, p:hover > .spellHover {//, .spellContainer:hover > .spellHover {
+  visibility: visible;
+  opacity: 100%;
+}
+// original code
+// td:hover > .spellHover, span:hover > .spellHover, p:hover > .spellHover, .spellContainer:hover > .spellHover {
+//   visibility: visible;
+//   opacity: 100%;
+// }
 
 /* Tooltip container */
 .tooltipx:hover .tooltiptext {

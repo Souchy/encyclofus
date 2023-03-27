@@ -213,16 +213,18 @@ export class EffectRenderer {
 		let grade = e.diceSide;
 		let key = e.diceNum + "";
 		if (grade) key += "-" + grade;
+		if(key == "0") return undefined;
 		return this.db.data.jsonSpells[key];
 	}
 	public hasTrapGlyph(e: any) {
 		return this.db.isCellEffect(e) && e.diceNum != e.spellId;
 	}
 	public getTrapGlyph(e: any): any {
-		if (!this.hasTrapGlyph(e)) return null;
+		// if (!this.hasTrapGlyph(e)) return null;
 		let grade = e.diceSide;
 		let key = e.diceNum + "";
 		if (grade) key += "-" + grade;
+		if(key == "0") return undefined;
 		return this.db.data.jsonSpells[key];
 	}
 

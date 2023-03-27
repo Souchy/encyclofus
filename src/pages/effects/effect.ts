@@ -1,3 +1,4 @@
+import { watch } from '@aurelia/runtime-html';
 import { EffectRenderer } from './effectRenderer';
 import { I18N } from "@aurelia/i18n";
 import { bindable, inject } from "aurelia";
@@ -5,6 +6,7 @@ import { db } from "../../DofusDB/db";
 import { SpellZone, Targets } from "../../DofusDB/formulas";	
 import { TargetConditionRenderer } from "../../ts/targetConditions";
 import { Util } from '../../ts/util';
+import { Themer } from '../../components/themes/themer';
 
 // @inject(db, Emerald, ConditionRenderer)
 export class Effect {
@@ -16,21 +18,46 @@ export class Effect {
 	@bindable
 	public iscrit: boolean;
 
+	public showsub: boolean = false;
+	public subSpell: any;
+
 	public db: db;	
 	public conditionRenderer: TargetConditionRenderer;
 	public effectRenderer: EffectRenderer
+	private readonly themer: Themer;
 
-	public constructor(db: db, effectRenderer: EffectRenderer, conditionRenderer: TargetConditionRenderer, @I18N private readonly i18n: I18N) {
+	public constructor(themer: Themer, db: db, effectRenderer: EffectRenderer, conditionRenderer: TargetConditionRenderer, @I18N private readonly i18n: I18N) {
 		// console.log("ctor: " + conditionRenderer)
 		this.db = db;
 		this.conditionRenderer = conditionRenderer;
 		this.effectRenderer = effectRenderer;
+		this.themer = themer;
 	}
 
 	public get isLoaded() {
 		return this.db.isLoaded
 	}
+	attached() {
+		this.subSpell = this.effectRenderer.getSubSpell(this.effect);
+	}
 
+	public clickShowSub() {
+		this.showsub = !this.showsub;
+	}
+
+	public get themeBool() {
+		return this.themer.themeBool;
+	}
+
+	// @watch('themeBool')
+	public get EffectRenderClass() {
+		if(this.effectRenderer.hasSubSpell(this.effect) && !this.isStateSubspell(this.effect)) {
+			if(this.themer.themeBool) return "foldableSubspellLight";
+			else return "foldableSubspellDark";
+		} else {
+			return "";
+		}
+	}
 
 	public isItem(effect) {
 		// console.log("effect: " + effect.spellId)
@@ -51,6 +78,7 @@ export class Effect {
 		let charac = this.db.data.jsonCharacteristics?.filter(c => c.id == cid)[0];
 		return charac;
 	}
+
 
 	// public getEffectMinMax() {
 	// 	let min = this.effect.diceNum;
@@ -85,6 +113,7 @@ export class Effect {
 	}
 
 
+
 	public isStateSubspell(e) {
 		if (this.db.isEffectState(e)) {
 			let state = this.db.data.jsonStates[e.value]
@@ -98,6 +127,7 @@ export class Effect {
 		if (this.db.isSubSpell(e)) {
 			let subspell = this.effectRenderer.getSubSpell(e);
 			if (!subspell) return false;
+			// return true;
 			let name = this.db.getI18n(subspell.nameId);
 			if (name && name.includes("{")) {
 				return true;
@@ -128,5 +158,8 @@ export class Effect {
 		return output;
 	}
 
+	public hasSub(e) {
+		return this.effectRenderer.hasSubSpell(e) || this.effectRenderer.hasTrapGlyph(e);
+	}
 
 }

@@ -7,37 +7,41 @@
 <table class="table table-striped table-sm table-borderless ${effectTypeStyle}" css="--bs-table-striped-bg: none; margin-bottom: 0px;" if.bind="isLoaded">
     <tbody>
         <tr id="${effect.effectUid}" data-effect="${effect?.effectId}" data-charac="${effect?.effect?.characteristic}">
-            <td style="width: 20px; padding: 0px; padding-left: 4px;" if.bind="getIcon(effect)">
-                <div style.bind="getIcon(effect)"></div>
+            <br if.bind="effectRenderer.renderEffectI18n(effect).includes('<br>')" />
+
+            <td if.bind="!db.isEffectState(effect) && (getIcon(effect) || hasSub(effect))" class="iconEffect">
+                <img if.bind="hasSub(effect) && subSpell" src="${db.getSpellObjectIconPath(subSpell)}"/>
+                <div if.bind="!hasSub(effect) && !subSpell" style.bind="getIcon(effect)"></div>
             </td>
-            <td innerHtml.bind="effectRenderer.renderEffectI18n(effect)" style="vertical-align: middle;"></td>
-            <td if.bind="isStateSubspell(effect)" style="vertical-align: middle; position: absolute; left: 0px; width: 100%; height: 100%;">
+            <td innerHtml.bind="effectRenderer.renderEffectI18n(effect).replace('<br>', '')" class.bind="EffectRenderClass" click.trigger="clickShowSub()"></td>
+            <td if.bind="isStateSubspell(effect)" class="hoverableEffectSubspell">
                 <spell class="spellHover" if.bind="depth <= 1" spellid.bind="getStateSubspellId(effect)" depth.bind="depth+1"></spell>
             </td>
-            <td if.bind="effectRenderer.isDuration(effect)" class="tooltipx" style="vertical-align: middle; width: 25px; height: 32px; ">
-                <img style="vertical-align: middle; margin-left: -10px; margin-right: -10px;" src.bind="effectRenderer.getDispellIcon(effect)"></img>
+            <td if.bind="effectRenderer.isDuration(effect)" class="tooltipx iconDispell">
+                <img src.bind="effectRenderer.getDispellIcon(effect)"></img>
                 <div class="tooltiptext">${effectRenderer.getDispellString(effect)}</div>
             </td>
-            <td if.bind="effectRenderer.hasTargetIcon(effect)" class="tooltipx" style="width: 22px; height: 32px; padding: 4px; vertical-align: middle;">
-                <img style="vertical-align: middle; margin-left: 2px;" src.bind="effectRenderer.getTargetIcon(effect)"></img>
+            <td if.bind="effectRenderer.hasTargetIcon(effect)" class="tooltipx iconTarget">
+                <img src.bind="effectRenderer.getTargetIcon(effect)"></img>
                 <div class="tooltiptext" innerHtml.bind="effectRenderer.getTargetString(effect)"></div>
             </td>
-            <td if.bind="db.getAoeIconUrl(effect)" class="tooltipx" style="width: 37px; height: 32px; padding: 0px; vertical-align: middle;">
-                <img style="width: 36px; height: 18px;" src.bind="db.getAoeIconUrl(effect)"></img>
+            <td if.bind="db.getAoeIconUrl(effect)" class="tooltipx iconZone">
+                <img src.bind="db.getAoeIconUrl(effect)"></img>
                 <div class="tooltiptext">${effectRenderer.getZoneString(effect)}</div>
             </td>
         </tr>
     </tbody>
 </table>
 
-<!-- TRAPS -->
+
+<!-- TRAPS & GLYPHS (they also call a subspell) -->
 <!-- normal effects -->
 <effectlist if.bind="effectRenderer.hasTrapGlyph(effect) && !iscrit" effects.bind="effectRenderer.getTrapGlyph(effect).effects" depth.bind="depth+1"></effectlist>
 <!-- have no crit effects -->
-<effectlist if.bind="effectRenderer.hasTrapGlyph(effect) && iscrit" effects.bind="effectRenderer.getTrapGlyph(effect).effects" depth.bind="depth+1" ></effectlist>
+<effectlist if.bind="effectRenderer.hasTrapGlyph(effect) && iscrit" effects.bind="effectRenderer.getTrapGlyph(effect).effects" depth.bind="depth+1"></effectlist>
 
-<!-- SUB SPELLS -->
+<!-- SUB SPELLS (that are not traps nor glyphs) -->
 <!-- normal effects -->
-<effectlist if.bind="effectRenderer.hasSubSpell(effect) && !iscrit && !isStateSubspell(effect)" effects.bind="effectRenderer.getSubSpell(effect).effects" depth.bind="depth+1"></effectlist>
+<effectlist if.bind="showsub && effectRenderer.hasSubSpell(effect) && !iscrit && !isStateSubspell(effect)" effects.bind="subSpell.effects" depth.bind="depth+1" iscrit.bind="false"></effectlist>
 <!-- crit effects -->
-<effectlist if.bind="effectRenderer.hasSubSpell(effect) && iscrit && !isStateSubspell(effect)" effects.bind="effectRenderer.getSubSpell(effect).criticalEffect" depth.bind="depth+1"></effectlist>
+<effectlist if.bind="showsub && effectRenderer.hasSubSpell(effect) && iscrit && !isStateSubspell(effect)" effects.bind="subSpell.criticalEffect" depth.bind="depth+1" iscrit.bind="true"></effectlist>

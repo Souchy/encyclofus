@@ -16,6 +16,7 @@ export class Effectlist {
 
     public constructor(db: db, @I18N private readonly i18n: I18N) {
         this.db = db;
+        // console.log("different effect order: " + (this.effects != this.effectsOrdered))
     }
     public get effectsOrdered() {
         return this.effects.sort((a, b) => a.order - b.order);
@@ -45,6 +46,13 @@ export class Effectlist {
         let effectModel = e.effect ?? this.getEffect(e);
         let show = (this.isGreenList(e.effectUid) || e.visibleInTooltip || (effectModel.showInTooltip && mode == "detailed")) // || e.visibleInBuffUi || e.visibleInFightLog) 
                 && !this.isRedList(e.effectUid) && e.effectId != 666
+
+        // let show = (
+        //         e.visibleInTooltip || 
+        //         // (effectModel.category != -1 && effectModel.showInSet && effectModel.showInTooltip) || 
+        //         (effectModel.showInTooltip && mode == "detailed")
+        //     ) // || e.visibleInBuffUi || e.visibleInFightLog) 
+        //     && e.effectId != 666
         return show;
         /*
         if(mode == "basic") {

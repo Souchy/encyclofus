@@ -6,9 +6,12 @@
 <!-- ${spellid} -->
 
 <!-- Spell Description -->
-<div class="spellDescription" if.bind="spell && db.isLoaded" id="${spellid}">
+<div class="spellDescription" if.bind="spell && db.isLoaded" id="${spellid}" click.trigger="clickHidePopup()">
 	<!-- name -->
-	<h5 if.bind="!issummon">${name}</h5>
+	<h5 if.bind="!issummon">
+		<img if.bind="depth > 0" src="${db.getSpellIconPath(spellid)}" style="width: 28px; height: 28px;" />
+		${name}
+	</h5>
 	<h6 if.bind="issummon">
 		<img src="${db.getSpellIconPath(spellid)}" style="width: 28px; height: 28px;" />
 		${name}
@@ -34,19 +37,28 @@
 		</span>
 	</span>
 
+
+
 	<!-- description -->
 	<div class="spellContainerContainer">
-		<p style="white-space: pre-line;" innerhtml.bind="description"></p>
-		<!-- hasspell : ${spell.spellId} : ${hasSubSpell} : ${subSpellId} -->
-		<div if.bind="hasSubSpell" class="spellContainer">
-			<spell class="spellHover" if.bind="depth <= 1 && subSpellId != 0" spellid.bind="subSpellId" depth.bind="depth+1"></spell>
-		</div>
+		<span class="" repeat.for="d1 of cutDescription">
+			<span style.bind="getDescriptionRenderStyle(d1)" innerhtml.bind="renderDescriptionBit(d1)" click.delegate="clickDescription($index)"></span>
+			<!--  && thing && showbit[$index] -->
+			<div if.bind="textHasSubSpell(d1)" class="spellContainer">
+				<!-- style.bind="showbit[$index] ? 'display: block;' : 'display: none;'" -->
+				<spell class="spellHover" if.bind="depth <= 1 && subSpellId != 0" spellid.bind="getTextSubSpellId(d1)" depth.bind="depth+1"></spell>
+			</div> 
+		</span>
 	</div>
-
+	
 	<!-- conditions -->
-	<div if.bind="hasCondition">
-		<p innerHtml.bind="getConditionsString(spell)"></p>
+	<div if.bind="hasCondition" >
+		<br/>
+		<div innerHtml.bind="getConditionsString(spell)"></div>
 	</div>
+	
+	<br/>
+	
 
 	<!-- effects -->
 	<div class="d-flex effects">
