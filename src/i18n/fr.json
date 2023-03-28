@@ -58,6 +58,7 @@
 	"hp": "PV",
 	"evade": "Fuite",
 	"block": "Tacle",
+	"level": "Niveau",
 	
 	"apCost": "PA",
 	"range": "Portée max.",
@@ -265,7 +266,16 @@
 	"condition": {
 		"condition": "Condition: ",
 		"hasItem": "Possède l'objet '{{itemName}}'",
-		"hasNotItem": "Ne possède pas l'objet '{{itemName}}'"
+		"hasNotItem": "Ne possède pas l'objet '{{itemName}}'",
+		"subscribed": "Être abonné",
+		"unsubscribed": "Non-abonné",
+		"setBonus": "Bonus de panoplie",
+		"unequipable": "Objet non équipable",
+		"kamas": "Kamas",
+		"alignment": {
+			"brakmar": "Alignement: Brâkmarien",
+			"bonta": "Alignement: Bontarien"
+		}
 	},
 	"summon": {
 		"useSummonSlot": "Utilise un slot d'invocation",

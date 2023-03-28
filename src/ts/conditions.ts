@@ -16,10 +16,12 @@ export class ConditionRenderer {
         let arr = []
         for(let node of root.criterions) {
             if(node instanceof Criteria) {
-                arr.push(this.parseCriteria(node))
+                let txt = this.parseCriteria(node)
+                if(txt) arr.push(txt)
             } 
             if(node instanceof CriteriaGroup) {
-                arr.push(this.parseGroup(node))
+                let txt = this.parseGroup(node)
+                if(txt) arr.push(txt)
             }
         }
         return arr.join(this.translateJointOperator(root.operator));
@@ -41,7 +43,8 @@ export class ConditionRenderer {
         let arr = []
         for(let node of g.criterions) {
             if(node instanceof Criteria) {
-                arr.push(this.parseCriteria(node))
+                let txt = this.parseCriteria(node)
+                if(txt) arr.push(txt)
             } 
         }
         return "(" + arr.join(this.translateJointOperator(g.operator)) + ")"
@@ -54,19 +57,33 @@ export class ConditionRenderer {
 
         let output = "";
         let arr = []; //c.name.split(".");
-        let names = CriterionUtil.getCriterion(c.name);
+        let names = CriterionUtil.getCriterion(c);
         if(names) {
-            for(let n of names.split(".")) {
-                if(n == "total") continue
-                arr.push(this.i18n.tr(n))
+            if(names == "null") {
+                // console.log("ignore criterion for " + c.name)
+                return null;
             }
+            if(names.startsWith("condition.")) {
+                arr.push(this.i18n.tr(names))
+            } else {
+                for(let n of names.split(".")) {
+                    if(n == "total") continue
+                    arr.push(this.i18n.tr(n))
+                }
+            }
+            arr.push(c.operator);
+            arr.push(c.value);
         } else {
-            arr.push(c.name);
+            names = CriterionUtil.getCriterionBool(c);
+            if(names) {
+                arr.push(this.i18n.tr(names))
+            } else {
+                arr.push(c.name);
+                arr.push(c.operator);
+                arr.push(c.value);
+            }
         }
-
-        arr.push(c.operator)
-        arr.push(c.value);
-        output = arr.map(d => this.i18n.tr(d)).join(" ");
+        output = arr.join(" ");
         // console.log("parse output: " + output)
         return output;
     }

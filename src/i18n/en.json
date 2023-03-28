@@ -58,6 +58,7 @@
 	"hp": "HP",
 	"evade": "Dodge",
 	"block": "Lock",
+	"level": "Niveau",
 	
 	"apCost": "AP",
 	"range": "Range max.",
@@ -267,7 +268,16 @@
 	"condition": {
 		"condition": "Condition: ",
 		"hasItem": "Has the object '{{itemName}}'",
-		"hasNotItem": "Does not have the object '{{itemName}}'"
+		"hasNotItem": "Does not have the object '{{itemName}}'",
+		"subscribed": "Be subscribed",
+		"unsubscribed": "Not subscribed",
+		"setBonus": "Set bonuses",
+		"unequipable": "Non equipable object",
+		"kamas": "Kamas",
+		"alignment": {
+			"brakmar": "Alignment: Brakmar",
+			"bonta": "Alignment: Bonta"
+		}
 	},
 	"summon": {
 		"useSummonSlot": "Uses a summon slot",
