@@ -50,8 +50,12 @@ export class MapList {
     public getMapName(mapid: number) {
         try {
             // console.log("mapid: " + mapid)
-            let spaces = this.db.getI18n("map_" + mapid).split(" ");
-            return spaces[spaces.length - 1];
+            if(this.db.hasI18n("map_" + mapid)) {
+                let spaces = this.db.getI18n("map_" + mapid).split(" ");
+                return spaces[spaces.length - 1];
+            } else {
+                return mapid + "";
+            }
         } catch(error) {
             return mapid + "";
         }
