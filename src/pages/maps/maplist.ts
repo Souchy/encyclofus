@@ -32,15 +32,44 @@ export class MapList {
         this.goultars = map_ids.goultar.sort((a, b) => this.sortMaps(a, b));
         this.tournois = map_ids.tournoi.sort((a, b) => this.sortMaps(a, b));
         this.duels = map_ids.duel.sort((a, b) => this.sortMaps(a, b));
-        this.amaknas = map_ids.amakna.sort();
+        this.amaknas = map_ids.amakna.sort((a, b) => this.sortMaps(a, b))
         this.isLoaded = true;
     }
 
     private sortMaps(id0: number, id1: number) {
         let name0 = this.getMapName(id0)
         let name1 = this.getMapName(id1)
-        return name0.localeCompare(name1);
+        let i0 = this.toNumberAndRoman(name0)
+        let i1 = this.toNumberAndRoman(name1)
+        // console.log("sort: " + i0 + ", " + i1)
+        return i0 - i1
+        // return name0.localeCompare(name1);
     }
+
+    public toNumberAndRoman(s) {
+        if(+s) return +s;
+        else {
+            return this.romanToArabic(s);
+        }
+    }
+    public romanToArabic(str) {
+        const romans = {
+            I: 1,
+            V: 5,
+            X: 10,
+            L: 50,
+            C: 100,
+            D: 500,
+            M: 1000,
+        };
+        return [...str.toUpperCase()].reduce(
+            (previousValue, currentValue, currentIndex, array) =>
+                romans[array[currentIndex + 1]] > romans[currentValue]
+                    ? previousValue - romans[currentValue]
+                    : previousValue + romans[currentValue],
+            0
+        );
+    };
 
     public select(mapid: string): void {
         // console.log("id: " + mapid)
@@ -52,7 +81,8 @@ export class MapList {
             // console.log("mapid: " + mapid)
             if(this.db.hasI18n("map_" + mapid)) {
                 let spaces = this.db.getI18n("map_" + mapid).split(" ");
-                return spaces[spaces.length - 1];
+                let remaining = spaces[spaces.length - 1];
+                return remaining;
             } else {
                 return mapid + "";
             }
