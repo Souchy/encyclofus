@@ -6,6 +6,15 @@
 </div>
 
 <div if.bind="isLoaded">
+	<div class="d-flex" style="align-items: center">
+        <div t="compare" style="margin-right: 5px;"></div>
+        <select class="form-select" style="width: 100%; margin-left: auto;" value.bind="selectedVersion">
+            <option repeat.for="version of versions" model.bind="version" if.bind="version > '2.64'">
+                ${version}
+            </option>
+        </select>
+    </div>
+
     <div repeat.for="b of breeds">
         <h1 style="border-bottom: 1px white solid;">
             ${getBreedName(b)}

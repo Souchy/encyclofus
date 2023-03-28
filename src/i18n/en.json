@@ -3,6 +3,8 @@
 	"false": "No",
 	"and": " and ",
 	"or": " or ",
+
+	"compare": "Compare: ",
 	
 	"newSummon": "New summon: ",
 	"oldSummon": "Removed summon: ",

@@ -1,7 +1,7 @@
 import { I18N } from "@aurelia/i18n";
 import { db } from "../../DofusDB/db";
-import versions from '../../DofusDB/versions.json'
-import { DI, IEventAggregator, Registration } from 'aurelia';
+import jsonVersions from '../../DofusDB/versions.json'
+import { DI, IEventAggregator, Registration, observable } from 'aurelia';
 import { SummonUtils } from "../../ts/summonUtils";
 
 export class Changelog {
@@ -10,6 +10,9 @@ export class Changelog {
     // public diffVersion: string;
 
 	// private loadedPrevious: boolean = false;
+	public versions: string[];
+	@observable
+	public selectedVersion: string;
 
 	public constructor(
         private readonly summonUtils: SummonUtils,
@@ -17,6 +20,8 @@ export class Changelog {
         @I18N private readonly i18n: I18N, 
         @IEventAggregator readonly ea: IEventAggregator
     ) {
+		this.versions = jsonVersions;
+        this.selectedVersion = this.db.data2.version;
         // this.diffVersion = versions[1];
         // console.log("changelog ctor")
 		// this.db.data2.loadJson(); // dont load this every in every ctor bc it activates on every page change
@@ -29,6 +34,12 @@ export class Changelog {
 	public get isLoaded() {
         // console.log("d: " + this.db.data.isLoaded + ", " + this.db.data2.isLoaded);
 		return this.db.data.isLoaded && this.db.data2.isLoaded;
+	}
+	public selectedVersionChanged(newValue: string, oldValue: string) {
+		console.log("selected version changed: " + oldValue + " -> " + newValue)
+		this.db.setVersion2(newValue);
+		// if(oldValue)
+		// 	location.reload();
 	}
     //#endregion
 
@@ -44,33 +55,7 @@ export class Changelog {
     public getBreedName(breedid) {
         return this.db.getI18n(this.db.data.jsonBreeds[breedid].nameId);
     }
-	// public get breed(): any {
-	// 	if (!this.db.jsonBreeds) return null;
-	// 	if (!this.db.breedId) return null;
-	// 	return this.db.jsonBreeds[this.db.breedId + ""];
-	// }
-	// public get spells(): any[] {
-	// 	if (!this.breed) return null;
-	// 	return this.breed.spells;
-	// }
     //#endregion
-
-    //#region Spell changes
-    // public getSpellChanges(spellid) {
-    //     let newSpell = this.breed.spells[spellid]
-    //     let oldSpell = this.jsonBreeds[this.db.breedId.toString()].spells[spellid]
-    //     let arr = [];
-    //     if(newSpell.apCost != oldSpell.apCost)
-    //         arr.push("AP: " + oldSpell.apCost + " -> " + newSpell.apCost);
-    //     if(newSpell.minRange != oldSpell.minRange || newSpell.range != oldSpell.range)
-    //         arr.push("PO: " + oldSpell.minRange + " - " + oldSpell.Range + " -> " + newSpell.minRange + " - " + newSpell.Range);
-    //     if(newSpell.castTestLos != oldSpell.castTestLos)
-    //         arr.push("LoS: " + oldSpell.castTestLos + " -> " + newSpell.castTestLos);
-
-    //     // if(newSpell.effects != oldSpell.effects)
-    // }
-    //#endregion
-
 }
 
 // const container = DI.createContainer();
