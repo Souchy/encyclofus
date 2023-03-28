@@ -36,7 +36,7 @@ export class Changelog {
 		return this.db.data.isLoaded && this.db.data2.isLoaded;
 	}
 	public selectedVersionChanged(newValue: string, oldValue: string) {
-		console.log("selected version changed: " + oldValue + " -> " + newValue)
+		// console.log("selected version changed: " + oldValue + " -> " + newValue)
 		this.db.setVersion2(newValue);
 		// if(oldValue)
 		// 	location.reload();
