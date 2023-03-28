@@ -234,6 +234,8 @@ export class EffectRenderer {
 		let grade = e.diceSide;
 		if (grade) key += "-" + grade;
 		if(key == "0") return undefined;
+		// if(e.effectUid == 303619) 
+		// 	console.log("key: " + key)
 		return this.db.data.jsonSpells[key];
 	}
 	public hasTrapGlyph(e: any, spellGrade) {
