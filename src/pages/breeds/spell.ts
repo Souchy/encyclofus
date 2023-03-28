@@ -143,7 +143,7 @@ export class Spell {
 		return this.spell.effects.filter(e => this.hasSummon(e));
 	}
 	public hasSummon(e: any) {
-		return this.db.isSummonEffect(e) && e.visibleInTooltip && this.db.data.jsonSummons[e.diceNum]; // e.effectId == 181 || e.effectId == 1011 || e.effectId == 1008;
+		return db.isSummonEffect(e) && e.visibleInTooltip && this.db.data.jsonSummons[e.diceNum]; // e.effectId == 181 || e.effectId == 1011 || e.effectId == 1008;
 	}
 	public getSummon(e: any): any {
 		if (!this.hasSummon(e)) return null;
@@ -198,7 +198,7 @@ export class Spell {
 
 
 	public isStateSubspell(e) {
-		if (this.db.isEffectState(e)) {
+		if (db.isEffectState(e)) {
 			let state = this.db.data.jsonStates[e.value]
 			if (!state) return false;
 			let name = this.db.getI18n(state.nameId);
@@ -207,7 +207,7 @@ export class Spell {
 			}
 		}
 		// state condition, fouet osa dragocharge, +1 combo,
-		if (this.db.isSubSpell(e)) {
+		if (db.isSubSpell(e)) {
 			let subspell = this.getSubSpell(e);
 			if (!subspell) return false;
 			let name = this.db.getI18n(subspell.nameId);
@@ -226,11 +226,11 @@ export class Spell {
 		// return subSpellId;
 		let spellString;
 		// état
-		if (this.db.isEffectState(e)) {
+		if (db.isEffectState(e)) {
 			let state = this.db.data.jsonStates[e.value]
 			spellString = this.db.getI18n(state.nameId);
 		}
-		if (this.db.isSubSpell(e)) {
+		if (db.isSubSpell(e)) {
 			let subspell = this.getSubSpell(e);
 			spellString = this.db.getI18n(subspell.nameId);
 		}

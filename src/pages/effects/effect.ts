@@ -117,7 +117,7 @@ export class Effect {
 
 
 	public isStateSubspell(e) {
-		if (this.db.isEffectState(e)) {
+		if (db.isEffectState(e)) {
 			let state = this.db.data.jsonStates[e.value]
 			if (!state) return false;
 			let name = this.db.getI18n(state.nameId);
@@ -126,7 +126,7 @@ export class Effect {
 			}
 		}
 		// state condition, fouet osa dragocharge, +1 combo,
-		if (this.db.isSubSpell(e)) {
+		if (db.isSubSpell(e)) {
 			let subspell = this.effectRenderer.getSubSpell(e);
 			if (!subspell) return false;
 			// return true;
@@ -141,11 +141,11 @@ export class Effect {
 	public getStateSubspellId(e) {
 		let spellString;
 		// état
-		if (this.db.isEffectState(e)) {
+		if (db.isEffectState(e)) {
 			let state = this.db.data.jsonStates[e.value]
 			spellString = this.db.getI18n(state.nameId);
 		}
-		if (this.db.isSubSpell(e)) {
+		if (db.isSubSpell(e)) {
 			let subspell = this.effectRenderer.getSubSpell(e);
 			spellString = this.db.getI18n(subspell.nameId);
 		}

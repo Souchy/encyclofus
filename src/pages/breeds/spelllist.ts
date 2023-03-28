@@ -77,7 +77,7 @@ export class SpellList {
 	public hasSummon() {
 		let e = this.summonEffect;
 		// console.log("hasSummon effect: " + e)
-		return this.db.isSummonEffect(e) && e.visibleInTooltip; // e.effectId == 181 || e.effectId == 1011 || e.effectId == 1008;
+		return db.isSummonEffect(e) && e.visibleInTooltip; // e.effectId == 181 || e.effectId == 1011 || e.effectId == 1008;
 	}
 	public get getSummon(): any {
 		let e = this.summonEffect;

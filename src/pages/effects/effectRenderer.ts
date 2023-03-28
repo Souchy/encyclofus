@@ -90,7 +90,7 @@ export class EffectRenderer {
 
 		}
 		// state condition, fouet osa dragocharge, +1 combo,
-		if (this.db.isSubSpell(e)) {
+		if (db.isSubSpell(e)) {
 			// let subspellid = e.diceNum;
 			// let subspell = this.db.jsonSpells[subspellid];
 			let subspell = this.getSubSpell(e);
@@ -112,7 +112,7 @@ export class EffectRenderer {
 			}
 		}
 		// augmente ou réduit le cooldown du sort 
-		if (this.db.isEffectChargeCooldown(e)) {
+		if (db.isEffectChargeCooldown(e)) {
 			let subspell = this.getSubSpell(e);
 			if (subspell) {
 				let name = this.db.getI18n(subspell.nameId);
@@ -121,7 +121,7 @@ export class EffectRenderer {
 			}
 		}
 		// effet de charge
-		if (this.db.isEffectCharge(e)) { // if (has1 && has3 && !has2) { //
+		if (db.isEffectCharge(e)) { // if (has1 && has3 && !has2) { //
 			// let subspellid = e.diceNum;
 			// let subspell = this.db.jsonSpells[subspellid];
 			let subspell = this.getSubSpell(e);
@@ -131,7 +131,7 @@ export class EffectRenderer {
 			}
 		}
 		// état
-		if (this.db.isEffectState(e)) {
+		if (db.isEffectState(e)) {
 			// if (e.value) {
 			let state = this.db.data.jsonStates[e.value]
 			if (!state) { }
@@ -219,7 +219,7 @@ export class EffectRenderer {
 	}
 
 	public hasSummon(e: any) {
-		return this.db.isSummonEffect(e) //&& e.visibleInTooltip;
+		return db.isSummonEffect(e) //&& e.visibleInTooltip;
 	}
 	public getSummon(e: any): any {
 		if (!this.hasSummon(e)) return null;
@@ -227,7 +227,7 @@ export class EffectRenderer {
 	}
 
 	public hasSubSpell(e: any, spellGrade) {
-		return this.db.isSubSpell(e) && !(e.diceNum == e.spellId && e.diceSide == spellGrade);
+		return db.isSubSpell(e) && !(e.diceNum == e.spellId && e.diceSide == spellGrade);
 	}
 	public getSubSpell(e: any) {
 		let key = e.diceNum + "";
@@ -237,7 +237,7 @@ export class EffectRenderer {
 		return this.db.data.jsonSpells[key];
 	}
 	public hasTrapGlyph(e: any, spellGrade) {
-		return this.db.isCellEffect(e) && !(e.diceNum == e.spellId && e.diceSide == spellGrade);
+		return db.isCellEffect(e) && !(e.diceNum == e.spellId && e.diceSide == spellGrade);
 	}
 	public getTrapGlyph(e: any): any {
 		// if (!this.hasTrapGlyph(e)) return null;
