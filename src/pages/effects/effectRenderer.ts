@@ -95,7 +95,7 @@ export class EffectRenderer {
 			// let subspell = this.db.jsonSpells[subspellid];
 			let subspell = this.getSubSpell(e);
 			if (!subspell) {
-				console.log("renderEffect has non-existing subspell " + e.effectUid)
+				// console.log("renderEffect has non-existing subspell " + e.effectUid)
 			} else {
 				let name = this.db.getI18n(subspell.nameId);
 				if (name && name.includes("{")) {
