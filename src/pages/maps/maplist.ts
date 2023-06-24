@@ -4,23 +4,22 @@ import map_ids from '../../DofusDB/scraped/common/mapIds.json'
 import { bindable, IEventAggregator, inject } from 'aurelia';
 import { db } from '../../DofusDB/db';
 
+@inject(db, IEventAggregator)
 export class MapList {
 
     public isLoaded: boolean = false
     
     public mapIds = map_ids;
     public goultars: number[]
-    public tournois: number[]
-    public duels: number[]
-    public amaknas: number[]
+    public koli3v3s: number[]
+    public koli1v1s: number[]
 
     public showGoultar = true;
-    public showTournoi = false;
-    public showDuel = false;
-    public showAmakna = false;
+    public showKoli3v3 = false;
+    public showKoli1v1 = false;
     public showHelp = false;
 
-    public constructor(private readonly db: db, @IEventAggregator readonly ea: IEventAggregator) {
+    public constructor(private readonly db: db, private readonly ea: IEventAggregator) {
         if(this.db.isLoaded) {
             this.onLoad();
         } else
@@ -30,20 +29,25 @@ export class MapList {
 
     private onLoad() {
         this.goultars = map_ids.goultar.sort((a, b) => this.sortMaps(a, b));
-        this.tournois = map_ids.tournoi.sort((a, b) => this.sortMaps(a, b));
-        this.duels = map_ids.duel.sort((a, b) => this.sortMaps(a, b));
-        this.amaknas = map_ids.amakna.sort((a, b) => this.sortMaps(a, b))
+        this.koli3v3s = map_ids.koli3v3.sort((a, b) => this.sortMaps(a, b));
+        this.koli1v1s = map_ids.koli1v1.sort((a, b) => this.sortMaps(a, b));
         this.isLoaded = true;
     }
 
-    private sortMaps(id0: number, id1: number) {
+    private sortMaps(id0: number, id1: number): number {
         let name0 = this.getMapName(id0)
         let name1 = this.getMapName(id1)
-        let i0 = this.toNumberAndRoman(name0)
-        let i1 = this.toNumberAndRoman(name1)
-        // console.log("sort: " + i0 + ", " + i1)
+        let i0 = this.getMapNumber(name0);
+        let i1 = this.getMapNumber(name1); 
+        // let i0 = this.toNumberAndRoman(name0)
+        // let i1 = this.toNumberAndRoman(name1)
+        console.log("sort: " + i0 + ", " + i1)
         return i0 - i1
         // return name0.localeCompare(name1);
+    }
+
+    private getMapNumber(mapName: string): number {
+       return +mapName.substring(1).split(" ")[0];
     }
 
     public toNumberAndRoman(s) {
@@ -80,7 +84,9 @@ export class MapList {
         try {
             // console.log("mapid: " + mapid)
             if(this.db.hasI18n("map_" + mapid)) {
-                let spaces = this.db.getI18n("map_" + mapid).split(" ");
+                let name = this.db.getI18n("map_" + mapid);
+                return name;
+                let spaces = name.split(" ");
                 let remaining = spaces[spaces.length - 1];
                 return remaining;
             } else {
@@ -94,33 +100,22 @@ export class MapList {
     public clickGoultar() {
         // console.log("click goulta")
         this.showGoultar = true;
-        this.showTournoi = false;
-        this.showDuel = false;
-        this.showAmakna = false;
+        this.showKoli3v3 = false;
+        this.showKoli1v1 = false;
         this.showHelp = false;
     }
-    public clickTournoi() {
-        // console.log("click tournoi")
+    public clickKoli3v3() {
+        // console.log("click koli3v3")
         this.showGoultar = false;
-        this.showTournoi = true;
-        this.showDuel = false;
-        this.showAmakna = false;
+        this.showKoli3v3 = true;
+        this.showKoli1v1 = false;
         this.showHelp = false;
     }
-    public clickDuel() {
-        // console.log("click duel")
+    public clickKoli1v1() {
+        // console.log("click koli1v1")
         this.showGoultar = false;
-        this.showTournoi = false;
-        this.showDuel = true;
-        this.showAmakna = false;
-        this.showHelp = false;
-    }
-    public clickAmakna() {
-        // console.log("click amakna")
-        this.showGoultar = false;
-        this.showTournoi = false;
-        this.showDuel = false;
-        this.showAmakna = true;
+        this.showKoli3v3 = false;
+        this.showKoli1v1 = true;
         this.showHelp = false;
     }
     public clickHelp() {

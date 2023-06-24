@@ -111,9 +111,8 @@
 	},
 	"maps": {
 		"goultar": "Goultarminator",
-		"tournament": "Tournament",
-		"duel": "Duel",
-		"amakna": "Amakna",
+		"koli3v3": "Kolizeum 3v3",
+		"koli1v1": "Kolizeum 1v1",
 		"clickl": "Left click to place the target",
 		"clickr": "Right click to place an obstacle"
 	},

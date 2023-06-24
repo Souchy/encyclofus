@@ -8,8 +8,10 @@ export class Diffchecker {
     
     public spellProperties: string[] = [
         "apCost",
-        "minRange", "range",
-        "castTestLos", "rangeCanBeBoosted",
+        "minRange", 
+        "range",
+        "castTestLos", 
+        "rangeCanBeBoosted",
 
         "criticalHitProbability",
         "maxCastPerTurn",
