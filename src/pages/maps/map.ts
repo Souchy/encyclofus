@@ -22,17 +22,11 @@ const v = 2 * Math.sin(30 * Math.PI / 180) * segmentLength;
 // height of a block
 const w = 15;
 
-@inject(db)
+@inject(db, IEventAggregator)
 export class Map {
-
-    // public mapsData = mapsJson;
-    public db: db;
 
     public svg: SVGSVGElement;
     public groupFloor: SVGGElement;
-    // public groupHoles: SVGGElement;
-    // public groupBlocks: SVGGElement;
-    // public groupObjects: SVGGElement;
 
     // public objects: { i: number, j: number, k: number }[] = []
     // public target = { i: 0, j: 0, k: 0 }
@@ -41,8 +35,7 @@ export class Map {
     public mapId: string = String(map_ids.goultar3v3[0]);
     public mapLoaded = false;
 
-    public constructor(db: db, @IEventAggregator readonly ea: IEventAggregator) {
-        this.db = db;
+    public constructor(readonly db: db, readonly ea: IEventAggregator) {
         ea.subscribe("db:loadmap", e => {
             // console.log("map db:loadmap")
             if (!this.initDone) {
