@@ -13,15 +13,17 @@
 
         <input type="radio" class="btn-check" name="btnradioa" id="btnDuel" autocomplete="off" click.trigger="clickKoli1v1()">
         <label class="btn btn-outline-dark radioDark" for="btnDuel" t="maps.koli1v1"></label>
-        
+
         <input type="radio" class="btn-check" name="btnradioa" id="btnHelp" autocomplete="off" click.trigger="clickHelp()">
-        <label class="btn btn-outline-dark radioDark ms-auto" style="" for="btnHelp" t="help"></label>
+        <label class="btn btn-outline-dark radioDark" style="margin-left: auto;" for="btnHelp" t="help"></label>
     </div>
 
     <div show.bind="showHelp">
         <span style="padding-left: 12px;" t="maps.clickl"></span> 
         <br/>  
         <span style="padding-left: 12px;" t="maps.clickr"></span>
+        <br/>  
+        <span style="padding-left: 12px;" t="maps.mapid"></span>
     </div>
 
     <hr>
@@ -41,7 +43,7 @@
     <div show.bind="showKoli1v1" class="maplist">
         <button class="btn btn-outline-dark" repeat.for="id of koli1v1s" click.trigger="select(id)">${getMapName(id)}</button>
     </div>
-    
+
     <hr>
 
     <map></map>

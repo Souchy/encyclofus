@@ -35,6 +35,7 @@ export class MapList {
         this.goultars1v1 = map_ids.goultar1v1.sort((a, b) => this.sortMaps(a, b));
         this.koli3v3s = map_ids.koli3v3.sort((a, b) => this.sortMaps(a, b));
         this.koli1v1s = map_ids.koli1v1.sort((a, b) => this.sortMaps(a, b));
+        
         // this.select(this.goultars3v3[0]);
         this.isLoaded = true;
     }
@@ -97,6 +98,7 @@ export class MapList {
                 let remaining = spaces[spaces.length - 1];
                 return remaining;
             } else {
+                return "Amakna " + mapid;
                 return mapid + "";
             }
         } catch(error) {
@@ -104,33 +106,28 @@ export class MapList {
         }
     }
 
-    public clickGoultar3v3() {
-        this.showGoultar3v3 = true;
+    private hide() {
+        this.showGoultar3v3 = false;
         this.showGoultar1v1 = false;
         this.showKoli3v3 = false;
         this.showKoli1v1 = false;
         this.showHelp = false;
+    }
+    public clickGoultar3v3() {
+        this.hide();
+        this.showGoultar3v3 = true;
     }
     public clickGoultar1v1() {
-        this.showGoultar3v3 = false;
+        this.hide();
         this.showGoultar1v1 = true;
-        this.showKoli3v3 = false;
-        this.showKoli1v1 = false;
-        this.showHelp = false;
     }
     public clickKoli3v3() {
-        this.showGoultar3v3 = false;
-        this.showGoultar1v1 = false;
+        this.hide();
         this.showKoli3v3 = true;
-        this.showKoli1v1 = false;
-        this.showHelp = false;
     }
     public clickKoli1v1() {
-        this.showGoultar3v3 = false;
-        this.showGoultar1v1 = false;
-        this.showKoli3v3 = false;
+        this.hide();
         this.showKoli1v1 = true;
-        this.showHelp = false;
     }
     public clickHelp() {
         this.showHelp = !this.showHelp;

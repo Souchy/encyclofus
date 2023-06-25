@@ -115,7 +115,8 @@
 		"koli3v3": "Kolizeum 3v3",
 		"koli1v1": "Kolizeum 1v1",
 		"clickl": "Click gauche pour placer la cible",
-		"clickr": "Click droit pour placer un obstacle"
+		"clickr": "Click droit pour placer un obstacle",
+		"mapid": "Si la map n'a pas de nom (Amakna), trouvez son ID avec la commande /mapid en jeu"
 	},
 	"effect": {
 		"removeRunes": "Enlève les runes",
