@@ -110,7 +110,8 @@
 		"basic": "Affichage de base"
 	},
 	"maps": {
-		"goultar": "Goultarminator",
+		"goultar3v3": "Goultarminator 3v3",
+		"goultar1v1": "Goultarminator 1v1",
 		"koli3v3": "Kolizeum 3v3",
 		"koli1v1": "Kolizeum 1v1",
 		"clickl": "Click gauche pour placer la cible",

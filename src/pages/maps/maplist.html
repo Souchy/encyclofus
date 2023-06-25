@@ -2,16 +2,19 @@
 
 <div if.bind="isLoaded">
     <div class="btn-group" style="" role="group" aria-label="Basic radio toggle button group">
-        <input type="radio" class="btn-check" name="btnradioa" id="btnGoultar" autocomplete="off" checked click.delegate="clickGoultar()">
-        <label class="btn btn-outline-dark radioDark" for="btnGoultar" t="maps.goultar"></label>
+        <input type="radio" class="btn-check" name="btnradioa" id="btnGoultar3v3" autocomplete="off" click.trigger="clickGoultar3v3()">
+        <label class="btn btn-outline-dark radioDark" for="btnGoultar3v3" t="maps.goultar3v3"></label>
+        
+        <input type="radio" class="btn-check" name="btnradioa" id="btnGoultar1v1" autocomplete="off" click.trigger="clickGoultar1v1()">
+        <label class="btn btn-outline-dark radioDark" for="btnGoultar1v1" t="maps.goultar1v1"></label>
 
-        <input type="radio" class="btn-check" name="btnradioa" id="btnTournoi" autocomplete="off" click.delegate="clickKoli3v3()">
+        <input type="radio" class="btn-check" name="btnradioa" id="btnTournoi" autocomplete="off" click.trigger="clickKoli3v3()">
         <label class="btn btn-outline-dark radioDark" for="btnTournoi" t="maps.koli3v3"></label>
 
-        <input type="radio" class="btn-check" name="btnradioa" id="btnDuel" autocomplete="off" click.delegate="clickKoli1v1()">
+        <input type="radio" class="btn-check" name="btnradioa" id="btnDuel" autocomplete="off" click.trigger="clickKoli1v1()">
         <label class="btn btn-outline-dark radioDark" for="btnDuel" t="maps.koli1v1"></label>
         
-        <input type="radio" class="btn-check" name="btnradioa" id="btnHelp" autocomplete="off" click.delegate="clickHelp()">
+        <input type="radio" class="btn-check" name="btnradioa" id="btnHelp" autocomplete="off" click.trigger="clickHelp()">
         <label class="btn btn-outline-dark radioDark ms-auto" style="" for="btnHelp" t="help"></label>
     </div>
 
@@ -23,21 +26,21 @@
 
     <hr>
 
-    <div show.bind="showGoultar">
-        <button class="btn btn-outline-dark" repeat.for="id of goultars" click.trigger="select(id)">${getMapName(id)}</button>
+    <div show.bind="showGoultar3v3" class="maplist">
+        <button class="btn btn-outline-dark" repeat.for="id of goultars3v3" click.trigger="select(id)">${getMapName(id)}</button>
+    </div>
+    
+    <div show.bind="showGoultar1v1" class="maplist">
+        <button class="btn btn-outline-dark" repeat.for="id of goultars1v1" click.trigger="select(id)">${getMapName(id)}</button>
     </div>
 
-    <div show.bind="showKoli3v3">
+    <div show.bind="showKoli3v3" class="maplist">
         <button class="btn btn-outline-dark" repeat.for="id of koli3v3s" click.trigger="select(id)">${getMapName(id)}</button>
     </div>
 
-    <div show.bind="showKoli1v1">
+    <div show.bind="showKoli1v1" class="maplist">
         <button class="btn btn-outline-dark" repeat.for="id of koli1v1s" click.trigger="select(id)">${getMapName(id)}</button>
     </div>
-    
-    <!-- <div show.bind="showAmakna">
-        <button class="btn btn-outline-dark" repeat.for="id of amaknas" click.trigger="select(id)">${getMapName(id)}</button>
-    </div> -->
     
     <hr>
 

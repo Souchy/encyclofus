@@ -1,3 +1,4 @@
+import { watch } from '@aurelia/runtime-html';
 import map_ids from '../../DofusDB/scraped/common/mapIds.json'
 // import mapsJson from './maps.json'
 // import fs from 'fs'
@@ -10,11 +11,13 @@ export class MapList {
     public isLoaded: boolean = false
     
     public mapIds = map_ids;
-    public goultars: number[]
+    public goultars3v3: number[]
+    public goultars1v1: number[]
     public koli3v3s: number[]
     public koli1v1s: number[]
 
-    public showGoultar = true;
+    public showGoultar3v3 = true;
+    public showGoultar1v1 = false;
     public showKoli3v3 = false;
     public showKoli1v1 = false;
     public showHelp = false;
@@ -28,20 +31,24 @@ export class MapList {
 
 
     private onLoad() {
-        this.goultars = map_ids.goultar.sort((a, b) => this.sortMaps(a, b));
+        this.goultars3v3 = map_ids.goultar3v3.sort((a, b) => this.sortMaps(a, b));
+        this.goultars1v1 = map_ids.goultar1v1.sort((a, b) => this.sortMaps(a, b));
         this.koli3v3s = map_ids.koli3v3.sort((a, b) => this.sortMaps(a, b));
         this.koli1v1s = map_ids.koli1v1.sort((a, b) => this.sortMaps(a, b));
+        // this.select(this.goultars3v3[0]);
         this.isLoaded = true;
     }
 
     private sortMaps(id0: number, id1: number): number {
         let name0 = this.getMapName(id0)
         let name1 = this.getMapName(id1)
-        let i0 = this.getMapNumber(name0);
-        let i1 = this.getMapNumber(name1); 
+        // let pop0 = name0.split(" ").pop()
+        // let pop1 = name1.split(" ").pop()
+        let i0 = this.getMapNumber(name0) || this.toNumberAndRoman(name0.split(" ").pop());
+        let i1 = this.getMapNumber(name1) || this.toNumberAndRoman(name1.split(" ").pop()); 
         // let i0 = this.toNumberAndRoman(name0)
         // let i1 = this.toNumberAndRoman(name1)
-        console.log("sort: " + i0 + ", " + i1)
+        // console.log("sort: " + pop0 + " " + i0 + ", " + pop1 + " " + i1)
         return i0 - i1
         // return name0.localeCompare(name1);
     }
@@ -75,7 +82,7 @@ export class MapList {
         );
     };
 
-    public select(mapid: string): void {
+    public select(mapid: number): void {
         // console.log("id: " + mapid)
         this.ea.publish("map:setid", mapid)
     }
@@ -97,23 +104,30 @@ export class MapList {
         }
     }
 
-    public clickGoultar() {
-        // console.log("click goulta")
-        this.showGoultar = true;
+    public clickGoultar3v3() {
+        this.showGoultar3v3 = true;
+        this.showGoultar1v1 = false;
+        this.showKoli3v3 = false;
+        this.showKoli1v1 = false;
+        this.showHelp = false;
+    }
+    public clickGoultar1v1() {
+        this.showGoultar3v3 = false;
+        this.showGoultar1v1 = true;
         this.showKoli3v3 = false;
         this.showKoli1v1 = false;
         this.showHelp = false;
     }
     public clickKoli3v3() {
-        // console.log("click koli3v3")
-        this.showGoultar = false;
+        this.showGoultar3v3 = false;
+        this.showGoultar1v1 = false;
         this.showKoli3v3 = true;
         this.showKoli1v1 = false;
         this.showHelp = false;
     }
     public clickKoli1v1() {
-        // console.log("click koli1v1")
-        this.showGoultar = false;
+        this.showGoultar3v3 = false;
+        this.showGoultar1v1 = false;
         this.showKoli3v3 = false;
         this.showKoli1v1 = true;
         this.showHelp = false;

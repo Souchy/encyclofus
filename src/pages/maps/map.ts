@@ -2,6 +2,7 @@ import { bindable, IEventAggregator, inject, observable } from 'aurelia';
 import { watch } from '@aurelia/runtime-html';
 import { Board, posVIP1, posVIP2, posVIP3, Vector2 } from '../../DofusDB/formulas';
 import { db } from '../../DofusDB/db';
+import map_ids from '../../DofusDB/scraped/common/mapIds.json'
 // import { MapTools } from '../../DofusDB/formulas2';
 // import jsonMap from '../../DofusDB/scraped/common/map_kolo/113508877.json'
 // import jsonMap from '../../DofusDB/scraped/common/134484992.json'
@@ -37,7 +38,7 @@ export class Map {
     // public target = { i: 0, j: 0, k: 0 }
     public board: Board;
 
-    public mapId: string = "134479872";
+    public mapId: string = String(map_ids.goultar3v3[0]);
     public mapLoaded = false;
 
     public constructor(db: db, @IEventAggregator readonly ea: IEventAggregator) {
