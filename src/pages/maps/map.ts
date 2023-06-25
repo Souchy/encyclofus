@@ -28,8 +28,6 @@ export class Map {
     public svg: SVGSVGElement;
     public groupFloor: SVGGElement;
 
-    // public objects: { i: number, j: number, k: number }[] = []
-    // public target = { i: 0, j: 0, k: 0 }
     public board: Board;
 
     public mapId: string = String(map_ids.goultar3v3[0]);
