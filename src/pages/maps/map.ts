@@ -76,7 +76,7 @@ export class Map {
             this.db.loadMap(this.mapId);
             return "";
         }
-        // console.log("map init " + this.mapId)
+        console.log("map init " + this.mapId)
         // this.initDone = false;
         if (this.groupFloor) this.groupFloor.innerHTML = "";
         this.board = new Board();
@@ -139,6 +139,8 @@ export class Map {
         // console.log("generateMap")
         // console.log("children 2: " + this.groupFloor.children.length)
 
+        let views = this.board.getViews(this.board.target);
+
         for (let id = 0; id < this.board.cells.length; id++) {
             let cell = this.board.cells[id];
             let x = this.board.getX(id);
@@ -152,6 +154,10 @@ export class Map {
             };
 
             let classes = "k" + k + " "
+
+// 240, 241 cells
+// 227, 255 blocks
+// 226, 256 view
 
             // placed object blocks
             if (this.board.objects[id]) {
@@ -168,7 +174,8 @@ export class Map {
                     let inlos = false;
                     // highlight los from target
                     if (this.board.target != -1) {
-                        inlos = this.board.checkView(this.board.target, id);
+                        // inlos = this.board.checkView(this.board.target, id);
+                        inlos = views.includes(id);
                     }
                     // hole
                     if (!cell.mov && cell.los)
@@ -273,6 +280,10 @@ export class Map {
             if (c) right.classList.add(c)
         }
 
+        // top.onclick = (e) => {
+        //     // if (!classes.includes("hole"))
+        //         this.placeTarget(id);
+        // };
         let func = (e) => {
             e.preventDefault();
             if (classes.includes("object"))
