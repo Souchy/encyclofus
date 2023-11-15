@@ -6,6 +6,7 @@
 
 - Perte de buffs: chance, contrecoup, pacte, muti, égide, rempart, bastion, mot de prevention....
 - Prytek
+- Crocobur, Scorbute
 - Dorigami
 - Ébène
 - Glyphes
@@ -23,12 +24,15 @@
 
 ### Fin de tour
 
-- Crocobur
+- Crocobur, Scorbute
 - Émeraude
 - Servitude
+- Rembobinage
 - Poisons: Épidémie, Poison paralysant...
 
 ## Interactions spéciales
+
+- Dofus Cauchemard + Prytek, Émeraude, Dorigami, Tacheté, Domakuro, 
 
 ### Sacrifice et Partage de dégât
 
@@ -47,9 +51,9 @@
 
 - Indéplaçable (portail, porter, déplacer, téléporter, échanger)
     - Pilori, Détermination, Ginga
-- Inébranlable (déplacer, ~~téléporter, échanger~~) // on peut transpo sacri sur un ougi aboiement
+- Inébranlable (déplacer, ~~téléporter, échanger~~) // on peut transpo sacri sur un ougi aboiement, mais bloque excu
     -  Glyphe Gravitationnel, Aboiement
-- Enraciné (portail, déplacer)
+- Enraciné (portail, déplacer -> bloque échange (excu) et tp symétrique (éviction) mais pas tp direct)
     - Stabilisation, Harmonie, Cawotte...
 - Pesanteur (téléporter, échanger)
     - Glyphe Gravitationnel, Brassage, Retraite, Bouftou chatain, Tourelles Steamer...
