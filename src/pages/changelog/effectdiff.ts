@@ -75,51 +75,51 @@ export class effectdiff {
         let newprop = this.newEffect[prop]
         let oldprop = this.oldEffect[prop]
         if(newprop == oldprop) return "";
-        return this.i18n.tr(prop) + ": " + this.i18n.tr(oldprop) + " -> " + this.i18n.tr(newprop);
+        return this.i18n.tr(prop) + ": " + this.i18n.tr(oldprop) + " → " + this.i18n.tr(newprop);
     }
     public get dispellable() {
         if(this.newEffect?.dispellable != this.oldEffect?.dispellable) {
-            // console.log("dispel1 " + this.newEffect?.dispellable + " -> " + this.oldEffect?.dispellable)
-            return "dispellable: " + this.oldEffect?.dispellable + " -> " + this.newEffect?.dispellable;
+            // console.log("dispel1 " + this.newEffect?.dispellable + " → " + this.oldEffect?.dispellable)
+            return "dispellable: " + this.oldEffect?.dispellable + " → " + this.newEffect?.dispellable;
         }
         return "";
     }
     public get rawZone() {
         if(this.newEffect?.rawZone != this.oldEffect?.rawZone) {
-            return "rawZone: " + this.oldEffect?.rawZone + " -> " + this.newEffect?.rawZone;
+            return "rawZone: " + this.oldEffect?.rawZone + " → " + this.newEffect?.rawZone;
         }
         return "";
     }
     public get targetMask() {
         if(this.newEffect?.targetMask != this.oldEffect?.targetMask) {
-            return "targetMask: " + this.oldEffect?.targetMask + " -> " + this.newEffect?.targetMask;
+            return "targetMask: " + this.oldEffect?.targetMask + " → " + this.newEffect?.targetMask;
         }
         return "";
     }
     public get delay() {
         if(this.newEffect?.delay != this.oldEffect?.delay) {
-            return "delay: " + this.oldEffect?.delay + " -> " + this.newEffect?.delay;
+            return "delay: " + this.oldEffect?.delay + " → " + this.newEffect?.delay;
         }
         return "";
     }
     public get duration() {
         if(this.newEffect?.duration != this.oldEffect?.duration) {
-            return "duration: " + this.oldEffect?.duration + " -> " + this.newEffect?.duration;
+            return "duration: " + this.oldEffect?.duration + " → " + this.newEffect?.duration;
         }
         return "";
     }
     public get effectId() {
         if(this.newEffect?.effectId != this.oldEffect?.effectId) {
-            return "effectId: " + this.oldEffect?.effectId + " -> " + this.newEffect?.effectId;
+            return "effectId: " + this.oldEffect?.effectId + " → " + this.newEffect?.effectId;
         }
         return "";
     }
     public get values() {
         if(this.newEffect?.diceNum != this.oldEffect?.diceNum || this.newEffect?.diceSide != this.oldEffect?.diceSide) {
-            return "values: " + this.oldEffect?.diceNum + " - " + this.oldEffect?.diceSide + " -> " + this.newEffect?.diceNum + " - " + this.newEffect?.diceSide
+            return "values: " + this.oldEffect?.diceNum + " - " + this.oldEffect?.diceSide + " → " + this.newEffect?.diceNum + " - " + this.newEffect?.diceSide
         }   
         if(this.newEffect?.value != this.oldEffect?.value)
-            return "value: " + this.oldEffect?.value + " -> " + this.newEffect?.value;
+            return "value: " + this.oldEffect?.value + " → " + this.newEffect?.value;
         return "";
     }
     

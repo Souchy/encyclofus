@@ -40,7 +40,7 @@
 
     <div if.bind="values || duration || delay || effectId"> <!-- -->
         <span innerHtml.bind="effectRenderer.renderEffectI18n(oldEffect).replace('<br>', '')"></span>
-        ->
+        →
         <span innerHtml.bind="effectRenderer.renderEffectI18n(newEffect).replace('<br>', '')"></span>
     </div>
     <div if.bind="!(values || duration || delay || effectId)">
@@ -56,7 +56,7 @@
             <img style="vertical-align: middle; margin-left: -10px; margin-right: -10px;" src.bind="effectRenderer.getDispellIcon(oldEffect)"></img>
             <div class="tooltiptext">${effectRenderer.getDispellString(oldEffect)}</div>
         </span>
-        ->
+        →
         <span  class="tooltipx" style="vertical-align: middle; width: 25px; height: 32px; display: inline-block;">
             <img style="vertical-align: middle; margin-left: -10px; margin-right: -10px;" src.bind="effectRenderer.getDispellIcon(newEffect)"></img>
             <div class="tooltiptext">${effectRenderer.getDispellString(newEffect)}</div>
@@ -68,7 +68,7 @@
             <img style="vertical-align: middle; margin-left: 2px;" src.bind="effectRenderer.getTargetIcon(oldEffect)"></img>
             <div class="tooltiptext" innerHtml.bind="effectRenderer.getTargetString(oldEffect)"></div>
         </span>
-        ->
+        →
         <span class="tooltipx" style="width: 22px; height: 32px; padding: 4px; vertical-align: middle; display: inline-block;">
             <img style="vertical-align: middle; margin-left: 2px;" src.bind="effectRenderer.getTargetIcon(newEffect)"></img>
             <div class="tooltiptext" innerHtml.bind="effectRenderer.getTargetString(newEffect)"></div>
@@ -80,7 +80,7 @@
             <img style="width: 36px; height: 18px;" src.bind="db.getAoeIconUrl(oldEffect)"></img>
             <div class="tooltiptext">${effectRenderer.getZoneString(oldEffect)}</div>
         </span>
-        ->
+        →
         <span if.bind="db.getAoeIconUrl(newEffect)" class="tooltipx" style="width: 37px; height: 32px; padding: 0px; vertical-align: middle; display: inline-block;">
             <img style="width: 36px; height: 18px;" src.bind="db.getAoeIconUrl(newEffect)"></img>
             <div class="tooltiptext">${effectRenderer.getZoneString(newEffect)}</div>

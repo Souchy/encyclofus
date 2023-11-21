@@ -48,7 +48,7 @@ export class spelldiff {
         let newprop = this.newSpell[prop]
         let oldprop = this.oldSpell[prop]
         if(newprop == oldprop) return "";
-        return this.i18n.tr(prop) + ": " + this.i18n.tr(oldprop) + " -> " + this.i18n.tr(newprop);
+        return this.i18n.tr(prop) + ": " + this.i18n.tr(oldprop) + " → " + this.i18n.tr(newprop);
     }
 
 
