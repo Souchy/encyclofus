@@ -1,0 +1,94 @@
+setsheet {
+  --sheetaccent: var(--accent1);
+  --sheetaccenthover: var(--accent0);
+  /* background: #1d3030; */
+  /* background: var(--bg1); */
+  cursor: pointer;
+  /* border: 1px solid var(--sheetaccent); */
+  border: 1px solid transparent;
+  /* box-shadow: 5px 5px 5px black; */
+}
+setsheet .statistics {
+  padding: 5px;
+}
+setsheet .title {
+    padding: 5px;
+    /* background: var(--sheetaccent); */
+    color: var(--sheetaccent);
+    font-size: 1.1rem;
+}
+
+
+setsheet:hover {
+  border: 1px solid var(--sheetaccenthover);
+}
+setsheet:hover .title {
+  color: var(--sheetaccenthover);
+}
+
+setsheet .items {
+  display: flex;
+}
+setsheet .items .item {
+  width: 55px;
+  height: 55px;
+}
+setsheet .items .item img {
+  width: 55px;
+  height: 55px;
+}
+
+setsheet .items .item itemsheet  {
+  /* Position the tooltip */
+  position: absolute;
+  visibility: collapse;
+  margin-left: -1px;
+  // margin-top: -30px;
+  // display: inline-block;
+  width: 260px;
+  background-color: var(--bg0);
+  // color: #fff;
+  // text-align: center;
+  // border-radius: 6px;
+  // padding: 5px 0;
+  pointer-events: none;
+  border: 1px solid var(--accent0);
+  z-index: 2;
+}
+setsheet .items .item:hover itemsheet,
+setsheet:hover .items .item:hover itemsheet {
+  visibility: visible;
+  opacity: 99%;
+}
+
+
+setsheet .totalStats {
+  /* Position the tooltip */
+  position: absolute;
+  visibility: collapse;
+  padding-left: 5px;
+  // display: none;
+  margin-left: -1px;
+  // margin-top: -30px;
+  // display: inline-block;
+  width: 260px;
+  background-color: var(--bg0);
+  // color: #fff;
+  // text-align: center;
+  // border-radius: 6px;
+  // padding: 5px 0;
+  border: 1px solid var(--accent0);
+  border-top: none;
+  z-index: 1;
+}
+setsheet:hover .totalStats {
+  // display: block;
+  visibility: visible;
+  opacity: 99%;
+}
+
+setsheet .setsheet>.statistics {
+}
+//  setsheet:hover .setsheet > .statistics {
+//    display: none;
+// }

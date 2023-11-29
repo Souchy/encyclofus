@@ -1,10 +1,11 @@
 import { ConditionRenderer } from './../../../ts/conditions';
 import { CriteriaGroup } from './../../../DofusDB/static/formulas/criterions';
-import { bindable, IEventAggregator, inject } from "aurelia";
+// import { bindable, IEventAggregator, inject } from "aurelia";
 import { db } from "../../../DofusDB/db";
 import { Citerions, CriterionUtil, Criteria } from '../../../DofusDB/static/formulas/criterions';
-import { json } from 'body-parser';
 import { I18N } from "@aurelia/i18n";
+import { bindable, IEventAggregator } from 'aurelia';
+
 
 // @inject(db, Emerald, ConditionRenderer)
 export class itemsheet {
@@ -14,12 +15,12 @@ export class itemsheet {
 
     // public sortedEffects: any[];
     private conditionRenderer: ConditionRenderer;
-	private db: db;	
+    private db: db;
 
-	public constructor(db: db, conditionRenderer: ConditionRenderer, @I18N private readonly i18n: I18N, @IEventAggregator readonly ea: IEventAggregator) {
+    public constructor(db: db, conditionRenderer: ConditionRenderer, @I18N private readonly i18n: I18N, @IEventAggregator readonly ea: IEventAggregator) {
         // console.log("renderer: " + conditionRenderer)
-		this.db = db;
-		this.conditionRenderer = conditionRenderer;
+        this.db = db;
+        this.conditionRenderer = conditionRenderer;
     }
 
     attached() {

@@ -1,0 +1,56 @@
+<require from="../build/components/itemSlot"></require>
+<require from="../items/itemsheet"></require>
+<require from="./setsheet.less"></require>
+<!-- <require from="/src/pages/items/itemsheet.css"></require> -->
+
+
+<!-- englobing class div for css -->
+<div class="setsheet" onclick.call="equip()" onmouseover.call="hoverSet()" ${hidden}>
+
+  <!-- Image and weapon stats -->
+  <div class="title d-flex flex-nowrap">
+    <!-- Name and level -->
+    <div>
+      <span>${data.name.fr}</span><br>
+    </div>
+  </div>
+
+  <!-- items -->
+  <!-- <div class="items">
+    <div class="item" repeat.for="item of data.items" onmouseover.call="hoverItem()">
+      <img src="${getImgUrl(item)}">
+      <itemsheet data.bind="item"></itemsheet>
+    </div>
+  </div> -->
+
+  <!-- Effects -->
+  <div class="statistics">
+    <ul style="padding: 0;">
+      <!-- 1 row for each effect -->
+      <li class="row" repeat.for="effect of data.bonuses[0]" if="isntPseudo(effect)">
+        <div class="container statistic">
+          ${effect.min}
+          ${effect.min == null ? "" : "à"}
+          ${effect.max}
+          <span style.bind="getStatColor(effect.name)">${effect.name}</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Effects totals -->
+  <div class="totalStats">
+    <ul style="padding: 0;">
+      <!-- 1 row for each effect -->
+      <li class="row" repeat.for="effect of data.statistics" if="isntPseudo(effect)">
+        <div class="container statistic">
+          ${effect.min}
+          ${effect.min == null ? "" : "à"}
+          ${effect.max}
+          <span style.bind="getStatColor(effect.name)">${effect.name}</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+</div>

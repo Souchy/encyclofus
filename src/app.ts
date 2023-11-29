@@ -97,6 +97,12 @@ export class App {
 				title: "Items",
 				reloadBehavior: ReloadBehavior.refresh,
 			});
+			App.routes.push({
+				path: 'sets',
+				component: import('./pages/quickfus/sets/sets'),
+				title: "Panoplies",
+				reloadBehavior: ReloadBehavior.refresh,
+			});
 		}
 
 		// App.routes.push({
