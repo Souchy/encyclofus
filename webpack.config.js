@@ -65,7 +65,7 @@ module.exports = function(env, { analyze }) {
       historyApiFallback: true,
       //open: !process.env.CI,
       open: false,
-      port: 9000,
+      port: 8000,
       liveReload: true,
       static: true,
       static: path.join(__dirname, '')
