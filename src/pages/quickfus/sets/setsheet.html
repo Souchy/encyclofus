@@ -18,7 +18,7 @@
   <div class="items" if.bind="items.length > 0">
     <div class="item" repeat.for="item of data.items" onmouseover.call="hoverItem()">
       <img class="itemIcon" src="${getImgUrl(item)}" loading="lazy"/>
-      <itemsheet item.bind="items[$index]"></itemsheet>
+      <!-- <itemsheet item.bind="items[$index]"></itemsheet> -->
     </div>
   </div>
 
@@ -37,9 +37,14 @@
 
   <!-- Effects -->
   <template if.bind="comparing">
-    <effectlist if.bind="bonusCounterHasEffects" effects.bind="comparedEffects[bonusCounter]" iscrit.bind="false" depth.bind="0" comparing.to-view="true"></effectlist>
+    <!-- hi ${finishedComparison} ${comparing} -->
+    <!-- <div if.bind="!finishedComparison" class="loaderContainer">
+        <div class="loader"></div>
+    </div> -->
+    <effectlist if.bind="finishedComparison" effects.bind="comparedEffects[bonusCounter]" iscrit.bind="false" depth.bind="0" comparing.to-view="true"></effectlist>
   </template>
   <template else>
+    bye
     <effectlist if.bind="bonusCounterHasEffects" effects.bind="data.effects[bonusCounter]" iscrit.bind="false" depth.bind="0"></effectlist>
   </template>
 

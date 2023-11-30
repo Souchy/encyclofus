@@ -88,8 +88,8 @@ export class sets {
         this.mason.showMore(); 
         this.mason.showMore(); 
         this.mason.showMore(); 
-        this.mason.showMore(); 
-        this.mason.showMore(); 
+        // this.mason.showMore(); 
+        // this.mason.showMore(); 
 		// console.log("mason showed more")
 		this.searching = false;
     }

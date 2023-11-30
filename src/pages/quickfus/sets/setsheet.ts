@@ -47,8 +47,8 @@ export class setsheet {
 		// console.log("Set data: ");
 		// console.log(this.data);
 		this.bonusCounter = this.data.effects.length - 1;
-		this.linkItems();
-		this.loadComparison();
+		setTimeout(() => this.linkItems(), 0);
+		setTimeout(() => this.loadComparison(), 0);
 	}
 
 	public async linkItems() {
@@ -98,8 +98,11 @@ export class setsheet {
 	}
 
 	public get bonusCounterHasEffects() {
-		if(this.bonusCounter in this.data.effects) {
-			let effects = this.data.effects[this.bonusCounter];
+		let bonuses = this.data.effects;
+		// if(this.comparing)
+		// 	bonuses = this.comparedEffects;
+		if(this.bonusCounter in bonuses) {
+			let effects = bonuses[this.bonusCounter];
 			// console.log("bonusCounterHasEffects: " + JSON.stringify(effects))
 			return effects.length > 0 && effects[0] != null;
 		}
@@ -114,6 +117,7 @@ export class setsheet {
 		this.comparedEffects = [];
 		if(this.data.id in this.db.data2.jsonItemSetsById == false) {
 			this.finishedComparison = true;
+			this.comparedEffects = this.data.effects;
 			return;
 		}
 		let oldSet = this.db.data2.jsonItemSetsById[this.data.id]; 
