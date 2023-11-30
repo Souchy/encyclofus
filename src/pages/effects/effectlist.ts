@@ -1,21 +1,25 @@
 import { I18N } from "@aurelia/i18n";
 import { bindable } from "aurelia";
 import { db } from "../../DofusDB/db";
+import { DofusEffect, DofusEffectModel } from "../../ts/dofusModels";
+import { Console } from "console";
 
 export class Effectlist {
 
     @bindable
     public spellGrade = 0;
     @bindable
-    public effects: any[];
+    public effects: DofusEffect[];
     @bindable
     public depth: number = 0;
     @bindable
     public iscrit:boolean;
+	@bindable
+	public comparing: boolean = false;
 
     public db: db;
     public debug: boolean = false;
-
+    
     public constructor(db: db, @I18N private readonly i18n: I18N) {
         this.db = db;
         // console.log("different effect order: " + (this.effects != this.effectsOrdered))
@@ -37,16 +41,22 @@ export class Effectlist {
         return this.db.jsonGreenListEffects.red.includes(e);
     }
 
-	public getEffect(effect) {
-		return this.db.data.jsonEffects?.filter(e => e.id == effect.effectId)[0];
+	public getEffectModel(effect: DofusEffect): DofusEffectModel {
+        // return this.db.data.jsonEffects.find(e => e.id == effect.effectId);
+        return this.db.data.jsonEffectsById[effect.effectId];
 	}
-    public isEffectVisible(e: any) {
+    public isEffectVisible(e: DofusEffect) {
+        if(!e) return false;
         let mode = this.db.effectMode;
         if(mode == "debug") return true;
         // 666 = ACTION_NOOP = "Pas d'effet supplémentaire"
 
-        let effectModel = e.effect ?? this.getEffect(e);
-        let show = (this.isGreenList(e.effectUid) || e.visibleInTooltip || (effectModel.showInTooltip && mode == "detailed")) // || e.visibleInBuffUi || e.visibleInFightLog) 
+        // console.log("isEffectVisible:")
+        // console.log(e);
+        let effectModel = e["effect"] ?? this.getEffectModel(e);
+        // console.log(effectModel)
+        
+        let show = (this.isGreenList(e.effectUid) || e.visibleInTooltip || (effectModel?.showInTooltip && mode == "detailed") || effectModel?.showInSet) // || e.visibleInBuffUi || e.visibleInFightLog) 
                 && !this.isRedList(e.effectUid) && e.effectId != 666
 
         // let show = (

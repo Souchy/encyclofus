@@ -30,4 +30,14 @@
             </div>
         </div>
     </div>
+
+    <div promise.bind="calculateSetDifferences()">
+        <div pending>loading...</div>
+        <div then.from-view>
+            ${data}
+        </div>
+        <!-- <div repeat.for="set of setDifferences">
+        </div> -->
+    </div>
+
 </div>

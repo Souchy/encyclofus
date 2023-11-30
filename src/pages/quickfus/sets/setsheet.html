@@ -1,47 +1,52 @@
-<require from="../build/components/itemSlot"></require>
 <require from="../items/itemsheet"></require>
 <require from="./setsheet.less"></require>
-<!-- <require from="/src/pages/items/itemsheet.css"></require> -->
-
+<import from="../../effects/effect"></import>
+<import from="../../effects/effectlist"></import>
 
 <!-- englobing class div for css -->
-<div class="setsheet" onclick.call="equip()" onmouseover.call="hoverSet()" ${hidden}>
+<div class="setsheet" onmouseover.call="hoverSet()" ${hidden} id="${data.id}">
 
   <!-- Image and weapon stats -->
   <div class="title d-flex flex-nowrap">
     <!-- Name and level -->
     <div>
-      <span>${data.name.fr}</span><br>
+      <span>${name} (${highestItemLevel})</span><br>
     </div>
   </div>
 
   <!-- items -->
-  <!-- <div class="items">
+  <div class="items" if.bind="items.length > 0">
     <div class="item" repeat.for="item of data.items" onmouseover.call="hoverItem()">
-      <img src="${getImgUrl(item)}">
-      <itemsheet data.bind="item"></itemsheet>
+      <img class="itemIcon" src="${getImgUrl(item)}" loading="lazy"/>
+      <itemsheet item.bind="items[$index]"></itemsheet>
     </div>
-  </div> -->
-
-  <!-- Effects -->
-  <div class="statistics">
-    <ul style="padding: 0;">
-      <!-- 1 row for each effect -->
-      <li class="row" repeat.for="effect of data.bonuses[0]" if="isntPseudo(effect)">
-        <div class="container statistic">
-          ${effect.min}
-          ${effect.min == null ? "" : "à"}
-          ${effect.max}
-          <span style.bind="getStatColor(effect.name)">${effect.name}</span>
-        </div>
-      </li>
-    </ul>
   </div>
 
+  <div class="itemCountChoice">
+    <!-- Sélection du nombre d'items pour choisir le bonus pano -->
+    <div repeat.for="i of data.effects.length">
+      <input type="radio" class="btn-check" name="${data.id}" id="${data.id}-${i}" model.bind="i" checked.bind="bonusCounter" autocomplete="off">
+      <label class="btn btn-outline-dark radioDark" style="margin-left: auto;" for="${data.id}-${i}">${i + 1}</label>
+    </div>
+    <!-- Bouton pour comparer avec la dernière version -->
+    <button class="btn btn-compare" click.trigger="comparing = !comparing">
+      <i class="fa-solid fa-code-compare"></i>
+    </button>
+  </div>
+
+
+  <!-- Effects -->
+  <template if.bind="comparing">
+    <effectlist if.bind="bonusCounterHasEffects" effects.bind="comparedEffects[bonusCounter]" iscrit.bind="false" depth.bind="0" comparing.to-view="true"></effectlist>
+  </template>
+  <template else>
+    <effectlist if.bind="bonusCounterHasEffects" effects.bind="data.effects[bonusCounter]" iscrit.bind="false" depth.bind="0"></effectlist>
+  </template>
+
+  
   <!-- Effects totals -->
-  <div class="totalStats">
+  <!-- <div class="totalStats">
     <ul style="padding: 0;">
-      <!-- 1 row for each effect -->
       <li class="row" repeat.for="effect of data.statistics" if="isntPseudo(effect)">
         <div class="container statistic">
           ${effect.min}
@@ -51,6 +56,6 @@
         </div>
       </li>
     </ul>
-  </div>
+  </div> -->
 
 </div>

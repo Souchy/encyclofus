@@ -61,7 +61,8 @@ export class itemsheet {
     }
 
     public getEffect(possibleEffect) {
-        possibleEffect.effect ??= this.db.data.jsonEffects.filter(e => e.id == possibleEffect.effectId)[0];
+        possibleEffect.effect ??= this.db.data.jsonEffectsById[possibleEffect.effectId]; 
+        //this.db.data.jsonEffects.filter(e => e.id == possibleEffect.effectId)[0];
         return possibleEffect.effect;
     }
 

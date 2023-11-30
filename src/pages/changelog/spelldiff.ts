@@ -7,6 +7,7 @@ import { DI, IEventAggregator, Registration } from 'aurelia';
 import _ from 'lodash';
 import { Diffchecker } from './diffchecker';
 import { SummonUtils } from '../../ts/summonUtils';
+import { DofusEffect, DofusEffectModel, DofusSpell } from '../../ts/dofusModels';
 
 export class spelldiff {
  
@@ -22,22 +23,14 @@ export class spelldiff {
     ) {
 	}
 
-    public get newSpell(): any {
+    public get newSpell(): DofusSpell {
         return this.db.data.jsonSpells[this.spellid];
     }
-    public get oldSpell(): any {
+    public get oldSpell(): DofusSpell {
         return this.db.data2.jsonSpells[this.spellid];
     }
-    public get effects2(): any[] {
+    public get effects2(): DofusEffectModel[] {
         return this.db.data2.jsonEffects;
-    }
-
-    public thing() {
-        let diff = this.newSpell.effects.filter((e1) => {
-            let e2 = this.effects2.find(e2 => e1.id == e2.id);
-            return !_.isEqual(e1, e2)
-        });
-        return diff;
     }
 
     public get hasDiff(): boolean {
@@ -61,13 +54,13 @@ export class spelldiff {
 
     public commonEffects() {
         let common = this.newSpell.effects.filter(e1 => {
-            return this.oldSpell.effects.find(e2 => e1.id == e2.id);
+            return this.oldSpell.effects.find(e2 => e1.effectId == e2.effectId);
         })
         return common;
     }
     public newEffects() {
         let news: any[] = this.newSpell.effects.filter(e1 => {
-            return !this.oldSpell.effects.find(e2 => e1.id == e2.id);
+            return !this.oldSpell.effects.find(e2 => e1.effectId == e2.effectId);
         })
         // if(news.length > 0) {
         //     console.log("news: " + news)
@@ -77,14 +70,14 @@ export class spelldiff {
     }
     public removedEffects() {
         let olds = this.oldSpell.effects.filter(e2 => {
-            return !this.newSpell.effects.find(e1 => e1.id == e2.id);
+            return !this.newSpell.effects.find(e1 => e1.effectId == e2.effectId);
         })
         return olds;
     }
 
     public get shouldDisplayOldName() {
         if(!this.oldSpell) return false;
-        return (this.oldSpell.nameId != this.newSpell.nameId && this.db.hasI18n(this.oldSpell.nameId)) 
+        return (this.oldSpell.nameId != this.newSpell.nameId && this.db.hasI18n(this.oldSpell.nameId.toString())) 
     }
 
     /*

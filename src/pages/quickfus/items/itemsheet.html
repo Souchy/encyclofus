@@ -2,9 +2,9 @@
 <import from="../../effects/effectlist"></import>
 
 
-<div data-id="${item.id}">
+<div if.bind="item" data-id="${item.id}">
     <div class="d-flex">
-        <img class="itemIcon" src="${itemIconUrl}"/>
+        <img class="itemIcon" src="${itemIconUrl}" loading="lazy"/>
         <div>
             ${db.getI18n(item.nameId)}
             <br>

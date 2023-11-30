@@ -1,3 +1,4 @@
+
 export interface DofusSpell {
     id: number;
     spellId: number;
@@ -32,7 +33,7 @@ export interface DofusSpell {
     criticalEffect: DofusEffect[],
     previewZones: [],
     nameId: number;
-    descriptionId:number;
+    descriptionId: number;
     iconId: number;
 }
 
@@ -63,12 +64,13 @@ export interface DofusEffect {
 }
 
 export interface DofusSet {
-    id: string,
+    id: number,
     items: number[],
     nameId: string,
     bonusIsSecret: boolean,
-    effects: DofusEffect[],
+    effects: DofusEffect[][],
     version: string
+    itemsData: DofusItem[]
 }
 
 export interface DofusItem {
@@ -101,6 +103,28 @@ export interface DofusItem {
     dropTemporisMonsterIds: [],
     objectIsDisplayOnWeb: boolean;
     bonusIsSecret: boolean;
+    possibleEffects: DofusEffect[];
+    evolutiveEffectIds: [],
+    favoriteSubAreas: [],
+    favoriteSubAreasBonus: number;
+    craftXpRatio: number;
+    needUseConfirm: boolean;
+    isDestructible: boolean;
+    isSaleable: boolean;
+    isColorable: boolean;
+    isLegendary: boolean;
+    craftVisible: string;
+    craftConditional: string;
+    craftFeasible: string;
+    visibility: string;
+    recyclingNuggets: number;
+    favoriteRecyclingSubareas: [],
+    containerIds: [],
+    resourcesBySubarea: [],
+    importantNoticeId: number;
+    changeVersion: string;
+    tooltipExpirationDate: number;
+    version: string;
 }
 
 export interface DofusPreviewZone {
@@ -110,4 +134,39 @@ export interface DofusPreviewZone {
     casterMask: string;
     rawActivationZone: string;
     activationMask: string;
+}
+
+export interface DofusEffectModel {
+    id: number;
+    descriptionId: number;
+    iconId: number;
+    characteristic: number;
+    category: number;
+    operator: string;
+    showInTooltip: boolean;
+    useDice: boolean;
+    forceMinMax: boolean;
+    boost: boolean;
+    active: boolean;
+    oppositeId: number;
+    theoreticalDescriptionId: number;
+    theoreticalPattern: number;
+    showInSet: boolean;
+    bonusType: number;
+    useInFight: boolean;
+    effectPriority: number;
+    effectPowerRate: number;
+    elementId: number;
+}
+
+export interface DofusCharacteristic {
+    id: number;
+    keyword: string;
+    nameId: number;
+    asset: string;
+    categoryId: number;
+    visible: boolean;
+    order: number;
+    scaleFormulaId: number;
+    upgradable: boolean;
 }

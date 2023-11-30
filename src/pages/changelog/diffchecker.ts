@@ -2,6 +2,7 @@ import { I18N } from "@aurelia/i18n";
 import { db } from "../../DofusDB/db";
 import versions from '../../DofusDB/versions.json'
 import { DI, IEventAggregator, Registration } from 'aurelia';
+import { DofusEffect } from "../../ts/dofusModels";
 
 
 export class Diffchecker {
@@ -106,8 +107,9 @@ export class Diffchecker {
     public effectDiff(spellid: number, effectid: number) {
         let newEffect = this.db.data.jsonSpells[spellid].effects.find(e => e.effectUid == effectid);
         let oldEffect = this.db.data2.jsonSpells[spellid].effects.find(e => e.effectUid == effectid);
-        newEffect.effect ??= this.db.data.jsonEffects.find(e => e.id == newEffect.effectId);
-        oldEffect.effect ??= this.db.data2.jsonEffects.find(e => e.id == oldEffect.effectId);
+        // ajoute le model
+        newEffect["effect"] ??= this.db.data.jsonEffectsById[newEffect.effectId] //this.db.data.jsonEffects.find(e => e.id == newEffect.effectId);
+        oldEffect["effect"] ??= this.db.data.jsonEffectsById[oldEffect.effectId] //this.db.data2.jsonEffects.find(e => e.id == oldEffect.effectId);
         for(let prop of this.effectProperties) {
             if(this.diffProperty(newEffect, oldEffect, prop) && (/* this.isEffectVisible(oldEffect) ||  */this.isEffectVisible(newEffect))) {
                 if(prop == "rawZone" && (newEffect[prop] == oldEffect[prop] + ",0,0" || oldEffect[prop] == newEffect[prop] + ",0,0"))
@@ -118,18 +120,19 @@ export class Diffchecker {
         }   
         return false;
     }
-    public getEffectModel(e) {
-        return this.db.data.jsonEffects.find(e => e.id == e.effectId);
+    public getEffectModel(effect: DofusEffect) {
+        // return this.db.data.jsonEffects.find(e => e.id == effect.effectId);
+        return this.db.data.jsonEffectsById[effect.effectId];
     }
     public isElemental(effectModel) {
         return effectModel.elementId >= 0;
     }
-    public isEffectVisible(e) {
+    public isEffectVisible(e: DofusEffect) {
         let mode = this.db.effectMode;
         if(mode == "debug") return true;
         // 666 = ACTION_NOOP = "Pas d'effet supplémentaire"
         // let e = this.newEffect;
-        let effectModel = e.effect; 
+        let effectModel = e["effect"] ?? this.getEffectModel(e);
         let show = (this.isGreenList(e.effectUid) || e.visibleInTooltip || (effectModel?.showInTooltip && mode == "detailed")) // || e.visibleInBuffUi || e.visibleInFightLog) 
                 && !this.isRedList(e.effectUid) && e.effectId != 666
         return show;

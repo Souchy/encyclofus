@@ -2,6 +2,8 @@ import { IEventAggregator, inject } from "aurelia";
 import { pipeline } from "stream";
 import { db } from "../../../DofusDB/db";
 import { Mason, util } from "../util";
+import { Setfilter } from "./setfilter";
+import { DofusSet } from "../../../ts/dofusModels";
 // import { BlockFilter, ModFilter, filter as Filter } from "./filter";
 var merge = require('deepmerge');
 
@@ -17,9 +19,13 @@ export class sets {
     }, 500, true);
 
 
+    public comparing: boolean = true;
+
+
     public constructor(readonly db: db, @IEventAggregator readonly ea: IEventAggregator) {
-		console.log("sets ctor")
+		// console.log("sets ctor")
         this.mason = new Mason();
+        this.mason.itemsPerPage = 20;
 
         let onSetSheetAttached = util.debounce(() => {
             this.mason.reloadMsnry();
@@ -29,7 +35,7 @@ export class sets {
            onSetSheetAttached();
         });
         // on click search in the filter
-        // this.ea.subscribe("sets:search", (filter: Filter) => this.search(filter));
+        this.ea.subscribe("sets:search", (filter: Setfilter) => this.search(filter));
     }
 
     public isLoaded() {
@@ -69,23 +75,59 @@ export class sets {
     /**
      * new search : clear current items and search for new
      */
-    public async search() { //filter: Filter = null) {
+    public async search(filter: Setfilter = null) {
 		// this.searching = true;
         // console.log("on search: " + filter)
         this.mason.data = []; 
         this.mason.fulldata = [];
         this.mason.page = 0;
 
-		this.filterData(); //filter);
+		this.filterData(filter);
+
+        // need more content on sets
+        this.mason.showMore(); 
+        this.mason.showMore(); 
+        this.mason.showMore(); 
+        this.mason.showMore(); 
         this.mason.showMore(); 
 		// console.log("mason showed more")
 		this.searching = false;
     }
 
-    public filterData() { //filter: Filter) {
-		let arr = this.db.data.jsonItemSets;
+    public filterData(filter: Setfilter) {
+		let arr: DofusSet[] = this.db.data.jsonItemSets
+            .map(set => {
+                if(!set.itemsData)
+                    set.itemsData = [];
+                if(set.itemsData?.length == 0) {
+                    let items = set.items.map(i => this.db.data.jsonItemsById[i]).filter(i => i != null);
+                    set.itemsData = items;
+                }
+                // console.log(set)
+                return set;
+            })
+            .filter((value, index, array) => value.effects.length > 0)
+            .sort((a, b) => {
+                let diff = this.highestItemLevel(b) - this.highestItemLevel(a);
+                if(diff != 0) return diff;
+                else return b.id - a.id;
+            });
         this.mason.fulldata.push(...arr);
+        // console.log("Sets filter: ");
+        // console.log(arr);
     }
 
+    public highestItemLevel(set: DofusSet) {
+        if(!set.itemsData) 
+            return 0;
+        let levels: number[] = set.itemsData.map(i => i.level)
+        let max = Math.max(...levels);
+        // console.log("Max set item level: " + max)
+        return max;
+    }
+
+    public async toggleComparing() {
+        this.comparing = !this.comparing;
+    }
 
 }

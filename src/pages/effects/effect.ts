@@ -7,6 +7,7 @@ import { SpellZone, Targets } from "../../DofusDB/formulas";
 import { TargetConditionRenderer } from "../../ts/targetConditions";
 import { Util } from '../../ts/util';
 import { Themer } from '../../components/themes/themer';
+import { DofusEffect, DofusEffectModel } from '../../ts/dofusModels';
 
 // @inject(db, Emerald, ConditionRenderer)
 export class Effect {
@@ -14,11 +15,13 @@ export class Effect {
 	@bindable 
 	public spellGrade = 0;
 	@bindable
-	public effect;
+	public effect: DofusEffect;
 	@bindable
 	public depth: number = 0;
 	@bindable
 	public iscrit: boolean;
+	@bindable
+	public comparing: boolean = false;
 
 	public showsub: boolean = false;
 	public subSpell: any;
@@ -27,6 +30,7 @@ export class Effect {
 	public conditionRenderer: TargetConditionRenderer;
 	public effectRenderer: EffectRenderer
 	private readonly themer: Themer;
+	public renderedEffect: string;
 
 	public constructor(themer: Themer, db: db, effectRenderer: EffectRenderer, conditionRenderer: TargetConditionRenderer, @I18N private readonly i18n: I18N) {
 		// console.log("ctor: " + conditionRenderer)
@@ -38,6 +42,9 @@ export class Effect {
 
 	public get isLoaded() {
 		return this.db.isLoaded
+	}
+	binding() {
+		this.renderedEffect = this.effectRenderer.renderEffectI18n(this.effect);
 	}
 	attached() {
 		this.subSpell = this.effectRenderer.getSubSpell(this.effect);
@@ -71,14 +78,15 @@ export class Effect {
 		else return "spellEffect"
 	}
 
-	public getEffect() {
-		let effect = this.db.data.jsonEffects?.filter(e => e.id == this.effect.effectId)[0];
+	public getEffect(): DofusEffectModel {
+		let effect = this.db.data.jsonEffectsById[this.effect.effectId]; //this.db.data.jsonEffects?.filter(e => e.id == this.effect.effectId)[0];
 		return effect;
 	}
 	public getCharacteristic() {
 		let cid = this.getEffect().characteristic;
-		let charac = this.db.data.jsonCharacteristics?.filter(c => c.id == cid)[0];
-		return charac;
+		return this.db.data.jsonCharacteristicsById[cid];
+		// let charac = this.db.data.jsonCharacteristics?.filter(c => c.id == cid)[0];
+		// return charac;
 	}
 
 
@@ -101,19 +109,29 @@ export class Effect {
 		return effect.useInFight
 	}
 
-	public getIcon(eff) {
+	private _icon: string;
+	public get icon() {
+		if (this._icon) 
+			return this._icon;
 		if (!this.isFightEffect) {
 			// console.log("not a fight effect")
 			return "";
 		}
-		if (eff) {
+		if (this.effect) {
 			// console.log("render for icon")
-			let str = this.db.getModIconStyle(this.effectRenderer.renderEffectI18n(eff), this.isItem(eff));
-			return str;
+			this._icon = this.db.getModIconStyle(this.renderedEffect, this.isItem(this.effect));
 		}
-		return "";
+		return this._icon;
 	}
 
+	public get comparisonStyle() {
+		if(!this.comparing)
+			return "";
+		if(this.effect.diceNum < 0)
+			return "background: var(--comparisonRed);";
+		if(this.effect.diceNum > 0)
+			return "background: var(--comparisonGreen);";
+	}
 
 
 	public isStateSubspell(e) {

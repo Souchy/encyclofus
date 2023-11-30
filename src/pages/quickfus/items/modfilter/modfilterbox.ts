@@ -162,7 +162,8 @@ export class ModFilterBox {
         return size;
     }
     public getCharac(id) {
-        let charac = this.db.data.jsonCharacteristics.find(c => c.id == id);
+        // let charac = this.db.data.jsonCharacteristics.find(c => c.id == id);
+        let charac: any = this.db.data.jsonCharacteristicsById[id];
         if(!charac) 
             charac = this.db.pseudoCharacs.find(c => c.id == id);
         return charac;
