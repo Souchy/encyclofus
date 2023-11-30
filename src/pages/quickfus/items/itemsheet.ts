@@ -5,13 +5,14 @@ import { db } from "../../../DofusDB/db";
 import { Citerions, CriterionUtil, Criteria } from '../../../DofusDB/static/formulas/criterions';
 import { I18N } from "@aurelia/i18n";
 import { bindable, IEventAggregator } from 'aurelia';
+import { DofusItem } from '../../../ts/dofusModels';
 
 
 // @inject(db, Emerald, ConditionRenderer)
 export class itemsheet {
 
     @bindable
-    public item;
+    public item: DofusItem;
 
     // public sortedEffects: any[];
     private conditionRenderer: ConditionRenderer;
@@ -82,7 +83,7 @@ export class itemsheet {
     public get isWeapon(): boolean {
         // let effects: any[] = this.item.possibleEffects;
         // return effects.filter(e => e.boost == false).length > 0;
-        return this.item.apCost || this.item.maxCastPerTurn;
+        return !!this.item.apCost || !!this.item.maxCastPerTurn;
     }
 
     public get hasConditions() {
