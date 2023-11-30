@@ -34,7 +34,7 @@ export class Mason {
 	}
 
 	public async reloadMsnry() {
-		console.log("mason reloadMsnry");
+		// console.log("mason reloadMsnry");
 		if (this.msnry) {
 			this.msnry.reloadItems();
 			this.msnry.layout();

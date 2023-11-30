@@ -52,8 +52,6 @@ export class setsheet {
 		// console.log("Set data: ");
 		// console.log(this.data);
 		this.bonusCounter = this.data.effects.length - 1;
-		// this.promiseItems = this.linkItems()
-		// this.promiseComparison = this.loadComparison()
 		setTimeout(() => this.promiseItems = this.linkItems(), 0);
 		setTimeout(() => this.promiseComparison = this.loadComparison(), 0);
 	}
@@ -79,10 +77,6 @@ export class setsheet {
 		this.finishedLinkingItems = true;
 	}
 
-	// public getStatColor(stat) {
-	// 	return db.getStatColor(stat);
-	// }
-
 	public hoverSet() {
 		// console.log("hover set");
 	}
@@ -91,8 +85,6 @@ export class setsheet {
 	}
 	
 	public getItem(itemId: number): DofusItem {
-		// let item = this.db.data.jsonItems.find(i => i.id == itemId);
-		// return item;
 		return this.db.data.jsonItemsById[itemId];
 	}
     public getImgUrl(itemId: number) {
@@ -146,10 +138,6 @@ export class setsheet {
 					let comparison = this.comparedEffects[b][oldEffect.effectId];
 					comparison.diceNum = comparison.diceNum - oldEffect.diceNum;
 					comparison.diceSide = comparison.diceSide - oldEffect.diceSide;
-					// if(comparison.effectId == 128) {
-					// 	console.log("comparison pm")
-					// 	console.log(comparison);
-					// }
 				} else {
 					let comparison = { ...oldEffect };
 					this.comparedEffects[b][comparison.effectId] = comparison;

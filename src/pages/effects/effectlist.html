@@ -4,7 +4,7 @@
 <!-- style.bind="tableStyle" -->
 <table if.bind="db.isLoaded" class="table table-striped table-sm table-borderless" >
     <tbody>
-        <tr repeat.for="e of getVisibleEffects()">
+        <tr repeat.for="e of getVisibleEffects">
             <td css="padding: 0px; padding-left: ${paddingLeft}px;">
                 <effect effect.bind="e" depth.bind="depth" iscrit.bind="iscrit" comparing.to-view="comparing"></effect>
             </td>

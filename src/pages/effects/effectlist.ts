@@ -41,7 +41,7 @@ export class Effectlist {
         return this.db.jsonGreenListEffects.red.includes(e);
     }
 
-    public getVisibleEffects() {
+    public get getVisibleEffects() {
         return this.effects.filter(e => e && this.isEffectVisible(e));
     }
 
