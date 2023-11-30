@@ -5,6 +5,7 @@ import { SpellZone, Targets } from "../../DofusDB/formulas";
 import { TargetConditionRenderer } from "../../ts/targetConditions";
 import { Util } from '../../ts/util';
 import { ActionIds } from "../../DofusDB/code/ActionIds";
+import { DofusEffect } from "../../ts/dofusModels";
 
 export class EffectRenderer {
 
@@ -17,12 +18,14 @@ export class EffectRenderer {
 		this.conditionRenderer = conditionRenderer;
 	}
     
-	public getEffectModel(e) {
-		return this.db.data.jsonEffects.find(c => c.id == e.effectId);
+	public getEffectModel(effect: DofusEffect) {
+		// return this.db.data.jsonEffects.find(c => c.id == e.effectId);
+        return this.db.data.jsonEffectsById[effect.effectId];
 	}
 	public getCharacteristic(e) {
 		let cid = this.getEffectModel(e).characteristic;
-		return this.db.data.jsonCharacteristics.find(c => c.id == cid);
+		// return this.db.data.jsonCharacteristics.find(c => c.id == cid);
+		return this.db.data.jsonCharacteristicsById[cid];
 	}
 
 	public isDuration(e) {

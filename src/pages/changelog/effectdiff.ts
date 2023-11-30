@@ -60,7 +60,8 @@ export class effectdiff {
     }
     
     public get effectModel() {
-        return this.db.data.jsonEffects.find(e => e.id == this.newEffect?.effectId);
+        // return this.db.data.jsonEffects.find(e => e.id == this.newEffect?.effectId);
+        return this.db.data.jsonEffectsById[this.newEffect?.effectId];
     }
     public get isElemental() {
         return this.effectModel.elementId >= 0;

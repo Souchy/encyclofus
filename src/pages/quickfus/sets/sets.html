@@ -1,0 +1,30 @@
+<require from="./setsheet"></require>
+<require from="./setfilter"></require>
+<!-- <require from="./setsearch.css"></require> -->
+<!-- <require from="../../components/mason.css"></require> -->
+
+<setfilter></setfilter>
+
+<!-- Filtres -->
+<!-- <setfilter filter.bind="filter"></setfilter> -->
+
+<div if.bind="searching" class="loaderContainer">
+    <div class="loader"></div>
+</div>
+
+<p></p>
+
+<!-- <button class="btn" click.trigger="toggleComparing()">Comparer avec la maj précédente</button> -->
+
+<div class="grid-wrapper">
+    <div class="grid" ref="grid">
+        <setsheet class="grid-item" repeat.for="set of mason.data" data.bind="set" comparing.bind="comparing"></setsheet>
+    </div>
+</div>
+
+
+<!-- <div>
+    <div>
+        <setsheet repeat.for="set of mason.data" data.bind="set"></setsheet>
+    </div>
+</div> -->

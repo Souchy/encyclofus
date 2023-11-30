@@ -99,7 +99,8 @@ export class ConditionRenderer {
     }
 
     private parseItem(c: Criteria) {
-        let item = this.db.data.jsonItems.find(i => i.id == c.value);
+        // let item = this.db.data.jsonItems.find(i => i.id == +c.value);
+		let item = this.db.data.jsonItemsById[+c.value];
         let itemName = this.db.getI18n(item.nameId);
 
         let arr = []

@@ -2,19 +2,19 @@
 
 <div if.bind="isLoaded">
     <div class="btn-group" style="" role="group" aria-label="Basic radio toggle button group">
-        <input type="radio" class="btn-check" name="btnradioa" id="btnGoultar3v3" autocomplete="off" click.trigger="clickGoultar3v3()">
+        <input type="radio" class="btn-check" name="btnradioa" id="btnGoultar3v3" autocomplete="off" click.delegate="clickGoultar3v3()" checked>
         <label class="btn btn-outline-dark radioDark" for="btnGoultar3v3" t="maps.goultar3v3"></label>
         
-        <input type="radio" class="btn-check" name="btnradioa" id="btnGoultar1v1" autocomplete="off" click.trigger="clickGoultar1v1()">
+        <input type="radio" class="btn-check" name="btnradioa" id="btnGoultar1v1" autocomplete="off" click.delegate="clickGoultar1v1()">
         <label class="btn btn-outline-dark radioDark" for="btnGoultar1v1" t="maps.goultar1v1"></label>
 
-        <input type="radio" class="btn-check" name="btnradioa" id="btnTournoi" autocomplete="off" click.trigger="clickKoli3v3()">
+        <input type="radio" class="btn-check" name="btnradioa" id="btnTournoi" autocomplete="off" click.delegate="clickKoli3v3()">
         <label class="btn btn-outline-dark radioDark" for="btnTournoi" t="maps.koli3v3"></label>
 
-        <input type="radio" class="btn-check" name="btnradioa" id="btnDuel" autocomplete="off" click.trigger="clickKoli1v1()">
+        <input type="radio" class="btn-check" name="btnradioa" id="btnDuel" autocomplete="off" click.delegate="clickKoli1v1()">
         <label class="btn btn-outline-dark radioDark" for="btnDuel" t="maps.koli1v1"></label>
 
-        <input type="radio" class="btn-check" name="btnradioa" id="btnHelp" autocomplete="off" click.trigger="clickHelp()">
+        <input type="radio" class="btn-check" name="btnradioa" id="btnHelp" autocomplete="off" click.delegate="clickHelp()">
         <label class="btn btn-outline-dark radioDark" style="margin-left: auto;" for="btnHelp" t="help"></label>
     </div>
 
@@ -29,19 +29,31 @@
     <hr>
 
     <div show.bind="showGoultar3v3" class="maplist">
-        <button class="btn btn-outline-dark" repeat.for="id of goultars3v3" click.trigger="select(id)">${getMapName(id)}</button>
+        <template repeat.for="id of goultars3v3">
+            <input type="radio" class="btn-check" name="goultar3v3" id="${id}" autocomplete="off" click.delegate="select(id)">
+            <label class="btn btn-outline-dark radioDark" style="margin-left: auto;" for="${id}">${getMapName(id)}</label>
+        </template>
     </div>
     
     <div show.bind="showGoultar1v1" class="maplist">
-        <button class="btn btn-outline-dark" repeat.for="id of goultars1v1" click.trigger="select(id)">${getMapName(id)}</button>
+        <template repeat.for="id of goultars1v1">
+            <input type="radio" class="btn-check" name="goultar1v1" id="${id}" autocomplete="off" click.delegate="select(id)">
+            <label class="btn btn-outline-dark radioDark" style="margin-left: auto;" for="${id}">${getMapName(id)}</label>
+        </template>
     </div>
 
     <div show.bind="showKoli3v3" class="maplist">
-        <button class="btn btn-outline-dark" repeat.for="id of koli3v3s" click.trigger="select(id)">${getMapName(id)}</button>
+        <template repeat.for="id of koli3v3s">
+            <input type="radio" class="btn-check" name="koli3v3" id="${id}" autocomplete="off" click.delegate="select(id)">
+            <label class="btn btn-outline-dark radioDark" style="margin-left: auto;" for="${id}">${getMapName(id)}</label>
+        </template>
     </div>
 
     <div show.bind="showKoli1v1" class="maplist">
-        <button class="btn btn-outline-dark" repeat.for="id of koli1v1s" click.trigger="select(id)">${getMapName(id)}</button>
+        <template repeat.for="id of koli1v1s">
+            <input type="radio" class="btn-check" name="koli1v1" id="${id}" autocomplete="off" click.delegate="select(id)">
+            <label class="btn btn-outline-dark radioDark" style="margin-left: auto;" for="${id}">${getMapName(id)}</label>
+        </template>
     </div>
 
     <hr>

@@ -5,6 +5,7 @@ import { db } from '../../DofusDB/db';
 import { I18N } from '@aurelia/i18n';
 import { SpellZone } from "../../DofusDB/formulas";
 import { ConditionRenderer } from '../../ts/conditions';
+import { DofusSpell } from '../../ts/dofusModels';
 
 @inject(db)
 export class Spell {
@@ -34,7 +35,7 @@ export class Spell {
 		return this.db.promiseLoadingSpells;
 	}
 
-	public get spell() {
+	public get spell(): DofusSpell {
 		return this.db.data.jsonSpells[this.spellid];
 	}
 	public get name() {

@@ -26,7 +26,7 @@ export class Mason {
 		this.page++;
 	}
 
-	public reloadMsnry() {
+	public async reloadMsnry() {
 		// console.log("mason reloadMsnry");
 		if (this.msnry) {
 			this.msnry.reloadItems();

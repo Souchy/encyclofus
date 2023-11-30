@@ -3,6 +3,7 @@ import { db } from "../../DofusDB/db";
 import jsonVersions from '../../DofusDB/versions.json'
 import { DI, IEventAggregator, Registration, observable } from 'aurelia';
 import { SummonUtils } from "../../ts/summonUtils";
+import { DofusSet } from "../../ts/dofusModels";
 
 export class Changelog {
     
@@ -13,6 +14,9 @@ export class Changelog {
 	public versions: string[];
 	@observable
 	public selectedVersion: string;
+
+
+	public promiseSets: Promise<boolean>;
 
 	public constructor(
         private readonly summonUtils: SummonUtils,
@@ -56,6 +60,52 @@ export class Changelog {
         return this.db.getI18n(this.db.data.jsonBreeds[breedid].nameId);
     }
     //#endregion
+
+	//#region Items
+	public async calculateSetDifferences(): Promise<Record<number, DofusSet>> {
+		let newSets = this.db.data.jsonItemSets;
+		let oldSets = this.db.data2.jsonItemSets;
+		let setsComparison: Record<number, DofusSet> = { ... this.db.data.jsonItemSetsById };
+
+		// for(let set of newSets) {
+		// 	setsComparison[set.id] = set;
+		// }
+
+
+		return setsComparison;
+	}
+	
+	public async loadComparison(newSet: DofusSet, oldSet: DofusSet) {
+		let comparedEffects = [];
+		// let oldSet = this.db.data2.jsonItemSetsById[newSet.id];
+		// let oldSet = this.db.data2.jsonItemSets.find(s => s.id == newSet.id);
+		// console.log("Oldset: ")
+		// console.log(oldSet);
+
+		for(let b = 0; b < newSet.effects.length; b++) {
+			comparedEffects[b] = [];
+			for(let newEffect of newSet.effects[b]) {
+				if(!newEffect) continue;
+				let comparison = { ...newEffect };
+				comparedEffects[b][comparison.effectId] = comparison;
+			}
+			for(let oldEffect of oldSet.effects[b]) {
+				if(!oldEffect) continue;
+				if(oldEffect.effectId in comparedEffects[b]) {
+					let comparison = comparedEffects[b][oldEffect.effectId];
+					comparison.diceNum = comparison.diceNum - oldEffect.diceNum;
+					comparison.diceSide = comparison.diceSide - oldEffect.diceSide;
+				} else {
+					let comparison = { ...oldEffect };
+					comparedEffects[b][comparison.effectId] = comparison;
+				}
+			}
+		}
+	}
+	//#endregion
+
+	
+
 }
 
 // const container = DI.createContainer();

@@ -4,11 +4,11 @@
 <!-- style.bind="tableStyle" -->
 <table if.bind="db.isLoaded" class="table table-striped table-sm table-borderless" >
     <tbody>
-        <tr repeat.for="e of effects" if.bind="isEffectVisible(e)">
+        <tr repeat.for="e of effects" if.bind="e && isEffectVisible(e)">
             <td css="padding: 0px; padding-left: ${paddingLeft}px;">
                  <!-- style.bind="tdStyle"> -->
                  <!-- ${e.order} - in ${e.group} -->
-                <effect effect.bind="e" depth.bind="depth" iscrit.bind="iscrit"></effect>
+                <effect effect.bind="e" depth.bind="depth" iscrit.bind="iscrit" comparing.to-view="comparing"></effect>
             </td>
         </tr>
     </tbody>
