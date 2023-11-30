@@ -4,7 +4,7 @@
 <import from="../../effects/effectlist"></import>
 
 <!-- englobing class div for css -->
-<div class="setsheet" onmouseover.call="hoverSet()" ${hidden} id="${data.id}">
+<div class="setsheet" onmouseover.call="hoverSet()" ${hidden} id="${data.id}" ref="engdiv">
 
   <!-- Image and weapon stats -->
   <div class="title d-flex flex-nowrap">
@@ -18,7 +18,7 @@
   <div class="items" if.bind="items.length > 0">
     <div class="item" repeat.for="item of data.items" onmouseover.call="hoverItem()">
       <img class="itemIcon" src="${getImgUrl(item)}" loading="lazy"/>
-      <!-- <itemsheet item.bind="items[$index]"></itemsheet> -->
+      <!-- <itemsheet if.bind="finishedComparison" item.bind="items[$index]"></itemsheet> -->
     </div>
   </div>
 

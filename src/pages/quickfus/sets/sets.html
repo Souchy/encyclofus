@@ -1,6 +1,6 @@
 <require from="./setsheet"></require>
 <require from="./setfilter"></require>
-<!-- <require from="./setsearch.css"></require> -->
+<!-- <require from="./sets.less"></require> -->
 <!-- <require from="../../components/mason.css"></require> -->
 
 <setfilter></setfilter>
@@ -16,15 +16,15 @@
 
 <!-- <button class="btn" click.trigger="toggleComparing()">Comparer avec la maj précédente</button> -->
 
+
+
 <div class="grid-wrapper">
     <div class="grid" ref="grid">
         <setsheet class="grid-item" repeat.for="set of mason.data" data.bind="set" comparing.bind="comparing"></setsheet>
     </div>
 </div>
 
-
-<!-- <div>
-    <div>
-        <setsheet repeat.for="set of mason.data" data.bind="set"></setsheet>
-    </div>
-</div> -->
+<!-- <div class="infgrid">
+  <setsheet repeat.for="set of mason.data" data.bind="set"></setsheet>
+</div>
+<button class="" click.trigger="showMore()">Load</button> -->

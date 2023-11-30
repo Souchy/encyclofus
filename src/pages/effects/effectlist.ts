@@ -41,6 +41,10 @@ export class Effectlist {
         return this.db.jsonGreenListEffects.red.includes(e);
     }
 
+    public getVisibleEffects() {
+        return this.effects.filter(e => e && this.isEffectVisible(e));
+    }
+
 	public getEffectModel(effect: DofusEffect): DofusEffectModel {
         // return this.db.data.jsonEffects.find(e => e.id == effect.effectId);
         return this.db.data.jsonEffectsById[effect.effectId];

@@ -22,6 +22,8 @@ export class setsheet {
 	// check if this set has conditions
 	// private hasConditions: boolean = false;
 
+	public engdiv: HTMLDivElement;
+
 	public hidden: string = "hidden";
 	public bonusCounter: number = 1;
 
@@ -30,6 +32,9 @@ export class setsheet {
 
 	public comparedEffects: DofusEffect[][];
 	public finishedComparison: boolean = false;
+
+	private promiseItems: Promise<void>
+	private promiseComparison: Promise<void>
 
 	// Ctor
 	constructor(db: db, @I18N private readonly i18n: I18N, @IEventAggregator readonly ea: IEventAggregator) {
@@ -47,8 +52,20 @@ export class setsheet {
 		// console.log("Set data: ");
 		// console.log(this.data);
 		this.bonusCounter = this.data.effects.length - 1;
-		setTimeout(() => this.linkItems(), 0);
-		setTimeout(() => this.loadComparison(), 0);
+		// this.promiseItems = this.linkItems()
+		// this.promiseComparison = this.loadComparison()
+		setTimeout(() => this.promiseItems = this.linkItems(), 0);
+		setTimeout(() => this.promiseComparison = this.loadComparison(), 0);
+	}
+
+	// when binding is done
+	async attached() {
+		// if (setsearch.inst) setsearch.inst.loadedCount++;
+		// if (setsearch.inst) setsearch.inst.onLoadedSheet();
+		await this.promiseItems;
+		await this.promiseComparison
+        this.ea.publish("setsheet:loaded", this.engdiv.parentElement);
+		this.hidden = "";
 	}
 
 	public async linkItems() {
@@ -60,14 +77,6 @@ export class setsheet {
 			// this.data["itemsdata"][itemid] = item;
 		}
 		this.finishedLinkingItems = true;
-	}
-
-	// when binding is done
-	attached() {
-		// if (setsearch.inst) setsearch.inst.loadedCount++;
-		// if (setsearch.inst) setsearch.inst.onLoadedSheet();
-        this.ea.publish("setsheet:loaded");
-		this.hidden = "";
 	}
 
 	// public getStatColor(stat) {

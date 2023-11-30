@@ -18,7 +18,6 @@ export class sets {
         this.mason.showMore(); 
     }, 500, true);
 
-
     public comparing: boolean = true;
 
 
@@ -31,8 +30,10 @@ export class sets {
             this.mason.reloadMsnry();
         }, 200, false);
         // on sheet attached
-        this.ea.subscribe("setsheet:loaded", () => {
-           onSetSheetAttached();
+        this.ea.subscribe("setsheet:loaded", (setsheet: HTMLElement) => {
+            onSetSheetAttached();
+            // this.mason.reloadMsnry();
+            // this.mason.append(setsheet);
         });
         // on click search in the filter
         this.ea.subscribe("sets:search", (filter: Setfilter) => this.search(filter));
@@ -92,6 +93,10 @@ export class sets {
         // this.mason.showMore(); 
 		// console.log("mason showed more")
 		this.searching = false;
+    }
+
+    public async showMore() {
+        this.mason.showMore();
     }
 
     public filterData(filter: Setfilter) {

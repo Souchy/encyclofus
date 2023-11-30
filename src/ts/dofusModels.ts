@@ -124,6 +124,12 @@ export interface DofusItem {
     importantNoticeId: number;
     changeVersion: string;
     tooltipExpirationDate: number;
+    criticalHitProbability: number;
+    range: number;
+    castInLine: boolean;
+    apCost: number;
+    castInDiagonal: boolean;
+    maxCastPerTurn: number;
     version: string;
 }
 

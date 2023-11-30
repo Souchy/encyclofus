@@ -4,7 +4,7 @@
 <!-- Spell List -->
 <div class="spellList d-flex flex-wrap" if.bind="db.isLoaded && spells">
 	<!-- spell group-->
-	<div class="spellGroup" repeat.for="i of spells.length" if.bind="$even">
+	<div class="spellGroup" repeat.for="i of spells.length" if.to-view="$even">
 		<!-- iterate 2 by 2 -->
 		<div repeat.for="j of 2">
 			<let s.bind="i+j"></let>
