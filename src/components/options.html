@@ -10,9 +10,18 @@
 		<option>ES</option>
 	</select>
 
-	<select class="form-select" style="width: 100%; margin-left: auto;" value.bind="selectedVersion">
-		<option repeat.for="version of versions" model.bind="version" if.bind="version > '2.64'">
-			${version}
-		</option>
-	</select>
+	<div class="dropdown">
+		<input type="button" class="form-select sel" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" 
+			style="height: 38px; cursor: default;"
+			value.bind="selectedVersion">
+		</input>
+		<select class="dropdown-menu" style="margin-left: auto;" size="6" value.bind="selectedVersion" aria-labelledby="dropdownMenuButton1">
+			<option repeat.for="version of versions" model.bind="version" if.bind="version > '2.64'">
+				${version}
+			</option>
+		</select>
+	</div>
+
 </div>
+
+

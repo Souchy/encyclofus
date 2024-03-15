@@ -3,10 +3,22 @@ options {
 	// top: 10px;
 	// right: 20px;
 
-	select {
+	select, .dropdown > .sel {
 		border-radius: 0 !important;
 		background-color: var(--select-bg-color) !important;
 		border-color: var(--select-border-color) !important;
 		color: var(--select-color) !important;
+
+		white-space: normal;
+		word-break: break-all;
+	
+		cursor: default;
+	}
+	.dropdown option:hover {
+		background-color: var(--bs-blue);
+	}
+	.dropdown option:checked {
+		color: inherit;
+		background-color: var(--bs-blue);
 	}
 }
