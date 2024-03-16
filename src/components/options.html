@@ -15,7 +15,7 @@
 			style="height: 38px; cursor: default;"
 			value.bind="selectedVersion">
 		</input>
-		<select class="dropdown-menu" style="margin-left: auto;" size="6" value.bind="selectedVersion" aria-labelledby="dropdownMenuButton1">
+		<select class="dropdown-menu" style="margin-left: auto;" size="7" value.bind="selectedVersion" aria-labelledby="dropdownMenuButton1">
 			<option repeat.for="version of versions" model.bind="version" if.bind="version > '2.64'">
 				${version}
 			</option>
