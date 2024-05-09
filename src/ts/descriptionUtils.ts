@@ -33,8 +33,8 @@ export class DescriptionUtils {
 		// console.log("diff desc on spell " + spellOld.spellId + " " + name)
 		let descOld = this.db.getI18n(spellOld.descriptionId);
 		let descNew = this.db.getI18n(spellNew.descriptionId);
-		console.log(descOld);
-		console.log(descNew);
+		// console.log(descOld);
+		// console.log(descNew);
 
 		// let changesWords = diffWords(descOld, descNew);
 		let changesSentences = diffSentences(descOld, descNew);
