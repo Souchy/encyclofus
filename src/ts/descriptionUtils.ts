@@ -34,6 +34,12 @@ export class DescriptionUtils {
 		// let descOld = this.db.getI18n(spellOld.descriptionId);
 		let descNew = this.db.data.getI18n(spellOld.descriptionId, this.db.lang);
 		let descOld = this.db.data2.getI18n(spellNew.descriptionId, this.db.lang);
+		if(!descOld || !descNew) {
+			this.changes = null;
+			this.hasDiff = false;
+			return;
+		}
+
 		// let descNew = this.db.getI18n(spellNew.descriptionId);
 		// console.log(descOld);
 		// console.log(descNew);
