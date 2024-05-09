@@ -31,8 +31,10 @@ export class DescriptionUtils {
 		// 	return;
 		this.hasDiff = false;
 		// console.log("diff desc on spell " + spellOld.spellId + " " + name)
-		let descOld = this.db.getI18n(spellOld.descriptionId);
-		let descNew = this.db.getI18n(spellNew.descriptionId);
+		// let descOld = this.db.getI18n(spellOld.descriptionId);
+		let descNew = this.db.data.getI18n(spellOld.descriptionId, this.db.lang);
+		let descOld = this.db.data2.getI18n(spellNew.descriptionId, this.db.lang);
+		// let descNew = this.db.getI18n(spellNew.descriptionId);
 		// console.log(descOld);
 		// console.log(descNew);
 
