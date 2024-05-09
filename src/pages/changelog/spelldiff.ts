@@ -1,3 +1,4 @@
+import { DescriptionUtils } from './../../ts/descriptionUtils';
 import { filter } from './../quickfus/items/filter';
 import { Changelog } from './changelog';
 import { bindable } from "aurelia";
@@ -13,15 +14,22 @@ export class spelldiff {
  
     @bindable
     public spellid;
+    private descriptionUtils: DescriptionUtils;
 
 	public constructor(
         private readonly summonUtils: SummonUtils,
         private readonly diffchecker: Diffchecker,
         private readonly db: db, 
+        // private readonly descriptionUtils: DescriptionUtils,
         @I18N private readonly i18n: I18N, 
         @IEventAggregator readonly ea: IEventAggregator
     ) {
 	}
+
+    attached() {
+        this.descriptionUtils = new DescriptionUtils(this.db, this.i18n);
+        this.descriptionUtils.setDescToDiff(this.oldSpell, this.newSpell);
+    }
 
     public get newSpell(): DofusSpell {
         return this.db.data.jsonSpells[this.spellid];
@@ -34,7 +42,8 @@ export class spelldiff {
     }
 
     public get hasDiff(): boolean {
-        return this.diffchecker.spellDiff(this.spellid)
+
+        return this.diffchecker.spellDiff(this.spellid) || this.descriptionUtils?.hasDiff;
     }
 
     public diffProp(prop) {

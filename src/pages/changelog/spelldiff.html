@@ -20,6 +20,28 @@
         
     <div if.bind="!isNew() && !isRemoved()">
         
+        <!-- description -->
+        <div class="spellContainerContainer" if.bind="descriptionUtils.hasDiff">
+            <div style.bind="descriptionUtils.getChangeStyle(change)" repeat.for="change of descriptionUtils.changes">
+                <span class="" repeat.for="d1 of descriptionUtils.cutText(change.value)">
+                    <!-- click.delegate="clickDescription($index)" -->
+                    <span style.bind="descriptionUtils.getDescriptionRenderStyle(d1)" innerhtml.bind="descriptionUtils.renderDescriptionBit(d1)"></span>
+                    <!--  && thing && showbit[$index] -->
+                    <!-- style.bind="showbit[$index] ? 'display: block;' : 'display: none;'" -->
+                    <div if.bind="descriptionUtils.textHasSubSpell(d1)" class="spellContainer">
+                        <spell class="spellHover" spellid.bind="descriptionUtils.getTextSubSpellId(d1)" depth.bind="1"></spell>
+                    </div> 
+                </span>
+            </div>
+        </div>
+        
+        <!-- conditions -->
+        <!-- <div if.bind="hasCondition" >
+            <br/>
+            <div innerHtml.bind="getConditionsString(spell)"></div>
+        </div> -->
+        
+
         <div repeat.for="prop of diffchecker.spellProperties">
             ${diffProp(prop)}
         </div>
