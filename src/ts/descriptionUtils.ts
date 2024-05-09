@@ -27,8 +27,8 @@ export class DescriptionUtils {
 	public setDescToDiff(spellOld: DofusSpell, spellNew: DofusSpell) {
 		// let name = this.db.getI18n(spellNew.nameId);
 		// spellNew.nameId
-		if(spellNew.spellId != 13525)
-			return;
+		// if(spellNew.spellId != 13525)
+		// 	return;
 		this.hasDiff = false;
 		// console.log("diff desc on spell " + spellOld.spellId + " " + name)
 		let descOld = this.db.getI18n(spellOld.descriptionId);
