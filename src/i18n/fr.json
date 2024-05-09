@@ -6,10 +6,10 @@
 
 	"compare": "Comparer: ",
 
-	"newSummon": "Nouvelle invocation: ",
-	"oldSummon": "Invocation supprimée: ",
-	"newSpell": "Nouveau sort: ",
-	"oldSpell": "Sort supprimé: ",
+	"newSummon": "Nouvelle invocation!",
+	"oldSummon": "Invocation supprimée!",
+	"newSpell": "Nouveau sort!",
+	"oldSpell": "Sort supprimé!",
 	"newEffect": "Nouvel effet: ",
 	"oldEffect": "Effet supprimé: ",
 	"targetConditions": "Conditions de cible: ",

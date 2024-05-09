@@ -42,8 +42,7 @@ export class spelldiff {
     }
 
     public get hasDiff(): boolean {
-
-        return this.diffchecker.spellDiff(this.spellid) || this.descriptionUtils?.hasDiff;
+        return this.diffchecker.spellDiff(this.spellid);
     }
 
     public diffProp(prop) {

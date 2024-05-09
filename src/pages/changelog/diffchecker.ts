@@ -3,6 +3,7 @@ import { db } from "../../DofusDB/db";
 import versions from '../../DofusDB/versions.json'
 import { DI, IEventAggregator, Registration } from 'aurelia';
 import { DofusEffect } from "../../ts/dofusModels";
+import { SummonUtils } from "../../ts/summonUtils";
 
 
 export class Diffchecker {
@@ -41,6 +42,7 @@ export class Diffchecker {
 
 	public constructor(
         private readonly db: db, 
+        private readonly summonUtils: SummonUtils,
         // private readonly emerald: Emerald, 
         @I18N private readonly i18n: I18N, 
         @IEventAggregator readonly ea: IEventAggregator
@@ -97,6 +99,7 @@ export class Diffchecker {
         let oldEffects = oldSpell.effects.filter(e1 => !newSpell.effects.find(e2 => e1.effectUid == e2.effectUid));
         let commonEffects = oldSpell.effects.filter(e1 => newSpell.effects.find(e2 => e1.effectUid == e2.effectUid));
 
+
         if(newEffects.length > 0) return true;
         if(oldEffects.length > 0) return true;
         for(let eff of commonEffects) {
@@ -122,7 +125,11 @@ export class Diffchecker {
                 // if(spellid == 14436) console.log("14436: prop diff: " + prop + " on " + effectid)
                 return true;
             }
-        }   
+        }
+        if(this.summonUtils.hasSummon(newEffect)) {
+            let summonId = this.summonUtils.getSummonId(newEffect);
+            return this.summonDiff(summonId);
+        }
         return false;
     }
     public getEffectModel(effect: DofusEffect) {

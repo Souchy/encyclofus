@@ -26,8 +26,6 @@ export class SummonUtils {
 		return this.db.data.jsonSummons[e.diceNum];
 	}
 
-
-
 }
 
 
