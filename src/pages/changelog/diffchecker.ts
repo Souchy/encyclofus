@@ -88,6 +88,11 @@ export class Diffchecker {
             }
         }
 
+        let newDesc = this.db.data.getI18n(newSpell.descriptionId, this.db.lang);
+        let oldDesc = this.db.data2.getI18n(oldSpell.descriptionId, this.db.lang);
+        if(newDesc != oldDesc)
+            return true;
+
         let newEffects = newSpell.effects.filter(e1 => !oldSpell.effects.find(e2 => e1.effectUid == e2.effectUid));
         let oldEffects = oldSpell.effects.filter(e1 => !newSpell.effects.find(e2 => e1.effectUid == e2.effectUid));
         let commonEffects = oldSpell.effects.filter(e1 => newSpell.effects.find(e2 => e1.effectUid == e2.effectUid));

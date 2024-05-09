@@ -56,9 +56,9 @@
         </div>
 
         <!-- Invoc -->
-        <div repeat.for="e1 of newSpell.effects">
-            <summondiff if.bind="summonUtils.hasSummon(e1)" summonid.bind="summonUtils.getSummonId(e1)" side.bind="e1.diceSide"></summondiff>
-        </div>
+        <!-- <div repeat.for="e1 of newSpell.effects"> -->
+            <summondiff repeat.for="e1 of newSpell.effects" if.bind="summonUtils.hasSummon(e1)" summonid.bind="summonUtils.getSummonId(e1)" side.bind="e1.diceSide"></summondiff>
+        <!-- </div> -->
 
     </div>
 </div>

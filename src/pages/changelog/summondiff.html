@@ -2,7 +2,7 @@
 
 
 
-<div if.bind="hasDiff">
+<div if.bind="hasDiff" style="margin-left: 15px;">
     <!-- invoc diff -->
     
     <!-- spells -->
@@ -17,14 +17,18 @@
     </div>
 
     
+    <h5>
+        <img src="${db.getMonsterIconPath(summonid)}" style="width: 28px; height: 28px;" />
+        ${newSummonName}
+        <span if.bind="shouldDisplayOldName"> (${oldSummonName})</span>
+    </h5>
+
     <div if.bind="!isNew() && !isRemoved()">
         <!-- TODO properties / stats diff -->
         <!-- <div repeat.for="prop of diffchecker.spellProperties">
             ${diffProp(prop)}
         </div> -->
-
-        <spelldiff repeat.for="summonSpellId of getCombinedSpells()" spellid.bind="summonSpellId"></spelldiff>
-
+        <spelldiff repeat.for="summonSpellId of getCombinedSpells" spellid.bind="summonSpellId">{summonSpellId}</spelldiff>
     </div>
 
 </div>

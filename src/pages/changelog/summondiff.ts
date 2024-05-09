@@ -42,13 +42,13 @@ export class summondiff {
 		return this.oldSummon?.grades[g];
     }
 
-    public getCombinedSpells() {
-        let spells = [];
+    public get getCombinedSpells() {
+        let spells: number[] = [];
         if(this.newSummon) {
             spells.push(...this.newSummon.spells);
         }
         if(this.oldSummon) {
-            for(let s in this.oldSummon.spells)
+            for(let s of this.oldSummon.spells)
                 if(!spells.includes(s))
                     spells.push(s)
         }
@@ -58,6 +58,20 @@ export class summondiff {
     public get hasDiff(): boolean {
         // console.log("summon hasdiff: " + this.summonid)
         return this.diffchecker.summonDiff(this.summonid);
+    }
+
+    public get newSummonName() {
+        return this.db.getI18n(this.newSummon.nameId);
+        // return this.db.data.getI18n(this.newSummon.nameId, this.db.lang);
+    }
+    public get oldSummonName() {
+        return this.db.data.getI18n(this.oldSummon.nameId, this.db.lang);
+    }
+
+    public get shouldDisplayOldName() {
+        return this.newSummonName != this.oldSummonName;
+        // if(!this.oldSummon) return false;
+        // return (this.oldSummon.nameId != this.oldSummon.nameId && this.db.hasI18n(this.oldSummon.nameId.toString())) 
     }
 
 }
