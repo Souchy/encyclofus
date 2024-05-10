@@ -25,11 +25,13 @@ export class DescriptionUtils {
 	}
 
 	public setDescToDiff(spellOld: DofusSpell, spellNew: DofusSpell) {
+		this.hasDiff = false;
+		if(!spellOld || !spellNew)
+			return;
 		// let name = this.db.getI18n(spellNew.nameId);
 		// spellNew.nameId
 		// if(spellNew.spellId != 13525)
 		// 	return;
-		this.hasDiff = false;
 		// console.log("diff desc on spell " + spellOld.spellId + " " + name)
 		// let descOld = this.db.getI18n(spellOld.descriptionId);
 		let descNew = this.db.data.getI18n(spellOld.descriptionId, this.db.lang);
