@@ -220,13 +220,13 @@ export class Effect {
 		if(this.grid) {
 			let bb = this.spellhover.getBoundingClientRect();
 			let gridbb = this.grid.getBoundingClientRect();
-			if (bb.left + bb.width > gridbb.width) {
+			if (bb.left + bb.width > gridbb.width && gridbb.width > 260) {
 				this.translation = gridbb.width - (bb.left + bb.width) + 50;
 			} else {
 				this.translation = 0;
 			}
 			// quand on enlève la sidebar
-			if(gridbb.x < 250) {
+			if(gridbb.x < 250 && gridbb.width > 260) {
 				this.translation -= (250 + 50);
 			}
 		}
