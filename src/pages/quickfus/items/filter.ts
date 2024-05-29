@@ -44,7 +44,7 @@ export class filter {
 			this.onLoad();
 		} else {
 			console.log("filter ctor2")
-			this.ea.subscribe("db:loaded", () => {
+			this.ea.subscribeOnce("db:loaded", () => {
 				this.onLoad();
 			})
 		}

@@ -16,6 +16,8 @@ export class Effectlist {
     public iscrit:boolean;
 	@bindable
 	public comparing: boolean = false;
+    @bindable
+    public sourcetype: string = "";
 
     public db: db;
     public debug: boolean = false;

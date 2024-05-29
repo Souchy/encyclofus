@@ -12,6 +12,8 @@ import { DofusEffect, DofusEffectModel } from '../../ts/dofusModels';
 // @inject(db, Emerald, ConditionRenderer)
 export class Effect {
 
+	public spellhover: HTMLDivElement;
+
 	@bindable 
 	public spellGrade = 0;
 	@bindable
@@ -22,6 +24,8 @@ export class Effect {
 	public iscrit: boolean;
 	@bindable
 	public comparing: boolean = false;
+	@bindable
+	public sourcetype: string = "";
 
 	public showsub: boolean = false;
 	public subSpell: any;
@@ -31,6 +35,9 @@ export class Effect {
 	public effectRenderer: EffectRenderer
 	private readonly themer: Themer;
 	public renderedEffect: string;
+
+	// mason grid containing itemsheets, if we're in the item page and we have a subspell (legendary item)
+	private grid: Element;
 
 	public constructor(themer: Themer, db: db, effectRenderer: EffectRenderer, conditionRenderer: TargetConditionRenderer, @I18N private readonly i18n: I18N) {
 		// console.log("ctor: " + conditionRenderer)
@@ -48,6 +55,9 @@ export class Effect {
 	}
 	attached() {
 		this.subSpell = this.effectRenderer.getSubSpell(this.effect);
+		if(this.spellhover) {
+			this.grid = this.spellhover.closest(".grid");
+		}
 	}
 
 	public clickShowSub() {
@@ -60,10 +70,16 @@ export class Effect {
 
 	// @watch('themeBool')
 	public get EffectRenderClass() {
-		if(this.effectRenderer.hasSubSpell(this.effect, this.spellGrade) && !this.isStateSubspell(this.effect)) {
+		let hasSubSpell = this.effectRenderer.hasSubSpell(this.effect, this.spellGrade);
+		if(hasSubSpell && !this.isStateSubspell(this.effect)) {
 			if(this.themer.themeBool) return "foldableSubspellLight";
 			else return "foldableSubspellDark";
-		} else {
+		} 
+		else if(hasSubSpell && this.sourcetype == "itemEffects") {
+			console.log("ayo????????????")
+			return "hoverableSubspell";
+		}
+		else {
 			return "";
 		}
 	}
@@ -147,6 +163,9 @@ export class Effect {
 		if (db.isSubSpell(e)) {
 			let subspell = this.effectRenderer.getSubSpell(e);
 			if (!subspell) return false;
+			if(this.sourcetype == "itemEffects") {
+				return true;
+			}
 			// return true;
 			let name = this.db.getI18n(subspell.nameId);
 			if (name && name.includes("{")) {
@@ -165,6 +184,12 @@ export class Effect {
 		}
 		if (db.isSubSpell(e)) {
 			let subspell = this.effectRenderer.getSubSpell(e);
+			if(this.sourcetype == "itemEffects") {
+				let key = e.diceNum + "";
+				let grade = e.diceSide;
+				if (grade) key += "-" + grade;
+				return key;
+			}
 			spellString = this.db.getI18n(subspell.nameId);
 		}
 
@@ -180,6 +205,27 @@ export class Effect {
 
 	public hasSub(e) {
 		return this.effectRenderer.hasSubSpell(e, this.spellGrade) || this.effectRenderer.hasTrapGlyph(e, this.spellGrade);
+	}
+
+	public get showcrit() {
+		return this.sourcetype != "itemEffects";
+	}
+
+
+	public translation: number = 0;
+	public get hoverTranslation() {
+		return "translate: " + this.translation + "px 0px";
+	}
+	public hoverSub() {
+		if(this.grid) {
+			let bb = this.spellhover.getBoundingClientRect();
+			let gridbb = this.grid.getBoundingClientRect();
+			if (bb.x + bb.width > gridbb.width) {
+				this.translation = gridbb.width - (bb.x + bb.width) + 100;
+			} else {
+				this.translation = 0;
+			}
+		}
 	}
 
 }

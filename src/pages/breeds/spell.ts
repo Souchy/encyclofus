@@ -18,6 +18,8 @@ export class Spell {
 	public issummon: boolean = false;
 	@bindable
 	public ispassive:boolean = false;
+	@bindable
+	public showcrit: boolean = true;
 
 	public showbit: boolean[] = []
 	public thing = false;
@@ -40,6 +42,9 @@ export class Spell {
 	}
 	public get name() {
 		return this.db.getI18n(this.spell.nameId);
+	}
+	public get effectsClass() {
+		return this.showcrit ? "effectsNormal" : "effectsWide"; 
 	}
 
 	public get cutDescription(): string[] {

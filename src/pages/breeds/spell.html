@@ -65,12 +65,12 @@
 	<!-- effects -->
 	<div class="d-flex effects">
 		<!-- normal -->
-		<div class="effectsNormal">
+		<div class.bind="effectsClass">
 			<h6 t="effects"></h6>
 			<effectlist effects.bind="spell.effects" iscrit.bind="false" depth.bind="depth"></effectlist>
 		</div>
 		<!-- critiques -->
-		<div class="effectsCrit">
+		<div class="effectsCrit" if.bind="showcrit">
 			<h6 t="effectsCrit"></h6>
 			<effectlist effects.bind="spell.criticalEffect" iscrit.bind="true" depth.bind="depth"></effectlist>
 		</div>

@@ -23,10 +23,10 @@
     </div>
 
     <!-- weapon effects -->
-    <effectlist class="weaponEffects" if.bind="isWeapon" effects.bind="weaponEffects" iscrit.bind="false" depth.bind="0"></effectlist>
+    <effectlist class="weaponEffects" if.bind="isWeapon" effects.bind="weaponEffects" iscrit.bind="false" sourcetype="weaponEffects" depth.bind="0"></effectlist>
 
     <!-- boost effects -->
-    <effectlist effects.bind="sortedEffects" iscrit.bind="false" depth.bind="0"></effectlist>
+    <effectlist effects.bind="sortedEffects" iscrit.bind="false" sourcetype="itemEffects" depth.bind="0"></effectlist>
 
     <!-- conditions -->
     <div class="conditions" if.bind="hasConditions">
