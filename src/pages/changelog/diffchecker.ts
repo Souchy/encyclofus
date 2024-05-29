@@ -1,8 +1,8 @@
+import { DofusEffect } from './../../ts/dofusModels';
 import { I18N } from "@aurelia/i18n";
 import { db } from "../../DofusDB/db";
 import versions from '../../DofusDB/versions.json'
 import { DI, IEventAggregator, Registration } from 'aurelia';
-import { DofusEffect } from "../../ts/dofusModels";
 import { SummonUtils } from "../../ts/summonUtils";
 
 
@@ -156,7 +156,72 @@ export class Diffchecker {
         return this.db.jsonGreenListEffects.red.includes(e);
     }
     //#endregion
-    
+ 
+    //#region Item diff
+    public itemDiff(itemid: number) {
+        if(!this.db.data.isLoaded) {
+            return false;
+        }
+        if(!this.db.data2.isLoaded) {
+            return false;
+        }
+        let newItem = this.db.data.jsonItemsById[itemid];
+        let oldItem = this.db.data2.jsonItemsById[itemid];
+        // let comparedEffects: DofusEffect[] = [];
+        
+        if(!oldItem)
+            return true;
+        if(!newItem)
+            return true;
+        if(newItem.possibleEffects.length != oldItem.possibleEffects.length)
+            return true;
+
+        // let commonEffects = newItem.possibleEffects.filter(e1 => oldItem.possibleEffects.find(e2 => e1.effectId == e2.effectId));
+        // if (commonEffects.length != newItem.possibleEffects.length || commonEffects.length != oldItem.possibleEffects.length)
+        //     return true;
+
+        for(let e1 of newItem.possibleEffects) {
+            let found = oldItem.possibleEffects.find(e2 => e1.effectId == e2.effectId);
+            if(!found)
+                return true;
+            if(found.diceNum != e1.diceNum)
+                return true;
+            if(found.diceSide != e1.diceSide)
+                return true;
+        }
+        return false;
+        // comparedEffects = newItem.possibleEffects.map(e1 => {
+        //     let found = oldItem.possibleEffects.find(e2 => e1.effectId == e2.effectId);
+        //     return e1;
+        // });
+
+        // for(let eff of commonEffects) {
+            
+        // }
+
+        // for (let newEffect of newItem.possibleEffects) {
+        //     if (!newEffect) continue;
+        //     let comparison = { ...newEffect };
+        //     comparedEffects[comparison.effectId] = comparison;
+        //     // this.comparedEffects[newEffect.effectId] = newEffect;
+        // }
+        // for (let oldEffect of oldItem.possibleEffects) {
+        //     if (!oldEffect) continue;
+        //     if (oldEffect.effectId in comparedEffects) {
+        //         let comparison = comparedEffects[oldEffect.effectId];
+        //         comparison.diceNum = comparison.diceNum - oldEffect.diceNum;
+        //         comparison.diceSide = comparison.diceSide - oldEffect.diceSide;
+        //     } else {
+        //         let comparison = { ...oldEffect };
+        //         comparedEffects[comparison.effectId] = comparison;
+        //         comparison.diceNum = 0 - oldEffect.diceNum;
+        //         comparison.diceSide = 0 - oldEffect.diceSide;
+        //     }
+        // }
+        // return false;
+    }
+    //#endregion
+
 }
 
 const container = DI.createContainer();
