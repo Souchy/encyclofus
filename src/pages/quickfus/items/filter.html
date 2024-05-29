@@ -1,10 +1,9 @@
 
 <import from="./modfilter/modfilterbox"></import>
 
-
 <!-- Search -->
 <div class="row" if.bind="isLoaded">
-    <input class="search" type="text" value.bind="filterText" placeholder="search..." focus="true" />
+    <input class="search" type="text" value.bind="filterText" t="[placeholder]quickfus.filter.search" focus="true" />
 </div>
 
 <!-- tagify search box ? = search sur item names, panoplies, effets, types d'items (capecoiffe..).... -->
@@ -19,6 +18,10 @@
             <label class="title mr-auto" for="level" t="quickfus.filter.level"></label>
             <input class="mr-2" type="number" value.bind="levelMin" placeholder="min" />
             <input class="" type="number" value.bind="levelMax" placeholder="max" />
+        </div>
+        <div style="display: flex;">
+            <input class="checkbox mr-1" type="checkbox" id="compare" checked.bind="comparing" />
+            <label class="mr-auto" for="compare" t="quickfus.filter.comparing"></label>
         </div>
 
         <!-- Types base -->
@@ -80,5 +83,5 @@
 
 <!-- Search button -->
 <div class="row" if.bind="isLoaded">
-    <button class="btnSearch" onclick.call="search()">Search</button>
+    <button class="btnSearch" onclick.call="search()" t="quickfus.filter.search"></button>
 </div>

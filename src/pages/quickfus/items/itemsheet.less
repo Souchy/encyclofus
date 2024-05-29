@@ -9,6 +9,7 @@ itemsheet {
     cursor: pointer;
     margin: 5px;
     padding: 5px;
+    background-color: var(--bs-body-bg);
 
     border: 1px solid transparent;
 
@@ -45,11 +46,34 @@ itemsheet {
         border-top: 1px dashed var(--sheetaccent);
         opacity: 0.5;
     }
+	.btn.btn-compare {
+        right: 5px;
+        position: absolute;
+        margin-left: auto;
+		width: 24px;
+		height: 24px;
+		color: var(--bs-body-color);
+		background-color: var(--bs-body-bg);
+        z-index: 3;
+        padding: 0px !important;
+	}
+	.btn.btn-compare i {
+        font-size: 0.7rem;
+    }
+	.btn.btn-compare:hover {
+		color: var(--bs-body-bg);
+		background-color: var(--bs-body-color);
+	}
+}
+
+itemsheet.hiddensheet {
+    display: none;
 }
 
 
 itemsheet:hover {
     border-color: var(--sheetaccenthover);
+    z-index: 5;
     .title {
         color: var(--sheetaccenthover);
     }

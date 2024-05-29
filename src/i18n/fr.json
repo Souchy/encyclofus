@@ -244,6 +244,7 @@
 	"quickfus": {
 		"filter": {
 			"level": "Niveau",
+			"comparing": "Afficher les modifications depuis la version précédente",
 			"type": "Type",
 			"weapons": "Armes",
 			"mods": "Filtres de stats",
@@ -253,7 +254,7 @@
 			"or": "Ou",
 			"sum": "Somme",
 			"nor": "Sans",
-			"search": "Recherche",
+			"search": "Chercher",
 			"sections": {
 				"pseudo": "Pseudo",
 				"pseudoProperty": "Propriété",

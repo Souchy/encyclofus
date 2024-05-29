@@ -24,7 +24,7 @@
 <div class="grid-wrapper">
     <!--  data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 200 }' -->
     <div class="grid" ref="grid">
-        <itemsheet class="grid-item" repeat.for="item of mason.data" item.bind="item"></itemsheet>
+        <itemsheet class="grid-item" repeat.for="item of mason.data" item.bind="item" comparing.bind="comparing"></itemsheet>
     </div>
 </div>
 

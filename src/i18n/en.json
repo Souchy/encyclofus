@@ -246,6 +246,7 @@
 	"quickfus": {
 		"filter": {
 			"level": "Level",
+			"comparing": "Show modifications since last version",
 			"type": "Type",
 			"weapons": "Weapons",
 			"mods": "Stats filters",

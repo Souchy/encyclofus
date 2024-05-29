@@ -1,37 +1,62 @@
 <import from="../../effects/effect"></import>
 <import from="../../effects/effectlist"></import>
 
+<!-- <template class.bind="renderClass"> -->
+    <div if.bind="shouldRender" data-id="${item.id}" >
+        <div class="d-flex">
+            <img class="itemIcon" src="${itemIconUrl}" loading="lazy"/>
+            <div>
+                ${db.getI18n(item.nameId)}
+                <br>
+                <div class="d-flex">
+                    ${item.level} 
+                    <!-- Bouton pour comparer avec la dernière version -->
+                    <button class="btn btn-compare" click.trigger="comparing = !comparing">
+                    <i class="fa-solid fa-code-compare"></i>
+                    </button>
+                </div>
+                <!-- - ${item.id} -->
+                <!-- typeId -->
+            </div>
 
-<div if.bind="item" data-id="${item.id}">
-    <div class="d-flex">
-        <img class="itemIcon" src="${itemIconUrl}" loading="lazy"/>
-        <div>
-            ${db.getI18n(item.nameId)}
-            <br>
-            ${item.level} 
-            <!-- - ${item.id} -->
-            <!-- typeId -->
         </div>
+
+        <!-- weapon stuff -->
+        <div class="weaponConditions" if.bind="isWeapon">
+            <!-- minrange, range, apCost, maxCastPerTurn, criticalHitProbability, criticalHitBonus  -->
+            <!-- castInDiagonal, castTestLos -->
+            <div>${item.apCost}PA ${item.minRange}-${item.range}PO ${item.maxCastPerTurn}/t ${item.criticalHitProbability}% +${item.criticalHitBonus}</div>
+            <div></div>
+        </div>
+
+        <!-- weapon effects -->
+        <!-- boost effects -->
+        <!-- <effectlist class="weaponEffects" if.bind="isWeapon" effects.bind="weaponEffects" iscrit.bind="false" sourcetype="weaponEffects" depth.bind="0"></effectlist>
+        <effectlist effects.bind="sortedEffects" iscrit.bind="false" sourcetype="itemEffects" depth.bind="0"></effectlist> -->
+
+        <!-- weapon effects -->
+        <!-- boost effects -->
+        <template if.bind="comparing">
+            <!-- <template if.bind="hasDifference"> -->
+                <effectlist class="weaponEffects" if.bind="isWeapon" effects.bind="weaponEffects" iscrit.bind="false" sourcetype="weaponEffects" comparing.to-view="true" depth.bind="0"></effectlist>
+                <effectlist if.bind="finishedComparison" effects.bind="comparedEffects" iscrit.bind="false" sourcetype="itemEffects" comparing.to-view="true" depth.bind="0"></effectlist>
+            <!-- </template>
+            <template else>
+                <div>Aucune modification</div>
+            </template> -->
+        </template>
+        <template else>
+            <effectlist class="weaponEffects" if.bind="isWeapon" effects.bind="weaponEffects" iscrit.bind="false" sourcetype="weaponEffects" depth.bind="0"></effectlist>
+            <effectlist effects.bind="sortedEffects" iscrit.bind="false" sourcetype="itemEffects" depth.bind="0"></effectlist>
+        </template>
+
+
+        <!-- conditions -->
+        <div class="conditions" if.bind="hasConditions">
+            <!-- "criteria": "CS>300&CI>300", -->
+            ${getConditionsString()}
+        </div>
+
     </div>
 
-    <!-- weapon stuff -->
-    <div class="weaponConditions" if.bind="isWeapon">
-        <!-- minrange, range, apCost, maxCastPerTurn, criticalHitProbability, criticalHitBonus  -->
-        <!-- castInDiagonal, castTestLos -->
-        <div>${item.apCost}PA ${item.minRange}-${item.range}PO ${item.maxCastPerTurn}/t ${item.criticalHitProbability}% +${item.criticalHitBonus}</div>
-        <div></div>
-    </div>
-
-    <!-- weapon effects -->
-    <effectlist class="weaponEffects" if.bind="isWeapon" effects.bind="weaponEffects" iscrit.bind="false" sourcetype="weaponEffects" depth.bind="0"></effectlist>
-
-    <!-- boost effects -->
-    <effectlist effects.bind="sortedEffects" iscrit.bind="false" sourcetype="itemEffects" depth.bind="0"></effectlist>
-
-    <!-- conditions -->
-    <div class="conditions" if.bind="hasConditions">
-        <!-- "criteria": "CS>300&CI>300", -->
-        ${getConditionsString()}
-    </div>
-
-</div>
+<!-- </template> -->

@@ -1,3 +1,4 @@
+import { Diffchecker } from './../../changelog/diffchecker';
 import { IEventAggregator, inject } from "aurelia";
 import { pipeline } from "stream";
 import { db } from "../../../DofusDB/db";
@@ -8,6 +9,8 @@ var merge = require('deepmerge');
 @inject(db)
 export class items {
 
+	public comparing: boolean = true;
+
 	public mason: Mason;
 	public grid: HTMLDivElement;
 	private pageHost: Element;
@@ -17,9 +20,8 @@ export class items {
 		this.mason.showMore();
 	}, 500, true);
 
-
-	public constructor(readonly db: db, @IEventAggregator readonly ea: IEventAggregator) {
-		console.log("items ctor")
+	public constructor(readonly db: db, readonly diffChecker: Diffchecker, @IEventAggregator readonly ea: IEventAggregator) {
+		// console.log("items ctor")
 		this.mason = new Mason();
 
 		let onItemSheetAttached = util.debounce(() => {
@@ -38,7 +40,7 @@ export class items {
 	}
 
 	attached() {
-		console.log("itemsearch attached grid: " + this.grid);
+		// console.log("itemsearch attached grid: " + this.grid);
 		this.mason.obj = this;
 		this.mason.initMasonry();
 
@@ -72,7 +74,7 @@ export class items {
 	 */
 	public async search(filter: Filter = null) {
 		// this.searching = true;
-		console.log("on search: " + filter)
+		// console.log("on search: " + filter)
 		this.mason.data = [];
 		this.mason.fulldata = [];
 		this.mason.page = 0;
@@ -151,8 +153,12 @@ export class items {
 				if (ld != 0) return ld;
 				else return b.id - a.id;
 			})
-		console.log("filter result: " + arr.length + ", from " + this.db.data.jsonItems.length);
+		// console.log("filter result: " + arr.length + ", from " + this.db.data.jsonItems.length);
 
+		this.comparing = filter.comparing;
+		if(this.comparing) {
+			arr = arr.filter(i => this.diffChecker.itemDiff(i.id));
+		}
 		this.mason.fulldata.push(...arr);
 	}
 

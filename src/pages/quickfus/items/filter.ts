@@ -1,4 +1,4 @@
-import { IEventAggregator, inject } from "aurelia";
+import { bindable, IEventAggregator, inject } from "aurelia";
 import { db } from "../../../DofusDB/db";
 
 @inject(db)
@@ -6,6 +6,8 @@ export class filter {
 
 	// need to wait for filter before rendering ui
 	private isSaveLoaded = false;
+
+	public comparing: boolean = false;
 
 	// filter data
 	public filterText: string = "";
@@ -29,7 +31,7 @@ export class filter {
 	public redListTypes = [265, 267, 169, 99, 83, 20, 21] // badges, idoles d'expédition, compagnons, filet de capture, pierre d'ame, outil, pioche
 
 	constructor(readonly db: db, @IEventAggregator readonly ea: IEventAggregator) {
-		console.log("filter ctor")
+		// console.log("filter ctor")
 		// ea.subscribe("emerald:loaded:itemtypes", () => {
 		// 	// console.log("init types in filter");
 		// 	// console.log("loaded item stypes: " + this.emerald.itemTypes.length)
@@ -40,16 +42,16 @@ export class filter {
 
 		// when emerald loads, auto search
 		if(this.db.isLoaded) {
-			console.log("filter ctor1")
+			// console.log("filter ctor1")
 			this.onLoad();
 		} else {
-			console.log("filter ctor2")
+			// console.log("filter ctor2")
 			this.ea.subscribeOnce("db:loaded", () => {
 				this.onLoad();
 			})
 		}
 		this.ea.subscribe("quickfus:mod:delete", (data: any) => {
-			console.log("filter onDeleteMod ["+data.blockid+"]: " + JSON.stringify(data.data));
+			// console.log("filter onDeleteMod ["+data.blockid+"]: " + JSON.stringify(data.data));
 			// if(!mod.blockId) return;
 			let m = this.blocks[data.blockid].mods.find(e => e.effectId == data.data.effectId);
 			if (m) {
@@ -86,6 +88,7 @@ export class filter {
 		if (json) {
 			let data = JSON.parse(json);
 			this.filterLevel = data.filterLevel;
+			this.comparing = !!data.comparing;
 			this.filterText = data.filterText;
 			this.levelMin = data.levelMin;
 			this.levelMax = data.levelMax;
@@ -111,6 +114,7 @@ export class filter {
 			filterText: this.filterText,
 			levelMin: this.levelMin,
 			levelMax: this.levelMax,
+			comparing: this.comparing,
 			types: Array.from(this.types.entries()),
 			armes: Array.from(this.armes.entries()),
 			filterLevel: this.filterLevel,

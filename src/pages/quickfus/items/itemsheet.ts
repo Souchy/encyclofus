@@ -4,8 +4,8 @@ import { CriteriaGroup } from './../../../DofusDB/static/formulas/criterions';
 import { db } from "../../../DofusDB/db";
 import { Citerions, CriterionUtil, Criteria } from '../../../DofusDB/static/formulas/criterions';
 import { I18N } from "@aurelia/i18n";
-import { bindable, IEventAggregator } from 'aurelia';
-import { DofusItem } from '../../../ts/dofusModels';
+import { bindable, IEventAggregator, observable } from 'aurelia';
+import { DofusEffect, DofusItem } from '../../../ts/dofusModels';
 
 
 // @inject(db, Emerald, ConditionRenderer)
@@ -13,10 +13,17 @@ export class itemsheet {
 
     @bindable
     public item: DofusItem;
+    @bindable
+    public comparing: boolean = false;
 
     // public sortedEffects: any[];
     private conditionRenderer: ConditionRenderer;
     private db: db;
+
+    public comparedEffects: DofusEffect[];
+    @observable
+    public finishedComparison: boolean = false;
+    private promiseComparison: Promise<void>
 
     public constructor(db: db, conditionRenderer: ConditionRenderer, @I18N private readonly i18n: I18N, @IEventAggregator readonly ea: IEventAggregator) {
         // console.log("renderer: " + conditionRenderer)
@@ -24,8 +31,14 @@ export class itemsheet {
         this.conditionRenderer = conditionRenderer;
     }
 
-    attached() {
+    binding() {
+        setTimeout(() => this.promiseComparison = this.loadComparison(), 0);
+    }
+    async attached() {
         // console.log("on attached")
+        if(this.comparing) {
+            await this.promiseComparison
+        }
         this.ea.publish("itemsheet:loaded");
     }
 
@@ -103,4 +116,85 @@ export class itemsheet {
         return str;
     }
 
+    
+    public async loadComparison() {
+        this.comparedEffects = [];
+        if (this.item.id in this.db.data2.jsonItemsById == false) {
+            this.finishedComparison = true;
+            this.comparedEffects = this.sortedEffects;
+            return;
+        }
+        let oldItem = this.db.data2.jsonItemsById[this.item.id];
+        if (!oldItem.possibleEffects[0]["effect"]) {
+            for (let e of oldItem.possibleEffects) {
+                e["effect"] ??= this.db.data2.jsonEffectsById[e.effectId];
+            }
+        }
+        // console.log("Oldset: ")
+        // console.log(oldSet);
+
+        // for(let b = 0; b < this.data.effects.length; b++) {
+        // this.comparedEffects[b] = [];
+        this.comparedEffects = [];
+        for (let newEffect of this.item.possibleEffects) {
+            if (!newEffect) continue;
+            let comparison = { ...newEffect };
+            this.comparedEffects[comparison.effectId] = comparison;
+            // this.comparedEffects[newEffect.effectId] = newEffect;
+        }
+        for (let oldEffect of oldItem.possibleEffects) {
+            if (!oldEffect) continue;
+            if (oldEffect.effectId in this.comparedEffects) {
+                let comparison = this.comparedEffects[oldEffect.effectId];
+                comparison.diceNum = comparison.diceNum - oldEffect.diceNum;
+                comparison.diceSide = comparison.diceSide - oldEffect.diceSide;
+            } else {
+                let comparison = { ...oldEffect };
+                this.comparedEffects[comparison.effectId] = comparison;
+                comparison.diceNum = 0 - oldEffect.diceNum;
+                comparison.diceSide = 0 - oldEffect.diceSide;
+            }
+        }
+        
+        // for(let e of this.comparedEffects) {
+        //     if(!e)
+        //         continue;
+        //     if(e.diceNum != 0 || e.diceSide != 0)
+        //         this.hasDifference = true;
+        // }
+        // }
+        this.finishedComparison = true;
+        // console.log("finished comparison: diff=" + this.hasDifference);
+    }
+    // @observable
+    // public hasDifference: boolean = false;
+    // public get hasDifference() {
+    //     for(let e of this.comparedEffects) {
+    //         if(!e)
+    //             continue;
+    //         if(e.diceNum != 0 || e.diceSide != 0)
+    //             return true;
+    //     }
+    //     return false;
+    // }
+
+    public get shouldRender() {
+        if(!this.item)
+            return false;
+        // console.log("SHOULD RENDER ? ");
+        // if(this.comparing)
+        //     return true;
+        // if(this.comparing && !this.finishedComparison)
+        //     return false;
+        // if(this.comparing && !this.hasDifference)
+        //     return false;
+        return true;
+    }
+
+    public get renderClass() {
+        if (this.shouldRender)
+            return "";
+        else
+            return "hiddensheet";
+    }
 }
