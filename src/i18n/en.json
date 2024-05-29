@@ -256,6 +256,7 @@
 			"search": "Search",
 			"sections": {
 				"pseudo": "Pseudo",
+				"pseudoProperty": "Property",
 				"primary": "Primary",
 				"secondary": "Secondary",
 				"damage": "Damages",
@@ -265,7 +266,9 @@
 				"numres": 	 "# res",
 				"numresele": "# res elementary",
 				"totres": 	 "Total #% res",
-				"totresele": "Total #% res elementary"
+				"totresele": "Total #% res elementary",
+				"isLegendary": "Legendary",
+				"changed": "Modified this update"
 			}
 		}
 	},

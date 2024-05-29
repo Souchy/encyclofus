@@ -254,6 +254,7 @@
 			"search": "Recherche",
 			"sections": {
 				"pseudo": "Pseudo",
+				"pseudoProperty": "Propriété",
 				"primary": "Primaires",
 				"damage": "Dommages",
 				"secondary": "Secondaires",
@@ -263,7 +264,9 @@
 				"numres": 	 "# res",
 				"numresele": "# res élémentaires",
 				"totres": 	 "Total #% res",
-				"totresele": "Total #% res élémentaires"
+				"totresele": "Total #% res élémentaires",
+				"isLegendary": "Légendaire",
+				"changed": "Modifié cette MaJ"
 			}
 		}
 	},

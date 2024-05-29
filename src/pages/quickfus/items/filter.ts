@@ -14,6 +14,7 @@ export class filter {
 	public levelMax: number = 200;
 	public types: Map<number, boolean> = new Map<number, boolean>();
 	public armes: Map<number, boolean> = new Map<number, boolean>();
+	public filterLegendary = false;
 	// @observable({ changeHandler: 'filterTypeChanged' })
 	public filterType: boolean = false;
 	// @observable({ changeHandler: 'filterWeaponChanged' })

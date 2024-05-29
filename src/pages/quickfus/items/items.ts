@@ -10,178 +10,178 @@ export class items {
 
 	public mason: Mason;
 	public grid: HTMLDivElement;
-    private pageHost: Element;
-    // private itemFilter: Object = null;
-    private debouncedShowMore = util.debounce(() => {
-        // this.search1();
-        this.mason.showMore(); 
-    }, 500, true);
+	private pageHost: Element;
+	// private itemFilter: Object = null;
+	private debouncedShowMore = util.debounce(() => {
+		// this.search1();
+		this.mason.showMore();
+	}, 500, true);
 
 
-    public constructor(readonly db: db, @IEventAggregator readonly ea: IEventAggregator) {
+	public constructor(readonly db: db, @IEventAggregator readonly ea: IEventAggregator) {
 		console.log("items ctor")
-        this.mason = new Mason();
+		this.mason = new Mason();
 
-        let onItemSheetAttached = util.debounce(() => {
-            this.mason.reloadMsnry();
-        }, 200, false);
-        // on sheet attached
-        this.ea.subscribe("itemsheet:loaded", () => {
-           onItemSheetAttached();
-        });
-        // on click search in the filter
-        this.ea.subscribe("items:search", (filter: Filter) => this.search(filter));
-    }
+		let onItemSheetAttached = util.debounce(() => {
+			this.mason.reloadMsnry();
+		}, 200, false);
+		// on sheet attached
+		this.ea.subscribe("itemsheet:loaded", () => {
+			onItemSheetAttached();
+		});
+		// on click search in the filter
+		this.ea.subscribe("items:search", (filter: Filter) => this.search(filter));
+	}
 
-    public isLoaded() {
+	public isLoaded() {
 		return this.db.isLoaded
-    }
+	}
 
-    attached() {
-        console.log("itemsearch attached grid: " + this.grid);
-        this.mason.obj = this;
-        this.mason.initMasonry();
+	attached() {
+		console.log("itemsearch attached grid: " + this.grid);
+		this.mason.obj = this;
+		this.mason.initMasonry();
 
-        // scroll handler
-        this.pageHost = document.getElementsByClassName("page-host")[0];
-        let handler =  (e) => {
-            if(!this.grid) {
-                this.pageHost.removeEventListener('scroll', handler, false);
-                return;
-            }
-            setTimeout(() => this.onScroll(e));
-        };
-        this.pageHost.addEventListener('scroll', handler);
-    }
+		// scroll handler
+		this.pageHost = document.getElementsByClassName("page-host")[0];
+		let handler = (e) => {
+			if (!this.grid) {
+				this.pageHost.removeEventListener('scroll', handler, false);
+				return;
+			}
+			setTimeout(() => this.onScroll(e));
+		};
+		this.pageHost.addEventListener('scroll', handler);
+	}
 
-    private async onScroll(e?) {
-        let h1 = this.pageHost.clientHeight;
-        let h2 = this.grid.scrollHeight + this.grid.offsetTop;
-        let maxScroll = h2 - h1;
-        let currScroll = this.pageHost.scrollTop;
-        // console.log("ph: " + h1 + ", au: " + h2 + ", max: " + maxScroll + ", curr: " + currScroll)
-        if(Math.abs(currScroll - maxScroll) <= 15) {
-            this.debouncedShowMore();
-        }
-    }
+	private async onScroll(e?) {
+		let h1 = this.pageHost.clientHeight;
+		let h2 = this.grid.scrollHeight + this.grid.offsetTop;
+		let maxScroll = h2 - h1;
+		let currScroll = this.pageHost.scrollTop;
+		// console.log("ph: " + h1 + ", au: " + h2 + ", max: " + maxScroll + ", curr: " + currScroll)
+		if (Math.abs(currScroll - maxScroll) <= 15) {
+			this.debouncedShowMore();
+		}
+	}
 
 	public searching: boolean = true;
 
-    /**
-     * new search : clear current items and search for new
-     */
-    public async search(filter: Filter = null) {
+	/**
+	 * new search : clear current items and search for new
+	 */
+	public async search(filter: Filter = null) {
 		// this.searching = true;
-        console.log("on search: " + filter)
-        this.mason.data = []; 
-        this.mason.fulldata = [];
-        this.mason.page = 0;
-		
+		console.log("on search: " + filter)
+		this.mason.data = [];
+		this.mason.fulldata = [];
+		this.mason.page = 0;
+
 		// load data in the background in increments
-        // let itemFilter = this.generateFilter(filter);
+		// let itemFilter = this.generateFilter(filter);
 		// await this.loadData(itemFilter, 0, 25); // just await the first data
 		// this.loadData(itemFilter, 25, 75);
 		// this.loadData(itemFilter, 75, 0);
 		this.filterData(filter);
-        this.mason.showMore(); 
+		this.mason.showMore();
 		// console.log("mason showed more")
 		this.searching = false;
-    }
+	}
 
 	private filterData(filter: Filter = null) {
-		if(!filter) return;
+		if (!filter) return;
 		// console.log({filter});
 		let arr = this.db.data.jsonItems
-		.filter(item => {
-			// console.log("filtering...")
-			// level
-			if(filter.filterLevel) {
-				if(item.level < filter.levelMin) return false;
-				if(item.level > filter.levelMax) return false;
-			}	
-			// Types
-			let goodType = !(filter.filterType || filter.filterWeapon);
-			if (filter.filterType) {
-				// if(!filter.types.get(item.typeId)) return false;
-				goodType = goodType || filter.types.get(item.typeId);
-			}
-			// Weapons
-			if (filter.filterWeapon) {
-				// if(!filter.armes.get(item.typeId)) return false;
-				goodType = goodType || filter.armes.get(item.typeId);
-			}
-			if(!goodType) return false;
-			// Text
-			if (filter.filterText && filter.filterText.trim() != "") {
-       		 	let regex = new RegExp(util.caseAndAccentInsensitive(filter.filterText.trim()), "i"); 
-				let name = this.db.getI18n(item.nameId);
-				if(!regex.test(name)) return false;
-			}
-			// blocks
-			if (filter.filterStats) {
-				for (let block of filter.blocks) {
-					if (!block.activate) continue;
-					if (block.type == "$sum") {
-						if (!this.filterSumMemory(block, item))
-							return false;
-					} else {
-						let arr = block.mods.filter(m => m.activate && m.effectId).map((m: ModFilter) => {
-							if (m.effectId >= 10000) {
-								return this.filterStatMemoryPseudo(m, item);
-							} else {
-								return this.filterStatMemory(m, item);
+			.filter(item => {
+				// console.log("filtering...")
+				// level
+				if (filter.filterLevel) {
+					if (item.level < filter.levelMin) return false;
+					if (item.level > filter.levelMax) return false;
+				}
+				// Types
+				let goodType = !(filter.filterType || filter.filterWeapon);
+				if (filter.filterType) {
+					// if(!filter.types.get(item.typeId)) return false;
+					goodType = goodType || filter.types.get(item.typeId);
+				}
+				// Weapons
+				if (filter.filterWeapon) {
+					// if(!filter.armes.get(item.typeId)) return false;
+					goodType = goodType || filter.armes.get(item.typeId);
+				}
+				if (!goodType) return false;
+				// Text
+				if (filter.filterText && filter.filterText.trim() != "") {
+					let regex = new RegExp(util.caseAndAccentInsensitive(filter.filterText.trim()), "i");
+					let name = this.db.getI18n(item.nameId);
+					if (!regex.test(name)) return false;
+				}
+				// blocks
+				if (filter.filterStats) {
+					for (let block of filter.blocks) {
+						if (!block.activate) continue;
+						if (block.type == "$sum") {
+							if (!this.filterSumMemory(block, item))
+								return false;
+						} else {
+							let arr = block.mods.filter(m => m.activate && m.effectId).map((m: ModFilter) => {
+								if (m.effectId >= 10000) {
+									return this.filterStatMemoryPseudo(m, item);
+								} else {
+									return this.filterStatMemory(m, item);
+								}
+							});
+							// console.log("filterBlock result: " + JSON.stringify(arr));
+							if (arr.length > 0) {
+								if (block.type == "$and" && arr.includes(false))
+									return false;
+								if (block.type == "$or" && !arr.includes(true))
+									return false;
+								if (block.type == "$nor" && arr.includes(true))
+									return false;
 							}
-						});
-						// console.log("filterBlock result: " + JSON.stringify(arr));
-						if (arr.length > 0) {
-							if (block.type == "$and" && arr.includes(false))
-								return false;
-							if (block.type == "$or" && !arr.includes(true))
-								return false;
-							if (block.type == "$nor" && arr.includes(true))
-								return false;
 						}
 					}
 				}
-			}
-			return true;
-		})
-		.sort((a, b) => {
-			let ld = b.level - a.level;
-			if(ld != 0) return ld;
-			else return b.id - a.id;
-		})
+				return true;
+			})
+			.sort((a, b) => {
+				let ld = b.level - a.level;
+				if (ld != 0) return ld;
+				else return b.id - a.id;
+			})
 		console.log("filter result: " + arr.length + ", from " + this.db.data.jsonItems.length);
-		
-        this.mason.fulldata.push(...arr);
+
+		this.mason.fulldata.push(...arr);
 	}
 
 	/*
 	private async loadData(itemFilter, skip: number, limit: number) { //pageId: number) {
 		// just load the rest of the .fulldata in the background
 		// maybe do 25 items (show), 50 (bg), infinite (bg)
-        var pipeline = [];
-        {
-            // actual filter
-            pipeline.push({ $match: itemFilter ?? "" });
-            // sums
-            //   if(Object.keys(adds.$addFields).length > 0)
-            //     pipeline.push(adds);
-            // sort
-            pipeline.push({ $sort: { "level": -1, "id": -1 } });
-            // // skip
-            pipeline.push({ $skip: skip }); // this.mason.page * this.mason.itemsPerPage
-            // // limit
-            if(limit != 0) pipeline.push({ $limit: limit }); // this.mason.itemsPerPage
-        };
-        // console.log("search 1, limit: " + this.mason.itemsPerPage + ", skip: " + this.mason.page * this.mason.itemsPerPage)
+		var pipeline = [];
+		{
+			// actual filter
+			pipeline.push({ $match: itemFilter ?? "" });
+			// sums
+			//   if(Object.keys(adds.$addFields).length > 0)
+			//     pipeline.push(adds);
+			// sort
+			pipeline.push({ $sort: { "level": -1, "id": -1 } });
+			// // skip
+			pipeline.push({ $skip: skip }); // this.mason.page * this.mason.itemsPerPage
+			// // limit
+			if(limit != 0) pipeline.push({ $limit: limit }); // this.mason.itemsPerPage
+		};
+		// console.log("search 1, limit: " + this.mason.itemsPerPage + ", skip: " + this.mason.page * this.mason.itemsPerPage)
 
-        let cursor = this.emerald.collectionItems.aggregate(pipeline);
-        let arr = await cursor.toArray(); 
+		let cursor = this.emerald.collectionItems.aggregate(pipeline);
+		let arr = await cursor.toArray(); 
 		// let arr = await this.db.mongoItemsAggregate(pipeline);
-        this.mason.fulldata.push(...arr);
+		this.mason.fulldata.push(...arr);
 		// console.log("loaded data: " + arr.length);
-        // console.log("arr: " + arr + ", fulldata: " + this.mason.fulldata.length);
+		// console.log("arr: " + arr + ", fulldata: " + this.mason.fulldata.length);
 	}
 	*/
 
@@ -336,18 +336,18 @@ export class items {
 		return mm;
 	}
 	*/
-	
+
 	private filterSumMemory(block: BlockFilter, item) {
 		let mask = block.mods.map(m => m.effectId);
 		let effects: any[] = item.possibleEffects;
 		let maskResult = effects.filter(e => mask.includes(this.getEffect(e).characteristic))
-		
+
 		let sum: number = maskResult.reduce((part: number, e) => {
 			let effectModel = this.getEffect(e);
 			let eMin = e.diceNum * effectModel.bonusType
 			let eMax = e.diceSide * effectModel.bonusType
 			// console.log("filterPseudoSum: " + eMax);
-			if(eMax == 0) return part + eMin;
+			if (eMax == 0) return part + eMin;
 			else return part + eMax;
 		}, 0);
 		// take min/max from first item
@@ -355,12 +355,12 @@ export class items {
 		let theoMax = block.mods[0].max || 100000
 		// pseudo stat
 		// console.log("filterPseudoSum: " + sum + ", mod: " + modMin + ", " + modMax);
-		if(sum < theoMin) return false;
-		if(sum > theoMax) return false;
+		if (sum < theoMin) return false;
+		if (sum > theoMax) return false;
 		return true;
 	}
 	private filterStatMemory(mod: ModFilter, item): boolean {
-		if(!mod.effectId) return true;
+		if (!mod.effectId) return true;
 		let modMin: number = parseInt(mod.min + "");
 		let modMax: number = parseInt(mod.max + "");
 		if (!mod.min) modMin = -100000;
@@ -368,13 +368,13 @@ export class items {
 		return effects.some(e => {
 			// charac
 			let effectModel = this.getEffect(e);
-			if(effectModel.characteristic != mod.effectId) return false;
-			if(effectModel.useInFight) return false; // can't filter weapon effects for now
+			if (effectModel.characteristic != mod.effectId) return false;
+			if (effectModel.useInFight) return false; // can't filter weapon effects for now
 			// min max
 			let eMin = e.diceNum * effectModel.bonusType
 			let eMax = e.diceSide * effectModel.bonusType
 			// console.log("filterStat: effect: " + eMin + "," + eMax + ",  mod: " + modMin + "," + modMax);
-			if(mod.max) {
+			if (mod.max) {
 				let minFilter = eMin >= modMin && eMin <= modMax;
 				let maxFilter = eMax >= modMin && eMax <= modMax;
 				return minFilter || maxFilter
@@ -382,10 +382,38 @@ export class items {
 				let minFilter = eMin >= modMin;
 				let maxFilter = eMax >= modMin;
 				return minFilter || maxFilter
-			} 
+			}
 		});
 	}
 	private filterStatMemoryPseudo(mod: ModFilter, item): boolean {
+		let charac = this.db.pseudoCharacs.find(c => c.id == mod.effectId);
+
+		switch (charac.subcategoryId) {
+			case 0:
+				return this.filterStatPseudoCharacteristics(mod, item);
+			case 1:
+				return this.filterStatPseudoProperty(mod, item);
+			// case 2:
+			// 	return this.filterStatPseudoSpecial(mod, item);
+		}
+		return true;
+	}
+	private filterStatPseudoSpecial(mod: ModFilter, item): boolean {
+		let charac = this.db.pseudoCharacs.find(c => c.id == mod.effectId);
+		// 12004 = item modified in the last game update
+		if(mod.effectId == 12004) {
+			let olditem = this.db.data2.jsonItemsById[item.id];
+			if(olditem != item) {
+
+			}
+		}
+		return true;
+	}
+	private filterStatPseudoProperty(mod: ModFilter, item): boolean {
+		let charac = this.db.pseudoCharacs.find(c => c.id == mod.effectId);
+		return !!item[charac.name];
+	}
+	private filterStatPseudoCharacteristics(mod: ModFilter, item): boolean {
 		let modMin: number = parseInt(mod.min + "");
 		let modMax: number = parseInt(mod.max + "");
 		if (!mod.min) modMin = -100000;
@@ -396,30 +424,30 @@ export class items {
 		let resis = effects.filter(e => charac.mask.includes(this.getEffect(e).characteristic))
 		// console.log("filterPseudo mask: " + charac.mask ); //+ " res: " + JSON.stringify(resis));
 
-		if(charac.count) {
+		if (charac.count) {
 			let count = resis.length;
 			// console.log("filterPseudoCount: " + count + ", mod: " + modMin + ", " + modMax);
-			if(mod.min && count < modMin) return false;
-			if(mod.max && count > modMax) return false;
+			if (mod.min && count < modMin) return false;
+			if (mod.max && count > modMax) return false;
 		} else {
 			let sum: number = resis.reduce((part: number, e) => {
 				let effectModel = this.getEffect(e);
 				let eMin = e.diceNum * effectModel.bonusType
 				let eMax = e.diceSide * effectModel.bonusType
 				// console.log("filterPseudoSum: " + eMax);
-				if(eMax == 0) return part + eMin;
+				if (eMax == 0) return part + eMin;
 				else return part + eMax;
 			}, 0);
 			// console.log("filterPseudoSum: " + sum + ", mod: " + modMin + ", " + modMax);
-			if(mod.min && sum < modMin) return false;
-			if(mod.max && sum > modMax) return false;
+			if (mod.min && sum < modMin) return false;
+			if (mod.max && sum > modMax) return false;
 		}
 		return true;
 	}
 
-    public getEffect(possibleEffect) {
-        possibleEffect.effect ??= this.db.data.jsonEffectsById[possibleEffect.effectId]; 
-        //this.db.data.jsonEffects.filter(e => e.id == possibleEffect.effectId)[0];
-        return possibleEffect.effect;
-    }
+	public getEffect(possibleEffect) {
+		possibleEffect.effect ??= this.db.data.jsonEffectsById[possibleEffect.effectId];
+		//this.db.data.jsonEffects.filter(e => e.id == possibleEffect.effectId)[0];
+		return possibleEffect.effect;
+	}
 }
