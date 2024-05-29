@@ -1,25 +1,46 @@
-<select class="form-select" style="width: 100%; margin-left: auto; margin-bottom: 10px;" value.bind="selectedEffectMode">
-	<option repeat.for="mode of modes" model.bind="mode" t="sidebar.${mode}">
-	</option>
-</select>
-
 <div class="d-flex">
-	<select class="form-select" style="width: auto; margin-right: 5px;" value.bind="selectedLang">
+	<select class="form-select" style="width: 100%; margin-right: 5px; margin-bottom: 10px;" value.bind="selectedEffectMode">
+		<option repeat.for="mode of modes" model.bind="mode" t="sidebar.${mode}">
+		</option>
+	</select>
+	<select class="form-select" style="width: auto; height: 38px;" value.bind="selectedLang">
 		<option>FR</option>
 		<option>EN</option>
 		<option>ES</option>
 	</select>
 
-	<div class="dropdown" style="width: 100%;">
-		<input type="button" class="form-select sel" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" 
-			style="height: 38px; cursor: default; text-align: left;"
-			value.bind="selectedVersion">
-		</input>
-		<select class="dropdown-menu" style="margin-left: auto;" size="7" value.bind="selectedVersion" aria-labelledby="dropdownMenuButton1">
-			<option repeat.for="version of versions" model.bind="version" if.bind="version > '2.64'">
-				${version}
-			</option>
-		</select>
+</div>
+
+<div class="d-flex">
+	
+	<div style="display: block; margin-right: 5px; width: 100%;">
+		<div t="sidebar.versionNow"></div>
+		<div class="dropdown" style="width: 100%;">
+			<input type="button" class="form-select sel" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" 
+				style="height: 38px; cursor: default; text-align: left;"
+				value.bind="selectedVersion">
+			</input>
+			<select class="dropdown-menu" style="margin-left: auto;" size="7" value.bind="selectedVersion" aria-labelledby="dropdownMenuButton1">
+				<option repeat.for="version of versions" model.bind="version" if.bind="version > '2.64'">
+					${version}
+				</option>
+			</select>
+		</div>
+	</div>
+	
+	<div style="display: block; width: 100%;">
+		<div t="sidebar.versionPrevious"></div>
+		<div class="dropdown">
+			<input type="button" class="form-select sel" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false" 
+				style="height: 38px; cursor: default; text-align: left;"
+				value.bind="selectedVersion2">
+			</input>
+			<select class="dropdown-menu" style="margin-left: auto;" size="7" value.bind="selectedVersion2" aria-labelledby="dropdownMenuButton2">
+				<option repeat.for="version of versions" model.bind="version" if.bind="version > '2.64'">
+					${version}
+				</option>
+			</select>
+		</div>
 	</div>
 
 </div>

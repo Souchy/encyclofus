@@ -20,7 +20,7 @@
             <td innerHtml.bind="renderedEffect.replace('<br>', '')" class.bind="EffectRenderClass" click.trigger="clickShowSub()"></td>
 
             <!-- icons fin -->
-            <td ref="spellhover" if.bind="isStateSubspell(effect)" class="hoverableEffectSubspell" id="spellhovertd" mouseover.trigger="hoverSub() & throttle:100">
+            <td ref="spellhover" if.bind="isStateSubspell(effect)" class="hoverableEffectSubspell" mouseover.trigger="hoverSub() & throttle:100">
                 <spell class="spellHover" style.bind="hoverTranslation" if.bind="depth <= 1" spellid.bind="getStateSubspellId(effect)" depth.bind="depth+1" showcrit.bind="showcrit"></spell>
             </td>
             <td if.bind="effectRenderer.isDuration(effect)" class="tooltipx iconDispell">

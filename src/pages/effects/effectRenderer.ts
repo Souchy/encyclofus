@@ -62,8 +62,8 @@ export class EffectRenderer {
 	}
 
 	public renderEffectI18n(e) {
-		e.effect ??= this.getEffectModel(e);
-		let text = this.db.getI18n(e.effect?.descriptionId);
+		let effect = this.getEffectModel(e);
+		let text = this.db.getI18n(effect.descriptionId);
 		// if(e.effectUid == 293889)
 		// 	console.log("monster!! " + this.hasSummon(e));
         

@@ -18,7 +18,7 @@ export class sets {
         this.mason.showMore(); 
     }, 500, true);
 
-    public comparing: boolean = true;
+    public comparing: boolean = false;
 
 
     public constructor(readonly db: db, @IEventAggregator readonly ea: IEventAggregator) {

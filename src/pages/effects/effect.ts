@@ -75,8 +75,8 @@ export class Effect {
 			if(this.themer.themeBool) return "foldableSubspellLight";
 			else return "foldableSubspellDark";
 		} 
-		else if(hasSubSpell && this.sourcetype == "itemEffects") {
-			console.log("ayo????????????")
+		else 
+		if(hasSubSpell && this.sourcetype == "itemEffects") {
 			return "hoverableSubspell";
 		}
 		else {
@@ -220,10 +220,14 @@ export class Effect {
 		if(this.grid) {
 			let bb = this.spellhover.getBoundingClientRect();
 			let gridbb = this.grid.getBoundingClientRect();
-			if (bb.x + bb.width > gridbb.width) {
-				this.translation = gridbb.width - (bb.x + bb.width) + 100;
+			if (bb.left + bb.width > gridbb.width) {
+				this.translation = gridbb.width - (bb.left + bb.width) + 50;
 			} else {
 				this.translation = 0;
+			}
+			// quand on enlève la sidebar
+			if(gridbb.x < 250) {
+				this.translation -= (250 + 50);
 			}
 		}
 	}

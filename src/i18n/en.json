@@ -108,7 +108,9 @@
 		},
 		"debug": "Extreme display (debug)",
 		"detailed": "Detailed display",
-		"basic": "Base display"
+		"basic": "Base display",
+		"versionNow": "Current",
+		"versionPrevious": "Previous"
 	},
 	"maps": {
 		"goultar3v3": "Goultarminator 3v3",

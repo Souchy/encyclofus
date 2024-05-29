@@ -10,7 +10,7 @@ import jsonVersions from '../DofusDB/versions.json'
 export class Options {
 	public db: db;
 	public versions: string[];
-	public modes: string[] = ["debug", "detailed", "basic"];
+	public modes: string[] = ["debug", "basic"]; //"detailed", "basic"];
 
 	@observable
 	public selectedVersion: string;
@@ -18,6 +18,8 @@ export class Options {
 	public selectedLang: string;
 	@observable
 	public selectedEffectMode: string;
+	@observable
+	public selectedVersion2: string;
 
 	constructor(db: db, @I18N private readonly i18n: I18N) {
 		this.db = db;
@@ -26,6 +28,7 @@ export class Options {
 		this.selectedEffectMode = this.db.effectMode;
 		this.selectedVersion = this.db.version;
 		this.selectedLang = this.db.lang.toUpperCase();
+        this.selectedVersion2 = this.db.data2.version;
 	}
 
 	public selectedLangChanged(newValue: string, oldValue: string) {
@@ -48,4 +51,11 @@ export class Options {
 		if(oldValue)
 			location.reload();
 	}
+	public selectedVersion2Changed(newValue: string, oldValue: string) {
+		// console.log("selected version changed: " + oldValue + " -> " + newValue)
+		this.db.setVersion2(newValue);
+		// if(oldValue)
+		// 	location.reload();
+	}
+
 }
