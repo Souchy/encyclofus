@@ -89,10 +89,11 @@ export class EffectRenderer {
 		// invocation
 		if (this.hasSummon(e)) {
 			let summon = this.getSummon(e);
+			// console.log("");
 			if (summon) {
 				let name = this.db.getI18n(summon.nameId);
 				//if(e.effectUid == 293889)
-				//console.log("monster: " + summon.id + ", " + summon.nameId + " = " + name + " for " + text);
+				// console.log("monster: " + summon.id + ", " + summon.nameId + " = " + name + " for " + text);
 				text = text.replace("#1", name);
 			}
 
@@ -142,10 +143,12 @@ export class EffectRenderer {
 		if (db.isEffectState(e)) {
 			// if (e.value) {
 			let state = this.db.data.jsonStates[e.value]
+			// console.log("state: " + e.value + ", " + JSON.stringify(state));
 			if (!state) { }
 			// "968135": "{spell,24036,1::<u>Saoul</u>}",
 			if (state) {
 				let stateName = this.db.getI18n(state.nameId);
+				// console.log("state: " + stateName);
 				if (stateName) {
 					if (stateName.includes("{")) {
 						stateName = stateName.replace("{", "").replace("}", "");
@@ -153,9 +156,27 @@ export class EffectRenderer {
 						let subSpellId = data[1];
 						let stateSpell = this.db.data.jsonSpells[subSpellId];
 						stateName = stateName.split("::")[1];
+						// console.log("reste: " + stateName);
+
+						if(this.db.checkFeature("unity")) {
+							// console.log("statename: " + stateName);
+							// stateName = stateName.replace("<color", "<font");
+							let i1 = stateName.indexOf(">");
+							stateName = stateName.slice(0, i1) + "\"" + stateName.slice(i1);
+							stateName = stateName.replace("color=", "font color=\"");
+							console.log(stateName);
+
+							let i2 = stateName.lastIndexOf("<");
+							// console.log("ii: " + i2);
+							stateName = stateName.substring(0, i2) + "</font>";
+							// console.log(stateName);
+							// stateName = stateName.replace("color", "font");
+
+						}
 					}
 				}
 				text = text.replace("#3", stateName);
+				// console.log("text: " + text);
 			} else {
 				console.log("null state: " + JSON.stringify(state))
 			}
@@ -163,16 +184,18 @@ export class EffectRenderer {
 		if(db.isCellEffect(e)) {
 			// glyphes, pièges..
 		} else {
-			let min = e.diceNum;
-			let max = e.diceSide;
 			if(this.db.checkFeature("unity")) {
-				if(min && !text.includes("#1")) {
-					let percent = effect["isInPercent"] ? "%" : "";
-					let str = min + percent + " ";
-					if(max != 0) {
-						str += "à " + max + percent + " ";
-					} 
-					text = effect["characteristicOperator"] + str + text;
+				let min = e.diceNum;
+				let max = e.diceSide;
+				if(effect.useDice || effect["isInPercent"]) {
+					if(min && !text.includes("#1")) {
+						let percent = effect["isInPercent"] ? "%" : "";
+						let str = min + percent + " ";
+						if(max != 0) {
+							str += "à " + max + percent + " ";
+						} 
+						text = effect["characteristicOperator"] + str + text;
+					}
 				}
 			}
 	
@@ -182,12 +205,15 @@ export class EffectRenderer {
 			text = text.replace("#3", e.value);
 		}
 
+
 		text = this.renderEffectPart2(e, effect, text);
 		if(e.triggers.includes("TB"))
 			text += this.i18n.tr("triggers.TB") //" (au début du tour)";
 		if(e.triggers.includes("TE"))
 			text += this.i18n.tr("triggers.TE") //" (à la fin du tour)";
 
+		if(this.db.checkFeature("unity"))
+			text = text.replace("{", "").replace("}", "");
 		return text;
 	}
 
@@ -221,7 +247,8 @@ export class EffectRenderer {
 			text = text.replace("}", "")
 			text = text.replace("#2", max);
 			if(str) text += " " + str;
-		} else {
+		} else 
+		if(text.includes("#2")) {
 			let values = text.split("#2")[0];
 			let str = text.split("#2")[1];
 			
@@ -237,11 +264,14 @@ export class EffectRenderer {
 			
 			if(str) text += " " + str;
 		}
+		// console.log("textttt: " + text);
 		// conjugaison
 		if (min > 1 || max > 1) {
 			text = text.replace("{~ps}{~zs}", "s");
+			text = text.replace("{{~ps}}", "s");
 		} else {
 			text = text.replace("{~ps}{~zs}", "");
+			text = text.replace("{{~ps}}", "");
 		}
 		// délai
 		if (e.delay > 0) {
