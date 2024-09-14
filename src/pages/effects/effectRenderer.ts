@@ -167,9 +167,10 @@ export class EffectRenderer {
 			let max = e.diceSide;
 			if(this.db.checkFeature("unity")) {
 				if(min && !text.includes("#1")) {
-					let str = min + " ";
+					let percent = effect["isInPercent"] ? "%" : "";
+					let str = min + percent + " ";
 					if(max != 0) {
-						str += "à " + max + " ";
+						str += "à " + max + percent + " ";
 					} 
 					text = effect["characteristicOperator"] + str + text;
 				}
