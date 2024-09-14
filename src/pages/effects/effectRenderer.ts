@@ -46,6 +46,9 @@ export class EffectRenderer {
 		}
 	}
 	public getZone(e) {
+		if(this.db.checkFeature("unity")) {
+			return SpellZone.parseZoneUnity(e.zoneDescr);
+		}
 		return SpellZone.parseZone(e.rawZone);
 	}
 	public getZoneString(e) {
@@ -93,7 +96,7 @@ export class EffectRenderer {
 				text = text.replace("#1", name);
 			}
 
-		}
+		} else
 		// state condition, fouet osa dragocharge, +1 combo,
 		if (db.isSubSpell(e)) {
 			// let subspellid = e.diceNum;
@@ -115,7 +118,7 @@ export class EffectRenderer {
 				}
 				text = text.replace("#1", name);
 			}
-		}
+		} else
 		// augmente ou réduit le cooldown du sort 
 		if (db.isEffectChargeCooldown(e)) {
 			let subspell = this.getSubSpell(e);
@@ -124,7 +127,7 @@ export class EffectRenderer {
 				text = text.replace("#1", name); // this.name
 				text = text.replace("#3", e.value);
 			}
-		}
+		} else
 		// effet de charge
 		if (db.isEffectCharge(e)) { // if (has1 && has3 && !has2) { //
 			// let subspellid = e.diceNum;
@@ -134,7 +137,7 @@ export class EffectRenderer {
 				text = text.replace("#1", this.db.getI18n(subspell.nameId));
 				text = text.replace("#3", e.value);
 			}
-		}
+		} else
 		// état
 		if (db.isEffectState(e)) {
 			// if (e.value) {
@@ -156,24 +159,48 @@ export class EffectRenderer {
 			} else {
 				console.log("null state: " + JSON.stringify(state))
 			}
+		} else {
+			let min = e.diceNum;
+			let max = e.diceSide;
+			if(this.db.checkFeature("unity")) {
+				if(min) {
+					let str = min + " ";
+					if(max != 0) {
+						str += "à " + max + " ";
+					} 
+					text = effect["characteristicOperator"] + str + text;
+				}
+			}
+	
 		}
 		// pose un portail avec value = % do
 		if (e.effectId == 1181) {
 			text = text.replace("#3", e.value);
 		}
 
-		text = this.renderEffectPart2(e, text);
+		text = this.renderEffectPart2(e, effect, text);
 		if(e.triggers.includes("TB"))
 			text += this.i18n.tr("triggers.TB") //" (au début du tour)";
 		if(e.triggers.includes("TE"))
 			text += this.i18n.tr("triggers.TE") //" (à la fin du tour)";
+
 		return text;
 	}
 
-	public renderEffectPart2(e, text: string): string {
+	public renderEffectPart2(e, effectModel, text: string): string {
 		// min/max
 		let min = e.diceNum;
 		let max = e.diceSide;
+		// if(this.db.checkFeature("unity")) {
+		// 	if(min) {
+		// 		let str = min + " ";
+		// 		if(max != 0) {
+		// 			str += "à " + max + " ";
+		// 		} 
+		// 		text = effectModel.characteristicOperator + str + text;
+		// 	}
+		// }
+
 		text = text.replace("#1", min);
 		if (max) {
 			let values = text.split("#2")[0];

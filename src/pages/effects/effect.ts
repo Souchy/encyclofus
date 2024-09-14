@@ -164,6 +164,7 @@ export class Effect {
 			let subspell = this.effectRenderer.getSubSpell(e);
 			if (!subspell) return false;
 			if(this.sourcetype == "itemEffects") {
+				// console.log("is sub itemEffects yes")
 				return true;
 			}
 			// return true;
@@ -217,9 +218,15 @@ export class Effect {
 		return "translate: " + this.translation + "px 0px";
 	}
 	public hoverSub() {
+		// if(this.spellhover) {
+		// 	let bb = this.spellhover.getBoundingClientRect();
+		// 	console.log(JSON.stringify(bb));
+		// }
 		if(this.grid) {
 			let bb = this.spellhover.getBoundingClientRect();
 			let gridbb = this.grid.getBoundingClientRect();
+			// console.log(bb);
+			// console.log(JSON.stringify(gridbb));
 			if (bb.left + bb.width > gridbb.width && gridbb.width > 260) {
 				this.translation = gridbb.width - (bb.left + bb.width) + 50;
 			} else {
@@ -229,7 +236,16 @@ export class Effect {
 			if(gridbb.x < 250 && gridbb.width > 260) {
 				this.translation -= (250 + 50);
 			}
+			// console.log("translation: " + this.translation);
 		}
 	}
+	/*
+	{"x":622.53125,"y":505.5,"width":238,"height":25,"top":505.5,"right":860.53125,"bottom":530.5,"left":622.53125}
+	{"x":71.531250,"y":446.5,"width":800,"height":336,"top":446.5,"right":871.53125,"bottom":782.5,"left":71.53125}
+	*/
+	/*
+	{"x":888.984375,"y":544.5,"width":238,"height":25,"top":544.5,"right":1126.984375,"bottom":569.5,"left":888.984375}
+	{"x":337.984375,"y":485.5,"width":800,"height":336,"top":485.5,"right":1137.984375,"bottom":821.5,"left":337.984375}
+	*/
 
 }
