@@ -159,11 +159,14 @@ export class EffectRenderer {
 			} else {
 				console.log("null state: " + JSON.stringify(state))
 			}
+		} else
+		if(db.isCellEffect(e)) {
+			// glyphes, pièges..
 		} else {
 			let min = e.diceNum;
 			let max = e.diceSide;
 			if(this.db.checkFeature("unity")) {
-				if(min) {
+				if(min && !text.includes("#1")) {
 					let str = min + " ";
 					if(max != 0) {
 						str += "à " + max + " ";
