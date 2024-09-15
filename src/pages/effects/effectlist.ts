@@ -61,8 +61,12 @@ export class Effectlist {
         // console.log(e);
         let effectModel = e["effect"] ?? this.getEffectModel(e);
         // console.log(effectModel)
-        
-        let show = (this.isGreenList(e.effectUid) || e.visibleInTooltip || (effectModel?.showInTooltip && mode == "detailed") || effectModel?.showInSet) // || e.visibleInBuffUi || e.visibleInFightLog) 
+
+        let visibleInTooltip = e.visibleInTooltip;
+        if(this.db.checkFeature("unity")) {
+            visibleInTooltip = (e["m_flags"] & 1) > 0;
+        }
+        let show = (this.isGreenList(e.effectUid) || visibleInTooltip || (effectModel?.showInTooltip && mode == "detailed") || effectModel?.showInSet) // || e.visibleInBuffUi || e.visibleInFightLog) 
                 && !this.isRedList(e.effectUid) && e.effectId != 666
 
         // let show = (

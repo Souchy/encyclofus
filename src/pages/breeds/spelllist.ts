@@ -89,37 +89,6 @@ export class SpellList {
 	public get summonSpell() {
 		return this.dbJsonSpells[13997];
 	}
-
-	// public hasSummon() {
-	// 	let e = this.summonEffect;
-	// 	console.log("hasSummon effect: ");
-	// 	return db.isSummonEffect(e); // && e.visibleInTooltip; // e.effectId == 181 || e.effectId == 1011 || e.effectId == 1008;
-	// }
-	// public get getSummon(): any {
-	// 	// console.log("get summon: " + this.thatSummon);
-	// 	let e = this.summonEffect;
-	// 	if (!this.hasSummon()) return null;
-	// 	// console.log("getSummon json why: " + e)
-	// 	let summon = this.db.data.jsonSummons[e.diceNum];
-	// 	console.log(summon);
-	// 	return summon;
-	// 	// return this.thatSummon;
-	// }
-
-	// public get summonEffect() {
-	// 	console.log("get effect ")
-	// 	// let s = this.db.data.jsonSpells[13997];
-	// 	let s = this.summonSpell;
-	// 	// console.log("summon effect: " + s);
-	// 	let e = s.effects[this.db.selectedOsaSlot];
-	// 	console.log("summon effect: " + s + ", " + e)
-	// 	return e;
-	// 	// return this.selectedOsaSummonEffectBla;
-	// }
-	// public summonSide() {
-	// 	return this.summonEffect?.diceSide;
-	// }
-
 	public get selectedEffect() {
 		let s = this.summonSpell;
 		let e = s.effects[this.db.selectedOsaSlot];
@@ -134,9 +103,6 @@ export class SpellList {
 	public getSummonBySlot(e) {
 		let summon = this.db.data.jsonSummons[e.diceNum];
 		return summon;
-	}
-	public get fdsfds() {
-		return this.dbJsonSpells[13997];
 	}
 
 }
