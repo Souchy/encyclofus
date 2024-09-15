@@ -33,23 +33,23 @@
 		<tbody>
 			<tr>
 				<td t="castTestLos"></td>
-				<td style="white-space: nowrap; text-align: right;">${translate(spell.castTestLos)}</td>
+				<td style="white-space: nowrap; text-align: right;">${translate(castTestLos)}</td>
 			</tr>
-			<tr if.bind="spell.needFreeCell">
+			<tr if.bind="needFreeCell">
 				<td t="needFreeCell"></td>
-				<td style="white-space: nowrap; text-align: right;">${translate(spell.needFreeCell)}</td>
+				<td style="white-space: nowrap; text-align: right;">${translate(needFreeCell)}</td>
 			</tr>
-			<tr if.bind="spell.needTakenCell">
+			<tr if.bind="needTakenCell">
 				<td t="needTakenCell"></td>
-				<td style="white-space: nowrap; text-align: right;">${translate(spell.needTakenCell)}</td>
+				<td style="white-space: nowrap; text-align: right;">${translate(needTakenCell)}</td>
 			</tr>
-			<tr if.bind="spell.castInLine">
+			<tr if.bind="castInLine">
 				<td t="castInLine"></td>
-				<td style="white-space: nowrap; text-align: right;">${translate(spell.castInLine)}</td>
+				<td style="white-space: nowrap; text-align: right;">${translate(castInLine)}</td>
 			</tr>
-			<tr if.bind="spell.castInDiagonal">
+			<tr if.bind="castInDiagonal">
 				<td t="castInDiagonal"></td>
-				<td style="white-space: nowrap; text-align: right;">${translate(spell.castInDiagonal)}</td>
+				<td style="white-space: nowrap; text-align: right;">${translate(castInDiagonal)}</td>
 			</tr>
 			<tr if.bind="spell.maxStack > 0">
 				<td t="maxStack"></td>

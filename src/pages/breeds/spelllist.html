@@ -20,11 +20,12 @@
 <!-- osa summons -->
 <div class="spellList d-flex flex-wrap" if.bind="db.isLoaded && breedId == 2">
 	<div repeat.for="e of dbJsonSpells[13997].effects" click.delegate="selectSummon($index)" class="spell ${ db.selectedOsaSlot == $index ? 'spellactive' : ''}">
-		<img src="${db.getMonsterIconPath(e.diceNum)}" style="width: 45px; height: 45px;" />
+		<img src="${db.getMonsterIconPath(e.diceNum)}" style="height: 45px; padding-left: 2px; padding-right: 2px;" />
 	</div>
 </div>
 <!-- selected osa summon -->
-<summon if.bind="db.isLoaded && db.selectedOsaSlot >= 0" summon.bind="getSummon" side.bind="summonSide()"></summon>
+<summon if.bind="db.isLoaded && db.selectedOsaSlot >= 0 && breedId == 2" summon.bind="selectedSummon" side.bind="selectedEffect.diceSide"></summon>
+<!-- <summon if.bind="db.isLoaded && db.selectedOsaSlot >= 0" summon.bind="getSummon" side.bind="summonSide()"></summon> -->
 
 <!-- selected spell Description -->
 <spell if.bind="db.isLoaded && db.selectedSpellSlot >= 0" spellid.bind="selectedSpellId"></spell>
@@ -34,3 +35,7 @@
 <!-- <div if.bind="db.isLoaded" repeat.for="e1 of selectedSpell.effects">
 	<summon if.bind="hasSummon(e1)" summon.bind="getSummon(e1)" side.bind="e1.diceSide"></summon>
 </div> -->
+
+<!-- <div if.bind="db.isLoaded && breedId == 2" repeat.for="e1 of fdsfds.effects">
+	<summon summon.bind="getSummonBySlot(e1)" side.bind="e1.diceSide"></summon>
+</div>  -->

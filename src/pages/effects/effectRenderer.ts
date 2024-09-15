@@ -164,7 +164,7 @@ export class EffectRenderer {
 							let i1 = stateName.indexOf(">");
 							stateName = stateName.slice(0, i1) + "\"" + stateName.slice(i1);
 							stateName = stateName.replace("color=", "font color=\"");
-							console.log(stateName);
+							// console.log(stateName);
 
 							let i2 = stateName.lastIndexOf("<");
 							// console.log("ii: " + i2);

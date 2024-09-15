@@ -145,11 +145,31 @@ export class Spell {
 	}
 	*/
 
+	public get rangeCanBeBoosted() {
+		if(this.db.checkFeature("unity")) {
+			return (this.spell["m_flags"] & 64) > 0;
+		} else {
+			return this.spell.rangeCanBeBoosted;
+		}
+	}
+	public get castTestLos() {
+		if(this.db.checkFeature("unity")) {
+			return (this.spell["m_flags"] & 4) > 0;
+		} else {
+			return this.spell.castTestLos;
+		}
+	}
+
 	public get summonEffects() {
-		return this.spell.effects.filter(e => this.hasSummon(e));
+		let effs = this.spell.effects.filter(e => this.hasSummon(e));
+		// console.log("summonEffects: " + asd);
+		return effs;
 	}
 	public hasSummon(e: any) {
-		return db.isSummonEffect(e) && e.visibleInTooltip && this.db.data.jsonSummons[e.diceNum]; // e.effectId == 181 || e.effectId == 1011 || e.effectId == 1008;
+		// if(this.db.checkFeature("unity")) {
+			return db.isSummonEffect(e) && this.db.data.jsonSummons[e.diceNum];
+		// }
+		// return db.isSummonEffect(e) && e.visibleInTooltip && this.db.data.jsonSummons[e.diceNum]; // e.effectId == 181 || e.effectId == 1011 || e.effectId == 1008;
 	}
 	public getSummon(e: any): any {
 		if (!this.hasSummon(e)) return null;
