@@ -187,6 +187,7 @@ export class EffectRenderer {
 			if(this.db.checkFeature("unity")) {
 				let min = e.diceNum;
 				let max = e.diceSide;
+				// console.log("effect unity: " + effect.useDice + ", " + min + " à " + max)
 				if(effect.useDice || effect["isInPercent"]) {
 					if(min && !text.includes("#1")) {
 						let percent = effect["isInPercent"] ? "%" : "";
@@ -204,7 +205,7 @@ export class EffectRenderer {
 		if (e.effectId == 1181) {
 			text = text.replace("#3", e.value);
 		}
-
+		// console.log("effect: " + text);
 
 		text = this.renderEffectPart2(e, effect, text);
 		if(e.triggers.includes("TB"))
