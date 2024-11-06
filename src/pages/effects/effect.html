@@ -31,7 +31,7 @@
                 <img src.bind="effectRenderer.getTargetIcon(effect)"></img>
                 <div class="tooltiptext" innerHtml.bind="effectRenderer.getTargetString(effect)"></div>
             </td>
-            <td if.bind="sourcetype != 'itemEffects' && db.getAoeIconUrl(effect)" class="tooltipx iconZone">
+            <td if.bind="sourcetype != 'itemEffects' && sourcetype != 'weaponEffects' && db.getAoeIconUrl(effect)" class="tooltipx iconZone">
                 <img src.bind="db.getAoeIconUrl(effect)"></img>
                 <div class="tooltiptext">${effectRenderer.getZoneString(effect)}</div>
             </td>

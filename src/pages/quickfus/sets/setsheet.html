@@ -40,11 +40,11 @@
     <!-- <div if.bind="!finishedComparison" class="loaderContainer">
         <div class="loader"></div>
     </div> -->
-    <effectlist if.bind="finishedComparison" effects.bind="comparedEffects[bonusCounter]" iscrit.bind="false" depth.bind="0" comparing.to-view="true"></effectlist>
+    <effectlist if.bind="finishedComparison" effects.bind="comparedEffects[bonusCounter]" sourcetype="itemEffects" iscrit.bind="false" depth.bind="0" comparing.to-view="true"></effectlist>
   </template>
   <template else>
     <!-- bye -->
-    <effectlist if.bind="bonusCounterHasEffects" effects.bind="data.effects[bonusCounter]" iscrit.bind="false" depth.bind="0"></effectlist>
+    <effectlist if.bind="bonusCounterHasEffects" effects.bind="data.effects[bonusCounter]" sourcetype="itemEffects" iscrit.bind="false" depth.bind="0"></effectlist>
   </template>
 
   
