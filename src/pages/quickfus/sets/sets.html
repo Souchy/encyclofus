@@ -14,8 +14,9 @@
 
 <p></p>
 
-<button class="btn" click.trigger="toggleComparing()">Comparer avec la maj précédente</button>
-
+<input class="checkbox mr-1" type="checkbox" id="comparing" checked.bind="comparing" />
+<label class="title mr-auto" for="comparing">Comparer tout avec la maj précédente</label>
+<!-- <button class="btn" click.trigger="toggleComparing()">Comparer avec la maj précédente</button> -->
 
 <div class="grid-wrapper">
     <div class="grid" ref="grid">
