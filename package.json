@@ -17,6 +17,7 @@
     "bootstrap": "^5.2.1",
     "colors": "^1.4.0",
     "diff": "^5.2.0",
+    "encyclofus": "file:",
     "infinite-scroll": "^4.0.1",
     "jquery": "^3.6.3",
     "masonry-layout": "^4.2.2",

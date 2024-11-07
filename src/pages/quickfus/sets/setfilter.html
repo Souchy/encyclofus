@@ -1,0 +1,12 @@
+<!-- Search -->
+<div class="row" if.bind="db.isLoaded">
+  <input class="search" type="text" value.bind="filterText" t="[placeholder]quickfus.filter.search" focus="true" change.delegate="filterTextChanged()" />
+</div>
+
+<!-- Level -->
+<div class="d-flex align-items-center">
+  <!-- <input class="checkbox mr-1" type="checkbox" id="level" checked.bind="filterLevel" /> -->
+  <label class="title mr-auto" for="level" t="quickfus.filter.level"></label>
+  <input class="mr-2" type="number" value.bind="levelMin" placeholder="min" change.delegate="levelMinChanged()" />
+  <input class="" type="number" value.bind="levelMax" placeholder="max" change.delegate="levelMaxChanged()" />
+</div>

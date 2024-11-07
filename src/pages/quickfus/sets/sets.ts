@@ -101,6 +101,18 @@ export class sets {
 
     public filterData(filter: Setfilter) {
 		let arr: DofusSet[] = this.db.data.jsonItemSets
+            .filter((value) => {
+                // level
+                if (this.highestItemLevel(value) < filter.levelMin) return false;
+                if (this.highestItemLevel(value) > filter.levelMax) return false;
+                // Text
+                if (filter.filterText && filter.filterText.trim() != "") {
+                    let regex = new RegExp(util.caseAndAccentInsensitive(filter.filterText.trim()), "i");
+                    let name = this.db.getI18n(value.nameId);
+                    if (!regex.test(name)) return false;
+                }
+                return true;
+            })
             .map(set => {
                 if(!set.itemsData)
                     set.itemsData = [];

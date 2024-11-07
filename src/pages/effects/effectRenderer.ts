@@ -274,6 +274,7 @@ export class EffectRenderer {
 			text = text.replace("{~ps}{~zs}", "");
 			text = text.replace("{{~ps}}", "");
 		}
+		text = text.replace("{{~zs}}", "");
 		// délai
 		if (e.delay > 0) {
 			text += " " + this.i18n.tr("delay", { delay: e.delay })
