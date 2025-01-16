@@ -21,7 +21,9 @@
 
             <!-- icons fin -->
             <td ref="spellhover" if.bind="isStateSubspell(effect)" class="hoverableEffectSubspell" mouseover.trigger="hoverSub() & throttle:100">
-                <spell class="spellHover" style.bind="hoverTranslation" if.bind="depth <= 1" spellid.bind="getStateSubspellId(effect)" depth.bind="depth+1" showcrit.bind="showcrit"></spell>
+                <spell class="spellHover" style.bind="hoverTranslation" if.bind="depth <= 1" 
+                    spellid.bind="getStateSubspellId(effect)" selectedGrade.bind="getStateSubSpellGrade(effect)" depth.bind="depth+1" showcrit.bind="showcrit"
+                ></spell>
             </td>
             <td if.bind="effectRenderer.isDuration(effect)" class="tooltipx iconDispell">
                 <img src.bind="effectRenderer.getDispellIcon(effect)"></img>
@@ -49,9 +51,9 @@
 <!-- SUB SPELLS (that are not traps nor glyphs) -->
 <!-- normal effects -->
 <effectlist if.bind="showsub && effectRenderer.hasSubSpell(effect, spellGrade) && !iscrit && !isStateSubspell(effect)" 
-    effects.bind="subSpell.effects" depth.bind="depth+1" iscrit.bind="false" spellGrade.bind="subSpell.grade"
+    effects.bind="subSpellLevel.effects" depth.bind="depth+1" iscrit.bind="false" spellGrade.bind="subSpellGrade"
 ></effectlist>
 <!-- crit effects -->
 <effectlist if.bind="showsub && effectRenderer.hasSubSpell(effect, spellGrade) && iscrit && !isStateSubspell(effect)" 
-    effects.bind="subSpell.criticalEffect" depth.bind="depth+1" iscrit.bind="true" spellGrade.bind="subSpell.grade"
+    effects.bind="subSpellLevel.criticalEffect" depth.bind="depth+1" iscrit.bind="true" spellGrade.bind="subSpellGrade"
 ></effectlist>

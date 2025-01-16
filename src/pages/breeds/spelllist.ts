@@ -5,6 +5,7 @@ import { IRouter, IRouteableComponent, Navigation, Parameters, RoutingInstructio
 
 import { db } from "../../DofusDB/db";
 import jsonBreeds from '../../DofusDB/static/classes.json';
+import { DofusSpell, DofusSpellNew } from '../../ts/dofusModels';
 // import { Breed } from "../breed";
 
 @inject(db)
@@ -33,7 +34,7 @@ export class SpellList {
 	}
 
 	public get dbJsonSpells() {
-		return this.db.data.jsonSpells;
+		return this.db.data.spells;
 	}
 	public get isDbLoaded() {
 		return this.db.isLoaded;
@@ -58,7 +59,7 @@ export class SpellList {
 	}
 	public get selectedSpell() {
 		if (!this.selectedSpellId) return null;
-		return this.db.data.jsonSpells[this.selectedSpellId];
+		return this.db.data.spells[this.selectedSpellId];
 	}
 
 
@@ -76,8 +77,8 @@ export class SpellList {
 	}
 
 	public getSpellName(spellId: number): string {
-		// console.log("getSpellName " + JSON.stringify(this.db.jsonSpells[spellId].nameId))
-		let nameid = this.db.data.jsonSpells[spellId].nameId;
+		// console.log("getSpellName " + JSON.stringify(this.db.spells[spellId].nameId))
+		let nameid = this.db.data.spells[spellId].nameId;
 		return this.db.getI18n(nameid);
 	}
 
@@ -86,13 +87,19 @@ export class SpellList {
 		this.db.selectedSpellSlot = -1;
 	}
 
-	public get summonSpell() {
+	public get summonSpell(): DofusSpell | DofusSpellNew {
 		return this.dbJsonSpells[13997];
 	}
 	public get selectedEffect() {
 		let s = this.summonSpell;
-		let e = s.effects[this.db.selectedOsaSlot];
-		return e;
+		if(this.isOldSpell(s)) {
+			let e = s.effects[this.db.selectedOsaSlot];
+			return e;
+		} 
+		else 
+		{
+
+		}
 	}
 	public get selectedSummon() {
 		let e = this.selectedEffect;
@@ -103,6 +110,11 @@ export class SpellList {
 	public getSummonBySlot(e) {
 		let summon = this.db.data.jsonSummons[e.diceNum];
 		return summon;
+	}
+
+		
+	public isOldSpell(object: any): object is DofusSpell {
+		return 'effects' in object;
 	}
 
 }

@@ -1,0 +1,161 @@
+spell {
+  .effects {
+    margin-bottom: 1rem;
+  }
+}
+
+
+spelllist > spell {
+  margin-top: 10px;
+  display: block;
+}
+
+tr {
+
+}
+
+td {
+  position: relative;
+}
+
+.spellContainerContainer {
+  position: relative;
+  z-index: 10 !important;
+}
+.spellContainer {
+  position: absolute; 
+  top: 49%;
+  width: 80%;
+  height: 50%;
+
+  z-index: -1 !important;
+}
+.spellHover {
+    position: absolute;
+    width: 100%;
+    top: 100%;
+    left: 10%;
+    height: auto;
+    // background-color: #ffffff;
+    // background-color: #f0f0f0;
+    background-color: var(--spellhover-bg-color);
+    border: var(--spellhover-border-color) 1px solid;
+    padding: 10px;
+
+    z-index: 94561239 !important;
+    // pointer-events: none;
+    cursor: default;
+    display: block;
+    visibility: collapse;
+}
+
+.effectsWide {
+  width: 100%;
+}
+
+spell tr .spellHover {
+  width: 200%;
+}
+itemsheet tr .spellHover {
+  width: 250%;
+}
+@media (max-width: 800px) and (max-width: 1199px) {
+  .spellHover {
+    width: 800px;
+	}
+}
+@media (max-width: 765px) {
+  .spellHover {
+    width: 500px;
+	}
+}
+@media (max-width: 500px) {
+  .spellHover {
+    width: 300px;
+	}
+}
+
+// description hover a keyword
+span:hover + .spellContainer > .spellHover {
+  visibility: visible;
+  opacity: 100%;
+}
+// keep hovering when over the popup
+.spellHover:hover {
+  visibility: visible;
+  opacity: 100%;
+}
+// td = hover on an effect
+td:hover > .spellHover, span:hover > .spellHover, p:hover > .spellHover {//, .spellContainer:hover > .spellHover {
+  visibility: visible;
+  opacity: 100%;
+}
+// original code
+// td:hover > .spellHover, span:hover > .spellHover, p:hover > .spellHover, .spellContainer:hover > .spellHover {
+//   visibility: visible;
+//   opacity: 100%;
+// }
+
+/* Tooltip container */
+.tooltipx:hover .tooltiptext {
+  visibility: visible;
+}
+.tooltipx {
+  position: relative;
+  // display: block;
+  // display: inline-block;
+  // float: inline-end;
+  // left: 50%;
+  // border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltiptext {
+  // display: none;
+  visibility: collapse;
+  
+  width: max-content;
+  min-width: 150px;
+  min-height: 34px;
+  max-width: 500px;
+  // max-height: 64px;
+  background-color: rgb(0, 0, 0);
+  color: #fff;
+  // background-color: var(--spellhover-bg-color);
+  // border: var(--spellhover-border-color) 1px solid;
+  // white-space: nowrap;
+  // flex:  1;
+  // display: flex;
+
+  text-align: center;
+  padding: 5px 10px;
+  border-radius: 6px;
+  /* Position the tooltip text - see examples below! */
+  pointer-events: none;
+  display: inline-block;
+  // display: block;
+  // float: right;
+
+  position: absolute;
+  opacity: 95%;
+  top: -0px;
+  left: 105%;
+  z-index: 901;
+}
+.tooltiptext::after {
+  content: " ";
+  position: absolute;
+  top: 17px;
+  right: 100%; /* To the left of the tooltip */
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent black transparent transparent;
+}
+.tooltipLine {
+  text-align: left;
+  white-space: normal;
+}
+.tooltipLineBorder {
+  border-bottom: 1px solid whitesmoke;
+}

@@ -1,101 +1,16 @@
-<import from="./summon"></import>
-<import from="./othercharac"></import>
-<import from="../effects/effect"></import>
-<import from="../effects/effectlist"></import>
+<!-- <import from="./summon"></import>
+<import from="./othercharac"></import> -->
+<!-- <import from="../effects/effect"></import>
+<import from="../effects/effectlist"></import> -->
+<!-- <import from="./spell/spell_level/spell_level"></import> -->
+<import from="./spell/spell_new/spell_new"></import>
+<import from="./spell/spell_old/spell_old"></import>
 
-<!-- ${spellid} -->
-
-<!-- Spell Description -->
-<div class="spellDescription" if.bind="db.isLoaded && spell" id="${spellid}" click.trigger="clickHidePopup()">
-
-	<!-- name -->
-	<h5 if.bind="!issummon">
-		<img if.bind="depth > 0" src="${db.getSpellIconPath(spellid)}" style="width: 28px; height: 28px;" />
-		${name}
-	</h5>
-	<h6 if.bind="issummon">
-		<img src="${db.getSpellIconPath(spellid)}" style="width: 28px; height: 28px;" />
-		<span if.bind="ispassive" t="summon.passive"></span>
-		${name}
-	</h6>
-
-	<span>
-		${spell.apCost} <span t="pa"></span> <span style.bind="db.getModIconStyle(' pa ') + 'display: inline-block;'"></span> /
-	</span>
-	<span>
-		${spell.minRange} - ${spell.range} <span t="po"></span>
-		<span if.bind="rangeCanBeBoosted" class="tooltipx">
-			<img src="${db.getIconPath('picto_portee_modif.png')}" />
-			<span class="tooltiptext" t="rangeCanBeBoosted"></span>
-		</span>
-		<!-- <img if.bind="!spell.rangeCanBeBoosted" src="${db.getIconPath('picto_spell_line.png')}" /> -->
-		<span if.bind="castTestLos" class="tooltipx">
-			<img src="${db.getIconPath('ligne_vu.png')}" />
-			<span class="tooltiptext" t="castTestLos"></span>
-		</span>
-		<span if.bind="!castTestLos" class="tooltipx">
-			<img src="${db.getIconPath('ligne_not_vu.png')}" />
-			<span class="tooltiptext" t="castTestLosNot"></span>
-		</span>
-	</span>
-
-
-
-	<!-- description -->
-	<div class="spellContainerContainer">
-		<span class="" repeat.for="d1 of cutDescription">
-			<span style.bind="getDescriptionRenderStyle(d1)" innerhtml.bind="renderDescriptionBit(d1)" click.delegate="clickDescription($index)"></span>
-			<!--  && thing && showbit[$index] -->
-			<div if.bind="textHasSubSpell(d1)" class="spellContainer">
-				<!-- style.bind="showbit[$index] ? 'display: block;' : 'display: none;'" -->
-				<spell class="spellHover" if.bind="depth <= 1 && subSpellId != 0" spellid.bind="getTextSubSpellId(d1)" depth.bind="depth+1"></spell>
-			</div> 
-		</span>
-	</div>
-	
-	<!-- conditions -->
-	<div if.bind="hasCondition" >
-		<br/>
-		<div innerHtml.bind="getConditionsString(spell)"></div>
-	</div>
-	
-	<br/>
-	
-
-	<!-- effects -->
-	<div class="d-flex effects">
-		<!-- normal -->
-		<div class.bind="effectsClass">
-			<h6 t="effects"></h6>
-			<effectlist effects.bind="spell.effects" iscrit.bind="false" depth.bind="depth"></effectlist>
-		</div>
-		<!-- critiques -->
-		<div class="effectsCrit" if.bind="showcrit">
-			<h6 t="effectsCrit"></h6>
-			<effectlist effects.bind="spell.criticalEffect" iscrit.bind="true" depth.bind="depth"></effectlist>
-		</div>
-	</div>
-
-	<!-- other -->
-	<div>
-		<othercharac spellid.bind="spellid" spell.bind="spell"></othercharac>
-	</div>
-
-	<!-- détails additionels -->
-	<!-- <div if.bind="detailsObj.text">
-		<h6>Détails additionnels</h6>
-		<p if.bind="detailsObj.text">${detailsObj.text}</p>
-	</div> -->
-
-</div> <!-- fin info sort -->
-
-
-<!-- Invoc -->
-<div if.bind="spell && db.isLoaded" repeat.for="e1 of summonEffects">
-	<summon if.bind="hasSummon(e1)" summon.bind="getSummon(e1)" side.bind="e1.diceSide"></summon>
+<div if.bind="hasNewSpellFeature">
+	<!-- <h2>new</h2> -->
+  	<spell-new spellid.bind="spellid" selectedGrade.bind="selectedGrade" depth.bind="depth" issummon.bind="issummon" ispassive.bind="ispassive" showcrit.bind="showcrit"></spell-new>
 </div>
-
-
-<!-- <div if.bind="db.isLoaded" repeat.for="e1 of spell.effects">
-	<summon if.bind="hasSummon(e1)" summon.bind="getSummon(e1)" side.bind="e1.diceSide"></summon>
-</div> -->
+<div else>
+	<!-- <h2>old</h2> -->
+  	<spell-old spellid.bind="spellid" selectedGrade.bind="selectedGrade" depth.bind="depth" issummon.bind="issummon" ispassive.bind="ispassive" showcrit.bind="showcrit"></spell-old>
+</div>

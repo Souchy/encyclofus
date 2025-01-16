@@ -107,7 +107,7 @@
 <!-- spells -->
 <div if.bind="!isBomb">
 	<!-- isbomb.bind="isBomb" -->
-	<spell if.bind="db.isLoaded" repeat.for="summonSpellId of summon.spells" issummon.bind="true" spellid.bind="summonSpellId" depth.bind="0"></spell>
+	<spell if.bind="db.isLoaded" repeat.for="summonSpellId of summon.spells" spellid.bind="summonSpellId" selectedGrade.bind="gradeIndex" issummon.bind="true" depth.bind="0"></spell>
 </div>
 
 

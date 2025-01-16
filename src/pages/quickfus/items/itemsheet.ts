@@ -36,13 +36,14 @@ export class itemsheet {
     }
     async attached() {
         // console.log("on attached")
-        if(this.comparing) {
+        if (this.comparing) {
             await this.promiseComparison
         }
         this.ea.publish("itemsheet:loaded");
     }
 
     public get itemIconUrl() {
+        // return "https://static.ankama.com/dofus/www/game/items/52/" + this.item.iconId + ".w40h40.png";
         return this.db.gitFolderPath + "sprites/items/" + this.item.iconId + ".png";
     }
 
@@ -75,7 +76,7 @@ export class itemsheet {
     }
 
     public getEffect(possibleEffect) {
-        possibleEffect.effect ??= this.db.data.jsonEffectsById[possibleEffect.effectId]; 
+        possibleEffect.effect ??= this.db.data.jsonEffectsById[possibleEffect.effectId];
         //this.db.data.jsonEffects.filter(e => e.id == possibleEffect.effectId)[0];
         return possibleEffect.effect;
     }
@@ -116,7 +117,7 @@ export class itemsheet {
         return str;
     }
 
-    
+
     public async loadComparison() {
         this.comparedEffects = [];
         if (this.item.id in this.db.data2.jsonItemsById == false) {
@@ -155,7 +156,7 @@ export class itemsheet {
                 comparison.diceSide = 0 - oldEffect.diceSide;
             }
         }
-        
+
         // for(let e of this.comparedEffects) {
         //     if(!e)
         //         continue;
@@ -179,7 +180,7 @@ export class itemsheet {
     // }
 
     public get shouldRender() {
-        if(!this.item)
+        if (!this.item)
             return false;
         // console.log("SHOULD RENDER ? ");
         // if(this.comparing)
