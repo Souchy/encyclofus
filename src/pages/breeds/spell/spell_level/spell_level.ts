@@ -48,10 +48,13 @@ export class SpellLevel {
 	}
 
 	public get spellLevel() {
-		console.log("spellLevel.selectedgrade: " + this.selectedgrade);
-		if(this.selectedgrade == undefined) return undefined;
+		// console.log("spellLevel.selectedgrade: " + this.selectedgrade);
+		// if(this.selectedgrade == undefined) 
+		// 	return undefined;
+		this.selectedgrade ??= this.db.selectedGradeSlot;
+		this.selectedgrade = Math.min(Math.max(0, this.selectedgrade), this.spell.spellLevels.length - 1);
 		let spellLevelId = this.spell.spellLevels[this.selectedgrade];
-		console.log("spellLevel.selectedgrade,spellLevelId: " + this.selectedgrade + ", " + spellLevelId);
+		// console.log("spellLevel.selectedgrade,spellLevelId: " + this.selectedgrade + ", " + spellLevelId);
 		return this.db.data.jsonSpellLevels[spellLevelId];
 	}
 	public get name() {
@@ -65,9 +68,9 @@ export class SpellLevel {
 	}
 	attached() {
 		this.showbit = this.cutDescription.map(t => false);
-		console.log("Bind spell level")
-		console.log(this.spell);
-		console.log(this.spellLevel);
+		// console.log("Bind spell level")
+		// console.log(this.spell);
+		// console.log(this.spellLevel);
 	}
 
 
@@ -174,13 +177,6 @@ export class SpellLevel {
 		return this.db.data.jsonSummons[e.diceNum];
 	}
 
-	public get hasSubSpell() {
-		let text = this.db.getI18n(this.spell.descriptionId);
-		if (!text) return false;
-		let has = text.includes("{");
-		// console.log("desc has spell: " + has)
-		return has;
-	}
 	public get subSpellId() {
 		let text = this.db.getI18n(this.spell.descriptionId);
 		if (!text) return false;
@@ -218,60 +214,6 @@ export class SpellLevel {
 				return spellid + "-" + grade;
 		}
 		return 0;
-	}
-
-
-	public isStateSubspell(e) {
-		if (db.isEffectState(e)) {
-			let state = this.db.data.jsonStates[e.value]
-			if (!state) return false;
-			let name = this.db.getI18n(state.nameId);
-			if (name && name.includes("{")) {
-				return true;
-			}
-		}
-		// state condition, fouet osa dragocharge, +1 combo,
-		if (db.isSubSpell(e)) {
-			let subspell = this.getSubSpell(e);
-			if (!subspell) return false;
-			let name = this.db.getI18n(subspell.nameId);
-			if (name && name.includes("{")) {
-				return true;
-			}
-		}
-		return false;
-	}
-	public getStateSubspellId(e) {
-		// let state = this.db.jsonStates[e.value]
-		// let stateName = this.db.getI18n(state.nameId);
-		// stateName = stateName.replace("{", "").replace("}", "");
-		// let data = stateName.split(",");
-		// let subSpellId = data[1];
-		// return subSpellId;
-		let spellString;
-		// état
-		if (db.isEffectState(e)) {
-			let state = this.db.data.jsonStates[e.value]
-			spellString = this.db.getI18n(state.nameId);
-		}
-		if (db.isSubSpell(e)) {
-			let subspell = this.getSubSpell(e);
-			spellString = this.db.getI18n(subspell.nameId);
-		}
-
-		spellString = spellString.replace("{", "").replace("}", "");
-		let data = spellString.split("::")[0].split(",");
-		// let subSpellId = data[1];
-		// return subSpellId;
-		let subspellid = data[1]
-		let subgrade = data[2];
-		return subspellid + "-" + subgrade;
-	}
-	public getSubSpell(e: any) {
-		let grade = e.diceSide;
-		let key = e.diceNum + "";
-		if (grade) key += "-" + grade;
-		return this.db.data.spells[key];
 	}
 
 	public get hasCondition() {

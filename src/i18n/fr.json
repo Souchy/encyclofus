@@ -85,6 +85,9 @@
 	"rangeCanBeBoosted": "Portée modifiable",
 	"castTestLosNot": "Ligne de vue non-nécessaire",
 
+	"ofbaselife": "de la vitalité de base de l'invocateur, ex. 1050 au lvl 200",
+	"ofsummoner": "de la valeur de l'invocateur",
+
 	"help": "Aide",
 	"sidebar" : {
 		"contact": "Contact",

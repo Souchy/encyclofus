@@ -6,14 +6,14 @@
 
 <!-- ${spellid} -->
 
-<h1>NEW SPELL ${spellid}-${actualGrade}</h1>
+<!-- <h1>NEW SPELL ${spellid}-${actualGrade}</h1> -->
 
 <!-- Spell Description -->
 <div class="spellDescription" if.bind="db.isLoaded" id="${spellid}" click.trigger="clickHidePopup()">
 
 	<div class="d-flex">
 		<!-- name -->
-		<h5 if.bind="!issummon">
+		<h5 if.bind="!issummon" class="spell_name">
 			<img if.bind="depth > 0" src="${db.getSpellIconPath(spellid)}" style="width: 28px; height: 28px;" />
 			${name}
 		</h5>
@@ -25,15 +25,15 @@
 		<div if.bind="depth == 0">
 			<span repeat.for="level of ankaLevels">
 				<!-- <span >${level.minPlayerLevel}</span> -->
-				<b if.bind="$index == actualGrade" click.trigger="selectGrade($index)">${level.minPlayerLevel}</b>
-				<span else click.trigger="selectGrade($index)">${level.minPlayerLevel}</span>
+				<span if.bind="$index == actualGrade" class="spell_level_button grade_selected" click.trigger="selectGrade($index)">${level.minPlayerLevel}</span>
+				<span else class="spell_level_button" click.trigger="selectGrade($index)">${level.minPlayerLevel}</span>
 				<span if.bind="!$last">/</span>
 			</span>
 		</div>
 	</div>
 
-	<div>grade: ${actualGrade}</div>
-	<div>levelid: ${selectedLevelId}</div>
+	<!-- <div>grade: ${actualGrade}</div>
+	<div>levelid: ${selectedLevelId}</div> -->
 	<spell-level spellid.bind="spellid" selectedgrade.bind="actualGrade" depth.bind="depth" issummon.bind="issummon" ispassive.bind="ispassive" showcrit.bind="showcrit"></spell-level>
 
 </div> <!-- fin info sort -->

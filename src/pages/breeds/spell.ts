@@ -22,14 +22,14 @@ export class Spell {
 	public showcrit: boolean = true;
 
 	@bindable
-	public selectedGrade: number = -1;
+	public selectedgrade: number = -1;
 
 	private db: db;
 
 	public constructor(db: db, @I18N private readonly i18n: I18N) {
 		this.db = db;
-		if(this.selectedGrade == -1) {
-			this.selectedGrade = db.selectedGradeSlot;
+		if(this.selectedgrade == -1) {
+			this.selectedgrade = db.selectedGradeSlot;
 		}
 	}
 

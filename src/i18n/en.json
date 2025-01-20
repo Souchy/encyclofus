@@ -85,6 +85,9 @@
 	"rangeCanBeBoosted": "Modifiable range",
 	"castTestLosNot": "Line of sight not necessary",
 
+	"ofbaselife": "of summoner's base life, ie. 1050 at lvl 200",
+	"ofsummoner": "of the summoner's value",
+
 	"help": "Help",
 	"sidebar" : {
 		"contact": "Contact",

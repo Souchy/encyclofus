@@ -314,7 +314,14 @@ export class EffectRenderer {
 	}
 	public getTrapGlyph(e: any): any {
 		if(this.db.checkFeature("spelllevels")) {
-			return this.db.data.jsonSpellsNew[e.diceNum];
+			let spell = this.db.data.jsonSpellsNew[e.diceNum];
+			let grade = e.diceSide;
+			let spellLevelId = spell.spellLevels[grade - 1];
+			// console.log("effectRenderer.getTrapGlyph: " + spell.id + ", " + grade + " = " + spellLevelId);
+			// console.log(spell);
+			let spellLevel = this.db.data.jsonSpellLevels[spellLevelId];
+			// console.log(spellLevel);
+			return spellLevel;
 		}
 		// if (!this.hasTrapGlyph(e)) return null;
 		let key = e.diceNum + "";

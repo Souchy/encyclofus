@@ -7,7 +7,7 @@ import { Console } from "console";
 export class Effectlist {
 
     @bindable
-    public spellGrade = 0;
+    public spellgrade = 0;
     @bindable
     public effects: DofusEffect[];
     @bindable

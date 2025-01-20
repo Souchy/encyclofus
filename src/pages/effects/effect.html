@@ -22,7 +22,8 @@
             <!-- icons fin -->
             <td ref="spellhover" if.bind="isStateSubspell(effect)" class="hoverableEffectSubspell" mouseover.trigger="hoverSub() & throttle:100">
                 <spell class="spellHover" style.bind="hoverTranslation" if.bind="depth <= 1" 
-                    spellid.bind="getStateSubspellId(effect)" selectedGrade.bind="getStateSubSpellGrade(effect)" depth.bind="depth+1" showcrit.bind="showcrit"
+                    spellid.bind="getStateSubspellId(effect)" selectedgrade.bind="getStateSubSpellGrade(effect)" 
+                    depth.bind="depth+1" showcrit.bind="showcrit"
                 ></spell>
             </td>
             <td if.bind="effectRenderer.isDuration(effect)" class="tooltipx iconDispell">
@@ -44,16 +45,20 @@
 
 <!-- TRAPS & GLYPHS (they also call a subspell) -->
 <!-- normal effects -->
-<effectlist if.bind="effectRenderer.hasTrapGlyph(effect, spellGrade) && !iscrit" effects.bind="effectRenderer.getTrapGlyph(effect).effects" depth.bind="depth+1"></effectlist>
+<effectlist if.bind="effectRenderer.hasTrapGlyph(effect, spellGrade) && !iscrit" 
+    effects.bind="effectRenderer.getTrapGlyph(effect).effects" depth.bind="depth+1"
+    ></effectlist>
 <!-- have no crit effects -->
-<effectlist if.bind="effectRenderer.hasTrapGlyph(effect, spellGrade) && iscrit" effects.bind="effectRenderer.getTrapGlyph(effect).effects" depth.bind="depth+1"></effectlist>
+<effectlist if.bind="effectRenderer.hasTrapGlyph(effect, spellGrade) && iscrit" 
+    effects.bind="effectRenderer.getTrapGlyph(effect).effects" depth.bind="depth+1"
+    ></effectlist>
 
 <!-- SUB SPELLS (that are not traps nor glyphs) -->
 <!-- normal effects -->
 <effectlist if.bind="showsub && effectRenderer.hasSubSpell(effect, spellGrade) && !iscrit && !isStateSubspell(effect)" 
-    effects.bind="subSpellLevel.effects" depth.bind="depth+1" iscrit.bind="false" spellGrade.bind="subSpellGrade"
+    effects.bind="subSpellLevel.effects" depth.bind="depth+1" iscrit.bind="false" spellgrade.bind="subSpellGrade"
 ></effectlist>
 <!-- crit effects -->
 <effectlist if.bind="showsub && effectRenderer.hasSubSpell(effect, spellGrade) && iscrit && !isStateSubspell(effect)" 
-    effects.bind="subSpellLevel.criticalEffect" depth.bind="depth+1" iscrit.bind="true" spellGrade.bind="subSpellGrade"
+    effects.bind="subSpellLevel.criticalEffect" depth.bind="depth+1" iscrit.bind="true" spellgrade.bind="subSpellGrade"
 ></effectlist>

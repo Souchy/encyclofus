@@ -1,6 +1,7 @@
 import { bindable, inject } from "aurelia";
 import { I18N } from "@aurelia/i18n";
 import { db } from '../../DofusDB/db';
+import { DofusSpellNew, DofusSpellLevel } from "../../ts/dofusModels";
 
 export class othercharac {
 
@@ -9,19 +10,32 @@ export class othercharac {
 	@bindable
 	public spellid;
 	@bindable
-	public selectedGrade;
+	public selectedgrade;
 
 	public constructor(private db: db, @I18N private readonly i18n: I18N) {
 	}
 
 	public get spellLevel() {
 		if(this.db.checkFeature("spelllevels")) {
-			return this.db.data.getSpellLevel(this.spellid, this.selectedGrade);
+			// console.log("othercharacs: spellLevel+selectedgrade: " + this.spellid + "." + this.selectedgrade);
+			let spelllevel = this.db.data.getSpellLevel(this.spellid, this.selectedgrade) as DofusSpellLevel;
+			// console.log(spelllevel);
+			return spelllevel;
 		} else {
 			return this.spell;
 		}
 	}
 
+	public get ankaspell() : DofusSpellNew {
+		return this.db.data.jsonSpellsNew[this.spellid]; //.spells[this.spellid];
+	}
+	// public get actualGrade() {
+	// 	if(this.selectedgrade >= this.ankaspell.spellLevels.length) 
+	// 		this.selectedgrade = this.ankaspell.spellLevels.length - 1;
+	// 	if(this.selectedgrade < 0)
+	// 		this.selectedgrade = 0;
+	// 	return this.selectedgrade;
+	// }
 	public translate(obj: any) {
 		return this.i18n.tr(obj as string);
 	}

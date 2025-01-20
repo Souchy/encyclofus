@@ -21,7 +21,7 @@ export class SpellOld {
 	@bindable
 	public showcrit: boolean = true;
 	@bindable
-	public selectedGrade: number;
+	public selectedgrade: number;
 
 	public showbit: boolean[] = []
 	public thing = false;
