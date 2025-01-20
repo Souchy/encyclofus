@@ -136,16 +136,22 @@ export class SpellLevel {
 
 
 	public get rangeCanBeBoosted() {
+		if(this.db.checkFeature("spelllevels")) {
+			return (this.spellLevel.m_flags & 64) > 0;
+		} else
 		if(this.db.checkFeature("unity")) {
-			return (this.spell["m_flags"] & 64) > 0;
+			return (this.spell.m_flags & 64) > 0;
 		}
 		// else {
 		// 	return this.spell.rangeCanBeBoosted;
 		// }
 	}
 	public get castTestLos() {
+		if(this.db.checkFeature("spelllevels")) {
+			return (this.spellLevel.m_flags & 4) > 0;
+		} else
 		if(this.db.checkFeature("unity")) {
-			return (this.spell["m_flags"] & 4) > 0;
+			return (this.spell.m_flags & 4) > 0;
 		} 
 		// else {
 		// 	return this.spell.castTestLos;
