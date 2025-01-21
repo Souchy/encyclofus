@@ -13,15 +13,15 @@
 		<tr>
 		</tr>
 		<tr>
-			<td>
+			<td class="tooltipx">
 				<span t="pv"></span>
 				<span>: ${life}</span>
-				<span if.bind="bonusLife"> (+${bonusLife}%)</span>
+				<span if.bind="bonusLife" class="bonus" t="[title]ofbaselife">(${bonusLife}%)</span>
 			</td>
 			<td>
 				<span t="wisdom"></span>
 				<span>: ${grade.wisdom * 3}</span>
-				<span if.bind="grade.bonusCharacteristics.wisdom"> (+${grade.bonusCharacteristics.wisdom}%)</span>
+				<span if.bind="grade.bonusCharacteristics.wisdom" class="bonus" t="[title]ofsummoner"> (+${grade.bonusCharacteristics.wisdom}%)</span>
 			</td>
 			<td><span t="neutral"></span> (%): ${grade.neutralResistance}</td>
 		</tr>
@@ -30,7 +30,7 @@
 			<td>
 				<span t="strength"></span>
 				<span>: ${grade.strength * 3}</span>
-				<span if.bind="grade.bonusCharacteristics.strength"> (+${grade.bonusCharacteristics.strength}%)</span>
+				<span if.bind="grade.bonusCharacteristics.strength" class="bonus" t="[title]ofsummoner"> (+${grade.bonusCharacteristics.strength}%)</span>
 			</td>
 			<td><span t="earth"></span> (%): ${grade.earthResistance}</td>
 		</tr>
@@ -39,7 +39,7 @@
 			<td>
 				<span t="intelligence"></span>
 				<span>: ${grade.intelligence * 3}</span>
-				<span if.bind="grade.bonusCharacteristics.intelligence"> (+${grade.bonusCharacteristics.intelligence}%)</span>
+				<span if.bind="grade.bonusCharacteristics.intelligence" class="bonus" t="[title]ofsummoner"> (+${grade.bonusCharacteristics.intelligence}%)</span>
 			</td>
 			<td><span t="fire"></span> (%): ${grade.fireResistance}</td>
 		</tr>
@@ -48,7 +48,7 @@
 			<td>
 				<span t="chance"></span>
 				<span>: ${grade.chance * 3}</span> 
-				<span if.bind="grade.bonusCharacteristics.chance"> (+${grade.bonusCharacteristics.chance}%)</span>
+				<span if.bind="grade.bonusCharacteristics.chance" class="bonus" t="[title]ofsummoner"> (+${grade.bonusCharacteristics.chance}%)</span>
 			</td>
 			<td><span t="water"></span> (%): ${grade.waterResistance}</td>
 		</tr>
@@ -57,7 +57,7 @@
 			<td>
 				<span t="agility"></span>
 				<span>: ${grade.agility * 3}</span> 
-				<span if.bind="grade.bonusCharacteristics.agility"> (+${grade.bonusCharacteristics.agility}%)</span>
+				<span if.bind="grade.bonusCharacteristics.agility" class="bonus" t="[title]ofsummoner"> (+${grade.bonusCharacteristics.agility}%)</span>
 			</td>
 			<td><span t="air"></span> (%): ${grade.airResistance}</td>
 		</tr>
@@ -65,12 +65,12 @@
 			<td>
 				<span t="lock"></span>
 				<span>: ${lock}</span>
-				<span if.bind="grade.bonusCharacteristics.tackleBlock"> (+${grade.bonusCharacteristics.tackleBlock}%)</span>
+				<span if.bind="grade.bonusCharacteristics.tackleBlock" class="bonus" t="[title]ofsummoner"> (+${grade.bonusCharacteristics.tackleBlock}%)</span>
 			</td>
 			<td>
 				<span t="dodge"></span>
 				<span>: ${dodge}</span>
-				<span if.bind="grade.bonusCharacteristics.tackleEvade"> (+${grade.bonusCharacteristics.tackleEvade}%)</span>
+				<span if.bind="grade.bonusCharacteristics.tackleEvade" class="bonus" t="[title]ofsummoner"> (+${grade.bonusCharacteristics.tackleEvade}%)</span>
 			</td>
 			<td></td>
 		</tr>
@@ -101,13 +101,13 @@
 
 <!-- starting spell -->
 <div if.bind="grade.startingSpellId">
-	<spell if.bind="db.isLoaded" issummon.bind="true" spellid.bind="startingSpellId" depth.bind="0" ispassive="true"></spell>
+	<spell if.bind="db.isLoaded" spellid.bind="startingSpellId" selectedgrade.bind="gradeIndex" issummon.bind="true" depth.bind="0" ispassive="true"></spell>
 </div>
 
 <!-- spells -->
 <div if.bind="!isBomb">
 	<!-- isbomb.bind="isBomb" -->
-	<spell if.bind="db.isLoaded" repeat.for="summonSpellId of summon.spells" issummon.bind="true" spellid.bind="summonSpellId" depth.bind="0"></spell>
+	<spell if.bind="db.isLoaded" repeat.for="summonSpellId of summon.spells" spellid.bind="summonSpellId" selectedgrade.bind="gradeIndex" issummon.bind="true" depth.bind="0"></spell>
 </div>
 
 

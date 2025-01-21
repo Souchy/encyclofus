@@ -17,10 +17,12 @@ export class Summon {
 		this.db = db;
 	}
 
+	public get gradeIndex() {
+		return Math.max(0, this.side - 1);
+	}
 	public get grade() {
-		let g = Math.max(0, this.side - 1);
 		// console.log("grades: " + g + ", " + JSON.stringify(this.summon.grades))
-		return this.summon.grades[g];
+		return this.summon.grades[this.gradeIndex];
 	}
 
 	public get life() {
@@ -28,10 +30,11 @@ export class Summon {
 	}
 
 	public get bonusLife() {
-		// seulement les tourelles steam scale avec la vita
-		if(this.summon.race != 221) { 
-			return 0;
-		}
+		// return 0; // plus rien ne scale avec vita il me semble
+		// // seulement les tourelles steam scale avec la vita
+		// if(this.summon.race != 221) { 
+		// 	return 0;
+		// }
 		return this.grade.bonusCharacteristics.lifePoints;
 	}
 
@@ -63,12 +66,22 @@ export class Summon {
 		return this.summon.race == 95 && this.db.checkFeatureVersion(features.bombspells);
 	}
 
+	/**
+	 * Passif
+	 */
 	public get startingSpellId() {
 		let startingSpellId = this.grade.startingSpellId;
-		let spelllevel: any = Object.values(this.db.data.jsonSpells).find((l: any) => l?.id == startingSpellId) //jsonLevels.find(l => l.id == startingSpellId)
 		// let index = this.db.data.jsonSpells.
-		if(spelllevel) {
-			return spelllevel.spellId + "-" + spelllevel.grade;
+		if(this.db.checkFeature("spelllevels")) {
+			let spelllevel = this.db.data.jsonSpellLevels[startingSpellId];
+			if(spelllevel) {
+				return spelllevel.spellId;
+			}
+		} else {
+			let spelllevel: any = Object.values(this.db.data.spells).find((l: any) => l?.id == startingSpellId) //jsonLevels.find(l => l.id == startingSpellId)
+			if(spelllevel) {
+				return spelllevel.spellId + "-" + spelllevel.grade;
+			}
 		}
 		return 0;
 	}

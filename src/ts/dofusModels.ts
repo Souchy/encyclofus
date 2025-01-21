@@ -1,3 +1,54 @@
+export interface DofusSpellNew {
+    m_flags: number;
+    id: number;
+    nameId: number;
+    descriptionId: number;
+    typeId: number;
+    order: number;
+    scriptParams: string;
+    scriptParamsCritical: string;
+    scriptId: number;
+    scriptIdCritical: number;
+    iconId: number;
+    spellLevels: number[],
+    boundScriptUsageData: [];
+    criticalHitBoundScriptUsageData: [];
+    basePreviewZoneDescr: DofusPreviewZoneDescr;
+    adminName: string;
+}
+
+export interface DofusPreviewZoneDescr {
+    cellIds: [];
+    shape: number;
+    param1: number;
+    param2: number;
+    damageDecreaseStepPercent: number;
+    maxDamageDecreaseApplyCount: number;
+    isStopAtTarget: boolean;
+}
+
+export interface DofusSpellLevel {
+    m_flags: number;
+    id: number;
+    spellId: number;
+    grade: number;
+    spellBreed: number;
+    apCost: number;
+    minRange: number;
+    range: number;
+    criticalHitProbability: number;
+    maxStack: number;
+    maxCastPerTurn: number;
+    maxCastPerTarget: number;
+    minCastInterval: number;
+    initialCooldown: number;
+    globalCooldown: number;
+    minPlayerLevel: number;
+    statesCriterion: string;
+    effects: DofusEffectUnity[],
+    criticalEffect: DofusEffectUnity[],
+    previewZones: [],
+}
 
 export interface DofusSpell {
     id: number;
@@ -62,6 +113,38 @@ export interface DofusEffect {
     order: number;
     group: number;
 }
+
+export interface DofusEffectUnity {
+    diceNum: number;
+    diceSide: number;
+    displayZero: boolean;
+    value: number;
+    m_flags: number;
+    effectUid: number;
+    baseEffectId: number;
+    effectId: number;
+    order: number;
+    targetId: number;
+    targetMask: string;
+    duration: number;
+    random: number;
+    group: number;
+    modificator: number;
+    dispellable: number;
+    delay: number;
+    triggers: string;
+    effectElement: number;
+    spellId: number;
+    effectTriggerDuration: number; 
+    zoneDescr: DofusPreviewZoneDescr;
+    // visibleInBuffUi: boolean;
+    // visibleInFightLog: boolean;
+    // visibleOnTerrain: boolean;
+    // visibleInTooltip: boolean;
+    // rawZone: string;
+    // forClientOnly: boolean;
+}
+
 
 export interface DofusSet {
     id: number,

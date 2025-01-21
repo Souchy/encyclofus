@@ -29,6 +29,7 @@ export class Effect {
 
 	public showsub: boolean = false;
 	public subSpell: any;
+	public subSpellLevel: any;
 
 	public db: db;	
 	public conditionRenderer: TargetConditionRenderer;
@@ -55,9 +56,27 @@ export class Effect {
 	}
 	attached() {
 		this.subSpell = this.effectRenderer.getSubSpell(this.effect);
+		if(this.subSpell) {
+			if(this.db.checkFeature("spelllevels")) {
+				let subSpellLevelId = this.subSpell.spellLevels[this.subSpellGrade];
+				this.subSpellLevel = this.db.data.jsonSpellLevels[subSpellLevelId];
+				// console.log("effect subspell, grade " + this.subSpellGrade);
+				// console.log(this.subSpell);
+				// console.log(this.subSpellLevel);
+			} else {
+				this.subSpellLevel = this.subSpell;
+			}
+		}
 		if(this.spellhover) {
 			this.grid = this.spellhover.closest(".grid");
 		}
+	}
+
+	public get subSpellId() {
+		return this.effect.diceNum;
+	}
+	public get subSpellGrade() {
+		return Math.max(0, this.effect.diceSide - 1);
 	}
 
 	public clickShowSub() {
@@ -176,6 +195,8 @@ export class Effect {
 		return false;
 	}
 
+
+
 	public getStateSubspellId(e) {
 		let spellString;
 		// état
@@ -186,6 +207,8 @@ export class Effect {
 		if (db.isSubSpell(e)) {
 			let subspell = this.effectRenderer.getSubSpell(e);
 			if(this.sourcetype == "itemEffects") {
+				if(this.db.checkFeature("spelllevels"))
+					return e.diceNum;
 				let key = e.diceNum + "";
 				let grade = e.diceSide;
 				if (grade) key += "-" + grade;
@@ -201,7 +224,29 @@ export class Effect {
 		let subspellid = data[1]
 		let subgrade = data[2];
 		let output = subspellid + "-" + subgrade;
+		if(this.db.checkFeature("spelllevels"))
+			return subspellid;
 		return output;
+	}
+	public getStateSubSpellGrade(e) {
+		let spellString;
+		// état
+		if (db.isEffectState(e)) {
+			let state = this.db.data.jsonStates[e.value]
+			spellString = this.db.getI18n(state.nameId);
+		}
+		if (db.isSubSpell(e)) {
+			let subspell = this.effectRenderer.getSubSpell(e);
+			if(this.sourcetype == "itemEffects") {
+				return e.diceSide;
+			}
+			spellString = this.db.getI18n(subspell.nameId);
+		}
+		spellString = spellString.replace("{", "").replace("}", "");
+		let data = spellString.split("::")[0].split(",");
+		// let subspellid = data[1]
+		let subgrade = data[2];
+		return subgrade;
 	}
 
 	public hasSub(e) {

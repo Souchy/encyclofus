@@ -111,9 +111,9 @@ export class EffectRenderer {
 					let obj = name.substring(name.indexOf("{"), name.indexOf("}"))
 					name = name.substring(0, name.indexOf("{"));
 					// name = name.replace("{", "").replace("}", "");
-					let data = obj.split(",");
-					let subSpellId = data[1];
-					let stateSpell = this.db.data.jsonSpells[subSpellId];
+					// let data = obj.split(",");
+					// let subSpellId = data[1];
+					// let stateSpell = this.db.data.jsonSpells[subSpellId];
 					obj = obj.split("::")[1];
 					name += obj;
 				}
@@ -152,9 +152,9 @@ export class EffectRenderer {
 				if (stateName) {
 					if (stateName.includes("{")) {
 						stateName = stateName.replace("{", "").replace("}", "");
-						let data = stateName.split(",");
-						let subSpellId = data[1];
-						let stateSpell = this.db.data.jsonSpells[subSpellId];
+						// let data = stateName.split(",");
+						// let subSpellId = data[1];
+						// let stateSpell = this.db.data.jsonSpells[subSpellId];
 						stateName = stateName.split("::")[1];
 						// console.log("reste: " + stateName);
 
@@ -298,24 +298,37 @@ export class EffectRenderer {
 		return db.isSubSpell(e) && !(e.diceNum == e.spellId && e.diceSide == spellGrade);
 	}
 	public getSubSpell(e: any) {
+		if(this.db.checkFeature("spelllevels")) {
+			return this.db.data.jsonSpellsNew[e.diceNum];
+		}
 		let key = e.diceNum + "";
 		let grade = e.diceSide;
 		if (grade) key += "-" + grade;
 		if(key == "0") return undefined;
 		// if(e.effectUid == 303619) 
 		// 	console.log("key: " + key)
-		return this.db.data.jsonSpells[key];
+		return this.db.data.spells[key];
 	}
 	public hasTrapGlyph(e: any, spellGrade) {
 		return db.isCellEffect(e) && !(e.diceNum == e.spellId && e.diceSide == spellGrade);
 	}
 	public getTrapGlyph(e: any): any {
+		if(this.db.checkFeature("spelllevels")) {
+			let spell = this.db.data.jsonSpellsNew[e.diceNum];
+			let grade = e.diceSide;
+			let spellLevelId = spell.spellLevels[grade - 1];
+			// console.log("effectRenderer.getTrapGlyph: " + spell.id + ", " + grade + " = " + spellLevelId);
+			// console.log(spell);
+			let spellLevel = this.db.data.jsonSpellLevels[spellLevelId];
+			// console.log(spellLevel);
+			return spellLevel;
+		}
 		// if (!this.hasTrapGlyph(e)) return null;
 		let key = e.diceNum + "";
 		let grade = e.diceSide;
 		if (grade) key += "-" + grade;
 		if(key == "0") return undefined;
-		return this.db.data.jsonSpells[key];
+		return this.db.data.spells[key];
 	}
 
     
