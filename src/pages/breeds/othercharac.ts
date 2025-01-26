@@ -37,7 +37,6 @@ export class othercharac {
 	// 	return this.selectedgrade;
 	// }
 	public translate(obj: any) {
-		console.log("translate: " + obj);
 		return this.i18n.tr(obj as string);
 	}
 
