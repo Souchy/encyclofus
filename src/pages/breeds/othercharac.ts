@@ -37,9 +37,52 @@ export class othercharac {
 	// 	return this.selectedgrade;
 	// }
 	public translate(obj: any) {
+		console.log("translate: " + obj);
 		return this.i18n.tr(obj as string);
 	}
 
+	public get criticalHitProbability() {
+		if (this.db.checkFeature("unity"))
+			return this.spellLevel.criticalHitProbability;
+		else
+			return this.spell.criticalHitProbability;
+	}
+	public get maxCastPerTurn() {
+		if (this.db.checkFeature("unity"))
+			return this.spellLevel.maxCastPerTurn;
+		else
+			return this.spell.maxCastPerTurn;
+	}
+	public get maxCastPerTarget() {
+		if (this.db.checkFeature("unity"))
+			return this.spellLevel.maxCastPerTarget;
+		else
+			return this.spell.maxCastPerTarget;
+	}
+	public get minCastInterval() {
+		if (this.db.checkFeature("unity"))
+			return this.spellLevel.minCastInterval;
+		else
+			return this.spell.minCastInterval;
+	}
+	public get initialCooldown() {
+		if (this.db.checkFeature("unity"))
+			return this.spellLevel.initialCooldown;
+		else
+			return this.spell.initialCooldown;
+	}
+	public get globalCooldown() {
+		if (this.db.checkFeature("unity"))
+			return this.spellLevel.globalCooldown;
+		else
+			return this.spell.globalCooldown;
+	}
+	public get maxStack() {
+		if (this.db.checkFeature("unity"))
+			return this.spellLevel.maxStack;
+		else
+			return this.spell.maxStack;
+	}
 	public get castInLine() {
 		if (this.db.checkFeature("unity"))
 			return (this.spellLevel.m_flags & 1) > 0;

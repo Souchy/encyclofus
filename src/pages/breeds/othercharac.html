@@ -8,29 +8,29 @@
 <div class="d-flex" style="margin-bottom: 16px;">
 	<table class="table table-striped table-sm table-borderless" style="width:45%; margin-right: auto; margin-bottom: auto">
 		<tbody>
-			<tr if.bind="spell.criticalHitProbability">
+			<tr if.bind="criticalHitProbability">
 				<td t="criticalHitProbability"></td>
-				<td style="white-space: nowrap; text-align: right;">${spell.criticalHitProbability}%</td>
+				<td style="white-space: nowrap; text-align: right;">${criticalHitProbability}%</td>
 			</tr>
-			<tr if.bind="spell.maxCastPerTurn">
+			<tr if.bind="maxCastPerTurn">
 				<td t="maxCastPerTurn"></td>
-				<td style="white-space: nowrap; text-align: right;">${spell.maxCastPerTurn}</td>
+				<td style="white-space: nowrap; text-align: right;">${maxCastPerTurn}</td>
 			</tr>
-			<tr if.bind="spell.maxCastPerTarget">
+			<tr if.bind="maxCastPerTarget">
 				<td t="maxCastPerTarget"></td>
-				<td style="white-space: nowrap; text-align: right;">${spell.maxCastPerTarget}</td>
+				<td style="white-space: nowrap; text-align: right;">${maxCastPerTarget}</td>
 			</tr>
-			<tr if.bind="spell.minCastInterval">
+			<tr if.bind="minCastInterval">
 				<td t="minCastInterval"></td>
-				<td style="white-space: nowrap; text-align: right;">${spell.minCastInterval}</td>
+				<td style="white-space: nowrap; text-align: right;">${minCastInterval}</td>
 			</tr>
-			<tr if.bind="spell.initialCooldown">
+			<tr if.bind="initialCooldown">
 				<td t="initialCooldown"></td>
-				<td style="white-space: nowrap; text-align: right;">${spell.initialCooldown}</td>
+				<td style="white-space: nowrap; text-align: right;">${initialCooldown}</td>
 			</tr>
-			<tr if.bind="spell.globalCooldown">
+			<tr if.bind="globalCooldown">
 				<td t="globalCooldown"></td>
-				<td style="white-space: nowrap; text-align: right;">${translate(spell.globalCooldown != 0)}</td>
+				<td style="white-space: nowrap; text-align: right;">${translate(globalCooldown != 0)}</td>
 			</tr>
 		</tbody>
 	</table>
@@ -56,9 +56,9 @@
 				<td t="castInDiagonal"></td>
 				<td style="white-space: nowrap; text-align: right;">${translate(castInDiagonal)}</td>
 			</tr>
-			<tr if.bind="spell.maxStack > 0">
+			<tr if.bind="maxStack > 0">
 				<td t="maxStack"></td>
-				<td style="white-space: nowrap; text-align: right;">${spell.maxStack}</td>
+				<td style="white-space: nowrap; text-align: right;">${maxStack}</td>
 			</tr>
 		</tbody>
 	</table>
